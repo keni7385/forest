@@ -4,7 +4,7 @@ RUN apt update && apt upgrade -y
 RUN mkdir forest
 WORKDIR forest
 
-COPY *.h *.hpp *.cpp CMakeLists.txt ./
+COPY *.h *.hpp *.cpp CMakeLists.txt ./ examples tests
 RUN mkdir build
 WORKDIR build
 RUN cmake ..
