@@ -150,7 +150,7 @@ namespace forest {
                         breadth_first_traversal(root);
                 }
                 /**
-                 * @brief Generates a DOT file representing the Binary Search Tree
+                 * @brief Generates a DOT file representing the binary search tree
                  * @param filename The filename of the .dot file
                  * @return void
                  */
@@ -164,10 +164,10 @@ namespace forest {
                         file.close();
                 }
                 /**
-                 * @brief Inserts a new node into the Binary Search Tree
+                 * @brief Inserts a new node into the binary search tree
                  * @param key The key for the new node
                  * @param value The value for the new node
-                 * @return true if the new node was inserted and false otherwise
+                 * @return The the inserted node otherwise nullptr
                  */
                 const binary_search_tree_node <key_t, value_t> *insert(key_t key, value_t value) {
                         binary_search_tree_node <key_t, value_t> *current = root;
@@ -195,7 +195,7 @@ namespace forest {
                 }
                 /**
                  * @brief Performs a binary search starting from the root node
-                 * @return The node with the key specified
+                 * @return The node with the key specified otherwise nullptr
                  */
                 const binary_search_tree_node <key_t, value_t> *search(key_t key) {
                         binary_search_tree_node <key_t, value_t> *x = root;
@@ -212,7 +212,7 @@ namespace forest {
                 }
                 /**
                  * @brief Finds the node with the minimum key
-                 * @return The node with the minimum key
+                 * @return The node with the minimum key otherwise nullptr
                  */
                 const binary_search_tree_node <key_t, value_t> *minimum() {
                         binary_search_tree_node <key_t, value_t> *x = root;
@@ -222,7 +222,7 @@ namespace forest {
                 }
                 /**
                  * @brief Finds the node with the maximum key
-                 * @return The node with the maximum key
+                 * @return The node with the maximum key otherwise nullptr
                  */
                 const binary_search_tree_node <key_t, value_t> *maximum() {
                         binary_search_tree_node <key_t, value_t> *x = root;
