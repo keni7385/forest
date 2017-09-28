@@ -12,7 +12,7 @@ compile:
 
 test:
   override:
-    - docker run xorz57/forest --entrypoint ./bsearch
-    - docker run xorz57/forest --entrypoint ./rbtree
-    - docker run xorz57/forest --entrypoint ./stree
-    - docker run xorz57/forest --entrypoint ./forest_test
+    - docker run xorz57/forest ./bsearch
+    - docker run xorz57/forest ./rbtree
+    - docker run xorz57/forest ./stree
+    - docker run xorz57/forest ./forest_test
