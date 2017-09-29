@@ -14,6 +14,9 @@ add_executable(bsearch
 add_executable(rbtree
   examples/example_red_black_tree.cpp)
 
+  add_executable(AVLtree
+  examples/example_AVL_tree.cpp)
+
 add_executable(stree
   examples/example_splay_tree.cpp)
 
@@ -22,4 +25,5 @@ add_executable(forest_test
   tests/catch.hpp
   tests/test_binary_search_tree.cpp
   tests/test_red_black_tree.cpp
+  tests/test_AVL_tree.cpp
   tests/test_splay_tree.cpp)
