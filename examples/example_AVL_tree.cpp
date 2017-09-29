@@ -4,22 +4,13 @@
 int main(int argc, char const *argv[]) {
         forest::AVL_tree <int, int> AVL_tree;
 
-        // AVL_tree.insert(2,0);
-        // AVL_tree.insert(4,0);
-        // AVL_tree.insert(90,0);
-        // AVL_tree.insert(3,100);
-        // AVL_tree.insert(0,0);
-        // AVL_tree.insert(14,0);
-        // AVL_tree.insert(45,0);
-
-        // AVL_tree.insert(0,0);
-        // AVL_tree.insert(1,1);
-        // AVL_tree.insert(2,2);
-
-        for (int i = 9; i >= 0; i--) {
-            AVL_tree.insert(i, i*i);
-        }
-
+        AVL_tree.insert(2,0);
+        AVL_tree.insert(4,0);
+        AVL_tree.insert(90,0);
+        AVL_tree.insert(3,100);
+        AVL_tree.insert(0,0);
+        AVL_tree.insert(14,0);
+        AVL_tree.insert(45,0);
 
         std::cout << "Pre Order Traversal" << std::endl;
         std::cout << std::endl;
