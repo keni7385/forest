@@ -158,54 +158,6 @@ namespace forest {
                     new_root->parent = rotation_root->parent;
                     rotation_root->parent = new_root;
                 }
-                const avl_tree_node <key_t, value_t> * insert(
-                    avl_tree_node <key_t, value_t> * current, 
-                    avl_tree_node <key_t, value_t> * parent, 
-                    key_t key, 
-                    value_t value) {
-
-                    const avl_tree_node <key_t, value_t> * inserted_node;    
-
-                    if (current == nullptr) {
-                        current = new avl_tree_node <key_t, value_t> (key, value);
-                        inserted_node = current;
-                        current->parent = parent;
-
-                        if(parent == nullptr) {
-                            root = current;
-                        }
-                        else if (current->key > parent->key) {
-                                parent->right = current;
-                        } else if (current->key < parent->key) {
-                                parent->left = current;
-                        }
-
-                    } else if (key > current->key) {
-                        inserted_node = insert(current->right, current, key, value);
-                    } else if (key < current->key) {
-                        inserted_node = insert(current->left, current, key, value);
-                    }
-
-                    current->balance_factor = (height(current->right) - height(current->left));
-
-                    // Rotate right
-                    if (current->balance_factor == -2) {
-                        // If left subtree is right heavy -- "double right"
-                        if (current->left->balance_factor == 1) {
-                            rotate_left(current->left);
-                        }
-                        rotate_right(current);
-                    }
-                    // Rotate left
-                    else if (current->balance_factor == 2) {
-                        // If right subtree is left heavy -- "double left"
-                        if (current->right->balance_factor == -1) {
-                            rotate_right(current->right);
-                        }
-                        rotate_left(current);
-                    }
-                    return inserted_node;
-                }
         public:
                 avl_tree() {
                         root = nullptr;
@@ -262,7 +214,60 @@ namespace forest {
                  * @return The inserted node otherwise nullptr
                  */
                 const avl_tree_node <key_t, value_t> * insert(key_t key, value_t value) {
-                    return insert (root, nullptr, key, value);
+    
+                        avl_tree_node <key_t, value_t> * current = root;
+                        avl_tree_node <key_t, value_t> * parent = nullptr;
+                        const avl_tree_node <key_t, value_t> * inserted_node;    
+    
+                        while (current != nullptr) {
+                            parent = current;
+                            if (key > current->key) {
+                                    current = current->right;
+                            } else if (key < current->key) {
+                                    current = current->left;
+                            } else {
+                                    return nullptr;
+                            }
+                        }
+    
+                        current = new avl_tree_node <key_t, value_t> (key, value);
+                        current->parent = parent;
+    
+                        if(parent == nullptr) {
+                                root = current;
+                        } else if (current->key > parent->key) {
+                                parent->right = current;
+                        } else if (current->key < parent->key) {
+                                parent->left = current;
+                        }
+    
+                        inserted_node = current;
+    
+                        // Re-trace up the tree
+                        while (current != nullptr) {
+                            current->balance_factor = (height(current->right) - height(current->left));
+                            
+                            // Rotate right
+                            if (current->balance_factor == -2) {
+                                    // If left subtree is right heavy -- "double right"
+                                    if (current->left->balance_factor == 1) {
+                                            rotate_left(current->left);
+                                    }
+                                    rotate_right(current);
+                            }
+                            // Rotate left
+                            else if (current->balance_factor == 2) {
+                                    // If right subtree is left heavy -- "double left"
+                                    if (current->right->balance_factor == -1) {
+                                            rotate_right(current->right);
+                                    }
+                                    rotate_left(current);
+                            }
+    
+                            current = current->parent;
+                        }
+    
+                        return inserted_node;
                 }
                 /**
                  * @brief Performs a binary search starting from the root node
