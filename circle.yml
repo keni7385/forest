@@ -12,7 +12,8 @@ compile:
 
 test:
   override:
-    - docker run xorz57/forest ./bsearch
-    - docker run xorz57/forest ./rbtree
-    - docker run xorz57/forest ./stree
-    - docker run xorz57/forest ./forest_test
+    - docker run xorz57/forest ./example_binary_search_tree
+    - docker run xorz57/forest ./example_red_black_tree
+    - docker run xorz57/forest ./example_splay_tree
+    - docker run xorz57/forest ./example_avl_tree
+    - docker run xorz57/forest ./tests
