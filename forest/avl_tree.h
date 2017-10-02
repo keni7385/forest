@@ -16,15 +16,12 @@
 namespace forest {
         template <typename key_t, typename value_t>
         struct avl_tree_node {
-                key_t key;     ///< The key of the node
-                value_t value; ///< The value of the node
-                int balance_factor; ///< The avl tree balance factor of this node
+                key_t key;              ///< The key of the node
+                value_t value;          ///< The value of the node
+                int balance_factor;     ///< The avl tree balance factor of this node
                 avl_tree_node *parent;  ///< A pointer to the parent of the node
                 avl_tree_node *left;    ///< A pointer to the left child of the node
                 avl_tree_node *right;   ///< A pointer to the right child of the node
-                /**
-                 * @brief Constructor of an avl tree node
-                 */
                 avl_tree_node(key_t key, value_t value) {
                         this->key = key;
                         this->value = value;
@@ -32,10 +29,6 @@ namespace forest {
                         this->left = nullptr;
                         this->right = nullptr;
                 }
-                /**
-                 * @brief Prints information about the avl tree node to the std::cout
-                 * @return void
-                 */
                 void info() const {
                         std::cout << this->key << "\t";
                         if (this->left != nullptr) {
@@ -214,11 +207,11 @@ namespace forest {
                  * @return The inserted node otherwise nullptr
                  */
                 const avl_tree_node <key_t, value_t> * insert(key_t key, value_t value) {
-    
+
                         avl_tree_node <key_t, value_t> * current = root;
                         avl_tree_node <key_t, value_t> * parent = nullptr;
-                        const avl_tree_node <key_t, value_t> * inserted_node;    
-    
+                        const avl_tree_node <key_t, value_t> * inserted_node;
+
                         while (current != nullptr) {
                             parent = current;
                             if (key > current->key) {
@@ -229,10 +222,10 @@ namespace forest {
                                     return nullptr;
                             }
                         }
-    
+
                         current = new avl_tree_node <key_t, value_t> (key, value);
                         current->parent = parent;
-    
+
                         if(parent == nullptr) {
                                 root = current;
                         } else if (current->key > parent->key) {
@@ -240,13 +233,13 @@ namespace forest {
                         } else if (current->key < parent->key) {
                                 parent->left = current;
                         }
-    
+
                         inserted_node = current;
-    
+
                         // Re-trace up the tree
                         while (current != nullptr) {
                             current->balance_factor = (height(current->right) - height(current->left));
-                            
+
                             // Rotate right
                             if (current->balance_factor == -2) {
                                     // If left subtree is right heavy -- "double right"
@@ -263,10 +256,10 @@ namespace forest {
                                     }
                                     rotate_left(current);
                             }
-    
+
                             current = current->parent;
                         }
-    
+
                         return inserted_node;
                 }
                 /**
@@ -305,6 +298,60 @@ namespace forest {
                         if (x == nullptr) return nullptr;
                         while(x->right != nullptr) x = x->right;
                         return x;
+                }
+                /**
+                 * @brief Finds the successor of the node with key specified
+                 * @return The successor of the node with key specified otherwise nullptr
+                 */
+                const avl_tree_node <key_t, value_t> *successor(key_t key) {
+                        avl_tree_node <key_t, value_t> *x = root;
+                        while (x != nullptr) {
+                                if (key > x->key) {
+                                        x = x->right;
+                                } else if (key < x->key) {
+                                        x = x->left;
+                                } else {
+                                        if (x->right != nullptr) {
+                                                x = x->right;
+                                                while(x->left != nullptr) x = x->left;
+                                                return x;
+                                        }
+                                        avl_tree_node <key_t, value_t> *parent = x->parent;
+                                        while (parent != nullptr && x == parent->right) {
+                                                x = parent;
+                                                parent = parent->parent;
+                                        }
+                                        return parent;
+                                }
+                        }
+                        return nullptr;
+                }
+                /**
+                 * @brief Finds the predecessor of the node with key specified
+                 * @return The predecessor of the node with key specified otherwise nullptr
+                 */
+                const avl_tree_node <key_t, value_t> *predecessor(key_t key) {
+                        avl_tree_node <key_t, value_t> *x = root;
+                        while (x != nullptr) {
+                                if (key > x->key) {
+                                        x = x->right;
+                                } else if (key < x->key) {
+                                        x = x->left;
+                                } else {
+                                        if (x->left != nullptr) {
+                                                x = x->left;
+                                                while(x->right != nullptr) x = x->right;
+                                                return x;
+                                        }
+                                        avl_tree_node <key_t, value_t> *parent = x->parent;
+                                        while (parent != nullptr && x == parent->left) {
+                                                x = parent;
+                                                parent = parent->parent;
+                                        }
+                                        return parent;
+                                }
+                        }
+                        return nullptr;
                 }
                 /**
                  * @brief Finds the height of the tree
