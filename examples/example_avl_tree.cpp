@@ -42,6 +42,16 @@ int main(int argc, char const *argv[]) {
                 std::cout << "Maximum: " << max->key << std::endl;
         }
 
+        auto predecessor = avl_tree.predecessor(90);
+        if (predecessor != nullptr) {
+                std::cout << "Predecessor of 90: " << predecessor->key << std::endl;
+        }
+
+        auto successor = avl_tree.successor(3);
+        if (successor != nullptr) {
+                std::cout << "Successor of 3: " << successor->key << std::endl;
+        }
+
         std::cout << "Height: " << avl_tree.height() << std::endl;
 
         std::cout << "Size: " << avl_tree.size() << std::endl;
