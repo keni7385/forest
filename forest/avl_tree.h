@@ -20,9 +20,12 @@ namespace forest {
                 key_t key;              ///< The key of the node
                 value_t value;          ///< The value of the node
                 int balance_factor;     ///< The avl tree balance factor of this node
-                std::weak_ptr<avl_tree_node> parent;  ///< A pointer to the parent of the node
+                std::weak_ptr<avl_tree_node> parent;    ///< A pointer to the parent of the node
                 std::shared_ptr<avl_tree_node> left;    ///< A pointer to the left child of the node
                 std::shared_ptr<avl_tree_node> right;   ///< A pointer to the right child of the node
+                /**
+                 * @brief Constructor of a avl tree node
+                 */
                 avl_tree_node(key_t key, value_t value) {
                         this->key = key;
                         this->value = value;
@@ -30,6 +33,9 @@ namespace forest {
                         this->left = nullptr;
                         this->right = nullptr;
                 }
+                /**
+                 * @brief Prints to the std::cout information about the node
+                 */
                 void info() const {
                         std::cout << this->key << "\t";
                         if (this->left != nullptr) {
