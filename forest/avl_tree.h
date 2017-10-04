@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <queue>
 #include <fstream>
+#include <memory>
 
 /**
  * @brief The forest library namespace
@@ -19,13 +20,13 @@ namespace forest {
                 key_t key;              ///< The key of the node
                 value_t value;          ///< The value of the node
                 int balance_factor;     ///< The avl tree balance factor of this node
-                avl_tree_node *parent;  ///< A pointer to the parent of the node
-                avl_tree_node *left;    ///< A pointer to the left child of the node
-                avl_tree_node *right;   ///< A pointer to the right child of the node
+                std::weak_ptr<avl_tree_node> parent;  ///< A pointer to the parent of the node
+                std::shared_ptr<avl_tree_node> left;    ///< A pointer to the left child of the node
+                std::shared_ptr<avl_tree_node> right;   ///< A pointer to the right child of the node
                 avl_tree_node(key_t key, value_t value) {
                         this->key = key;
                         this->value = value;
-                        this->parent = nullptr;
+                        this->parent.reset();
                         this->left = nullptr;
                         this->right = nullptr;
                 }
@@ -41,8 +42,8 @@ namespace forest {
                         } else {
                                 std::cout << "null" << "\t";
                         }
-                        if (this->parent != nullptr) {
-                                std::cout << this->parent->key << std::endl;
+                        if (this->parent.lock() != nullptr) {
+                                std::cout << this->parent.lock()->key << std::endl;
                         } else {
                                 std::cout << "null" << std::endl;
                         }
@@ -51,46 +52,46 @@ namespace forest {
         template <typename key_t, typename value_t>
         class avl_tree {
         private:
-                avl_tree_node <key_t, value_t> *root;
-                void pre_order_traversal(avl_tree_node <key_t, value_t> *x) {
+                std::shared_ptr<avl_tree_node <key_t, value_t> > root;
+                void pre_order_traversal(std::shared_ptr<avl_tree_node <key_t, value_t> > &x) {
                         if (x == nullptr) return;
                         x->info();
                         pre_order_traversal(x->left);
                         pre_order_traversal(x->right);
                 }
-                void in_order_traversal(avl_tree_node <key_t, value_t> *x) {
+                void in_order_traversal(std::shared_ptr<avl_tree_node <key_t, value_t> > &x) {
                         if (x == nullptr) return;
                         in_order_traversal(x->left);
                         x->info();
                         in_order_traversal(x->right);
                 }
-                void post_order_traversal(avl_tree_node <key_t, value_t> *x) {
+                void post_order_traversal(std::shared_ptr<avl_tree_node <key_t, value_t> > &x) {
                         if (x == nullptr) return;
                         post_order_traversal(x->left);
                         post_order_traversal(x->right);
                         x->info();
                 }
-                void breadth_first_traversal(avl_tree_node <key_t, value_t> *x) {
-                        std::queue <avl_tree_node <key_t, value_t> *> queue;
+                void breadth_first_traversal(std::shared_ptr<avl_tree_node <key_t, value_t> > &x) {
+                        std::queue <std::shared_ptr<avl_tree_node <key_t, value_t> > > queue;
                         if (x == nullptr) return;
                         queue.push(x);
                         while(queue.empty() == false) {
-                                avl_tree_node <key_t, value_t> *y = queue.front();
+                                std::shared_ptr<avl_tree_node <key_t, value_t> > y = queue.front();
                                 y->info();
                                 queue.pop();
                                 if (y->left != nullptr) queue.push(y->left);
                                 if (y->right != nullptr) queue.push(y->right);
                         }
                 }
-                unsigned long long height(avl_tree_node <key_t, value_t> *x) {
+                unsigned long long height(std::shared_ptr<avl_tree_node <key_t, value_t> > &x) {
                         if (x == nullptr) return 0;
                         return std::max(height(x->left), height(x->right)) + 1;
                 }
-                unsigned long long size(avl_tree_node <key_t, value_t> *x) {
+                unsigned long long size(std::shared_ptr<avl_tree_node <key_t, value_t> > &x) {
                         if (x == nullptr) return 0;
                         return size(x->left) + size(x->right) + 1;
                 }
-                void graphviz(std::ofstream &file, avl_tree_node <key_t, value_t> *x, unsigned long long *count) {
+                void graphviz(std::ofstream &file, std::shared_ptr<avl_tree_node <key_t, value_t> > &x, unsigned long long *count) {
                         if (x == nullptr) return;
                         graphviz(file, x->left, count);
                         if (x->left != nullptr) {
@@ -109,9 +110,9 @@ namespace forest {
                         }
                         graphviz(file, x->right, count);
                 }
-                void rotate_right(avl_tree_node <key_t, value_t> * rotation_root) {
-                    avl_tree_node <key_t, value_t> * new_root = rotation_root->left;
-                    avl_tree_node <key_t, value_t> * orphan_subtree = new_root->right;
+                void rotate_right(std::shared_ptr<avl_tree_node <key_t, value_t> >  &rotation_root) {
+                    std::shared_ptr<avl_tree_node <key_t, value_t> >  new_root = rotation_root->left;
+                    std::shared_ptr<avl_tree_node <key_t, value_t> >  orphan_subtree = new_root->right;
 
                     rotation_root->left = orphan_subtree;
                     if (orphan_subtree != nullptr) {
@@ -120,19 +121,19 @@ namespace forest {
 
                     new_root->right = rotation_root;
 
-                    if (rotation_root->parent == nullptr) {
+                    if (rotation_root->parent.lock() == nullptr) {
                         root = new_root;
-                    } else if(rotation_root == rotation_root->parent->left) {
-                        rotation_root->parent->left = new_root;
-                    } else if (rotation_root == rotation_root->parent->right) {
-                        rotation_root->parent->right = new_root;
+                    } else if(rotation_root == rotation_root->parent.lock()->left) {
+                        rotation_root->parent.lock()->left = new_root;
+                    } else if (rotation_root == rotation_root->parent.lock()->right) {
+                        rotation_root->parent.lock()->right = new_root;
                     }
                     new_root->parent = rotation_root->parent;
                     rotation_root->parent = new_root;
                 }
-                void rotate_left(avl_tree_node <key_t, value_t> * rotation_root) {
-                    avl_tree_node <key_t, value_t> * new_root = rotation_root->right;
-                    avl_tree_node <key_t, value_t> * orphan_subtree = new_root->left;
+                void rotate_left(std::shared_ptr<avl_tree_node <key_t, value_t> >  &rotation_root) {
+                    std::shared_ptr<avl_tree_node <key_t, value_t> >  new_root = rotation_root->right;
+                    std::shared_ptr<avl_tree_node <key_t, value_t> >  orphan_subtree = new_root->left;
 
                     rotation_root->right = orphan_subtree;
                     if (orphan_subtree != nullptr) {
@@ -141,12 +142,12 @@ namespace forest {
 
                     new_root->left = rotation_root;
 
-                    if (rotation_root->parent == nullptr) {
+                    if (rotation_root->parent.lock() == nullptr) {
                         root = new_root;
-                    } else if(rotation_root == rotation_root->parent->left) {
-                        rotation_root->parent->left = new_root;
+                    } else if(rotation_root == rotation_root->parent.lock()->left) {
+                        rotation_root->parent.lock()->left = new_root;
                     } else {
-                        rotation_root->parent->right = new_root;
+                        rotation_root->parent.lock()->right = new_root;
                     }
                     new_root->parent = rotation_root->parent;
                     rotation_root->parent = new_root;
@@ -191,7 +192,7 @@ namespace forest {
                  * @param filename The filename of the .dot file
                  * @return void
                  */
-                void graphviz(std::string filename) {
+                void graphviz(const std::string &filename) {
                         std::ofstream file;
                         unsigned long long count = 0;
                         file.open(filename);
@@ -206,11 +207,11 @@ namespace forest {
                  * @param value The value for the new node
                  * @return The inserted node otherwise nullptr
                  */
-                const avl_tree_node <key_t, value_t> * insert(key_t key, value_t value) {
+                const std::shared_ptr<avl_tree_node <key_t, value_t> >  insert(key_t key, value_t value) {
 
-                        avl_tree_node <key_t, value_t> * current = root;
-                        avl_tree_node <key_t, value_t> * parent = nullptr;
-                        const avl_tree_node <key_t, value_t> * inserted_node;
+                        std::shared_ptr<avl_tree_node <key_t, value_t> >  current = root;
+                        std::shared_ptr<avl_tree_node <key_t, value_t> >  parent = nullptr;
+                        std::shared_ptr<avl_tree_node <key_t, value_t> >  inserted_node;
 
                         while (current != nullptr) {
                             parent = current;
@@ -223,7 +224,7 @@ namespace forest {
                             }
                         }
 
-                        current = new avl_tree_node <key_t, value_t> (key, value);
+                        current = std::make_shared<avl_tree_node <key_t, value_t> >(key, value);
                         current->parent = parent;
 
                         if(parent == nullptr) {
@@ -257,7 +258,7 @@ namespace forest {
                                     rotate_left(current);
                             }
 
-                            current = current->parent;
+                            current = current->parent.lock();
                         }
 
                         return inserted_node;
@@ -266,8 +267,8 @@ namespace forest {
                  * @brief Performs a binary search starting from the root node
                  * @return The node with the key specified otherwise nullptr
                  */
-                const avl_tree_node <key_t, value_t> *search(key_t key) {
-                        avl_tree_node <key_t, value_t> *x = root;
+                const std::shared_ptr<avl_tree_node <key_t, value_t> > search(key_t key) {
+                        std::shared_ptr<avl_tree_node <key_t, value_t> > x = root;
                         while (x != nullptr) {
                                 if (key > x->key) {
                                         x = x->right;
@@ -283,8 +284,8 @@ namespace forest {
                  * @brief Finds the node with the minimum key
                  * @return The node with the minimum key otherwise nullptr
                  */
-                const avl_tree_node <key_t, value_t> *minimum() {
-                        avl_tree_node <key_t, value_t> *x = root;
+                const std::shared_ptr<avl_tree_node <key_t, value_t> > minimum() {
+                        std::shared_ptr<avl_tree_node <key_t, value_t> > x = root;
                         if (x == nullptr) return nullptr;
                         while(x->left != nullptr) x = x->left;
                         return x;
@@ -293,8 +294,8 @@ namespace forest {
                  * @brief Finds the node with the maximum key
                  * @return The node with the maximum key otherwise nullptr
                  */
-                const avl_tree_node <key_t, value_t> *maximum() {
-                        avl_tree_node <key_t, value_t> *x = root;
+                const std::shared_ptr<avl_tree_node <key_t, value_t> > maximum() {
+                        std::shared_ptr<avl_tree_node <key_t, value_t> > x = root;
                         if (x == nullptr) return nullptr;
                         while(x->right != nullptr) x = x->right;
                         return x;
@@ -303,8 +304,8 @@ namespace forest {
                  * @brief Finds the successor of the node with key specified
                  * @return The successor of the node with key specified otherwise nullptr
                  */
-                const avl_tree_node <key_t, value_t> *successor(key_t key) {
-                        avl_tree_node <key_t, value_t> *x = root;
+                const std::shared_ptr<avl_tree_node <key_t, value_t> > successor(key_t key) {
+                        std::shared_ptr<avl_tree_node <key_t, value_t> > x = root;
                         while (x != nullptr) {
                                 if (key > x->key) {
                                         x = x->right;
@@ -316,10 +317,10 @@ namespace forest {
                                                 while(x->left != nullptr) x = x->left;
                                                 return x;
                                         }
-                                        avl_tree_node <key_t, value_t> *parent = x->parent;
+                                        std::shared_ptr<avl_tree_node <key_t, value_t> > parent = x->parent.lock();
                                         while (parent != nullptr && x == parent->right) {
                                                 x = parent;
-                                                parent = parent->parent;
+                                                parent = parent->parent.lock();
                                         }
                                         return parent;
                                 }
@@ -330,8 +331,8 @@ namespace forest {
                  * @brief Finds the predecessor of the node with key specified
                  * @return The predecessor of the node with key specified otherwise nullptr
                  */
-                const avl_tree_node <key_t, value_t> *predecessor(key_t key) {
-                        avl_tree_node <key_t, value_t> *x = root;
+                const std::shared_ptr<avl_tree_node <key_t, value_t> > predecessor(key_t key) {
+                        std::shared_ptr<avl_tree_node <key_t, value_t> > x = root;
                         while (x != nullptr) {
                                 if (key > x->key) {
                                         x = x->right;
@@ -343,10 +344,10 @@ namespace forest {
                                                 while(x->right != nullptr) x = x->right;
                                                 return x;
                                         }
-                                        avl_tree_node <key_t, value_t> *parent = x->parent;
+                                        std::shared_ptr<avl_tree_node <key_t, value_t> > parent = x->parent.lock();
                                         while (parent != nullptr && x == parent->left) {
                                                 x = parent;
-                                                parent = parent->parent;
+                                                parent = parent->parent.lock();
                                         }
                                         return parent;
                                 }
