@@ -22,6 +22,14 @@ SCENARIO("Test Splay Tree") {
                                 auto min = splay_tree.minimum();
                                 REQUIRE(min == nullptr);
                         }
+                        THEN("Test predecessor for a node that does not exist") {
+                                auto predecessor = splay_tree.predecessor(1911);
+                                REQUIRE(predecessor == nullptr);
+                        }
+                        THEN("Test successor for a node that does not exist") {
+                                auto successor = splay_tree.successor(1337);
+                                REQUIRE(successor == nullptr);
+                        }
                         THEN("Test search for a node that does not exist") {
                                 auto result = splay_tree.search(555);
                                 REQUIRE(result == nullptr);
@@ -55,6 +63,24 @@ SCENARIO("Test Splay Tree") {
                                 REQUIRE(min != nullptr);
                                 REQUIRE(min->key == 0);
                                 REQUIRE(min->value == -110);
+                        }
+                        THEN("Test predecessor for a node that does exist") {
+                                auto predecessor = splay_tree.predecessor(90);
+                                REQUIRE(predecessor != nullptr);
+                                REQUIRE(predecessor->key == 45);
+                        }
+                        THEN("Test successor for a node that does exist") {
+                                auto successor = splay_tree.successor(0);
+                                REQUIRE(successor != nullptr);
+                                REQUIRE(successor->key == 2);
+                        }
+                        THEN("Test predecessor for a node that does not exist") {
+                                auto predecessor = splay_tree.predecessor(1917);
+                                REQUIRE(predecessor == nullptr);
+                        }
+                        THEN("Test successor for a node that does not exist") {
+                                auto successor = splay_tree.successor(1920);
+                                REQUIRE(successor == nullptr);
                         }
                         THEN("Test search for a node that does not exist") {
                                 auto result = splay_tree.search(1337);
@@ -92,6 +118,24 @@ SCENARIO("Test Splay Tree") {
                                 REQUIRE(min->key == 0);
                                 REQUIRE(min->value == 0);
                         }
+                        THEN("Test predecessor for a node that does exist") {
+                                auto predecessor = splay_tree.predecessor(9);
+                                REQUIRE(predecessor != nullptr);
+                                REQUIRE(predecessor->key == 8);
+                        }
+                        THEN("Test successor for a node that does exist") {
+                                auto successor = splay_tree.successor(3);
+                                REQUIRE(successor != nullptr);
+                                REQUIRE(successor->key == 4);
+                        }
+                        THEN("Test predecessor for a node that does not exist") {
+                                auto predecessor = splay_tree.predecessor(1917);
+                                REQUIRE(predecessor == nullptr);
+                        }
+                        THEN("Test successor for a node that does not exist") {
+                                auto successor = splay_tree.successor(1920);
+                                REQUIRE(successor == nullptr);
+                        }
                         THEN("Test search for a node that does not exist") {
                                 auto result = splay_tree.search(1337);
                                 REQUIRE(result == nullptr);
@@ -127,6 +171,24 @@ SCENARIO("Test Splay Tree") {
                                 REQUIRE(min != nullptr);
                                 REQUIRE(min->key == 0);
                                 REQUIRE(min->value == 0);
+                        }
+                        THEN("Test predecessor for a node that does exist") {
+                                auto predecessor = splay_tree.predecessor(9);
+                                REQUIRE(predecessor != nullptr);
+                                REQUIRE(predecessor->key == 8);
+                        }
+                        THEN("Test successor for a node that does exist") {
+                                auto successor = splay_tree.successor(3);
+                                REQUIRE(successor != nullptr);
+                                REQUIRE(successor->key == 4);
+                        }
+                        THEN("Test predecessor for a node that does not exist") {
+                                auto predecessor = splay_tree.predecessor(1917);
+                                REQUIRE(predecessor == nullptr);
+                        }
+                        THEN("Test successor for a node that does not exist") {
+                                auto successor = splay_tree.successor(1920);
+                                REQUIRE(successor == nullptr);
                         }
                         THEN("Test search for a node that does not exist") {
                                 auto result = splay_tree.search(1337);

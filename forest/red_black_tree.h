@@ -21,7 +21,7 @@ namespace forest {
                 key_t key;     ///< The key of the node
                 value_t value; ///< The value of the node
                 color_t color; ///< The color of the node
-                std::weak_ptr<red_black_tree_node> parent;  ///< A pointer to the parent of the node
+                std::weak_ptr<red_black_tree_node> parent;    ///< A pointer to the parent of the node
                 std::shared_ptr<red_black_tree_node> left;    ///< A pointer to the left child of the node
                 std::shared_ptr<red_black_tree_node> right;   ///< A pointer to the right child of the node
                 /**
@@ -398,6 +398,60 @@ namespace forest {
                         if (x == nullptr) return nullptr;
                         while(x->right != nullptr) x = x->right;
                         return x;
+                }
+                /**
+                 * @brief Finds the successor of the node with key specified
+                 * @return The successor of the node with key specified otherwise nullptr
+                 */
+                const std::shared_ptr<red_black_tree_node <key_t, value_t> > successor(key_t key) {
+                        std::shared_ptr<red_black_tree_node <key_t, value_t> > x = root;
+                        while (x != nullptr) {
+                                if (key > x->key) {
+                                        x = x->right;
+                                } else if (key < x->key) {
+                                        x = x->left;
+                                } else {
+                                        if (x->right != nullptr) {
+                                                x = x->right;
+                                                while(x->left != nullptr) x = x->left;
+                                                return x;
+                                        }
+                                        std::shared_ptr<red_black_tree_node <key_t, value_t> > parent = x->parent.lock();
+                                        while (parent != nullptr && x == parent->right) {
+                                                x = parent;
+                                                parent = parent->parent.lock();
+                                        }
+                                        return parent;
+                                }
+                        }
+                        return nullptr;
+                }
+                /**
+                 * @brief Finds the predecessor of the node with key specified
+                 * @return The predecessor of the node with key specified otherwise nullptr
+                 */
+                const std::shared_ptr<red_black_tree_node <key_t, value_t> > predecessor(key_t key) {
+                        std::shared_ptr<red_black_tree_node <key_t, value_t> > x = root;
+                        while (x != nullptr) {
+                                if (key > x->key) {
+                                        x = x->right;
+                                } else if (key < x->key) {
+                                        x = x->left;
+                                } else {
+                                        if (x->left != nullptr) {
+                                                x = x->left;
+                                                while(x->right != nullptr) x = x->right;
+                                                return x;
+                                        }
+                                        std::shared_ptr<red_black_tree_node <key_t, value_t> > parent = x->parent.lock();
+                                        while (parent != nullptr && x == parent->left) {
+                                                x = parent;
+                                                parent = parent->parent.lock();
+                                        }
+                                        return parent;
+                                }
+                        }
+                        return nullptr;
                 }
                 /**
                  * @brief Finds the height of the red black tree
