@@ -19,7 +19,7 @@ file(
 
 foreach(header IN LISTS headers)
     configure_file(
-        "${CMAKE_CURRENT_LIST_DIR}/${header}"
+          "${CMAKE_CURRENT_LIST_DIR}/${header}"
           "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${header}"
         COPYONLY)
 endforeach()
@@ -27,7 +27,7 @@ endforeach()
 target_include_directories(
     ${PROJECT_NAME}
         INTERFACE
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+          $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
           $<INSTALL_INTERFACE:.>) # current directory, relative
 
 target_compile_features(
@@ -57,8 +57,8 @@ export(
       "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Targets.cmake")
 
 configure_file(
-    "cmake/${PROJECT_NAME}Config.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake"
+      "${CMAKE_MODULE_PATH}/${PROJECT_NAME}Config.cmake"
+      "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake"
     COPYONLY)
 
 install(
@@ -72,7 +72,7 @@ install(
 
 install(
     FILES
-      "cmake/${PROJECT_NAME}Config.cmake"
+      "${CMAKE_MODULE_PATH}/${PROJECT_NAME}Config.cmake"
       "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake"
     DESTINATION
       "/usr/lib/cmake/${PROJECT_NAME}")
