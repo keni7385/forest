@@ -45,7 +45,7 @@ target_link_libraries(your_project PRIVATE Forest::forest)
 In order to provide flexibility to builds, custom CMake variables exist. To use them, pass `-DVARIABLE=VALUE` to CMake, for example:
 
 ```console
-$ cmake -BUILD_EXAMPLES=ON -DENABLE_TESTING=ON ..
+$ cmake -DBUILD_EXAMPLES=ON -DENABLE_TESTING=ON ..
 ```
 
 * `BUILD_EXAMPLES:BOOL=OFF` - Build usage examples
