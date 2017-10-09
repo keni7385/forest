@@ -9,11 +9,26 @@ project(forest LANGUAGES CXX VERSION ${${CMAKE_PROJECT_NAME}_VERSION})
 add_library(${PROJECT_NAME} INTERFACE)
 add_library(${CMAKE_PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
+file(
+    GLOB headers
+    RELATIVE "${CMAKE_CURRENT_LIST_DIR}"
+      "*.h")
+
+# Copy headers into build directory in order to be able to write
+# #include <forest/smth.h> instead of #include <smth.h> to build examples
+
+foreach(header IN LISTS headers)
+    configure_file(
+        "${CMAKE_CURRENT_LIST_DIR}/${header}"
+          "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${header}"
+        COPYONLY)
+endforeach()
+
 target_include_directories(
     ${PROJECT_NAME}
         INTERFACE
-          $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-          $<INSTALL_INTERFACE:include>)
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+          $<INSTALL_INTERFACE:.>) # current directory, relative
 
 target_compile_features(
     ${PROJECT_NAME}
@@ -37,7 +52,7 @@ write_basic_package_version_file(
 export(
     EXPORT ${PROJECT_NAME}Targets
     NAMESPACE
-    ${CMAKE_PROJECT_NAME}::
+      ${CMAKE_PROJECT_NAME}::
     FILE
       "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Targets.cmake")
 
@@ -63,6 +78,7 @@ install(
       "/usr/lib/cmake/${PROJECT_NAME}")
 
 install(
-    DIRECTORY "include/${PROJECT_NAME}"
-    DESTINATION include
-    FILES_MATCHING PATTERN "*.h")
+    FILES
+      ${headers}
+    DESTINATION
+      include/${PROJECT_NAME})

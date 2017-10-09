@@ -21,7 +21,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib" CACHE
     STRING "Where to put libraries after compilation.")
 
-add_subdirectory(forest)
+add_subdirectory(include)
 
 add_subdirectory(examples)
 
