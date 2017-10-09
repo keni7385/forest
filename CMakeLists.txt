@@ -16,14 +16,23 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 
 include(ForestBuildType)
 
+# Configuration
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE
     STRING "Where to put binaries after compilation.")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib" CACHE
     STRING "Where to put libraries after compilation.")
 
+set(BUILD_EXAMPLES OFF CACHE BOOL "Build usage examples")
+set(ENABLE_TESTING OFF CACHE BOOL "Build tests and prepare `test` target")
+
 add_subdirectory(include)
 
-add_subdirectory(examples)
+if(BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
 
-enable_testing()
-add_subdirectory(tests)
+if(ENABLE_TESTING)
+    enable_testing()
+    add_subdirectory(tests)
+endif()

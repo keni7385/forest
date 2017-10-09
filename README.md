@@ -40,6 +40,17 @@ find_package(forest REQUIRED CONFIG)
 target_link_libraries(your_project PRIVATE Forest::forest)
 ```
 
+### CMake variables
+
+In order to provide flexibility to builds, custom CMake variables exist. To use them, pass `-DVARIABLE=VALUE` to CMake, for example:
+
+```console
+$ cmake -BUILD_EXAMPLES=ON -DENABLE_TESTING=ON ..
+```
+
+* `BUILD_EXAMPLES:BOOL=OFF` - Build usage examples
+* `ENABLE_TESTING:BOOL=OFF` - Build tests and prepare `test` target
+
 ## Example Code
 
 Forest is best explained through examples. The following source code generates a red black tree, inserts 7 nodes and then generates a DOT file.
@@ -67,6 +78,8 @@ int main() {
 }
 ```
 
+See `examples` directory in the project root for more.
+
 ## Graph Visualization using Graphviz
 
 Forest provides an easy way to visualize tree data structures using the graphviz member function. When this function is called, a [DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) file describing the data structure graph is created. In order to be able to generate an image of the graph you must install [Graphviz](http://www.graphviz.org/). The generated [DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) file can be feed to the dot tool (provided by [Graphviz](http://www.graphviz.org/)) which in turn will generate an image for the graph.
@@ -80,3 +93,7 @@ This is the graph visualization of the above example code, generated with the do
 ![Red Black Tree Graph](https://i.imgur.com/FrRNJ29.png)
 
 Refer to the [Quick Start Guide](https://github.com/xorz57/forest/wiki/Quick-Start-Guide) page for further information and examples.
+
+## Testing
+
+Configure CMake with `ENABLE_TESTING=ON` and build `check` target. This will run all tests in `tests` directory using `ctest` program.
