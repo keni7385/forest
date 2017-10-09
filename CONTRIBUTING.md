@@ -1,15 +1,69 @@
-**CONTRIBUTION**
+# CONTRIBUTION
 
-Some Conventions to be followed for contributing to the project
+## Coding Conventions
 
-- 8 spaces must be used for indentation
+#### Indentation is 8 spaces:
 
-- Variables should be named in lower case and words should be seperated by underscore.
+```
+void foo(int x) {
+        // code
+}
+```
 
-- Iterative implementations should be preferred over Recursive Implementation.
+#### Function definitions should not be separated from their arguments:
 
-- Your code should be Well commented and comments should be descriptive in nature
+```
+void foo(int a)  // preferable
+void foo (int a) // not preferable
+```
 
-- Your code must be tested by you before making a PR
+#### Separate arguments by a single space:
 
-- [Git flow](https://help.github.com/articles/what-is-a-good-git-workflow/) should be followed instead of github flow.
+```
+void foo(int a, float b) // preferable
+void foo(int a,float b)  // not preferable
+```
+
+#### Space between operators:
+
+```
+if (a == b) // preferable
+if (a==b)   // not preferable
+```
+
+#### Braces should be on the same line:
+
+```
+// preferable
+if (a == b) {
+        // code
+}
+
+// not preferable
+if (a == b)
+{
+        // code
+}
+
+```
+
+#### Braces should not be used only if one command follows the if statement:
+
+```
+// preferable
+if (a == b) c = a + b;
+
+// not preferable
+if (a == b) {
+        c = a + b;
+}
+```
+
+## Pull Requests
+
+- Should not introduce merge conflicts
+- Should follow the Coding Convention mentioned above
+- Should not break anything inside the repository
+- Should pass all existing tests
+- Should provide self explanatory code or sufficient comments
+- Should provide tests for every new feature
