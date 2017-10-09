@@ -5,5 +5,5 @@ WORKDIR forest
 COPY / ./
 RUN mkdir build
 WORKDIR build
-RUN cmake ..
+RUN cmake -DBUILD_EXAMPLES=ON -DENABLE_TESTING=ON ..
 RUN make
