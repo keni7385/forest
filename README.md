@@ -2,7 +2,21 @@
 
 [![CircleCI](https://circleci.com/gh/xorz57/forest/tree/master.svg?style=svg)](https://circleci.com/gh/xorz57/forest/tree/master)
 
-Forest is an open source, template library of tree data structures written in C++11.
+Forest is an open-source, template library of tree data structures written in C++11.
+
+## Features
+
+|Operations|Binary Search Tree|AVL Tree|Red Black Tree|Splay Tree|
+|---|---|---|---|---|
+|Insert|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|Search|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|Delete|:x:|:x:|:x:|:x:|
+|Pre Order Traversal|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|In Order Traversal|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|Post Order Traversal|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|Breadth First Traversal|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|In Order Predecessor|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|In Order Successor|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
 
 ## Installation
 
@@ -28,7 +42,7 @@ target_link_libraries(your_project PRIVATE Forest::forest)
 
 ## Example Code
 
-Forest is best explained through examples. The following source code generates a red black tree, inserts 7 nodes and then performs an in order traversal.
+Forest is best explained through examples. The following source code generates a red black tree, inserts 7 nodes and then generates a DOT file.
 
 ```cpp
 #include <forest/red_black_tree.h>
@@ -46,10 +60,7 @@ int main() {
         red_black_tree.insert(14,0);
         red_black_tree.insert(45,0);
 
-        // Perform an in order traversal
-        red_black_tree.in_order_traversal();
-
-        // Generate a .dot file representing the Red Black Tree
+        // Generate a DOT file representing the Red Black Tree
         red_black_tree.graphviz("red_black_tree.dot");
 
         return 0;
