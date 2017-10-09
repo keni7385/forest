@@ -1,34 +1,29 @@
+# Copyright (C) 2017 xorz57 <fot@ceid.upatras.gr>
+# Copyright (C) 2017 Josh Lospinoso <josh@lospi.net>
+# Copyright (C) 2017 Tres DuBiel <tres@localhost.localdomain>
+# Copyright (C) 2017 Oleksii Vilchanskyi <alexvilchansky@yahoo.com>
+#
+# This software may be modified and distributed under the terms
+# of the MIT license.  See the LICENSE file for details.
+#
+
 cmake_minimum_required(VERSION 3.9)
 
-project(forest)
+project(Forest LANGUAGES CXX VERSION 4.2.1)
 
 # Let CMake find custom modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 
 include(ForestBuildType)
 
-set (CMAKE_CXX_STANDARD 11)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE
+    STRING "Where to put binaries after compilation.")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib" CACHE
+    STRING "Where to put libraries after compilation.")
 
-install(DIRECTORY forest DESTINATION include FILES_MATCHING PATTERN "*.h")
+add_subdirectory(forest)
 
-include_directories(.)
+add_subdirectory(examples)
 
-add_executable(example_binary_search_tree
-  examples/example_binary_search_tree.cpp)
-
-add_executable(example_red_black_tree
-  examples/example_red_black_tree.cpp)
-
-add_executable(example_splay_tree
-  examples/example_splay_tree.cpp)
-
-add_executable(example_avl_tree
-  examples/example_avl_tree.cpp)
-
-add_executable(tests
-  tests/test.cpp
-  tests/catch.hpp
-  tests/test_binary_search_tree.cpp
-  tests/test_red_black_tree.cpp
-  tests/test_splay_tree.cpp
-  tests/test_avl_tree.cpp)
+enable_testing()
+add_subdirectory(tests)

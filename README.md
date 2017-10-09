@@ -8,20 +8,29 @@ Forest is an open source, template library of tree data structures written in C+
 
 #### Linux / macOS
 
-```
+```console
 $ git clone https://github.com/xorz57/forest.git
 $ cd forest
 $ mkdir build
 $ cd build
 $ cmake ..
-$ make install
+$ sudo make install
+```
+
+## Usage
+
+Forest uses CMake to build itself and provides an interface for CMake users. In particular, it defines an `IMPORTED` library that should be linked to your target. For example:
+
+```cmake
+find_package(forest REQUIRED CONFIG)
+target_link_libraries(your_project PRIVATE Forest::forest)
 ```
 
 ## Example Code
 
 Forest is best explained through examples. The following source code generates a red black tree, inserts 7 nodes and then performs an in order traversal.
 
-```
+```cpp
 #include <forest/red_black_tree.h>
 
 int main() {
@@ -51,7 +60,7 @@ int main() {
 
 Forest provides an easy way to visualize tree data structures using the graphviz member function. When this function is called, a [DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) file describing the data structure graph is created. In order to be able to generate an image of the graph you must install [Graphviz](http://www.graphviz.org/). The generated [DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) file can be feed to the dot tool (provided by [Graphviz](http://www.graphviz.org/)) which in turn will generate an image for the graph.
 
-```
+```console
 $ dot red_black_tree.dot -Tpng > red_black_tree.png
 ```
 
