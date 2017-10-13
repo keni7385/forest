@@ -45,12 +45,12 @@ target_link_libraries(your_project PRIVATE Forest::forest)
 In order to provide flexibility to builds, custom CMake variables exist. To use them, pass `-DVARIABLE=VALUE` to CMake, for example:
 
 ```console
-$ cmake -DBUILD_EXAMPLES=ON -DENABLE_TESTING=ON ..
+$ cmake -DFOREST_BUILD_EXAMPLES=ON -DFOREST_ENABLE_TESTING=ON ..
 ```
 
-* `BUILD_EXAMPLES:BOOL=OFF` - Build usage examples
-* `ENABLE_TESTING:BOOL=OFF` - Build tests and prepare `check` target
-* `BUILD_DOCUMENTATION:BOOL=OFF` - Build Doxygen documentation and prepare `doc` target
+* `FOREST_BUILD_EXAMPLES:BOOL=OFF` - Build usage examples
+* `FOREST_ENABLE_TESTING:BOOL=OFF` - Build tests and prepare `check` target
+* `FOREST_BUILD_DOCUMENTATION:BOOL=OFF` - Build Doxygen documentation and prepare `doc` target
 
 ## Example Code
 
@@ -81,7 +81,7 @@ int main() {
 
 See `examples` directory in the project root for more.
 
-To build all examples, configure CMake with `-DBUILD_EXAMPLES=ON` and build `examples` target.
+To build all examples, configure CMake with `-DFOREST_BUILD_EXAMPLES=ON` and build `examples` target.
 
 ## Graph Visualization using Graphviz
 
@@ -99,8 +99,8 @@ Refer to the [Quick Start Guide](https://github.com/xorz57/forest/wiki/Quick-Sta
 
 ## Documentation
 
-To generate Doxygen documentation, configure CMake with `-DBUILD_DOCUMENTATION=ON` and build `doc` target. The HTML documentation will appear under `<build>/doc/html`, where `<build>` is the directory containing CMake configuration (usually `build`).
+To generate Doxygen documentation, configure CMake with `-DFOREST_BUILD_DOCUMENTATION=ON` and build `doc` target. The HTML documentation will appear under `<build>/doc/html`, where `<build>` is the directory containing CMake configuration (usually `build`).
 
 ## Testing
 
-Configure CMake with `-DENABLE_TESTING=ON` and build `check` target. This will run all tests in `tests` directory.
+Configure CMake with `-DFOREST_ENABLE_TESTING=ON` and build `check` target. This will run all tests in `tests` directory.

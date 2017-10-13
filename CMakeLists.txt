@@ -23,21 +23,21 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib" CACHE
     STRING "Where to put libraries after compilation.")
 
-set(BUILD_EXAMPLES      OFF CACHE BOOL "Build usage examples")
-set(ENABLE_TESTING      OFF CACHE BOOL "Build tests and prepare `test` target")
-set(BUILD_DOCUMENTATION OFF CACHE BOOL "Build Doxygen documentation")
+set(FOREST_BUILD_EXAMPLES      OFF CACHE BOOL "Build usage examples")
+set(FOREST_ENABLE_TESTING      OFF CACHE BOOL "Build tests and prepare `test` target")
+set(FOREST_BUILD_DOCUMENTATION OFF CACHE BOOL "Build Doxygen documentation")
 
 add_subdirectory(include)
 
-if(BUILD_EXAMPLES)
+if(FOREST_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
-if(ENABLE_TESTING)
+if(FOREST_ENABLE_TESTING)
     enable_testing()
     add_subdirectory(tests)
 endif()
 
-if(BUILD_DOCUMENTATION)
+if(FOREST_BUILD_DOCUMENTATION)
     add_subdirectory(doc)
 endif()
