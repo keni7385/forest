@@ -49,7 +49,7 @@ $ cmake -DBUILD_EXAMPLES=ON -DENABLE_TESTING=ON ..
 ```
 
 * `BUILD_EXAMPLES:BOOL=OFF` - Build usage examples
-* `ENABLE_TESTING:BOOL=OFF` - Build tests and prepare `test` target
+* `ENABLE_TESTING:BOOL=OFF` - Build tests and prepare `check` target
 * `BUILD_DOCUMENTATION:BOOL=OFF` - Build Doxygen documentation and prepare `doc` target
 
 ## Example Code
@@ -101,4 +101,4 @@ To generate Doxygen documentation, configure CMake with `-DBUILD_DOCUMENTATION=O
 
 ## Testing
 
-Configure CMake with `-DENABLE_TESTING=ON` and build `test` target. This will run all tests in `tests` directory.
+Configure CMake with `-DENABLE_TESTING=ON` and build `check` target. This will run all tests in `tests` directory.
