@@ -46,6 +46,8 @@ add_test(
 
 add_custom_target(
     check
-      COMMAND test_forest
-      DEPENDS test_forest
-      USES_TERMINAL)
+      COMMAND
+        test_forest
+      DEPENDS
+        test_forest
+    USES_TERMINAL)

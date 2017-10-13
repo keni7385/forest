@@ -6,58 +6,32 @@
 
 project(forestExamples LANGUAGES CXX)
 
-add_executable(
-    example_binary_search_tree
-        example_binary_search_tree.cpp)
+add_custom_target(examples)
 
-target_compile_features(
-    example_binary_search_tree
-        PRIVATE
-          cxx_std_11)
+set(forest_examples
+        example_avl_tree
+        example_binary_search_tree
+        example_red_black_tree
+        example_splay_tree)
 
-target_link_libraries(
-    example_binary_search_tree
-        PRIVATE
-          Forest::forest)
+foreach(forest_example IN LISTS forest_examples)
 
-add_executable(
-    example_red_black_tree
-        example_red_black_tree.cpp)
+    add_executable(
+        ${forest_example}
+            ${forest_example}.cpp)
 
-target_compile_features(
-    example_red_black_tree
-        PRIVATE
-          cxx_std_11)
+    target_compile_features(
+        ${forest_example}
+            PRIVATE
+              cxx_std_11)
 
-target_link_libraries(
-    example_red_black_tree
-        PRIVATE
-          Forest::forest)
+    target_link_libraries(
+        ${forest_example}
+            PRIVATE
+              Forest::forest)
 
-add_executable(
-    example_splay_tree
-        example_splay_tree.cpp)
+add_dependencies(
+    examples
+        ${forest_example})
 
-target_compile_features(
-    example_splay_tree
-        PRIVATE
-          cxx_std_11)
-
-target_link_libraries(
-    example_splay_tree
-        PRIVATE
-          Forest::forest)
-
-add_executable(
-    example_avl_tree
-        example_avl_tree.cpp)
-
-target_compile_features(
-    example_avl_tree
-        PRIVATE
-          cxx_std_11)
-
-target_link_libraries(
-    example_avl_tree
-        PRIVATE
-          Forest::forest)
+endforeach()
