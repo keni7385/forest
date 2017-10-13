@@ -40,7 +40,7 @@ find_package(forest REQUIRED CONFIG)
 target_link_libraries(your_project PRIVATE Forest::forest)
 ```
 
-### CMake variables
+### CMake Variables
 
 In order to provide flexibility to builds, custom CMake variables exist. To use them, pass `-DVARIABLE=VALUE` to CMake, for example:
 
@@ -50,6 +50,7 @@ $ cmake -DBUILD_EXAMPLES=ON -DENABLE_TESTING=ON ..
 
 * `BUILD_EXAMPLES:BOOL=OFF` - Build usage examples
 * `ENABLE_TESTING:BOOL=OFF` - Build tests and prepare `test` target
+* `BUILD_DOCUMENTATION:BOOL=OFF` - Build Doxygen documentation and prepare `doc` target
 
 ## Example Code
 
@@ -94,6 +95,10 @@ This is the graph visualization of the above example code, generated with the do
 
 Refer to the [Quick Start Guide](https://github.com/xorz57/forest/wiki/Quick-Start-Guide) page for further information and examples.
 
+## Documentation
+
+To generate Doxygen documentation, configure CMake with `-DBUILD_DOCUMENTATION=ON` and build `doc` target. The HTML documentation will appear under `<build>/doc/html`, where `<build>` is the directory containing CMake configuration (usually `build`).
+
 ## Testing
 
-Configure CMake with `ENABLE_TESTING=ON` and build `check` target. This will run all tests in `tests` directory using `ctest` program.
+Configure CMake with `-DENABLE_TESTING=ON` and build `test` target. This will run all tests in `tests` directory.

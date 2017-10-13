@@ -23,8 +23,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib" CACHE
     STRING "Where to put libraries after compilation.")
 
-set(BUILD_EXAMPLES OFF CACHE BOOL "Build usage examples")
-set(ENABLE_TESTING OFF CACHE BOOL "Build tests and prepare `test` target")
+set(BUILD_EXAMPLES      OFF CACHE BOOL "Build usage examples")
+set(ENABLE_TESTING      OFF CACHE BOOL "Build tests and prepare `test` target")
+set(BUILD_DOCUMENTATION OFF CACHE BOOL "Build Doxygen documentation")
 
 add_subdirectory(include)
 
@@ -35,4 +36,8 @@ endif()
 if(ENABLE_TESTING)
     enable_testing()
     add_subdirectory(tests)
+endif()
+
+if(BUILD_DOCUMENTATION)
+    add_subdirectory(doc)
 endif()
