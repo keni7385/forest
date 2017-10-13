@@ -57,7 +57,7 @@ export(
       "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Targets.cmake")
 
 configure_file(
-      "${CMAKE_MODULE_PATH}/${PROJECT_NAME}Config.cmake"
+      "${CMAKE_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake"
       "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake"
     COPYONLY)
 
@@ -72,7 +72,7 @@ install(
 
 install(
     FILES
-      "${CMAKE_MODULE_PATH}/${PROJECT_NAME}Config.cmake"
+      "${CMAKE_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake"
       "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake"
     DESTINATION
       "/usr/lib/cmake/${PROJECT_NAME}")
