@@ -1,12 +1,3 @@
-# Copyright (C) 2017 xorz57 <fot@ceid.upatras.gr>
-# Copyright (C) 2017 Josh Lospinoso <josh@lospi.net>
-# Copyright (C) 2017 Tres DuBiel <tres@localhost.localdomain>
-# Copyright (C) 2017 Oleksii Vilchanskyi <alexvilchansky@yahoo.com>
-#
-# This software may be modified and distributed under the terms
-# of the MIT license.  See the LICENSE file for details.
-#
-
 cmake_minimum_required(VERSION 3.9)
 
 project(Forest LANGUAGES CXX VERSION 4.2.1)
