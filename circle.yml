@@ -16,4 +16,4 @@ test:
     - docker run xorz57/forest ./bin/example_red_black_tree
     - docker run xorz57/forest ./bin/example_splay_tree
     - docker run xorz57/forest ./bin/example_avl_tree
-    - docker run xorz57/forest ./bin/forestTests
+    - docker run xorz57/forest ./bin/test_forest

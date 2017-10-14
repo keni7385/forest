@@ -33,7 +33,13 @@ $ sudo make install
 
 ## Usage
 
-Forest uses CMake to build itself and provides an interface for CMake users. In particular, it defines an `IMPORTED` library that should be linked to your target. For example:
+Just include a header. For example:
+
+```cpp
+#include <forest/red_black_tree.h>
+```
+
+Additionally, Forest provides an interface for CMake users. In particular, it defines an `IMPORTED` library that should be linked to your target. For example:
 
 ```cmake
 find_package(forest REQUIRED CONFIG)
@@ -48,9 +54,9 @@ In order to provide flexibility to builds, custom CMake variables exist. To use 
 $ cmake -DFOREST_BUILD_EXAMPLES=ON -DFOREST_ENABLE_TESTING=ON ..
 ```
 
-* `FOREST_BUILD_EXAMPLES:BOOL=OFF` - Build usage examples
-* `FOREST_ENABLE_TESTING:BOOL=OFF` - Build tests and prepare `check` target
-* `FOREST_BUILD_DOCUMENTATION:BOOL=OFF` - Build Doxygen documentation and prepare `doc` target
+* `FOREST_BUILD_EXAMPLES:BOOL=OFF` - Build usage examples (`examples` target)
+* `FOREST_ENABLE_TESTING:BOOL=OFF` - Build tests (`check` target)
+* `FOREST_BUILD_DOCUMENTATION:BOOL=OFF` - Build Doxygen documentation (`doc` target)
 
 ## Example Code
 
