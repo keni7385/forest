@@ -9,6 +9,8 @@ include(ForestBuildType)
 
 # Configuration
 
+set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY ON)
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE
     STRING "Where to put binaries after compilation.")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib" CACHE
