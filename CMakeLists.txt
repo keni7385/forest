@@ -1,29 +1,36 @@
 cmake_minimum_required(VERSION 3.9)
 
-project(forest)
+project(Forest LANGUAGES CXX VERSION 4.2.1)
 
-set (CMAKE_CXX_STANDARD 11)
+# Let CMake find custom modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")
 
-install(DIRECTORY forest DESTINATION include FILES_MATCHING PATTERN "*.h")
+include(ForestBuildType)
 
-include_directories(.)
+# Configuration
 
-add_executable(example_binary_search_tree
-  examples/example_binary_search_tree.cpp)
+set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY ON)
 
-add_executable(example_red_black_tree
-  examples/example_red_black_tree.cpp)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin" CACHE
+    STRING "Where to put binaries after compilation.")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib" CACHE
+    STRING "Where to put libraries after compilation.")
 
-add_executable(example_splay_tree
-  examples/example_splay_tree.cpp)
+set(FOREST_BUILD_EXAMPLES      OFF CACHE BOOL "Build usage examples")
+set(FOREST_ENABLE_TESTING      OFF CACHE BOOL "Build tests and prepare `test` target")
+set(FOREST_BUILD_DOCUMENTATION OFF CACHE BOOL "Build Doxygen documentation")
 
-add_executable(example_avl_tree
-  examples/example_avl_tree.cpp)
+add_subdirectory(include)
 
-add_executable(tests
-  tests/test.cpp
-  tests/catch.hpp
-  tests/test_binary_search_tree.cpp
-  tests/test_red_black_tree.cpp
-  tests/test_splay_tree.cpp
-  tests/test_avl_tree.cpp)
+if(FOREST_BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
+
+if(FOREST_ENABLE_TESTING)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+
+if(FOREST_BUILD_DOCUMENTATION)
+    add_subdirectory(doc)
+endif()
