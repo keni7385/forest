@@ -7,8 +7,8 @@ jobs:
         working_directory: ~/forest
         branches:
             only:
-                - develop
-                # since CMake is not yet on master, only develop is used
+                - ci
+                # since CMake is not yet on master, only ci is used
                 # - master
         steps:
             - checkout
@@ -36,8 +36,9 @@ jobs:
         working_directory: ~/forest
         branches:
             only:
-                # would make sense only on master
-                - develop
+                - ci
+                # since CMake is not yet on master, only ci is used
+                # - master
         steps:
             - checkout
             - run:
@@ -68,8 +69,8 @@ jobs:
         working_directory: ~/forest
         branches:
             only:
-                - develop
-                # since CMake is not yet on master, only develop is used
+                - ci
+                # since CMake is not yet on master, only ci is used
                 # - master
         steps:
             - checkout
