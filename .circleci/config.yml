@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-    check:
+    build:
         docker:
             image: pritunl/archlinux:latest
         working_directory: ~/forest
@@ -9,35 +9,8 @@ jobs:
             only:
                 - ci
                 # since CMake is not yet on master, only ci is used
-                # - master
-        steps:
-            - checkout
-            - run:
-                name: Install dependencies
-                command: pacman -S gcc ninja cmake --noconfirm
-            - run:
-                name: GCC version
-                command: gcc --version | head -n 1
-            - run:
-                name: Ninja version
-                command: ninja --version
-            - run:
-                name: CMake version
-                command: cmake --version | head -n 1
-            - run:
-                name: Generate CMake configuration
-                command: cmake -H. -Bbuild -GNinja -DFOREST_ENABLE_TESTING=ON
-            - run:
-                name: Run tests
-                command: cmake --build build --target check
-    doc:
-        docker:
-            image: pritunl/archlinux:latest
-        working_directory: ~/forest
-        branches:
-            only:
-                - ci
-                # since CMake is not yet on master, only ci is used
+                # but since CircleCI reads config from master, I have
+                # to locally merge branches evey time
                 # - master
         steps:
             - checkout
@@ -58,37 +31,18 @@ jobs:
                 command: doxygen --version
             - run:
                 name: Generate CMake configuration
-                command: cmake -H. -Bbuild -GNinja -DFOREST_BUILD_DOCUMENTATION=ON
+                command: |
+                    cmake -H. -Bbuild -GNinja       \
+                    -DFOREST_ENABLE_TESTING=ON      \
+                    -DFOREST_BUILD_EXAMPLES=ON      \
+                    -DFOREST_BUILD_DOCUMENTATION=ON
+            - run:
+                name: Run tests
+                command: cmake --build build --target check
             - run:
                 name: Build Doxygen documentation
                 command: cmake --build build --target doc
                 # in case website appears, it could be deployed to web on a new release
-    examples:
-        docker:
-            image: pritunl/archlinux:latest
-        working_directory: ~/forest
-        branches:
-            only:
-                - ci
-                # since CMake is not yet on master, only ci is used
-                # - master
-        steps:
-            - checkout
-            - run:
-                name: Install dependencies
-                command: pacman -S gcc ninja cmake --noconfirm
-            - run:
-                name: GCC version
-                command: gcc --version | head -n 1
-            - run:
-                name: Ninja version
-                command: ninja --version
-            - run:
-                name: CMake version
-                command: cmake --version | head -n 1
-            - run:
-                name: Generate CMake configuration
-                command: cmake -H. -Bbuild -GNinja -DFOREST_ENABLE_TESTING=ON
             - run:
                 name: Build examples
                 command: cmake --build build --target examples
