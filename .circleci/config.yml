@@ -3,7 +3,7 @@ version: 2
 jobs:
     build:
         docker:
-            image: pritunl/archlinux:latest
+            - image: pritunl/archlinux:latest
         working_directory: ~/forest
         branches:
             only:
