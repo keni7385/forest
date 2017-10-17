@@ -1,0 +1,105 @@
+version: 2
+
+jobs:
+    check:
+        docker:
+            image: pritunl/archlinux:latest
+        working_directory: ~/forest
+        branches:
+            only:
+                - develop
+                # since CMake is not yet on master, only develop is used
+                # - master
+        steps:
+            - checkout
+            - run:
+                name: Install dependencies
+                command: pacman -S gcc ninja cmake --noconfirm
+            - run:
+                name: GCC version
+                command: gcc --version | head -n 1
+            - run:
+                name: Ninja version
+                command: ninja --version
+            - run:
+                name: CMake version
+                command: cmake --version | head -n 1
+            - run:
+                name: Generate CMake configuration
+                command: cmake -H. -Bbuild -GNinja -DFOREST_ENABLE_TESTING=ON
+            - run:
+                name: Run tests
+                command: cmake --build build --target check
+    doc:
+        docker:
+            image: pritunl/archlinux:latest
+        working_directory: ~/forest
+        branches:
+            only:
+                # would make sense only on master
+                - develop
+        steps:
+            - checkout
+            - run:
+                name: Install dependencies
+                command: pacman -S gcc ninja cmake doxygen --noconfirm
+            - run:
+                name: GCC version
+                command: gcc --version | head -n 1
+            - run:
+                name: Ninja version
+                command: ninja --version
+            - run:
+                name: CMake version
+                command: cmake --version | head -n 1
+            - run:
+                name: Doxygen version
+                command: doxygen --version
+            - run:
+                name: Generate CMake configuration
+                command: cmake -H. -Bbuild -GNinja -DFOREST_BUILD_DOCUMENTATION=ON
+            - run:
+                name: Build Doxygen documentation
+                command: cmake --build build --target doc
+                # in case website appears, it could be deployed to web on a new release
+    examples:
+        docker:
+            image: pritunl/archlinux:latest
+        working_directory: ~/forest
+        branches:
+            only:
+                - develop
+                # since CMake is not yet on master, only develop is used
+                # - master
+        steps:
+            - checkout
+            - run:
+                name: Install dependencies
+                command: pacman -S gcc ninja cmake --noconfirm
+            - run:
+                name: GCC version
+                command: gcc --version | head -n 1
+            - run:
+                name: Ninja version
+                command: ninja --version
+            - run:
+                name: CMake version
+                command: cmake --version | head -n 1
+            - run:
+                name: Generate CMake configuration
+                command: cmake -H. -Bbuild -GNinja -DFOREST_ENABLE_TESTING=ON
+            - run:
+                name: Build examples
+                command: cmake --build build --target examples
+            - run:
+                name: Run example_avl_tree
+                command: ./build/bin/example_avl_tree
+            - run:
+                name: Run example_binary_search_tree
+                command: ./build/bin/example_binary_search_tree
+            - run:
+                name: Run example_red_black_tree
+                command: ./build/bin/example_red_black_tree
+            - run:
+                name: Run example_splay_tree
+                command: ./build/bin/example_splay_tree
