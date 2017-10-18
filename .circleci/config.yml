@@ -7,7 +7,7 @@ jobs:
         working_directory: ~/forest
         branches:
             only:
-                # - master
+                - master
                 - develop
         steps:
             - checkout
