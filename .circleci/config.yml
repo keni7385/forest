@@ -5,10 +5,6 @@ jobs:
         docker:
             - image: pritunl/archlinux:latest
         working_directory: ~/forest
-        branches:
-            only:
-                - master
-                - develop
         steps:
             - checkout
             - run:
