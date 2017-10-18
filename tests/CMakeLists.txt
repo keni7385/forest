@@ -1,15 +1,30 @@
 project(forestTests LANGUAGES CXX)
 
+message(STATUS "Downloading Catch header")
+file(
+    DOWNLOAD
+      https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp
+      "${CMAKE_CURRENT_BINARY_DIR}/catch.hpp")
+
+# Generate main test file
+file(
+    WRITE
+    "${CMAKE_CURRENT_BINARY_DIR}/test.cpp" [[
+      #define CATCH_CONFIG_MAIN
+      #include <catch.hpp>
+      ]])
+
 add_library(Catch INTERFACE)
 
 target_include_directories(
     Catch
         INTERFACE
-          "${CMAKE_CURRENT_SOURCE_DIR}")
+          "${CMAKE_CURRENT_SOURCE_DIR}"
+          "${CMAKE_CURRENT_BINARY_DIR}")
 
 add_executable(
     test_forest
-        test.cpp
+        "${CMAKE_CURRENT_BINARY_DIR}/test.cpp"
         test_binary_search_tree.cpp
         test_red_black_tree.cpp
         test_splay_tree.cpp
