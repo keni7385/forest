@@ -15,18 +15,6 @@ jobs:
                 name: Install dependencies
                 command: pacman -S gcc ninja cmake doxygen --noconfirm
             - run:
-                name: GCC version
-                command: gcc --version
-            - run:
-                name: Ninja version
-                command: ninja --version
-            - run:
-                name: CMake version
-                command: cmake --version
-            - run:
-                name: Doxygen version
-                command: doxygen --version
-            - run:
                 name: Generate CMake configuration
                 command: |
                     cmake -H. -Bbuild -GNinja       \
