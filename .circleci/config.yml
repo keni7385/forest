@@ -1,0 +1,41 @@
+version: 2
+
+jobs:
+    build:
+        docker:
+            - image: pritunl/archlinux:latest
+        working_directory: ~/forest
+        steps:
+            - checkout
+            - run:
+                name: Install dependencies
+                command: pacman -S gcc ninja cmake doxygen --noconfirm
+            - run:
+                name: Generate CMake configuration
+                command: |
+                    cmake -H. -Bbuild -GNinja       \
+                    -DFOREST_ENABLE_TESTING=ON      \
+                    -DFOREST_BUILD_EXAMPLES=ON      \
+                    -DFOREST_BUILD_DOCUMENTATION=ON
+            - run:
+                name: Run tests
+                command: cmake --build build --target check
+            - run:
+                name: Build Doxygen documentation
+                command: cmake --build build --target doc
+                # in case website appears, it could be deployed to web on a new release
+            - run:
+                name: Build examples
+                command: cmake --build build --target examples
+            - run:
+                name: Run example_avl_tree
+                command: ./build/bin/example_avl_tree
+            - run:
+                name: Run example_binary_search_tree
+                command: ./build/bin/example_binary_search_tree
+            - run:
+                name: Run example_red_black_tree
+                command: ./build/bin/example_red_black_tree
+            - run:
+                name: Run example_splay_tree
+                command: ./build/bin/example_splay_tree
