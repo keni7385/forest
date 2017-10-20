@@ -8,15 +8,15 @@ Forest is an open-source, template library of tree data structures written in C+
 
 |Operations|Binary Search Tree|AVL Tree|Red Black Tree|Splay Tree|
 |---|---|---|---|---|
-|Insert|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
-|Search|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|Insert|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Search|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |Delete|:x:|:x:|:x:|:x:|
-|Pre Order Traversal|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
-|In Order Traversal|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
-|Post Order Traversal|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
-|Breadth First Traversal|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
-|In Order Predecessor|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
-|In Order Successor|:white_check_mark:|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|Pre Order Traversal|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|In Order Traversal|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Post Order Traversal|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Breadth First Traversal|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|In Order Predecessor|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|In Order Successor|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 
 ## Installation
 
@@ -31,36 +31,24 @@ $ cmake ..
 $ sudo make install
 ```
 
-## Usage
+## CMake Support
 
-Just include a header. For example:
-
-```cpp
-#include <forest/red_black_tree.h>
-```
-
-Additionally, Forest provides an interface for CMake users. In particular, it defines an `IMPORTED` library that should be linked to your target. For example:
+Forest provides an interface for CMake users.
 
 ```cmake
 find_package(forest REQUIRED CONFIG)
 target_link_libraries(your_project PRIVATE Forest::forest)
 ```
 
-### CMake Variables
-
-In order to provide flexibility to builds, custom CMake variables exist. To use them, pass `-DVARIABLE=VALUE` to CMake, for example:
-
-```console
-$ cmake -DFOREST_BUILD_EXAMPLES=ON -DFOREST_ENABLE_TESTING=ON ..
-```
-
-* `FOREST_BUILD_EXAMPLES:BOOL=OFF` - Build usage examples (`examples` target)
-* `FOREST_ENABLE_TESTING:BOOL=OFF` - Build tests (`check` target)
-* `FOREST_BUILD_DOCUMENTATION:BOOL=OFF` - Build Doxygen documentation (`doc` target)
+| CMake Variable | Description | GNU Make Target |
+| --- | --- | --- |
+| FOREST_BUILD_EXAMPLES | Build the examples | examples |
+| FOREST_ENABLE_TESTING | Build the tests | check |
+| FOREST_BUILD_DOCUMENTATION | Build the documentation | doc |
 
 ## Example Code
 
-Forest is best explained through examples. The following source code generates a red black tree, inserts 7 nodes and then generates a DOT file.
+Forest is best explained through [examples](https://github.com/xorz57/forest/tree/master/examples). The following source code generates a red black tree, inserts 7 nodes and then generates a DOT file.
 
 ```cpp
 #include <forest/red_black_tree.h>
@@ -85,10 +73,6 @@ int main() {
 }
 ```
 
-See `examples` directory in the project root for more.
-
-To build all examples, configure CMake with `-DFOREST_BUILD_EXAMPLES=ON` and build `examples` target.
-
 ## Graph Visualization using Graphviz
 
 Forest provides an easy way to visualize tree data structures using the graphviz member function. When this function is called, a [DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) file describing the data structure graph is created. In order to be able to generate an image of the graph you must install [Graphviz](http://www.graphviz.org/). The generated [DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) file can be feed to the dot tool (provided by [Graphviz](http://www.graphviz.org/)) which in turn will generate an image for the graph.
@@ -102,11 +86,3 @@ This is the graph visualization of the above example code, generated with the do
 ![Red Black Tree Graph](https://i.imgur.com/FrRNJ29.png)
 
 Refer to the [Quick Start Guide](https://github.com/xorz57/forest/wiki/Quick-Start-Guide) page for further information and examples.
-
-## Documentation
-
-To generate Doxygen documentation, configure CMake with `-DFOREST_BUILD_DOCUMENTATION=ON` and build `doc` target. The HTML documentation will appear under `<build>/doc/html`, where `<build>` is the directory containing CMake configuration (usually `build`).
-
-## Testing
-
-Configure CMake with `-DFOREST_ENABLE_TESTING=ON` and build `check` target. This will run all tests in `tests` directory.
