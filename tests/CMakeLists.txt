@@ -8,6 +8,12 @@ execute_process(
     OUTPUT_QUIET
     ERROR_QUIET)
 
+file(STRINGS "${CMAKE_CURRENT_BINARY_DIR}/catch.hpp"
+      catch_version
+    REGEX " \*  Catch v")
+
+message(STATUS "${catch_version}")
+
 # Generate main test file
 file(
     WRITE
