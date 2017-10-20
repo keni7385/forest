@@ -63,7 +63,6 @@ if (a == b) {
 
 - Should not introduce merge conflicts
 - Should follow the Coding Convention mentioned above
-- Should not break anything inside the repository
 - Should pass all existing tests
 - Should provide self explanatory code or sufficient comments
 - Should provide tests for every new feature
