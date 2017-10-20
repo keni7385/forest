@@ -1,10 +1,18 @@
 project(forestTests LANGUAGES CXX)
 
 message(STATUS "Downloading Catch header")
-file(
-    DOWNLOAD
-      https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp
-      "${CMAKE_CURRENT_BINARY_DIR}/catch.hpp")
+# External curl is used due to CMake not being built with SSL by default
+execute_process(
+    COMMAND
+      curl -o "${CMAKE_CURRENT_BINARY_DIR}/catch.hpp" https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp
+    OUTPUT_QUIET
+    ERROR_QUIET)
+
+file(STRINGS "${CMAKE_CURRENT_BINARY_DIR}/catch.hpp"
+      catch_version
+    REGEX " \*  Catch v")
+
+message(STATUS "${catch_version}")
 
 # Generate main test file
 file(
