@@ -15,14 +15,17 @@
  * @brief The forest library namespace
  */
 namespace forest {
+        /**
+         * @brief AVL Tree node struct
+         */
         template <typename key_t, typename value_t>
         struct avl_tree_node {
                 key_t key;              ///< The key of the node
                 value_t value;          ///< The value of the node
                 int balance_factor;     ///< The avl tree balance factor of this node
-                std::weak_ptr<avl_tree_node> parent;    ///< A pointer to the parent of the node
-                std::shared_ptr<avl_tree_node> left;    ///< A pointer to the left child of the node
-                std::shared_ptr<avl_tree_node> right;   ///< A pointer to the right child of the node
+                std::weak_ptr<avl_tree_node> parent;    ///< The parent of the node
+                std::shared_ptr<avl_tree_node> left;    ///< The left child of the node
+                std::shared_ptr<avl_tree_node> right;   ///< The right child of the node
                 /**
                  * @brief Constructor of a avl tree node
                  */
@@ -55,6 +58,9 @@ namespace forest {
                         }
                 }
         };
+        /**
+         * @brief AVL Tree class
+         */
         template <typename key_t, typename value_t>
         class avl_tree {
         private:
@@ -116,9 +122,9 @@ namespace forest {
                         }
                         graphviz(file, x->right, count);
                 }
-                void rotate_right(std::shared_ptr<avl_tree_node <key_t, value_t> >  &rotation_root) {
-                    std::shared_ptr<avl_tree_node <key_t, value_t> >  new_root = rotation_root->left;
-                    std::shared_ptr<avl_tree_node <key_t, value_t> >  orphan_subtree = new_root->right;
+                void rotate_right(std::shared_ptr<avl_tree_node <key_t, value_t> > &rotation_root) {
+                    std::shared_ptr<avl_tree_node <key_t, value_t> > new_root = rotation_root->left;
+                    std::shared_ptr<avl_tree_node <key_t, value_t> > orphan_subtree = new_root->right;
 
                     rotation_root->left = orphan_subtree;
                     if (orphan_subtree != nullptr) {
@@ -214,7 +220,6 @@ namespace forest {
                  * @return The inserted node otherwise nullptr
                  */
                 const std::shared_ptr<avl_tree_node <key_t, value_t> >  insert(key_t key, value_t value) {
-
                         std::shared_ptr<avl_tree_node <key_t, value_t> >  current = root;
                         std::shared_ptr<avl_tree_node <key_t, value_t> >  parent = nullptr;
                         std::shared_ptr<avl_tree_node <key_t, value_t> >  inserted_node;
