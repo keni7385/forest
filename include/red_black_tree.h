@@ -16,14 +16,17 @@
  */
 namespace forest {
         enum color_t {red, black}; ///< Color data type for the nodes of a red black tree.
+        /**
+         * @brief Red Black Tree node struct
+         */
         template <typename key_t, typename value_t>
         struct red_black_tree_node {
                 key_t key;     ///< The key of the node
                 value_t value; ///< The value of the node
                 color_t color; ///< The color of the node
-                std::weak_ptr<red_black_tree_node> parent;    ///< A pointer to the parent of the node
-                std::shared_ptr<red_black_tree_node> left;    ///< A pointer to the left child of the node
-                std::shared_ptr<red_black_tree_node> right;   ///< A pointer to the right child of the node
+                std::weak_ptr<red_black_tree_node> parent;    ///< The parent of the node
+                std::shared_ptr<red_black_tree_node> left;    ///< The left child of the node
+                std::shared_ptr<red_black_tree_node> right;   ///< The right child of the node
                 /**
                  * @brief Constructor of a red black tree node
                  */
@@ -62,6 +65,9 @@ namespace forest {
                         }
                 }
         };
+        /**
+         * @brief Red Black Tree class
+         */
         template <typename key_t, typename value_t>
         class red_black_tree {
         private:
@@ -215,8 +221,8 @@ namespace forest {
                         return nullptr;
                 }
                 void fix(std::shared_ptr<red_black_tree_node <key_t, value_t> > &x) {
-                        std::shared_ptr<red_black_tree_node <key_t, value_t> > parent = NULL;
-                        std::shared_ptr<red_black_tree_node <key_t, value_t> > grand_parent = NULL;
+                        std::shared_ptr<red_black_tree_node <key_t, value_t> > parent = nullptr;
+                        std::shared_ptr<red_black_tree_node <key_t, value_t> > grand_parent = nullptr;
                         while ((x != root) && (x->color != black) && (x->parent.lock()->color == red)) {
                                 parent = x->parent.lock();
                                 grand_parent = x->parent.lock()->parent.lock();
@@ -228,7 +234,7 @@ namespace forest {
                                         /**
                                          * @brief Case 1 - The uncle of x is also red. Only recoloring is required
                                          */
-                                        if (uncle != NULL && uncle->color == red) {
+                                        if (uncle != nullptr && uncle->color == red) {
                                                 grand_parent->color = red;
                                                 parent->color = black;
                                                 uncle->color = black;
@@ -257,7 +263,7 @@ namespace forest {
                                         /**
                                          * @brief Case 1 - The uncle of x is also red. Only recoloring required
                                          */
-                                        if ((uncle != NULL) && (uncle->color == red)) {
+                                        if ((uncle != nullptr) && (uncle->color == red)) {
                                                 grand_parent->color = red;
                                                 parent->color = black;
                                                 uncle->color = black;
