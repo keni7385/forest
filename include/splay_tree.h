@@ -15,13 +15,16 @@
  * @brief The forest library namespace
  */
 namespace forest {
+        /**
+         * @brief Splay Tree node struct
+         */
         template <typename key_t, typename value_t>
         struct splay_tree_node {
                 key_t key;     ///< The key of the node
                 value_t value; ///< The value of the node
-                std::weak_ptr<splay_tree_node> parent;    ///< A pointer to the parent of the node
-                std::shared_ptr<splay_tree_node> left;    ///< A pointer to the left child of the node
-                std::shared_ptr<splay_tree_node> right;   ///< A pointer to the right child of the node
+                std::weak_ptr<splay_tree_node> parent;    ///< The parent of the node
+                std::shared_ptr<splay_tree_node> left;    ///< The left child of the node
+                std::shared_ptr<splay_tree_node> right;   ///< The right child of the node
                 /**
                  * @brief Constructor of a splay tree node
                  */
@@ -54,6 +57,9 @@ namespace forest {
                         }
                 }
         };
+        /**
+         * @brief Splay Tree class
+         */
         template <typename key_t, typename value_t>
         class splay_tree {
         private:
