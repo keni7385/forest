@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
-project(Forest LANGUAGES CXX VERSION 4.2.4)
+project(Forest LANGUAGES CXX VERSION 4.2.5)
 
 # Let CMake find custom modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules")

@@ -1,6 +1,7 @@
 ![forest logo](https://i.imgur.com/zl44kiK.jpg)
 
 [![CircleCI](https://circleci.com/gh/xorz57/forest/tree/master.svg?style=svg)](https://circleci.com/gh/xorz57/forest/tree/master)
+[![Join the chat at https://gitter.im/repository-forest/Lobby](https://badges.gitter.im/repository-forest/Lobby.svg)](https://gitter.im/repository-forest/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Forest is an open-source, template library of tree data structures written in C++11.
 
