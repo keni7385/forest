@@ -5,7 +5,10 @@ compiler:
 os:
   - linux
 script:
-  - bash build.sh
+  - bash build_tests.sh
+  - bash build_examples.sh
+  - bash run_tests.sh
+  - bash run_examples.sh
 env:
   global:
     - MAKEFLAGS="-j 2"

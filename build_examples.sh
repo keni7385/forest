@@ -1,0 +1,2 @@
+cd examples
+make $MAKEFLAGS
