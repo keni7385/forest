@@ -18,9 +18,7 @@ Forest is an open-source, template library of tree data structures written in C+
 |In Order Predecessor|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |In Order Successor|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 
-## Installation
-
-#### Linux / macOS
+## Download
 
 You can download the latest header files from the links below and include them to your project.
 
