@@ -20,36 +20,12 @@ Forest is an open-source, template library of tree data structures written in C+
 
 #### Linux / macOS
 
-```console
-$ git clone https://github.com/xorz57/forest.git
-$ cd forest
-$ mkdir build
-$ cd build
-$ cmake ..
-$ sudo make install
-```
-
-You can also download the latest header files from the links below and include them to your project.
+You can download the latest header files from the links below and include them to your project.
 
 - [Binary Search Tree](https://raw.githubusercontent.com/xorz57/forest/master/include/binary_search_tree.h)
 - [AVL Tree](https://raw.githubusercontent.com/xorz57/forest/master/include/avl_tree.h)
 - [Red Black Tree](https://raw.githubusercontent.com/xorz57/forest/master/include/red_black_tree.h)
 - [Splay Tree](https://raw.githubusercontent.com/xorz57/forest/master/include/splay_tree.h)
-
-## CMake Support
-
-Forest provides an interface for CMake users.
-
-```cmake
-find_package(forest REQUIRED CONFIG)
-target_link_libraries(your_project PRIVATE Forest::forest)
-```
-
-| CMake Variable | Description | GNU Make Target |
-| --- | --- | --- |
-| FOREST_BUILD_EXAMPLES | Build the examples | examples |
-| FOREST_ENABLE_TESTING | Build the tests | check |
-| FOREST_BUILD_DOCUMENTATION | Build the documentation | doc |
 
 ## Example Code
 
