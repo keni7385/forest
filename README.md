@@ -1,5 +1,7 @@
 ![forest logo](https://i.imgur.com/zl44kiK.jpg)
 
+[![Build Status](https://travis-ci.org/xorz57/forest.svg?branch=master)](https://travis-ci.org/xorz57/forest)
+
 Forest is an open-source, template library of tree data structures written in C++11.
 
 ## Features
