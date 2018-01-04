@@ -1,8 +1,11 @@
 nguage: cpp
 dist: trusty
 compiler:
-        - gcc
+  - gcc
 os:
-        - linux
+  - linux
 script:
-        - bash build.sh
+  - bash build.sh
+env:
+  global:
+    - MAKEFLAGS="-j 2"
