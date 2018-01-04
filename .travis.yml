@@ -1,0 +1,8 @@
+nguage: cpp
+dist: trusty
+compiler:
+        - gcc
+os:
+        - linux
+script:
+        - bash build.sh
