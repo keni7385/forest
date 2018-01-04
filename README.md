@@ -20,12 +20,10 @@ Forest is an open-source, template library of tree data structures written in C+
 
 ## Download
 
-You can download the latest header files from the links below and include them to your project.
-
-- [Binary Search Tree](https://raw.githubusercontent.com/xorz57/forest/master/include/binary_search_tree.h)
-- [AVL Tree](https://raw.githubusercontent.com/xorz57/forest/master/include/avl_tree.h)
-- [Red Black Tree](https://raw.githubusercontent.com/xorz57/forest/master/include/red_black_tree.h)
-- [Splay Tree](https://raw.githubusercontent.com/xorz57/forest/master/include/splay_tree.h)
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/4.2.6/binary_search_tree.h)
+- [AVL Tree](https://github.com/xorz57/forest/releases/download/4.2.6/avl_tree.h)
+- [Red Black Tree](https://github.com/xorz57/forest/releases/download/4.2.6/red_black_tree.h)
+- [Splay Tree](https://github.com/xorz57/forest/releases/download/4.2.6/splay_tree.h)
 
 ## Example Code
 
