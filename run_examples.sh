@@ -3,3 +3,4 @@ cd examples
 ./example_avl_tree
 ./example_splay_tree
 ./example_red_black_tree
+./example_trie
