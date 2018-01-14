@@ -1,3 +1,7 @@
+/**
+ * @file trie.h
+ */
+
 #ifndef TRIE_H
 #define TRIE_H
 
