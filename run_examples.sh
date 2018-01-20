@@ -1,3 +1,4 @@
+#!/bin/bash
 cd examples
 ./example_binary_search_tree
 ./example_avl_tree
