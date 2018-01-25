@@ -36,7 +36,7 @@ Forest is an open-source, template library of tree data structures written in C+
 
 ## Example Code
 
-Forest is best explained through [examples](https://github.com/xorz57/forest/tree/master/examples). The following source code generates a red black tree, inserts 7 nodes and then generates a `DOT` file.
+Forest is best explained through [examples](https://github.com/xorz57/forest/tree/master/examples). The following source code generates a red black tree, inserts 7 nodes and then generates a [DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) file.
 
 ```cpp
 #include <forest/red_black_tree.h>
