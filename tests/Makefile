@@ -24,4 +24,5 @@ test_trie.o: test_trie.cpp
 
 clean:
 	rm -f *.o
+	rm -f .gcno .gcda
 	rm -f test
