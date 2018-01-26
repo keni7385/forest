@@ -1,4 +1,4 @@
-#include "catch.hpp"
+#include <catch.hpp>
 #include <forest/splay_tree.h>
 
 SCENARIO("Test Splay Tree") {
