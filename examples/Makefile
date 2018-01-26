@@ -19,19 +19,19 @@ example_trie: example_trie.o
 	$(CXX) example_trie.o $(CXXFLAGS) -o example_trie
 
 example_binary_search_tree.o: example_binary_search_tree.cpp
-	$(CXX) -c example_binary_search_tree.cpp $(CXXFLAGS) -I ..
+	$(CXX) -c example_binary_search_tree.cpp $(CXXFLAGS) -I ../include
 
 example_avl_tree.o: example_avl_tree.cpp
-	$(CXX) -c example_avl_tree.cpp $(CXXFLAGS) -I ..
+	$(CXX) -c example_avl_tree.cpp $(CXXFLAGS) -I ../include
 
 example_splay_tree.o: example_splay_tree.cpp
-	$(CXX) -c example_splay_tree.cpp $(CXXFLAGS) -I ..
+	$(CXX) -c example_splay_tree.cpp $(CXXFLAGS) -I ../include
 
 example_red_black_tree.o: example_red_black_tree.cpp
-	$(CXX) -c example_red_black_tree.cpp $(CXXFLAGS) -I ..
+	$(CXX) -c example_red_black_tree.cpp $(CXXFLAGS) -I ../include
 
 example_trie.o: example_trie.cpp
-	$(CXX) -c example_trie.cpp $(CXXFLAGS) -I ..
+	$(CXX) -c example_trie.cpp $(CXXFLAGS) -I ../include
 
 clean:
 	rm -f *.o
