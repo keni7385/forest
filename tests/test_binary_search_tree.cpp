@@ -1,4 +1,4 @@
-#include "catch.hpp"
+#include <catch.hpp>
 #include <forest/binary_search_tree.h>
 
 SCENARIO("Test Binary Search Tree") {
