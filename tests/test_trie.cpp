@@ -1,4 +1,4 @@
-#include "catch.hpp"
+#include <catch.hpp>
 #include <forest/trie.h>
 
 SCENARIO("Test Trie") {

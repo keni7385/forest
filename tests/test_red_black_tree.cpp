@@ -1,4 +1,4 @@
-#include "catch.hpp"
+#include <catch.hpp>
 #include <forest/red_black_tree.h>
 
 SCENARIO("Test Red Black Tree") {
