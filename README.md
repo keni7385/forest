@@ -4,11 +4,8 @@
 [![Build Status](https://travis-ci.org/xorz57/forest.svg?branch=master)](https://travis-ci.org/xorz57/forest)
 [![codecov](https://codecov.io/gh/xorz57/forest/branch/master/graph/badge.svg)](https://codecov.io/gh/xorz57/forest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+[![CLA assistant](https://cla-assistant.io/readme/badge/xorz57/forest)](https://cla-assistant.io/xorz57/forest)
 [![Donate with Bitcoin](https://en.cryptobadges.io/badge/micro/1CVUX3cBGWTCVJPbbKBEUpi7j4knSVHZWW)](https://en.cryptobadges.io/donate/1CVUX3cBGWTCVJPbbKBEUpi7j4knSVHZWW)
-[![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xa6d34E18591117472498C7581Ce444433C718cf5)](https://en.cryptobadges.io/donate/0xa6d34E18591117472498C7581Ce444433C718cf5)
-[![Donate with Litecoin](https://en.cryptobadges.io/badge/micro/LeuFv8aY6vp1b1DtRvrLWeCMPaAetmGvce)](https://en.cryptobadges.io/donate/LeuFv8aY6vp1b1DtRvrLWeCMPaAetmGvce)
-[![Donate with Ripple](https://en.cryptobadges.io/badge/micro/r6bHPRvQNP9MkQRRzsurktv3tDwuYffNw)](https://en.cryptobadges.io/donate/r6bHPRvQNP9MkQRRzsurktv3tDwuYffNw)
 
 Forest is an open-source, template library of tree data structures written in C++11.
 
