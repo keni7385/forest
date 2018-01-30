@@ -23,9 +23,13 @@ Forest is an open-source, template library of tree data structures written in C+
 |In Order Predecessor|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
 |In Order Successor|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
 
-## Download
+## Installation
 
-- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/4.5.0/binary_search_tree.h)
+#### Use your favorite package manager
+- `vcpkg install forest`
+
+#### Or simply download the header files
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/latest/binary_search_tree.h)
 - [AVL Tree](https://github.com/xorz57/forest/releases/download/4.5.0/avl_tree.h)
 - [Red Black Tree](https://github.com/xorz57/forest/releases/download/4.5.0/red_black_tree.h)
 - [Splay Tree](https://github.com/xorz57/forest/releases/download/4.5.0/splay_tree.h)
