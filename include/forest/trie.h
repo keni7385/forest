@@ -9,7 +9,7 @@
 #include <string>
 #include <memory>
 
-#define ALPHABET_SIZE 52
+#define ALPHABET_SIZE 26
 
 /**
  * @brief The forest library namespace
@@ -46,7 +46,7 @@ namespace forest {
 		void insert(std::string key) {
 			std::shared_ptr<trie_node> n = root;
 			for (int i = 0; i < key.length(); i++) {
-				int index = key[i] - 'A';
+				int index = key[i] - 'a';
 				if (n->children[index] == nullptr) {
 					n->children[index] = std::make_shared<trie_node>();
 				}
@@ -62,7 +62,7 @@ namespace forest {
 		bool search(std::string key) {
 			std::shared_ptr<trie_node> n = root;
 			for (int i = 0; i < key.length(); i++) {
-				int index = key[i] - 'A';
+				int index = key[i] - 'a';
 				if (n->children[index] == nullptr) {
 					return false;
 				}
