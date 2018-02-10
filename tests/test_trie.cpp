@@ -10,7 +10,7 @@ SCENARIO("Test Trie") {
                         }
                 }
                 WHEN("The Trie is not empty") {
-			trie.insert("A");
+			trie.insert("a");
 			trie.insert("to");
 			trie.insert("tea");
 			trie.insert("ted");
@@ -19,7 +19,7 @@ SCENARIO("Test Trie") {
 			trie.insert("in");
 			trie.insert("inn");
 			THEN("Test search for some keys that do exist") {
-				REQUIRE(trie.search("A") == true);
+				REQUIRE(trie.search("a") == true);
 				REQUIRE(trie.search("to") == true);
 				REQUIRE(trie.search("tea") == true);
 				REQUIRE(trie.search("ted") == true);
@@ -31,7 +31,6 @@ SCENARIO("Test Trie") {
 			THEN("Test search for some keys that do not exist") {	
 				REQUIRE(trie.search("god") == false);
 				REQUIRE(trie.search("too") == false);
-				REQUIRE(trie.search("a") == false);
 			}
 		}
 	}
