@@ -4,7 +4,7 @@
 int main(int argc, char const *argv[]) {
         forest::trie trie;
 
-	trie.insert("A");
+	trie.insert("a");
 	trie.insert("to");
         trie.insert("tea");
         trie.insert("ted");
@@ -13,7 +13,7 @@ int main(int argc, char const *argv[]) {
         trie.insert("in");
 	trie.insert("inn");
 
-	std::cout << trie.search("A") << " " << "A" << std::endl;
+	std::cout << trie.search("a") << " " << "a" << std::endl;
 	std::cout << trie.search("to") << " " << "to" << std::endl;
         std::cout << trie.search("tea") << " " << "tea" << std::endl;
         std::cout << trie.search("ted") << " " << "ted" << std::endl;
