@@ -9,7 +9,7 @@
 #include <string>
 #include <memory>
 
-#define ALPHABET_SIZE 52
+#define ALPHABET_SIZE 26
 
 /**
  * @brief The forest library namespace
