@@ -19,14 +19,17 @@ namespace forest {
 	 * @brief Trie node struct
 	 */
 	struct trie_node {
+		std::shared_ptr<trie_node> children[ALPHABET_SIZE];
+		bool end;
+		/**
+         * @brief Constructor of a trie node
+         */
 		trie_node() {
 			this->end = false; 
 			for (int i = 0; i < ALPHABET_SIZE; i++) {
 				this->children[i] = NULL;
 			}
 		}
-		std::shared_ptr<trie_node> children[ALPHABET_SIZE];
-		bool end;
 	};
 	/**
 	 * @brief Trie class
