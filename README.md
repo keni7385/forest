@@ -42,17 +42,17 @@ Forest is best explained through [examples](https://github.com/xorz57/forest/tre
 #include <forest/red_black_tree.h>
 
 int main() {
-        // Generate a binary search tree for nodes of integer keys and values
-        forest::red_black_tree <int, int> red_black_tree;
+        // Generate a red-black tree with integer keys
+        forest::red_black_tree <int> red_black_tree;
 
-        // Insert 7 nodes in the form of a (key, value) pair
-        red_black_tree.insert(4,0);
-        red_black_tree.insert(2,0);
-        red_black_tree.insert(90,0);
-        red_black_tree.insert(3,100);
-        red_black_tree.insert(0,0);
-        red_black_tree.insert(14,0);
-        red_black_tree.insert(45,0);
+        // Insert 7 plain nodes
+        red_black_tree.insert(4);
+        red_black_tree.insert(2);
+        red_black_tree.insert(90);
+        red_black_tree.insert(3);
+        red_black_tree.insert(0);
+        red_black_tree.insert(14);
+        red_black_tree.insert(45);
 
         // Generate a DOT file representing the Red Black Tree
         red_black_tree.graphviz("red_black_tree.dot");
