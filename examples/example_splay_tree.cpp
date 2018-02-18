@@ -2,15 +2,15 @@
 #include <iostream>
 
 int main(int argc, char const *argv[]) {
-        forest::splay_tree <int, int> splay_tree;
+        forest::splay_tree <int> splay_tree;
 
-        splay_tree.insert(4,0);
-        splay_tree.insert(2,0);
-        splay_tree.insert(90,0);
-        splay_tree.insert(3,100);
-        splay_tree.insert(0,0);
-        splay_tree.insert(14,0);
-        splay_tree.insert(45,0);
+        splay_tree.insert(4);
+        splay_tree.insert(2);
+        splay_tree.insert(90);
+        splay_tree.insert(3);
+        splay_tree.insert(0);
+        splay_tree.insert(14);
+        splay_tree.insert(45);
 
         std::cout << "Pre Order Traversal" << std::endl;
         std::cout << std::endl;
