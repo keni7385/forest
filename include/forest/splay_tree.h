@@ -27,7 +27,7 @@ namespace forest {
                 /**
                  * @brief Constructor of a splay tree node
                  */
-                splay_tree_node(key_t key) {
+                splay_tree_node(const key_t key) {
                         this->key = key;
                         this->parent.reset();
                         this->left = nullptr;
@@ -92,11 +92,11 @@ namespace forest {
                                 if (y->right != nullptr) queue.push(y->right);
                         }
                 }
-                unsigned long long height(std::shared_ptr<splay_tree_node <key_t> > &x) {
+                const unsigned long long height(std::shared_ptr<splay_tree_node <key_t> > &x) {
                         if (x == nullptr) return 0;
                         return std::max(height(x->left), height(x->right)) + 1;
                 }
-                unsigned long long size(std::shared_ptr<splay_tree_node <key_t> > &x) {
+                const unsigned long long size(std::shared_ptr<splay_tree_node <key_t> > &x) {
                         if (x == nullptr) return 0;
                         return size(x->left) + size(x->right) + 1;
                 }
@@ -243,7 +243,7 @@ namespace forest {
                  * @param key The key for the new node
                  * @return The the inserted node otherwise nullptr
                  */
-                const std::shared_ptr<splay_tree_node <key_t> > insert(key_t key) {
+                const std::shared_ptr<splay_tree_node <key_t> > insert(const key_t key) {
                         std::shared_ptr<splay_tree_node <key_t> > current = root;
                         std::shared_ptr<splay_tree_node <key_t> > parent = nullptr;
                         while(current!=nullptr) {
@@ -272,7 +272,7 @@ namespace forest {
                  * @brief Performs a binary search starting from the root node
                  * @return The node with the key specified otherwise nullptr
                  */
-                const std::shared_ptr<splay_tree_node <key_t> > search(key_t key) {
+                const std::shared_ptr<splay_tree_node <key_t> > search(const key_t key) {
                         std::shared_ptr<splay_tree_node <key_t> > x = root;
                         while (x != nullptr) {
                                 if (key > x->key) {
@@ -309,7 +309,7 @@ namespace forest {
                  * @brief Finds the successor of the node with key specified
                  * @return The successor of the node with key specified otherwise nullptr
                  */
-                const std::shared_ptr<splay_tree_node <key_t> > successor(key_t key) {
+                const std::shared_ptr<splay_tree_node <key_t> > successor(const key_t key) {
                         std::shared_ptr<splay_tree_node <key_t> > x = root;
                         while (x != nullptr) {
                                 if (key > x->key) {
@@ -336,7 +336,7 @@ namespace forest {
                  * @brief Finds the predecessor of the node with key specified
                  * @return The predecessor of the node with key specified otherwise nullptr
                  */
-                const std::shared_ptr<splay_tree_node <key_t> > predecessor(key_t key) {
+                const std::shared_ptr<splay_tree_node <key_t> > predecessor(const key_t key) {
                         std::shared_ptr<splay_tree_node <key_t> > x = root;
                         while (x != nullptr) {
                                 if (key > x->key) {
@@ -363,21 +363,21 @@ namespace forest {
                  * @brief Finds the height of the tree
                  * @return The height of the splay tree
                  */
-                unsigned long long height() {
+                const unsigned long long height() {
                         return height(root);
                 }
                 /**
                  * @brief Finds the size of the tree
                  * @return The size of the splay tree
                  */
-                unsigned long long size() {
+                const unsigned long long size() {
                         return size(root);
                 }
                 /**
                  * @brief Finds if the splay tree is empty
                  * @return true if the splay tree is empty and false otherwise
                  */
-                bool empty() {
+                const bool empty() {
                         if (root == nullptr) {
                                 return true;
                         } else {
