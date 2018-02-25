@@ -46,7 +46,7 @@ namespace forest {
                  * @param key The key to be inserted
                  * @return void
                  */		
-                void insert(const std::string key) {
+                void insert(const std::string &key) {
                         std::shared_ptr<trie_node> n = root;
                         for (int i = 0; i < key.length(); i++) {
                                 int index = key[i] - 'a';
@@ -62,7 +62,7 @@ namespace forest {
                  * @param key The key to be inserted
                  * @return true if key exists in the Trie and false otherwise
                  */
-                const bool search(const std::string key) {
+                const bool search(const std::string &key) {
                         std::shared_ptr<trie_node> n = root;
                         for (int i = 0; i < key.length(); i++) {
                                 int index = key[i] - 'a';
