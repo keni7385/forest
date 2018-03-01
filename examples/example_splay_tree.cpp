@@ -1,6 +1,25 @@
 #include "forest/splay_tree.h"
 #include <iostream>
 
+void handler(std::shared_ptr<forest::splay_tree_node <int> > x) {
+        std::cout << x->key << "\t";
+        if (x->left != nullptr) {
+                std::cout << x->left->key << "\t";
+        } else {
+                std::cout << "null" << "\t";
+        }
+        if (x->right != nullptr) {
+                std::cout << x->right->key << "\t";
+        } else {
+                std::cout << "null" << "\t";
+        }
+        if (x->parent.lock() != nullptr) {
+                std::cout << x->parent.lock()->key << std::endl;
+        } else {
+                std::cout << "null" << std::endl;
+        }
+}
+
 int main(int argc, char const *argv[]) {
         forest::splay_tree <int> splay_tree;
 
@@ -14,22 +33,22 @@ int main(int argc, char const *argv[]) {
 
         std::cout << "Pre Order Traversal" << std::endl;
         std::cout << std::endl;
-        splay_tree.pre_order_traversal();
+        splay_tree.pre_order_traversal(handler);
         std::cout << std::endl;
 
         std::cout << "In Order Traversal" << std::endl;
         std::cout << std::endl;
-        splay_tree.in_order_traversal();
+        splay_tree.in_order_traversal(handler);
         std::cout << std::endl;
 
         std::cout << "Post Order Traversal" << std::endl;
         std::cout << std::endl;
-        splay_tree.post_order_traversal();
+        splay_tree.post_order_traversal(handler);
         std::cout << std::endl;
 
         std::cout << "Breadth First Traversal" << std::endl;
         std::cout << std::endl;
-        splay_tree.breadth_first_traversal();
+        splay_tree.breadth_first_traversal(handler);
         std::cout << std::endl;
 
         auto min = splay_tree.minimum();
@@ -62,8 +81,6 @@ int main(int argc, char const *argv[]) {
         if (n != nullptr) {
                 std::cout << std::endl;
                 std::cout << "Found node with key 3" << std::endl;
-                std::cout << std::endl;
-                n->info();
         }
 
         splay_tree.graphviz("splay_tree.dot");
