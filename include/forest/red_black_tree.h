@@ -271,29 +271,29 @@ namespace forest {
                  * @brief Performs a Pre Order Traversal starting from the root node
                  * @return void
                  */
-                void pre_order_traversal() {
-                        pre_order_traversal(root);
+                void pre_order_traversal(void handler(std::shared_ptr<red_black_tree_node <key_t> >)) {
+                        pre_order_traversal(root, handler);
                 }
                 /**
                  * @brief Performs a In Order Traversal starting from the root node
                  * @return void
                  */
-                void in_order_traversal() {
-                        in_order_traversal(root);
+                void in_order_traversal(void handler(std::shared_ptr<red_black_tree_node <key_t> >)) {
+                        in_order_traversal(root, handler);
                 }
                 /**
                  * @brief Performs a Post Order Traversal starting from the root node
                  * @return void
                  */
-                void post_order_traversal() {
-                        post_order_traversal(root);
+                void post_order_traversal(void handler(std::shared_ptr<red_black_tree_node <key_t> >)) {
+                        post_order_traversal(root, handler);
                 }
                 /**
                  * @brief Performs a Breadth First Traversal starting from the root node
                  * @return void
                  */
-                void breadth_first_traversal() {
-                        breadth_first_traversal(root);
+                void breadth_first_traversal(void handler(std::shared_ptr<red_black_tree_node <key_t> >)) {
+                        breadth_first_traversal(root, handler);
                 }
                 /**
                  * @brief Generates a DOT file representing the red black tree
