@@ -34,27 +34,6 @@ namespace forest {
                         this->left = nullptr;
                         this->right = nullptr;
                 }
-                /**
-                 * @brief Prints to the std::cout information about the node
-                 */
-                void info() const {
-                        std::cout << this->key << "\t";
-                        if (this->left != nullptr) {
-                                std::cout << this->left->key << "\t";
-                        } else {
-                                std::cout << "null" << "\t";
-                        }
-                        if (this->right != nullptr) {
-                                std::cout << this->right->key << "\t";
-                        } else {
-                                std::cout << "null" << "\t";
-                        }
-                        if (this->parent.lock() != nullptr) {
-                                std::cout << this->parent.lock()->key << std::endl;
-                        } else {
-                                std::cout << "null" << std::endl;
-                        }
-                }
         };
         /**
          * @brief AVL Tree class
@@ -63,31 +42,31 @@ namespace forest {
         class avl_tree {
         private:
                 std::shared_ptr<avl_tree_node <key_t> > root;
-                void pre_order_traversal(std::shared_ptr<avl_tree_node <key_t> > &x) {
+                void pre_order_traversal(std::shared_ptr<avl_tree_node <key_t> > &x, void handler(std::shared_ptr<avl_tree_node <key_t> >)) {
                         if (x == nullptr) return;
-                        x->info();
-                        pre_order_traversal(x->left);
-                        pre_order_traversal(x->right);
+                        handler(x);
+                        pre_order_traversal(x->left, handler);
+                        pre_order_traversal(x->right, handler);
                 }
-                void in_order_traversal(std::shared_ptr<avl_tree_node <key_t> > &x) {
+                void in_order_traversal(std::shared_ptr<avl_tree_node <key_t> > &x, void handler(std::shared_ptr<avl_tree_node <key_t> >)) {
                         if (x == nullptr) return;
-                        in_order_traversal(x->left);
-                        x->info();
-                        in_order_traversal(x->right);
+                        in_order_traversal(x->left, handler);
+                        handler(x);
+                        in_order_traversal(x->right, handler);
                 }
-                void post_order_traversal(std::shared_ptr<avl_tree_node <key_t> > &x) {
+                void post_order_traversal(std::shared_ptr<avl_tree_node <key_t> > &x, void handler(std::shared_ptr<avl_tree_node <key_t> >)) {
                         if (x == nullptr) return;
-                        post_order_traversal(x->left);
-                        post_order_traversal(x->right);
-                        x->info();
+                        post_order_traversal(x->left, handler);
+                        post_order_traversal(x->right, handler);
+                        handler(x);
                 }
-                void breadth_first_traversal(std::shared_ptr<avl_tree_node <key_t> > &x) {
+                void breadth_first_traversal(std::shared_ptr<avl_tree_node <key_t> > &x, void handler(std::shared_ptr<avl_tree_node <key_t> >)) {
                         std::queue <std::shared_ptr<avl_tree_node <key_t> > > queue;
                         if (x == nullptr) return;
                         queue.push(x);
                         while(queue.empty() == false) {
                                 std::shared_ptr<avl_tree_node <key_t> > y = queue.front();
-                                y->info();
+                                handler(y);
                                 queue.pop();
                                 if (y->left != nullptr) queue.push(y->left);
                                 if (y->right != nullptr) queue.push(y->right);
@@ -173,29 +152,29 @@ namespace forest {
                  * @brief Performs a Pre Order Traversal starting from the root node
                  * @return void
                  */
-                void pre_order_traversal() {
-                        pre_order_traversal(root);
+                void pre_order_traversal(void handler(std::shared_ptr<avl_tree_node <key_t> >)) {
+                        pre_order_traversal(root, handler);
                 }
                 /**
                  * @brief Performs a In Order Traversal starting from the root node
                  * @return void
                  */
-                void in_order_traversal() {
-                        in_order_traversal(root);
+                void in_order_traversal(void handler(std::shared_ptr<avl_tree_node <key_t> >)) {
+                        in_order_traversal(root, handler);
                 }
                 /**
                  * @brief Performs a Post Order Traversal starting from the root node
                  * @return void
                  */
-                void post_order_traversal() {
-                        post_order_traversal(root);
+                void post_order_traversal(void handler(std::shared_ptr<avl_tree_node <key_t> >)) {
+                        post_order_traversal(root, handler);
                 }
                 /**
                  * @brief Performs a Breadth First Traversal starting from the root node
                  * @return void
                  */
-                void breadth_first_traversal() {
-                        breadth_first_traversal(root);
+                void breadth_first_traversal(void handler(std::shared_ptr<avl_tree_node <key_t> >)) {
+                        breadth_first_traversal(root, handler);
                 }
                 /**
                  * @brief Generates a DOT file representing the AVL tree
