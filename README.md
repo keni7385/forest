@@ -1,4 +1,4 @@
-![forest logo](https://i.imgur.com/zl44kiK.jpg)
+![forest logo](https://tinypng.com/web/output/h6gbajzk84mxc2t0n4zcjj42b3gehcd9/forest.png)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7e0feb3d79ca41649aa207eeeef065dc)](https://www.codacy.com/app/xorz57/forest?utm_source=github.com&utm_medium=referral&utm_content=xorz57/forest&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/xorz57/forest.svg?branch=master)](https://travis-ci.org/xorz57/forest)
