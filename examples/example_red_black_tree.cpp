@@ -83,7 +83,5 @@ int main(int argc, char const *argv[]) {
                 std::cout << "Found node with key 3" << std::endl;
         }
 
-        red_black_tree.graphviz("red_black_tree.dot");
-
         return 0;
 }

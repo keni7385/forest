@@ -80,25 +80,6 @@ namespace forest {
                         if (x == nullptr) return 0;
                         return size(x->left) + size(x->right) + 1;
                 }
-                void graphviz(std::ofstream &file, std::shared_ptr<avl_tree_node <key_t> > &x, unsigned long long *count) {
-                        if (x == nullptr) return;
-                        graphviz(file, x->left, count);
-                        if (x->left != nullptr) {
-                                file << "\t" << x->key << " -> " << x->left->key << ";" << std::endl;
-                        } else {
-                                file << "\t" << "null" << *count << " " << "[shape=point]" << ";" << std::endl;
-                                file << "\t" << x->key << " -> " << "null" << *count << ";" << std::endl;
-                                (*count)++;
-                        }
-                        if (x->right != nullptr) {
-                                file << "\t" << x->key << " -> " << x->right->key << ";" << std::endl;
-                        } else {
-                                file << "\t" << "null" << *count << " " << "[shape=point]" << ";" << std::endl;
-                                file << "\t" << x->key << " -> " << "null" << *count << ";" << std::endl;
-                                (*count)++;
-                        }
-                        graphviz(file, x->right, count);
-                }
                 void rotate_right(std::shared_ptr<avl_tree_node <key_t> > &rotation_root) {
                     std::shared_ptr<avl_tree_node <key_t> > new_root = rotation_root->left;
                     std::shared_ptr<avl_tree_node <key_t> > orphan_subtree = new_root->right;
@@ -177,25 +158,11 @@ namespace forest {
                         breadth_first_traversal(root, handler);
                 }
                 /**
-                 * @brief Generates a DOT file representing the AVL tree
-                 * @param filename The filename of the .dot file
-                 * @return void
-                 */
-                void graphviz(const std::string &filename) {
-                        std::ofstream file;
-                        unsigned long long count = 0;
-                        file.open(filename);
-                        file << "digraph {" << std::endl;
-                        graphviz(file, root, &count);
-                        file << "}" << std::endl;
-                        file.close();
-                }
-                /**
                  * @brief Inserts a new node into the AVL tree
                  * @param key The key for the new node
                  * @return The inserted node otherwise nullptr
                  */
-                const std::shared_ptr<avl_tree_node <key_t> >  insert(const key_t key) {
+                const std::shared_ptr<avl_tree_node <key_t> > insert(const key_t key) {
                         std::shared_ptr<avl_tree_node <key_t> >  current = root;
                         std::shared_ptr<avl_tree_node <key_t> >  parent = nullptr;
                         std::shared_ptr<avl_tree_node <key_t> >  inserted_node;
