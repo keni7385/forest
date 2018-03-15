@@ -28,11 +28,11 @@ Forest is an open-source, template library of tree data structures written in C+
 - `vcpkg install forest`
 
 #### Or simply download the header files
-- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/5.1.0/binary_search_tree.h)
-- [AVL Tree](https://github.com/xorz57/forest/releases/download/5.1.0/avl_tree.h)
-- [Red Black Tree](https://github.com/xorz57/forest/releases/download/5.1.0/red_black_tree.h)
-- [Splay Tree](https://github.com/xorz57/forest/releases/download/5.1.0/splay_tree.h)
-- [Trie](https://github.com/xorz57/forest/releases/download/5.1.0/trie.h)
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/6.0.0/binary_search_tree.h)
+- [AVL Tree](https://github.com/xorz57/forest/releases/download/6.0.0/avl_tree.h)
+- [Red Black Tree](https://github.com/xorz57/forest/releases/download/6.0.0/red_black_tree.h)
+- [Splay Tree](https://github.com/xorz57/forest/releases/download/6.0.0/splay_tree.h)
+- [Trie](https://github.com/xorz57/forest/releases/download/6.0.0/trie.h)
 
 ## Example Code
 
@@ -41,13 +41,13 @@ Forest is best explained through [examples](https://github.com/xorz57/forest/tre
 ```cpp
 #include <forest/red_black_tree.h>
 
-void handler(std::shared_ptr<forest::red_black_tree_node <int> > x) {
+void handler(std::shared_ptr<forest::red_black::node <int> > x) {
         std::cout << x->key << std::endl;
 }
 
 int main() {
         // Generate a red-black tree with integer keys
-        forest::red_black_tree <int> red_black_tree;
+        forest::red_black::tree <int> red_black_tree;
 
         // Insert 7 plain nodes
         red_black_tree.insert(4);
