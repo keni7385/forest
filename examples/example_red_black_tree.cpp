@@ -1,7 +1,7 @@
 #include "forest/red_black_tree.h"
 #include <iostream>
 
-void handler(std::shared_ptr<forest::red_black_tree_node <int> > x) {
+void handler(std::shared_ptr<forest::red_black::node <int> > x) {
         std::cout << x->key << "\t";
         if (x->left != nullptr) {
                 std::cout << x->left->key << "\t";
@@ -21,7 +21,7 @@ void handler(std::shared_ptr<forest::red_black_tree_node <int> > x) {
 }
 
 int main(int argc, char const *argv[]) {
-        forest::red_black_tree <int> red_black_tree;
+        forest::red_black::tree <int> red_black_tree;
 
         red_black_tree.insert(4);
         red_black_tree.insert(2);

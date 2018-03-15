@@ -3,7 +3,7 @@
 
 SCENARIO("Test Red Black Tree") {
         GIVEN("A Red Black Tree") {
-                forest::red_black_tree <int> red_black_tree;
+                forest::red_black::tree <int> red_black_tree;
                 WHEN("The Red Black Tree is empty") {
                         THEN("Test empty") {
                                 REQUIRE(red_black_tree.empty() == true);
