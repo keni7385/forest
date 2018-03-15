@@ -83,7 +83,5 @@ int main(int argc, char const *argv[]) {
                 std::cout << "Found node with key 3" << std::endl;
         }
 
-        binary_search_tree.graphviz("binary_search_tree.dot");
-
         return 0;
 }
