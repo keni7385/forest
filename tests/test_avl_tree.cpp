@@ -3,7 +3,7 @@
 
 SCENARIO("Test AVL Tree") {
         GIVEN("An AVL Tree") {
-                forest::avl_tree <int> avl_tree;
+                forest::avl::tree <int> avl_tree;
                 WHEN("The AVL Tree is empty") {
                         THEN("Test empty") {
                                 REQUIRE(avl_tree.empty() == true);
