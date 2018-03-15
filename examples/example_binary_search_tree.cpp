@@ -1,7 +1,7 @@
 #include "forest/binary_search_tree.h"
 #include <iostream>
 
-void handler(std::shared_ptr<forest::binary_search_tree_node <int> > x) {
+void handler(std::shared_ptr<forest::binary_search::node <int> > x) {
         std::cout << x->key << "\t";
         if (x->left != nullptr) {
                 std::cout << x->left->key << "\t";
@@ -21,7 +21,7 @@ void handler(std::shared_ptr<forest::binary_search_tree_node <int> > x) {
 }
 
 int main(int argc, char const *argv[]) {
-        forest::binary_search_tree <int> binary_search_tree;
+        forest::binary_search::tree <int> binary_search_tree;
 
         binary_search_tree.insert(4);
         binary_search_tree.insert(2);
