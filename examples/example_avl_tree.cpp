@@ -1,7 +1,7 @@
 #include "forest/avl_tree.h"
 #include <iostream>
 
-void handler(std::shared_ptr<forest::avl_tree::node <int> > x) {
+void handler(std::shared_ptr<forest::avl::node <int> > x) {
         std::cout << x->key << "\t";
         if (x->left != nullptr) {
                 std::cout << x->left->key << "\t";
