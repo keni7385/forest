@@ -3,7 +3,7 @@
 
 SCENARIO("Test Binary Search Tree") {
         GIVEN("A Binary Search Tree") {
-                forest::binary_search_tree <int> binary_search_tree;
+                forest::binary_search::tree <int> binary_search_tree;
                 WHEN("The Binary Search Tree is empty") {
                         THEN("Test empty") {
                                 REQUIRE(binary_search_tree.empty() == true);

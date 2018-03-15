@@ -28,26 +28,26 @@ Forest is an open-source, template library of tree data structures written in C+
 - `vcpkg install forest`
 
 #### Or simply download the header files
-- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/5.1.0/binary_search_tree.h)
-- [AVL Tree](https://github.com/xorz57/forest/releases/download/5.1.0/avl_tree.h)
-- [Red Black Tree](https://github.com/xorz57/forest/releases/download/5.1.0/red_black_tree.h)
-- [Splay Tree](https://github.com/xorz57/forest/releases/download/5.1.0/splay_tree.h)
-- [Trie](https://github.com/xorz57/forest/releases/download/5.1.0/trie.h)
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/6.0.0/binary_search_tree.h)
+- [AVL Tree](https://github.com/xorz57/forest/releases/download/6.0.0/avl_tree.h)
+- [Red Black Tree](https://github.com/xorz57/forest/releases/download/6.0.0/red_black_tree.h)
+- [Splay Tree](https://github.com/xorz57/forest/releases/download/6.0.0/splay_tree.h)
+- [Trie](https://github.com/xorz57/forest/releases/download/6.0.0/trie.h)
 
 ## Example Code
 
-Forest is best explained through [examples](https://github.com/xorz57/forest/tree/master/examples). The following source code generates a red black tree, inserts 7 nodes and then generates a [DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) file.
+Forest is best explained through [examples](https://github.com/xorz57/forest/tree/master/examples).
 
 ```cpp
 #include <forest/red_black_tree.h>
 
-void handler(std::shared_ptr<forest::red_black_tree_node <int> > x) {
+void handler(std::shared_ptr<forest::red_black::node <int> > x) {
         std::cout << x->key << std::endl;
 }
 
 int main() {
         // Generate a red-black tree with integer keys
-        forest::red_black_tree <int> red_black_tree;
+        forest::red_black::tree <int> red_black_tree;
 
         // Insert 7 plain nodes
         red_black_tree.insert(4);
@@ -61,23 +61,8 @@ int main() {
         // Perform In-Order-Traversal
         red_black_tree.in_order_traversal(handler);
 
-        // Generate a DOT file representing the Red Black Tree
-        red_black_tree.graphviz("red_black_tree.dot");
-
         return 0;
 }
 ```
-
-## Graph Visualization using Graphviz
-
-Forest provides an easy way to visualize tree data structures using the graphviz member function. When this function is called, a [DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) file describing the data structure graph is created. In order to be able to generate an image of the graph you must install [Graphviz](http://www.graphviz.org/). The generated [DOT](https://en.wikipedia.org/wiki/DOT_(graph_description_language)) file can be feed to the dot tool (provided by [Graphviz](http://www.graphviz.org/)) which in turn will generate an image for the graph.
-
-```console
-$ dot red_black_tree.dot -Tpng > red_black_tree.png
-```
-
-This is the graph visualization of the above example code, generated with the dot tool (provided by [Graphviz](http://www.graphviz.org/)).
-
-![Red Black Tree Graph](https://i.imgur.com/FrRNJ29.png)
 
 Refer to the [Quick Start Guide](https://github.com/xorz57/forest/wiki/Quick-Start-Guide) page for further information and examples.

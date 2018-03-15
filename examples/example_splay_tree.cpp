@@ -1,7 +1,7 @@
 #include "forest/splay_tree.h"
 #include <iostream>
 
-void handler(std::shared_ptr<forest::splay_tree_node <int> > x) {
+void handler(std::shared_ptr<forest::splay::node <int> > x) {
         std::cout << x->key << "\t";
         if (x->left != nullptr) {
                 std::cout << x->left->key << "\t";
@@ -21,7 +21,7 @@ void handler(std::shared_ptr<forest::splay_tree_node <int> > x) {
 }
 
 int main(int argc, char const *argv[]) {
-        forest::splay_tree <int> splay_tree;
+        forest::splay::tree <int> splay_tree;
 
         splay_tree.insert(4);
         splay_tree.insert(2);
@@ -82,8 +82,6 @@ int main(int argc, char const *argv[]) {
                 std::cout << std::endl;
                 std::cout << "Found node with key 3" << std::endl;
         }
-
-        splay_tree.graphviz("splay_tree.dot");
 
         return 0;
 }
