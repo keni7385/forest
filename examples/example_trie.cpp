@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main(int argc, char const *argv[]) {
-        forest::trie trie;
+        forest::trie::tree trie;
 
 	trie.insert("a");
 	trie.insert("to");

@@ -15,65 +15,67 @@
  * @brief The forest library namespace
  */
 namespace forest {
-        /**
-         * @brief Trie node struct
-         */
-        struct trie_node {
-                std::shared_ptr<trie_node> children[ALPHABET_SIZE];
-                bool end;
+        namespace trie {
                 /**
-                 * @brief Constructor of a trie node
+                 * @brief trie::node struct
                  */
-                trie_node() {
-                        this->end = false; 
-                        for (int i = 0; i < ALPHABET_SIZE; i++) {
-                                this->children[i] = NULL;
-                        }
-                }
-        };
-        /**
-         * @brief Trie class
-         */
-        class trie {
-        private:
-                std::shared_ptr<trie_node> root;
-        public:
-                trie() {
-                        root = std::make_shared<trie_node>();
-                }
-                /**
-                 * @brief Inserts the given key into the Trie
-                 * @param key The key to be inserted
-                 * @return void
-                 */		
-                void insert(const std::string &key) {
-                        std::shared_ptr<trie_node> n = root;
-                        for (int i = 0; i < key.length(); i++) {
-                                int index = key[i] - 'a';
-                                if (n->children[index] == nullptr) {
-                                        n->children[index] = std::make_shared<trie_node>();
+                struct node {
+                        std::shared_ptr<node> children[ALPHABET_SIZE];
+                        bool end;
+                        /**
+                         * @brief Constructor of a trie::node
+                         */
+                        node() {
+                                this->end = false; 
+                                for (int i = 0; i < ALPHABET_SIZE; i++) {
+                                        this->children[i] = NULL;
                                 }
-                                n = n->children[index];
                         }
-                        n->end = true;
-                }
+                };
                 /**
-                 * @brief Searches for the given key in the Trie
-                 * @param key The key to be inserted
-                 * @return true if key exists in the Trie and false otherwise
+                 * @brief trie::tree class
                  */
-                const bool search(const std::string &key) {
-                        std::shared_ptr<trie_node> n = root;
-                        for (int i = 0; i < key.length(); i++) {
-                                int index = key[i] - 'a';
-                                if (n->children[index] == nullptr) {
-                                        return false;
-                                }
-                                n = n->children[index];
+                class tree {
+                private:
+                        std::shared_ptr<node> root;
+                public:
+                        tree() {
+                                root = std::make_shared<node>();
                         }
-                        return (n != nullptr && n->end == true);
-                }
-        };
+                        /**
+                         * @brief Inserts the given key into the trie::tree
+                         * @param key The key to be inserted
+                         * @return void
+                         */		
+                        void insert(const std::string &key) {
+                                std::shared_ptr<node> n = root;
+                                for (int i = 0; i < key.length(); i++) {
+                                        int index = key[i] - 'a';
+                                        if (n->children[index] == nullptr) {
+                                                n->children[index] = std::make_shared<node>();
+                                        }
+                                        n = n->children[index];
+                                }
+                                n->end = true;
+                        }
+                        /**
+                         * @brief Searches for the given key in the trie::tree
+                         * @param key The key to be inserted
+                         * @return true if key exists in the trie::tree and false otherwise
+                         */
+                        const bool search(const std::string &key) {
+                                std::shared_ptr<node> n = root;
+                                for (int i = 0; i < key.length(); i++) {
+                                        int index = key[i] - 'a';
+                                        if (n->children[index] == nullptr) {
+                                                return false;
+                                        }
+                                        n = n->children[index];
+                                }
+                                return (n != nullptr && n->end == true);
+                        }
+                };
+        }
 }
 
 #endif
