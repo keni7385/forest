@@ -1,9 +1,9 @@
 /**
- * @file tree.h
+ * @file splay_tree.h
  */
 
-#ifndef tree_H
-#define tree_H
+#ifndef SPLAY_TREE_H
+#define SPLAY_TREE_H
 
 #include <iostream>
 #include <algorithm>

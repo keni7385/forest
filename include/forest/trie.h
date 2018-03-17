@@ -17,13 +17,13 @@
 namespace forest {
         namespace trie {
                 /**
-                 * @brief trie::node struct
+                 * @brief trie node struct
                  */
                 struct node {
                         std::shared_ptr<node> children[ALPHABET_SIZE];
                         bool end;
                         /**
-                         * @brief Constructor of a trie::node
+                         * @brief Constructor of a trie node
                          */
                         node() {
                                 this->end = false; 
@@ -33,7 +33,7 @@ namespace forest {
                         }
                 };
                 /**
-                 * @brief trie::tree class
+                 * @brief trie class
                  */
                 class tree {
                 private:
@@ -43,10 +43,10 @@ namespace forest {
                                 root = std::make_shared<node>();
                         }
                         /**
-                         * @brief Inserts the given key into the trie::tree
+                         * @brief Inserts the given key into the trie
                          * @param key The key to be inserted
                          * @return void
-                         */		
+                         */
                         void insert(const std::string &key) {
                                 std::shared_ptr<node> n = root;
                                 for (int i = 0; i < key.length(); i++) {
@@ -59,9 +59,9 @@ namespace forest {
                                 n->end = true;
                         }
                         /**
-                         * @brief Searches for the given key in the trie::tree
+                         * @brief Searches for the given key in the trie
                          * @param key The key to be inserted
-                         * @return true if key exists in the trie::tree and false otherwise
+                         * @return true if key exists in the trie and false otherwise
                          */
                         const bool search(const std::string &key) {
                                 std::shared_ptr<node> n = root;
