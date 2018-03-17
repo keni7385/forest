@@ -1,9 +1,9 @@
 /**
- * @file tree.h
+ * @file avl_tree.h
  */
 
-#ifndef tree_H
-#define tree_H
+#ifndef AVL_TREE_H
+#define AVL_TREE_H
 
 #include <iostream>
 #include <algorithm>
@@ -17,7 +17,7 @@
 namespace forest {
         namespace avl {
                 /**
-                 * @brief AVL Tree node struct
+                 * @brief avl tree node struct
                  */
                 template <typename key_t>
                 struct node {
@@ -37,7 +37,7 @@ namespace forest {
                         }
                 };
                 /**
-                 * @brief AVL Tree class
+                 * @brief avl tree class
                  */
                 template <typename key_t>
                 class tree {
@@ -159,7 +159,7 @@ namespace forest {
                                 breadth_first_traversal(root, handler);
                         }
                         /**
-                         * @brief Inserts a new node into the AVL tree
+                         * @brief Inserts a new node into the avl tree
                          * @param key The key for the new node
                          * @return The inserted node otherwise nullptr
                          */
@@ -195,24 +195,19 @@ namespace forest {
                                 // Re-trace up the tree
                                 while (current != nullptr) {
                                     current->balance_factor = (height(current->right) - height(current->left));
-
-                                    // Rotate right
                                     if (current->balance_factor == -2) {
                                             // If left subtree is right heavy -- "double right"
                                             if (current->left->balance_factor == 1) {
                                                     rotate_left(current->left);
                                             }
                                             rotate_right(current);
-                                    }
-                                    // Rotate left
-                                    else if (current->balance_factor == 2) {
+                                    } else if (current->balance_factor == 2) {
                                             // If right subtree is left heavy -- "double left"
                                             if (current->right->balance_factor == -1) {
                                                     rotate_right(current->right);
                                             }
                                             rotate_left(current);
                                     }
-
                                     current = current->parent.lock();
                                 }
 
@@ -311,21 +306,21 @@ namespace forest {
                         }
                         /**
                          * @brief Finds the height of the tree
-                         * @return The height of the AVL tree
+                         * @return The height of the avl tree
                          */
                         const unsigned long long height() {
                                 return height(root);
                         }
                         /**
                          * @brief Finds the size of the tree
-                         * @return The size of the AVL tree
+                         * @return The size of the avl tree
                          */
                         const unsigned long long size() {
                                 return size(root);
                         }
                         /**
-                         * @brief Finds if the AVL tree is empty
-                         * @return true if the AVL tree is empty and false otherwise
+                         * @brief Finds if the avl tree is empty
+                         * @return true if the avl tree is empty and false otherwise
                          */
                         const bool empty() noexcept{
                                 if (root == nullptr) {

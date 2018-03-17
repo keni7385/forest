@@ -1,9 +1,9 @@
 /**
- * @file tree.h
+ * @file red_black_tree.h
  */
 
-#ifndef tree_H
-#define tree_H
+#ifndef RED_BLACK_TREE_H
+#define RED_BLACK_TREE_H
 
 #include <iostream>
 #include <algorithm>
@@ -18,7 +18,7 @@ namespace forest {
         namespace red_black {
                 enum color_t {red, black}; ///< Color data type for the nodes of a red black tree.
                 /**
-                 * @brief Red Black Tree node struct
+                 * @brief red black tree node struct
                  */
                 template <typename key_t>
                 struct node {
@@ -39,7 +39,7 @@ namespace forest {
                         }
                 };
                 /**
-                 * @brief Red Black Tree class
+                 * @brief red black tree class
                  */
                 template <typename key_t>
                 class tree {

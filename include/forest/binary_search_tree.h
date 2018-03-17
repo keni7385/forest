@@ -1,9 +1,9 @@
 /**
- * @file tree.h
+ * @file binary_search_tree.h
  */
 
-#ifndef tree_H
-#define tree_H
+#ifndef BINARY_SEARCH_TREE_H
+#define BINARY_SEARCH_TREE_H
 
 #include <iostream>
 #include <algorithm>
@@ -17,7 +17,7 @@
 namespace forest {
         namespace binary_search {
                 /**
-                 * @brief Binary Search Tree node struct
+                 * @brief binary search Tree node struct
                  */
                 template <typename key_t>
                 struct node {
@@ -36,7 +36,7 @@ namespace forest {
                         }
                 };
                 /**
-                 * @brief Binary Search Tree class
+                 * @brief binary search tree class
                  */
                 template <typename key_t>
                 class tree {
