@@ -28,40 +28,36 @@ Forest is an open-source, template library of tree data structures written in C+
 - `vcpkg install forest`
 
 #### Or simply download the header files
-- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/6.0.3/binary_search_tree.h)
-- [AVL Tree](https://github.com/xorz57/forest/releases/download/6.0.3/avl_tree.h)
-- [Red Black Tree](https://github.com/xorz57/forest/releases/download/6.0.3/red_black_tree.h)
-- [Splay Tree](https://github.com/xorz57/forest/releases/download/6.0.3/splay_tree.h)
-- [Trie](https://github.com/xorz57/forest/releases/download/6.0.3/trie.h)
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/6.0.4/binary_search_tree.h)
+- [AVL Tree](https://github.com/xorz57/forest/releases/download/6.0.4/avl_tree.h)
+- [Red Black Tree](https://github.com/xorz57/forest/releases/download/6.0.4/red_black_tree.h)
+- [Splay Tree](https://github.com/xorz57/forest/releases/download/6.0.4/splay_tree.h)
+- [Trie](https://github.com/xorz57/forest/releases/download/6.0.4/trie.h)
 
 ## Example Code
 
 Forest is best explained through [examples](https://github.com/xorz57/forest/tree/master/examples).
 
 ```cpp
-#include <forest/red_black_tree.h>
-
-void handler(std::shared_ptr<forest::red_black::node <int> > x) {
-        std::cout << x->key << std::endl;
-}
+#include "red_black_tree.h"
 
 int main() {
-        // Generate a red-black tree with integer keys
-        forest::red_black::tree <int> red_black_tree;
+	// Generate a red-black tree with integer keys
+	forest::red_black::tree <int> red_black_tree;
 
-        // Insert 7 plain nodes
-        red_black_tree.insert(4);
-        red_black_tree.insert(2);
-        red_black_tree.insert(90);
-        red_black_tree.insert(3);
-        red_black_tree.insert(0);
-        red_black_tree.insert(14);
-        red_black_tree.insert(45);
+	// Insert 7 plain nodes
+	red_black_tree.insert(4);
+	red_black_tree.insert(2);
+	red_black_tree.insert(90);
+	red_black_tree.insert(3);
+	red_black_tree.insert(0);
+	red_black_tree.insert(14);
+	red_black_tree.insert(45);
 
-        // Perform In-Order-Traversal
-        red_black_tree.in_order_traversal(handler);
+	// Perform In-Order-Traversal
+	red_black_tree.in_order_traversal([](auto node){ std::cout << node->key << std::endl; });
 
-        return 0;
+	return 0;
 }
 ```
 
