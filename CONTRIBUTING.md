@@ -2,11 +2,11 @@
 
 ## Coding Conventions
 
-#### Indentation is 8 spaces:
+#### Indentation is 2 spaces:
 
 ```
 void foo(int x) {
-        // code
+  // code
 }
 ```
 
@@ -36,13 +36,13 @@ if (a==b)   // not preferable
 ```
 // preferable
 if (a == b) {
-        // code
+// code
 }
 
 // not preferable
 if (a == b)
 {
-        // code
+  // code
 }
 
 ```
@@ -55,7 +55,7 @@ if (a == b) c = a + b;
 
 // not preferable
 if (a == b) {
-        c = a + b;
+  c = a + b;
 }
 ```
 
