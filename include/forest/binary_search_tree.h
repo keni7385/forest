@@ -2,8 +2,8 @@
  * @file binary_search_tree.h
  */
 
-#ifndef BINARY_SEARCH_TREE_H
-#define BINARY_SEARCH_TREE_H
+#ifndef FOREST_BINARY_SEARCH_TREE_H
+#define FOREST_BINARY_SEARCH_TREE_H
 
 #include <iostream>
 #include <algorithm>
