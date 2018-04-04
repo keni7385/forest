@@ -30,31 +30,31 @@ namespace forest {
 			}
 		};
 		std::shared_ptr<node> root;
-		void pre_order_traversal(std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) {
+		void pre_order_traversal(std::shared_ptr<node> &x, void handler(const T & key)) {
 			if (x == nullptr) return;
-			handler(x);
+			handler(x->key);
 			pre_order_traversal(x->left, handler);
 			pre_order_traversal(x->right, handler);
 		}
-		void in_order_traversal(std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) {
+		void in_order_traversal(std::shared_ptr<node> &x, void handler(const T & key)) {
 			if (x == nullptr) return;
 			in_order_traversal(x->left, handler);
-			handler(x);
+			handler(x->key);
 			in_order_traversal(x->right, handler);
 		}
-		void post_order_traversal(std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) {
+		void post_order_traversal(std::shared_ptr<node> &x, void handler(const T & key)) {
 			if (x == nullptr) return;
 			post_order_traversal(x->left, handler);
 			post_order_traversal(x->right, handler);
-			handler(x);
+			handler(x->key);
 		}
-		void breadth_first_traversal(std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) {
+		void breadth_first_traversal(std::shared_ptr<node> &x, void handler(const T & key)) {
 			std::queue <std::shared_ptr<node> > queue;
 			if (x == nullptr) return;
 			queue.push(x);
 			while (queue.empty() == false) {
 				std::shared_ptr<node> y = queue.front();
-				handler(y);
+				handler(y->key);
 				queue.pop();
 				if (y->left != nullptr) queue.push(y->left);
 				if (y->right != nullptr) queue.push(y->right);
@@ -73,28 +73,28 @@ namespace forest {
 		* @brief Performs a Pre Order Traversal starting from the root node
 		* @return void
 		*/
-		void pre_order_traversal(void handler(std::shared_ptr<node>)) {
+		void pre_order_traversal(void handler(const T & key)) {
 			pre_order_traversal(root, handler);
 		}
 		/**
 		* @brief Performs a In Order Traversal starting from the root node
 		* @return void
 		*/
-		void in_order_traversal(void handler(std::shared_ptr<node>)) {
+		void in_order_traversal(void handler(const T & key)) {
 			in_order_traversal(root, handler);
 		}
 		/**
 		* @brief Performs a Post Order Traversal starting from the root node
 		* @return void
 		*/
-		void post_order_traversal(void handler(std::shared_ptr<node>)) {
+		void post_order_traversal(void handler(const T & key)) {
 			post_order_traversal(root, handler);
 		}
 		/**
 		* @brief Performs a Breadth First Traversal starting from the root node
 		* @return void
 		*/
-		void breadth_first_traversal(void handler(std::shared_ptr<node>)) {
+		void breadth_first_traversal(void handler(const T & key)) {
 			breadth_first_traversal(root, handler);
 		}
 		/**
