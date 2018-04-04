@@ -70,9 +70,6 @@ namespace forest {
 			return size(x->left) + size(x->right) + 1;
 		}
 	public:
-		binary_search_tree() {
-			root = nullptr;
-		}
 		/**
 		* @brief Performs a Pre Order Traversal starting from the root node
 		* @return void
