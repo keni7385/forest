@@ -1,7 +1,3 @@
-/**
-* @file binary_search_tree.h
-*/
-
 #pragma once
 
 #include <iostream>
@@ -10,18 +6,15 @@
 #include <fstream>
 #include <memory>
 
-/**
-* @brief The forest library namespace
-*/
 namespace forest {
 	template <typename T>
 	class binary_search_tree {
 	private:
 		struct node {
-			T key;                         ///< The key of the node
-			std::weak_ptr<node> parent;    ///< The parent of the node
-			std::shared_ptr<node> left;    ///< The left child of the node
-			std::shared_ptr<node> right;   ///< The right child of the node
+			T key;
+			std::weak_ptr<node> parent;
+			std::shared_ptr<node> left;
+			std::shared_ptr<node> right;
 			node(const T key) {
 				this->key = key;
 			}
@@ -66,39 +59,18 @@ namespace forest {
 			return size(x->left) + size(x->right) + 1;
 		}
 	public:
-		/**
-		* @brief Performs a Pre Order Traversal starting from the root node
-		* @return void
-		*/
 		void pre_order_traversal(void handler(const T & key)) {
 			pre_order_traversal(root, handler);
 		}
-		/**
-		* @brief Performs a In Order Traversal starting from the root node
-		* @return void
-		*/
 		void in_order_traversal(void handler(const T & key)) {
 			in_order_traversal(root, handler);
 		}
-		/**
-		* @brief Performs a Post Order Traversal starting from the root node
-		* @return void
-		*/
 		void post_order_traversal(void handler(const T & key)) {
 			post_order_traversal(root, handler);
 		}
-		/**
-		* @brief Performs a Breadth First Traversal starting from the root node
-		* @return void
-		*/
 		void breadth_first_traversal(void handler(const T & key)) {
 			breadth_first_traversal(root, handler);
 		}
-		/**
-		* @brief Inserts a new node into the binary search tree
-		* @param key The key for the new node
-		* @return The the inserted node otherwise nullptr
-		*/
 		std::shared_ptr<const node> insert(const T & key) {
 			std::shared_ptr<node> current = root;
 			std::shared_ptr<node> parent = nullptr;
@@ -127,10 +99,6 @@ namespace forest {
 			}
 			return current;
 		}
-		/**
-		* @brief Performs a binary search starting from the root node
-		* @return The node with the key specified otherwise nullptr
-		*/
 		std::shared_ptr<const node> search(const T & key) {
 			std::shared_ptr<node> x = root;
 			while (x != nullptr) {
@@ -146,30 +114,18 @@ namespace forest {
 			}
 			return nullptr;
 		}
-		/**
-		* @brief Finds the node with the minimum key
-		* @return The node with the minimum key otherwise nullptr
-		*/
 		std::shared_ptr<const node> minimum() {
 			std::shared_ptr<node> x = root;
 			if (x == nullptr) return nullptr;
 			while (x->left != nullptr) x = x->left;
 			return x;
 		}
-		/**
-		* @brief Finds the node with the maximum key
-		* @return The node with the maximum key otherwise nullptr
-		*/
 		std::shared_ptr<const node> maximum() {
 			std::shared_ptr<node> x = root;
 			if (x == nullptr) return nullptr;
 			while (x->right != nullptr) x = x->right;
 			return x;
 		}
-		/**
-		* @brief Finds the successor of the node with key specified
-		* @return The successor of the node with key specified otherwise nullptr
-		*/
 		std::shared_ptr<const node> successor(const T & key) {
 			std::shared_ptr<node> x = root;
 			while (x != nullptr) {
@@ -195,10 +151,6 @@ namespace forest {
 			}
 			return nullptr;
 		}
-		/**
-		* @brief Finds the predecessor of the node with key specified
-		* @return The predecessor of the node with key specified otherwise nullptr
-		*/
 		std::shared_ptr<const node> predecessor(const T & key) {
 			std::shared_ptr<node> x = root;
 			while (x != nullptr) {
@@ -224,24 +176,12 @@ namespace forest {
 			}
 			return nullptr;
 		}
-		/**
-		* @brief Finds the height of the binary search tree
-		* @return The height of the binary search tree
-		*/
-		auto height() {
+		auto height() const {
 			return height(root);
 		}
-		/**
-		* @brief Finds the size of the binary search tree
-		* @return The size of the binary search tree
-		*/
-		auto size() {
+		auto size() const {
 			return size(root);
 		}
-		/**
-		* @brief Finds if the binary search tree is empty
-		* @return true if the binary search tree is empty and false otherwise
-		*/
 		auto empty() const {
 			return (root == nullptr);
 		}
