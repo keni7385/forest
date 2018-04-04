@@ -176,10 +176,10 @@ namespace forest {
 			}
 			return nullptr;
 		}
-		auto height() const {
+		auto height() {
 			return height(root);
 		}
-		auto size() const {
+		auto size() {
 			return size(root);
 		}
 		auto empty() const {
