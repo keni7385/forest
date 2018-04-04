@@ -50,11 +50,11 @@ namespace forest {
 				if (y->right != nullptr) queue.push(y->right);
 			}
 		}
-		auto height(std::shared_ptr<node> & x) {
+		size_t height(std::shared_ptr<node> & x) {
 			if (x == nullptr) return 0;
 			return std::max(height(x->left), height(x->right)) + 1;
 		}
-		auto size(std::shared_ptr<node> & x) {
+		size_t size(std::shared_ptr<node> & x) {
 			if (x == nullptr) return 0;
 			return size(x->left) + size(x->right) + 1;
 		}
@@ -176,13 +176,13 @@ namespace forest {
 			}
 			return nullptr;
 		}
-		auto height() {
+		size_t height() {
 			return height(root);
 		}
-		auto size() {
+		size_t size() {
 			return size(root);
 		}
-		auto empty() const {
+		bool empty() const {
 			return (root == nullptr);
 		}
 	};
