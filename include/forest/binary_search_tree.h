@@ -24,9 +24,6 @@ namespace forest {
 			std::shared_ptr<node> right;   ///< The right child of the node
 			node(const T key) {
 				this->key = key;
-				this->parent.reset();
-				this->left = nullptr;
-				this->right = nullptr;
 			}
 		};
 		std::shared_ptr<node> root;
