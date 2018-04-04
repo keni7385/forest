@@ -249,13 +249,8 @@ namespace forest {
 		* @brief Finds if the binary search tree is empty
 		* @return true if the binary search tree is empty and false otherwise
 		*/
-		const bool empty() {
-			if (root == nullptr) {
-				return true;
-			}
-			else {
-				return false;
-			}
+		const bool empty() const {
+			return (root == nullptr);
 		}
 	};
 }
