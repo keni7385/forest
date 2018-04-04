@@ -2,8 +2,8 @@
  * @file red_black_tree.h
  */
 
-#ifndef RED_BLACK_TREE_H
-#define RED_BLACK_TREE_H
+#ifndef FOREST_RED_BLACK_TREE_H
+#define FOREST_RED_BLACK_TREE_H
 
 #include <iostream>
 #include <algorithm>
@@ -16,20 +16,14 @@
  */
 namespace forest {
   namespace red_black {
-    enum color_t {red, black}; ///< Color data type for the nodes of a red black tree.
-    /**
-     * @brief red black tree node struct
-     */
+    enum color_t {red, black};
     template <typename key_t>
     struct node {
-      key_t key;     ///< The key of the node
-      color_t color; ///< The color of the node
+      key_t key;                     ///< The key of the node
+      color_t color;                 ///< The color of the node
       std::weak_ptr<node> parent;    ///< The parent of the node
       std::shared_ptr<node> left;    ///< The left child of the node
       std::shared_ptr<node> right;   ///< The right child of the node
-      /**
-       * @brief Constructor of a red black tree node
-       */
       node(const key_t key, const color_t color) {
         this->key = key;
         this->color = color;
@@ -38,9 +32,6 @@ namespace forest {
         this->right = nullptr;
       }
     };
-    /**
-     * @brief red black tree class
-     */
     template <typename key_t>
     class tree {
     private:
