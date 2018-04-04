@@ -231,21 +231,21 @@ namespace forest {
 		* @brief Finds the height of the binary search tree
 		* @return The height of the binary search tree
 		*/
-		const unsigned long long height() {
+		auto height() {
 			return height(root);
 		}
 		/**
 		* @brief Finds the size of the binary search tree
 		* @return The size of the binary search tree
 		*/
-		const unsigned long long size() {
+		auto size() {
 			return size(root);
 		}
 		/**
 		* @brief Finds if the binary search tree is empty
 		* @return true if the binary search tree is empty and false otherwise
 		*/
-		const bool empty() const {
+		auto empty() const {
 			return (root == nullptr);
 		}
 	};
