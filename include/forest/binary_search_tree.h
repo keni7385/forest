@@ -30,25 +30,25 @@ namespace forest {
 			}
 		};
 		std::shared_ptr<node> root;
-		void pre_order_traversal(std::shared_ptr<node> &x, void handler(const T & key)) {
+		void pre_order_traversal(std::shared_ptr<node> & x, void handler(const T & key)) {
 			if (x == nullptr) return;
 			handler(x->key);
 			pre_order_traversal(x->left, handler);
 			pre_order_traversal(x->right, handler);
 		}
-		void in_order_traversal(std::shared_ptr<node> &x, void handler(const T & key)) {
+		void in_order_traversal(std::shared_ptr<node> & x, void handler(const T & key)) {
 			if (x == nullptr) return;
 			in_order_traversal(x->left, handler);
 			handler(x->key);
 			in_order_traversal(x->right, handler);
 		}
-		void post_order_traversal(std::shared_ptr<node> &x, void handler(const T & key)) {
+		void post_order_traversal(std::shared_ptr<node> & x, void handler(const T & key)) {
 			if (x == nullptr) return;
 			post_order_traversal(x->left, handler);
 			post_order_traversal(x->right, handler);
 			handler(x->key);
 		}
-		void breadth_first_traversal(std::shared_ptr<node> &x, void handler(const T & key)) {
+		void breadth_first_traversal(std::shared_ptr<node> & x, void handler(const T & key)) {
 			std::queue <std::shared_ptr<node> > queue;
 			if (x == nullptr) return;
 			queue.push(x);
@@ -60,11 +60,11 @@ namespace forest {
 				if (y->right != nullptr) queue.push(y->right);
 			}
 		}
-		const unsigned long long height(std::shared_ptr<node> &x) {
+		auto height(std::shared_ptr<node> & x) {
 			if (x == nullptr) return 0;
 			return std::max(height(x->left), height(x->right)) + 1;
 		}
-		const unsigned long long size(std::shared_ptr<node> &x) {
+		auto size(std::shared_ptr<node> & x) {
 			if (x == nullptr) return 0;
 			return size(x->left) + size(x->right) + 1;
 		}
@@ -102,7 +102,7 @@ namespace forest {
 		* @param key The key for the new node
 		* @return The the inserted node otherwise nullptr
 		*/
-		const std::shared_ptr<node> insert(const T key) {
+		const std::shared_ptr<node> insert(const T & key) {
 			std::shared_ptr<node> current = root;
 			std::shared_ptr<node> parent = nullptr;
 			while (current != nullptr) {
@@ -134,7 +134,7 @@ namespace forest {
 		* @brief Performs a binary search starting from the root node
 		* @return The node with the key specified otherwise nullptr
 		*/
-		const std::shared_ptr<node> search(const T key) {
+		const std::shared_ptr<node> search(const T & key) {
 			std::shared_ptr<node> x = root;
 			while (x != nullptr) {
 				if (key > x->key) {
@@ -173,7 +173,7 @@ namespace forest {
 		* @brief Finds the successor of the node with key specified
 		* @return The successor of the node with key specified otherwise nullptr
 		*/
-		const std::shared_ptr<node> successor(const T key) {
+		const std::shared_ptr<node> successor(const T & key) {
 			std::shared_ptr<node> x = root;
 			while (x != nullptr) {
 				if (key > x->key) {
@@ -202,7 +202,7 @@ namespace forest {
 		* @brief Finds the predecessor of the node with key specified
 		* @return The predecessor of the node with key specified otherwise nullptr
 		*/
-		const std::shared_ptr<node> predecessor(const T key) {
+		const std::shared_ptr<node> predecessor(const T & key) {
 			std::shared_ptr<node> x = root;
 			while (x != nullptr) {
 				if (key > x->key) {
