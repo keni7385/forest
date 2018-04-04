@@ -1,9 +1,4 @@
-/**
-* @file trie.h
-*/
-
-#ifndef FOREST_TRIE_H
-#define FOREST_TRIE_H
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -12,34 +7,23 @@
 namespace forest {
 	class Trie {
 	private:
-		#define ALPHABET_SIZE 26
 		struct Node {
-			std::shared_ptr<Node> children[ALPHABET_SIZE];
-			bool end;
-			Node() {
-				this->end = false;
-				for (int i = 0; i < ALPHABET_SIZE; i++) {
-					this->children[i] = NULL;
-				}
-			}
+			std::shared_ptr<Node> children[26];
+			bool end = false;
 		};
-		std::shared_ptr<Node> root;
+		std::shared_ptr<Node> root = std::make_shared<Node>();;
 	public:
-		Trie() {
-			root = std::make_shared<Node>();
-		}
-		void insert(const std::string &key) {
+		void insert(const std::string & key) {
 			std::shared_ptr<Node> n = root;
-			for (int i = 0; i < key.length(); i++) {
-				int index = key[i] - 'a';
-				if (n->children[index] == nullptr) {
-					n->children[index] = std::make_shared<Node>();
-				}
-				n = n->children[index];
+			for (auto c : key) {
+				int index = c - 'a';
+				auto& slot = n->children[index];
+				if (!slot) slot = std::make_shared<Node>();
+				n = slot;
 			}
 			n->end = true;
 		}
-		const bool search(const std::string &key) {
+		bool search(const std::string & key) {
 			std::shared_ptr<Node> n = root;
 			for (int i = 0; i < key.length(); i++) {
 				int index = key[i] - 'a';
@@ -48,9 +32,7 @@ namespace forest {
 				}
 				n = n->children[index];
 			}
-			return (n != nullptr && n->end == true);
+			return n && n->end;
 		}
 	};
 }
-
-#endif
