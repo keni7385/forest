@@ -2,8 +2,8 @@
  * @file splay_tree.h
  */
 
-#ifndef SPLAY_TREE_H
-#define SPLAY_TREE_H
+#ifndef FOREST_SPLAY_TREE_H
+#define FOREST_SPLAY_TREE_H
 
 #include <iostream>
 #include <algorithm>
@@ -21,13 +21,10 @@ namespace forest {
      */
     template <typename key_t>
     struct node {
-      key_t key;     ///< The key of the node
+      key_t key;                     ///< The key of the node
       std::weak_ptr<node> parent;    ///< The parent of the node
       std::shared_ptr<node> left;    ///< The left child of the node
       std::shared_ptr<node> right;   ///< The right child of the node
-      /**
-       * @brief Constructor of a splay tree node
-       */
       node(const key_t key) {
         this->key = key;
         this->parent.reset();
@@ -35,9 +32,6 @@ namespace forest {
         this->right = nullptr;
       }
     };
-    /**
-     * @brief Splay Tree class
-     */
     template <typename key_t>
     class tree {
     private:
