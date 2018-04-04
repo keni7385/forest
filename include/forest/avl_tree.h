@@ -118,9 +118,6 @@ namespace forest {
       tree() {
         root = nullptr;
       }
-      ~tree() {
-
-      }
       /**
        * @brief Performs a Pre Order Traversal starting from the root node
        * @return void
