@@ -2,8 +2,8 @@
  * @file avl_tree.h
  */
 
-#ifndef AVL_TREE_H
-#define AVL_TREE_H
+#ifndef FOREST_AVL_TREE_H
+#define FOREST_AVL_TREE_H
 
 #include <iostream>
 #include <algorithm>
@@ -16,19 +16,13 @@
  */
 namespace forest {
   namespace avl {
-    /**
-     * @brief avl tree node struct
-     */
     template <typename key_t>
     struct node {
-      key_t key;              ///< The key of the node
-      int balance_factor;     ///< The avl tree balance factor of this node
+      key_t key;                     ///< The key of the node
+      int balance_factor;            ///< The avl tree balance factor of this node
       std::weak_ptr<node> parent;    ///< The parent of the node
       std::shared_ptr<node> left;    ///< The left child of the node
       std::shared_ptr<node> right;   ///< The right child of the node
-      /**
-       * @brief Constructor of a avl tree node
-       */
       node(const key_t key) {
         this->key = key;
         this->parent.reset();
@@ -36,9 +30,6 @@ namespace forest {
         this->right = nullptr;
       }
     };
-    /**
-     * @brief avl tree class
-     */
     template <typename key_t>
     class tree {
     private:
