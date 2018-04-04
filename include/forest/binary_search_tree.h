@@ -16,18 +16,12 @@
  */
 namespace forest {
   namespace binary_search {
-    /**
-     * @brief binary search Tree node struct
-     */
     template <typename key_t>
     struct node {
-      key_t key;     ///< The key of the node
+      key_t key;                     ///< The key of the node
       std::weak_ptr<node> parent;    ///< The parent of the node
       std::shared_ptr<node> left;    ///< The left child of the node
       std::shared_ptr<node> right;   ///< The right child of the node
-      /**
-       * @brief Constructor of a binary search tree node
-       */
       node(const key_t key) {
         this->key = key;
         this->parent.reset();
@@ -35,9 +29,6 @@ namespace forest {
         this->right = nullptr;
       }
     };
-    /**
-     * @brief binary search tree class
-     */
     template <typename key_t>
     class tree {
     private:
@@ -83,9 +74,6 @@ namespace forest {
     public:
       tree() {
         root = nullptr;
-      }
-      ~tree() {
-
       }
       /**
        * @brief Performs a Pre Order Traversal starting from the root node
