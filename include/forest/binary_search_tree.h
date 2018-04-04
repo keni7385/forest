@@ -99,7 +99,7 @@ namespace forest {
 		* @param key The key for the new node
 		* @return The the inserted node otherwise nullptr
 		*/
-		const std::shared_ptr<node> insert(const T & key) {
+		std::shared_ptr<const node> insert(const T & key) {
 			std::shared_ptr<node> current = root;
 			std::shared_ptr<node> parent = nullptr;
 			while (current != nullptr) {
@@ -131,7 +131,7 @@ namespace forest {
 		* @brief Performs a binary search starting from the root node
 		* @return The node with the key specified otherwise nullptr
 		*/
-		const std::shared_ptr<node> search(const T & key) {
+		std::shared_ptr<const node> search(const T & key) {
 			std::shared_ptr<node> x = root;
 			while (x != nullptr) {
 				if (key > x->key) {
@@ -150,7 +150,7 @@ namespace forest {
 		* @brief Finds the node with the minimum key
 		* @return The node with the minimum key otherwise nullptr
 		*/
-		const std::shared_ptr<node> minimum() {
+		std::shared_ptr<const node> minimum() {
 			std::shared_ptr<node> x = root;
 			if (x == nullptr) return nullptr;
 			while (x->left != nullptr) x = x->left;
@@ -160,7 +160,7 @@ namespace forest {
 		* @brief Finds the node with the maximum key
 		* @return The node with the maximum key otherwise nullptr
 		*/
-		const std::shared_ptr<node> maximum() {
+		std::shared_ptr<const node> maximum() {
 			std::shared_ptr<node> x = root;
 			if (x == nullptr) return nullptr;
 			while (x->right != nullptr) x = x->right;
@@ -170,7 +170,7 @@ namespace forest {
 		* @brief Finds the successor of the node with key specified
 		* @return The successor of the node with key specified otherwise nullptr
 		*/
-		const std::shared_ptr<node> successor(const T & key) {
+		std::shared_ptr<const node> successor(const T & key) {
 			std::shared_ptr<node> x = root;
 			while (x != nullptr) {
 				if (key > x->key) {
@@ -199,7 +199,7 @@ namespace forest {
 		* @brief Finds the predecessor of the node with key specified
 		* @return The predecessor of the node with key specified otherwise nullptr
 		*/
-		const std::shared_ptr<node> predecessor(const T & key) {
+		std::shared_ptr<const node> predecessor(const T & key) {
 			std::shared_ptr<node> x = root;
 			while (x != nullptr) {
 				if (key > x->key) {
