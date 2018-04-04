@@ -2,8 +2,7 @@
 * @file binary_search_tree.h
 */
 
-#ifndef FOREST_BINARY_SEARCH_TREE_H
-#define FOREST_BINARY_SEARCH_TREE_H
+#pragma once
 
 #include <iostream>
 #include <algorithm>
@@ -251,5 +250,3 @@ namespace forest {
 		}
 	};
 }
-
-#endif
