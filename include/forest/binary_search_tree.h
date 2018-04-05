@@ -80,8 +80,7 @@ namespace forest {
 				parent = current;
 				if (key > current->key) {
 					current = current->right;
-				}
-				else if (key < current->key) {
+				} else if (key < current->key) {
 					current = current->left;
 				}
 			}
@@ -89,11 +88,9 @@ namespace forest {
 			current->parent = parent;
 			if (parent == nullptr) {
 				root = current;
-			}
-			else if (current->key > parent->key) {
+			} else if (current->key > parent->key) {
 				parent->right = current;
-			}
-			else if (current->key < parent->key) {
+			} else if (current->key < parent->key) {
 				parent->left = current;
 			}
 		}
@@ -102,11 +99,9 @@ namespace forest {
 			while (x != nullptr) {
 				if (key > x->key) {
 					x = x->right;
-				}
-				else if (key < x->key) {
+				} else if (key < x->key) {
 					x = x->left;
-				}
-				else {
+				} else {
 					return x;
 				}
 			}
@@ -129,11 +124,9 @@ namespace forest {
 			while (x != nullptr) {
 				if (key > x->key) {
 					x = x->right;
-				}
-				else if (key < x->key) {
+				} else if (key < x->key) {
 					x = x->left;
-				}
-				else {
+				} else {
 					if (x->right != nullptr) {
 						x = x->right;
 						while (x->left != nullptr) x = x->left;
@@ -154,11 +147,9 @@ namespace forest {
 			while (x != nullptr) {
 				if (key > x->key) {
 					x = x->right;
-				}
-				else if (key < x->key) {
+				} else if (key < x->key) {
 					x = x->left;
-				}
-				else {
+				} else {
 					if (x->left != nullptr) {
 						x = x->left;
 						while (x->right != nullptr) x = x->right;
