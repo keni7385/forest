@@ -143,17 +143,14 @@ namespace forest {
 
       inserted_node = current;
 
-      // Re-trace up the tree
       while (current != nullptr) {
         current->balance_factor = (height(current->right) - height(current->left));
         if (current->balance_factor == -2) {
-          // If left subtree is right heavy -- "double right"
           if (current->left->balance_factor == 1) {
             rotate_left(current->left);
           }
           rotate_right(current);
         } else if (current->balance_factor == 2) {
-          // If right subtree is left heavy -- "double left"
           if (current->right->balance_factor == -1) {
             rotate_right(current->right);
           }

@@ -72,11 +72,9 @@ namespace forest {
 			}
 			if (x->parent.lock() == nullptr) {
 				root = y;
-			}
-			else if (x == x->parent.lock()->left) {
+			} else if (x == x->parent.lock()->left) {
 				x->parent.lock()->left = y;
-			}
-			else {
+			} else {
 				x->parent.lock()->right = y;
 			}
 			if (y != nullptr) {
@@ -93,11 +91,9 @@ namespace forest {
 			}
 			if (x->parent.lock() == nullptr) {
 				root = y;
-			}
-			else if (x == x->parent.lock()->left) {
+			} else if (x == x->parent.lock()->left) {
 				x->parent.lock()->left = y;
-			}
-			else {
+			} else {
 				x->parent.lock()->right = y;
 			}
 			if (y != nullptr) {
@@ -108,8 +104,7 @@ namespace forest {
 		std::shared_ptr<Node> find_sibling(std::shared_ptr<Node> & x) {
 			if (x == find_parent(x)->left) {
 				return find_parent(x)->right;
-			}
-			else if (x == find_parent(x)->right) {
+			} else if (x == find_parent(x)->right) {
 				return find_parent(x)->left;
 			}
 			return nullptr;
@@ -135,63 +130,36 @@ namespace forest {
 			while ((x != root) && (x->color != black) && (x->parent.lock()->color == red)) {
 				parent = x->parent.lock();
 				grand_parent = x->parent.lock()->parent.lock();
-				/**
-				* @brief Case A - Parent of x is left child of the grand parent of x
-				*/
 				if (parent == grand_parent->left) {
 					std::shared_ptr<Node> uncle = grand_parent->right;
-					/**
-					* @brief Case 1 - The uncle of x is also red. Only recoloring is required
-					*/
 					if (uncle != nullptr && uncle->color == red) {
 						grand_parent->color = red;
 						parent->color = black;
 						uncle->color = black;
 						x = grand_parent;
-					}
-					else {
-						/**
-						* @brief Case 2 - x is right child of its parent. Left rotation is required
-						*/
+					} else {
 						if (x == parent->right) {
 							left_rotate(parent);
 							x = parent;
 							parent = x->parent.lock();
 						}
-						/**
-						* @brief Case 3 - x is left child of its parent. Right rotation is required
-						*/
 						right_rotate(grand_parent);
 						std::swap(parent->color, grand_parent->color);
 						x = parent;
 					}
-				}
-				else {
-					/**
-					* @brief Case B - Parent of x is right child of the grand parent of x
-					*/
+				} else {
 					std::shared_ptr<Node> uncle = grand_parent->left;
-					/**
-					* @brief Case 1 - The uncle of x is also red. Only recoloring required
-					*/
 					if ((uncle != nullptr) && (uncle->color == red)) {
 						grand_parent->color = red;
 						parent->color = black;
 						uncle->color = black;
 						x = grand_parent;
-					}
-					else {
-						/**
-						* @brief Case 2 - x is left child of its parent. Right rotation is required
-						*/
+					} else {
 						if (x == parent->left) {
 							right_rotate(parent);
 							x = parent;
 							parent = x->parent.lock();
 						}
-						/**
-						* @brief Case 3 - x is right child of its parent. Left rotation is required
-						*/
 						left_rotate(grand_parent);
 						std::swap(parent->color, grand_parent->color);
 						x = parent;
@@ -220,8 +188,7 @@ namespace forest {
 				parent = current;
 				if (key > current->key) {
 					current = current->right;
-				}
-				else if (key < current->key) {
+				} else if (key < current->key) {
 					current = current->left;
 				}
 			}
@@ -229,11 +196,9 @@ namespace forest {
 			current->parent = parent;
 			if (parent == nullptr) {
 				root = current;
-			}
-			else if (current->key > parent->key) {
+			} else if (current->key > parent->key) {
 				parent->right = current;
-			}
-			else if (current->key < parent->key) {
+			} else if (current->key < parent->key) {
 				parent->left = current;
 			}
 			fix(current);
@@ -243,11 +208,9 @@ namespace forest {
 			while (x != nullptr) {
 				if (key > x->key) {
 					x = x->right;
-				}
-				else if (key < x->key) {
+				} else if (key < x->key) {
 					x = x->left;
-				}
-				else {
+				} else {
 					return x;
 				}
 			}
@@ -270,11 +233,9 @@ namespace forest {
 			while (x != nullptr) {
 				if (key > x->key) {
 					x = x->right;
-				}
-				else if (key < x->key) {
+				} else if (key < x->key) {
 					x = x->left;
-				}
-				else {
+				} else {
 					if (x->right != nullptr) {
 						x = x->right;
 						while (x->left != nullptr) x = x->left;
@@ -295,11 +256,9 @@ namespace forest {
 			while (x != nullptr) {
 				if (key > x->key) {
 					x = x->right;
-				}
-				else if (key < x->key) {
+				} else if (key < x->key) {
 					x = x->left;
-				}
-				else {
+				} else {
 					if (x->left != nullptr) {
 						x = x->left;
 						while (x->right != nullptr) x = x->right;
