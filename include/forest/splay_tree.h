@@ -22,25 +22,25 @@ namespace forest {
 			}
 		};
 		std::shared_ptr<Node> root;
-		void pre_order_traversal(std::shared_ptr<Node> & x, void handler(T & key, U & value)) {
+		void pre_order_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
 			if (x == nullptr) return;
 			handler(x->key, x->value);
 			pre_order_traversal(x->left, handler);
 			pre_order_traversal(x->right, handler);
 		}
-		void in_order_traversal(std::shared_ptr<Node> & x, void handler(T & key, U & value)) {
+		void in_order_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
 			if (x == nullptr) return;
 			in_order_traversal(x->left, handler);
 			handler(x->key, x->value);
 			in_order_traversal(x->right, handler);
 		}
-		void post_order_traversal(std::shared_ptr<Node> & x, void handler(T & key, U & value)) {
+		void post_order_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
 			if (x == nullptr) return;
 			post_order_traversal(x->left, handler);
 			post_order_traversal(x->right, handler);
 			handler(x->key, x->value);
 		}
-		void breadth_first_traversal(std::shared_ptr<Node> & x, void handler(T & key, U & value)) {
+		void breadth_first_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
 			std::queue <std::shared_ptr<Node> > queue;
 			if (x == nullptr) return;
 			queue.push(x);
@@ -140,16 +140,16 @@ namespace forest {
 			}
 		}
 	public:
-		void pre_order_traversal(void handler(T & key, U & value)) {
+		void pre_order_traversal(void handler(const T & key, const U & value)) {
 			pre_order_traversal(root, handler);
 		}
-		void in_order_traversal(void handler(T & key, U & value)) {
+		void in_order_traversal(void handler(const T & key, const U & value)) {
 			in_order_traversal(root, handler);
 		}
-		void post_order_traversal(void handler(T & key, U & value)) {
+		void post_order_traversal(void handler(const T & key, const U & value)) {
 			post_order_traversal(root, handler);
 		}
-		void breadth_first_traversal(void handler(T & key, U & value)) {
+		void breadth_first_traversal(void handler(const T & key, const U & value)) {
 			breadth_first_traversal(root, handler);
 		}
 		void insert(T key, U value) {
