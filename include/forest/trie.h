@@ -5,7 +5,7 @@
 #include <string>
 
 namespace forest {
-	class Trie {
+	class trie {
 	private:
 		struct Node {
 			std::shared_ptr<Node> children[26];

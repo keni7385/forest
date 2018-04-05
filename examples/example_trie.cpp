@@ -8,7 +8,7 @@ int main(int argc, char const *argv[]) {
 
   std::cout << std::endl;
 
-  forest::Trie trie;
+  forest::trie trie;
 
   trie.insert("a");
   trie.insert("to");

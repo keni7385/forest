@@ -3,7 +3,7 @@
 
 SCENARIO("Test Trie") {
   GIVEN("A Trie") {
-    forest::Trie trie;
+    forest::trie trie;
     WHEN("The Trie is empty") {
       THEN("Test search for a key that does not exist") {
         REQUIRE(trie.search("lol") == false);
