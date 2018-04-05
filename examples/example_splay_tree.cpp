@@ -1,53 +1,39 @@
-#include "forest/splay_tree.h"
+#include <forest/splay_tree.h>
 #include <iostream>
+#include <string>
 
-void handler(std::shared_ptr<forest::splay::node <int> > x) {
-  std::cout << x->key << "\t";
-  if (x->left != nullptr) {
-    std::cout << x->left->key << "\t";
-  } else {
-    std::cout << "null" << "\t";
-  }
-  if (x->right != nullptr) {
-    std::cout << x->right->key << "\t";
-  } else {
-    std::cout << "null" << "\t";
-  }
-  if (x->parent.lock() != nullptr) {
-    std::cout << x->parent.lock()->key << std::endl;
-  } else {
-    std::cout << "null" << std::endl;
-  }
-}
+auto handler = [](int & key, std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main(int argc, char const *argv[]) {
-  forest::splay::tree <int> splay_tree;
+  std::cout << "======================" << std::endl;
+  std::cout << "[ Splay Tree Example ]" << std::endl;
+  std::cout << "======================" << std::endl;
 
-  splay_tree.insert(4);
-  splay_tree.insert(2);
-  splay_tree.insert(90);
-  splay_tree.insert(3);
-  splay_tree.insert(0);
-  splay_tree.insert(14);
-  splay_tree.insert(45);
+  std::cout << std::endl;
+
+  forest::splay_tree <int, std::string> splay_tree;
+
+  splay_tree.insert(2 , "Thor");
+  splay_tree.insert(4 , "Odin");
+  splay_tree.insert(90, "Loki");
+  splay_tree.insert(3 , "Baldr");
+  splay_tree.insert(0 , "Frigg");
+  splay_tree.insert(14, "Eir");
+  splay_tree.insert(45, "Heimdall");
 
   std::cout << "Pre Order Traversal" << std::endl;
-  std::cout << std::endl;
   splay_tree.pre_order_traversal(handler);
   std::cout << std::endl;
 
   std::cout << "In Order Traversal" << std::endl;
-  std::cout << std::endl;
   splay_tree.in_order_traversal(handler);
   std::cout << std::endl;
 
   std::cout << "Post Order Traversal" << std::endl;
-  std::cout << std::endl;
   splay_tree.post_order_traversal(handler);
   std::cout << std::endl;
 
   std::cout << "Breadth First Traversal" << std::endl;
-  std::cout << std::endl;
   splay_tree.breadth_first_traversal(handler);
   std::cout << std::endl;
 
@@ -72,9 +58,7 @@ int main(int argc, char const *argv[]) {
   }
 
   std::cout << "Height: " << splay_tree.height() << std::endl;
-
   std::cout << "Size: " << splay_tree.size() << std::endl;
-
 	std::cout << "Empty: " << (splay_tree.empty() ? "yes" : "no") << std::endl;
 
   auto n = splay_tree.search(3);
@@ -82,6 +66,8 @@ int main(int argc, char const *argv[]) {
     std::cout << std::endl;
     std::cout << "Found node with key 3" << std::endl;
   }
+
+  std::cout << std::endl;
 
   return 0;
 }
