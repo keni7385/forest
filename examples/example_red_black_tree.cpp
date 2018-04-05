@@ -5,7 +5,7 @@
 auto handler = [](int & key, std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main(int argc, char const *argv[]) {
-  forest::red_black::tree <int, std::string> red_black_tree;
+  forest::red_black_tree <int, std::string> red_black_tree;
 
   red_black_tree.insert(2 , "Thor");
   red_black_tree.insert(4 , "Odin");
