@@ -2,6 +2,8 @@
 #include <iostream>
 
 int main(int argc, char const *argv[]) {
+  std::cout << "Trie Example" << std::endl;
+
   forest::Trie trie;
 
   trie.insert("a");

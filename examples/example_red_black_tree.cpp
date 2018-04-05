@@ -5,6 +5,8 @@
 auto handler = [](int & key, std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main(int argc, char const *argv[]) {
+  std::cout << "Red-Black Tree Example" << std::endl;
+
   forest::red_black_tree <int, std::string> red_black_tree;
 
   red_black_tree.insert(2 , "Thor");
@@ -60,6 +62,8 @@ int main(int argc, char const *argv[]) {
     std::cout << std::endl;
     std::cout << "Found node with key 3" << std::endl;
   }
+
+  std::cout << std::endl;
 
   return 0;
 }
