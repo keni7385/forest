@@ -28,11 +28,11 @@ Forest is an open-source, template library of tree data structures written in C+
 - `vcpkg install forest`
 
 #### Or simply download the header files
-- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/6.0.5/binary_search_tree.h)
-- [AVL Tree](https://github.com/xorz57/forest/releases/download/6.0.5/avl_tree.h)
-- [Red Black Tree](https://github.com/xorz57/forest/releases/download/6.0.5/red_black_tree.h)
-- [Splay Tree](https://github.com/xorz57/forest/releases/download/6.0.5/splay_tree.h)
-- [Trie](https://github.com/xorz57/forest/releases/download/6.0.5/trie.h)
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/6.0.6/binary_search_tree.h)
+- [AVL Tree](https://github.com/xorz57/forest/releases/download/6.0.6/avl_tree.h)
+- [Red Black Tree](https://github.com/xorz57/forest/releases/download/6.0.6/red_black_tree.h)
+- [Splay Tree](https://github.com/xorz57/forest/releases/download/6.0.6/splay_tree.h)
+- [Trie](https://github.com/xorz57/forest/releases/download/6.0.6/trie.h)
 
 ## Example Code
 
@@ -40,22 +40,25 @@ Forest is best explained through [examples](https://github.com/xorz57/forest/tre
 
 ```cpp
 #include "red_black_tree.h"
+#include <string>
+
+auto handler = [](int & key, std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main() {
-	// Generate a red-black tree with integer keys
-	forest::red_black::tree <int> red_black_tree;
+	// Generate a red-black tree with integer keys and std::string values
+	forest::red_black_tree <int, std::string> red_black_tree;
 
 	// Insert 7 plain nodes
-	red_black_tree.insert(4);
-	red_black_tree.insert(2);
-	red_black_tree.insert(90);
-	red_black_tree.insert(3);
-	red_black_tree.insert(0);
-	red_black_tree.insert(14);
-	red_black_tree.insert(45);
+	red_black_tree.insert(2, "Thor");
+	red_black_tree.insert(4, "Odin");
+	red_black_tree.insert(90, "Loki");
+	red_black_tree.insert(3, "Baldr");
+	red_black_tree.insert(0, "Frigg");
+	red_black_tree.insert(14, "Eir");
+	red_black_tree.insert(45, "Heimdall");
 
 	// Perform In-Order-Traversal
-	red_black_tree.in_order_traversal([](auto node){ std::cout << node->key << std::endl; });
+	red_black_tree.in_order_traversal(handler);
 
 	return 0;
 }
