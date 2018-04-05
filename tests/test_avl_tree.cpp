@@ -36,13 +36,13 @@ SCENARIO("Test AVL Tree") {
       }
     }
     WHEN("Nodes are inserted in random order") {
-      REQUIRE(avl_tree.insert(4 , 0) != nullptr);
-      REQUIRE(avl_tree.insert(2 , 0) != nullptr);
-      REQUIRE(avl_tree.insert(90, 0) != nullptr);
-      REQUIRE(avl_tree.insert(3 , 0) != nullptr);
-      REQUIRE(avl_tree.insert(0 , 0) != nullptr);
-      REQUIRE(avl_tree.insert(14, 0) != nullptr);
-      REQUIRE(avl_tree.insert(45, 0) != nullptr);
+      avl_tree.insert(4 , 0);
+      avl_tree.insert(2 , 0);
+      avl_tree.insert(90, 0);
+      avl_tree.insert(3 , 0);
+      avl_tree.insert(0 , 0);
+      avl_tree.insert(14, 0);
+      avl_tree.insert(45, 0);
       THEN("Test empty") {
         REQUIRE(avl_tree.empty() == false);
       }
@@ -92,7 +92,7 @@ SCENARIO("Test AVL Tree") {
     }
     WHEN("Nodes are inserted in ascending order") {
       for (int i = 0; i < 10; i++) {
-        REQUIRE(avl_tree.insert(i, 0) != nullptr);
+        avl_tree.insert(i, 0);
       }
       THEN("Test empty") {
         REQUIRE(avl_tree.empty() == false);
@@ -143,7 +143,7 @@ SCENARIO("Test AVL Tree") {
     }
     WHEN("Nodes are inserted in descending order") {
       for (int i = 9; i >= 0; i--) {
-        REQUIRE(avl_tree.insert(i, 0) != nullptr);
+        avl_tree.insert(i, 0);
       }
       THEN("Test empty") {
         REQUIRE(avl_tree.empty() == false);
