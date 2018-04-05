@@ -1,8 +1,14 @@
-#include "forest/trie.h"
+#include <forest/trie.h>
 #include <iostream>
 
 int main(int argc, char const *argv[]) {
-  forest::trie::tree trie;
+  std::cout << "================" << std::endl;
+  std::cout << "[ Trie Example ]" << std::endl;
+  std::cout << "================" << std::endl;
+
+  std::cout << std::endl;
+
+  forest::trie trie;
 
   trie.insert("a");
   trie.insert("to");
