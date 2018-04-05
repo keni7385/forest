@@ -14,7 +14,7 @@ script:
   - codecov
 env:
   global:
-    - MAKEFLAGS="-j 2"
+    - MAKEFLAGS="-j 4"
 notifications:
   email:
     - xorz57@gmail.com
