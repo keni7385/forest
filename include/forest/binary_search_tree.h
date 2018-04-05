@@ -1,10 +1,10 @@
 #pragma once
 
-#include <iostream>
 #include <algorithm>
-#include <queue>
 #include <fstream>
+#include <iostream>
 #include <memory>
+#include <queue>
 
 namespace forest {
 	template <typename T>
