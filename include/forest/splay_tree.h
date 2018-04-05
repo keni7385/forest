@@ -69,11 +69,9 @@ namespace forest {
 			}
 			if (x->parent.lock() == nullptr) {
 				root = y;
-			}
-			else if (x == x->parent.lock()->left) {
+			} else if (x == x->parent.lock()->left) {
 				x->parent.lock()->left = y;
-			}
-			else {
+			} else {
 				x->parent.lock()->right = y;
 			}
 			if (y != nullptr) {
@@ -90,11 +88,9 @@ namespace forest {
 			}
 			if (x->parent.lock() == nullptr) {
 				root = y;
-			}
-			else if (x == x->parent.lock()->left) {
+			} else if (x == x->parent.lock()->left) {
 				x->parent.lock()->left = y;
-			}
-			else {
+			} else {
 				x->parent.lock()->right = y;
 			}
 			if (y != nullptr) {
@@ -116,24 +112,19 @@ namespace forest {
 				if (find_grand_parent(x) == nullptr) {
 					if (find_parent(x)->left == x) {
 						right_rotate(find_parent(x));
-					}
-					else if (find_parent(x)->right == x) {
+					} else if (find_parent(x)->right == x) {
 						left_rotate(find_parent(x));
 					}
-				}
-				else if (find_parent(x)->left == x && find_grand_parent(x)->left == find_parent(x)) {
+				} else if (find_parent(x)->left == x && find_grand_parent(x)->left == find_parent(x)) {
 					right_rotate(find_grand_parent(x));
 					right_rotate(find_parent(x));
-				}
-				else if (find_parent(x)->right == x && find_grand_parent(x)->right == find_parent(x)) {
+				} else if (find_parent(x)->right == x && find_grand_parent(x)->right == find_parent(x)) {
 					left_rotate(find_grand_parent(x));
 					left_rotate(find_parent(x));
-				}
-				else if (find_parent(x)->left == x && find_grand_parent(x)->right == find_parent(x)) {
+				} else if (find_parent(x)->left == x && find_grand_parent(x)->right == find_parent(x)) {
 					right_rotate(find_parent(x));
 					left_rotate(find_parent(x));
-				}
-				else if (find_parent(x)->right == x && find_grand_parent(x)->left == find_parent(x)) {
+				} else if (find_parent(x)->right == x && find_grand_parent(x)->left == find_parent(x)) {
 					left_rotate(find_parent(x));
 					right_rotate(find_parent(x));
 				}
@@ -159,8 +150,7 @@ namespace forest {
 				parent = current;
 				if (key > current->key) {
 					current = current->right;
-				}
-				else if (key < current->key) {
+				} else if (key < current->key) {
 					current = current->left;
 				}
 			}
@@ -168,11 +158,9 @@ namespace forest {
 			current->parent = parent;
 			if (parent == nullptr) {
 				root = current;
-			}
-			else if (current->key > parent->key) {
+			} else if (current->key > parent->key) {
 				parent->right = current;
-			}
-			else if (current->key < parent->key) {
+			} else if (current->key < parent->key) {
 				parent->left = current;
 			}
 			splay(current);
@@ -182,11 +170,9 @@ namespace forest {
 			while (x != nullptr) {
 				if (key > x->key) {
 					x = x->right;
-				}
-				else if (key < x->key) {
+				} else if (key < x->key) {
 					x = x->left;
-				}
-				else {
+				} else {
 					return x;
 				}
 			}
@@ -209,11 +195,9 @@ namespace forest {
 			while (x != nullptr) {
 				if (key > x->key) {
 					x = x->right;
-				}
-				else if (key < x->key) {
+				} else if (key < x->key) {
 					x = x->left;
-				}
-				else {
+				} else {
 					if (x->right != nullptr) {
 						x = x->right;
 						while (x->left != nullptr) x = x->left;
@@ -234,11 +218,9 @@ namespace forest {
 			while (x != nullptr) {
 				if (key > x->key) {
 					x = x->right;
-				}
-				else if (key < x->key) {
+				} else if (key < x->key) {
 					x = x->left;
-				}
-				else {
+				} else {
 					if (x->left != nullptr) {
 						x = x->left;
 						while (x->right != nullptr) x = x->right;
