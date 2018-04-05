@@ -5,7 +5,11 @@
 auto handler = [](int & key, std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main(int argc, char const *argv[]) {
-  std::cout << "AVL Tree Example" << std::endl;
+  std::cout << "====================" << std::endl;
+  std::cout << "[ AVL Tree Example ]" << std::endl;
+  std::cout << "====================" << std::endl;
+
+  std::cout << std::endl;
 
   forest::avl_tree <int, std::string> avl_tree;
 

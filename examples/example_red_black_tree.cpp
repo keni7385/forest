@@ -5,7 +5,11 @@
 auto handler = [](int & key, std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main(int argc, char const *argv[]) {
-  std::cout << "Red-Black Tree Example" << std::endl;
+  std::cout << "==========================" << std::endl;
+  std::cout << "[ Red-Black Tree Example ]" << std::endl;
+  std::cout << "==========================" << std::endl;
+
+  std::cout << std::endl;
 
   forest::red_black_tree <int, std::string> red_black_tree;
 

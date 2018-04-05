@@ -5,7 +5,11 @@
 auto handler = [](int & key, std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main(int argc, char const *argv[]) {
-  std::cout << "Splay Tree Example" << std::endl;
+  std::cout << "======================" << std::endl;
+  std::cout << "[ Splay Tree Example ]" << std::endl;
+  std::cout << "======================" << std::endl;
+
+  std::cout << std::endl;
 
   forest::splay_tree <int, std::string> splay_tree;
 

@@ -2,7 +2,11 @@
 #include <iostream>
 
 int main(int argc, char const *argv[]) {
-  std::cout << "Trie Example" << std::endl;
+  std::cout << "================" << std::endl;
+  std::cout << "[ Trie Example ]" << std::endl;
+  std::cout << "================" << std::endl;
+
+  std::cout << std::endl;
 
   forest::Trie trie;
 

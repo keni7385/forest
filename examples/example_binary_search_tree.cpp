@@ -5,7 +5,11 @@
 auto handler = [](int & key, std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main(int argc, char const *argv[]) {
-	std::cout << "Binary Search Tree Example" << std::endl;
+	std::cout << "==============================" << std::endl;
+	std::cout << "[ Binary Search Tree Example ]" << std::endl;
+	std::cout << "==============================" << std::endl;
+
+	std::cout << std::endl;
 
 	forest::binary_search_tree <int, std::string> binary_search_tree;
 
