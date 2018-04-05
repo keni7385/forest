@@ -27,10 +27,9 @@ namespace forest {
 			std::shared_ptr<Node> n = root;
 			for (int i = 0; i < key.length(); i++) {
 				int index = key[i] - 'a';
-				if (n->children[index] == nullptr) {
-					return false;
-				}
-				n = n->children[index];
+				auto& slot = n->children[index];
+				if (!slot) return false;
+				n = slot;
 			}
 			return n && n->end;
 		}
