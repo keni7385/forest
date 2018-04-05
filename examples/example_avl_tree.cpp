@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-auto handler = [](int & key, std::string & value) { std::cout << key << "->" << value << std::endl; };
+auto handler = [](const int & key, const std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main(int argc, char const *argv[]) {
   std::cout << "====================" << std::endl;
