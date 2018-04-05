@@ -1,38 +1,33 @@
 #include <forest/binary_search_tree.h>
 #include <iostream>
+#include <string>
 
-void handler(const int & x) {
-	std::cout << x << "\t";
-}
+auto handler = [](int & key, std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main(int argc, char const *argv[]) {
-	forest::binary_search_tree <int> binary_search_tree;
+	forest::binary_search_tree <int, std::string> binary_search_tree;
 
-	binary_search_tree.insert(4);
-	binary_search_tree.insert(2);
-	binary_search_tree.insert(90);
-	binary_search_tree.insert(3);
-	binary_search_tree.insert(0);
-	binary_search_tree.insert(14);
-	binary_search_tree.insert(45);
+	binary_search_tree.insert(2 , "Thor");
+	binary_search_tree.insert(4 , "Odin");
+	binary_search_tree.insert(90, "Loki");
+	binary_search_tree.insert(3 , "Baldr");
+	binary_search_tree.insert(0 , "Frigg");
+	binary_search_tree.insert(14, "Eir");
+	binary_search_tree.insert(45, "Heimdall");
 
 	std::cout << "Pre Order Traversal" << std::endl;
-	std::cout << std::endl;
 	binary_search_tree.pre_order_traversal(handler);
 	std::cout << std::endl;
 
 	std::cout << "In Order Traversal" << std::endl;
-	std::cout << std::endl;
 	binary_search_tree.in_order_traversal(handler);
 	std::cout << std::endl;
 
 	std::cout << "Post Order Traversal" << std::endl;
-	std::cout << std::endl;
 	binary_search_tree.post_order_traversal(handler);
 	std::cout << std::endl;
 
 	std::cout << "Breadth First Traversal" << std::endl;
-	std::cout << std::endl;
 	binary_search_tree.breadth_first_traversal(handler);
 	std::cout << std::endl;
 
@@ -57,9 +52,7 @@ int main(int argc, char const *argv[]) {
 	}
 
 	std::cout << "Height: " << binary_search_tree.height() << std::endl;
-
 	std::cout << "Size: " << binary_search_tree.size() << std::endl;
-
 	std::cout << "Empty: " << (binary_search_tree.empty() ? "yes" : "no") << std::endl;
 
 	auto n = binary_search_tree.search(3);

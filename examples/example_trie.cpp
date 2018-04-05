@@ -1,4 +1,4 @@
-#include "forest/trie.h"
+#include <forest/trie.h>
 #include <iostream>
 
 int main(int argc, char const *argv[]) {
