@@ -213,7 +213,7 @@ namespace forest {
 		void breadth_first_traversal(void handler(T & key, U & value)) {
 			breadth_first_traversal(root, handler);
 		}
-		std::shared_ptr<const Node> insert(T key, U value) {
+		void insert(T key, U value) {
 			std::shared_ptr<Node> current = root;
 			std::shared_ptr<Node> parent = nullptr;
 			while (current != nullptr) {
@@ -223,9 +223,6 @@ namespace forest {
 				}
 				else if (key < current->key) {
 					current = current->left;
-				}
-				else {
-					return nullptr;
 				}
 			}
 			current = std::make_shared<Node>(key, value, red);
@@ -240,7 +237,6 @@ namespace forest {
 				parent->left = current;
 			}
 			fix(current);
-			return current;
 		}
 		std::shared_ptr<const Node> search(T key) {
 			std::shared_ptr<Node> x = root;
