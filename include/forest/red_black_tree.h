@@ -280,7 +280,7 @@ namespace forest {
 		size_t size() {
 			return size(root);
 		}
-		bool empty() {
+		bool empty() const {
 			return root == nullptr;
 		}
 	};
