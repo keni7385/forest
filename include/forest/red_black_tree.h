@@ -63,7 +63,7 @@ namespace forest {
 			if (x == nullptr) return 0;
 			return size(x->left) + size(x->right) + 1;
 		}
-		void left_rotate(std::shared_ptr<Node> & x) {
+		void left_rotate(const std::shared_ptr<Node> & x) {
 			std::shared_ptr<Node> y = x->right;
 			if (y != nullptr) {
 				x->right = y->left;
@@ -82,7 +82,7 @@ namespace forest {
 			}
 			x->parent = y;
 		}
-		void right_rotate(std::shared_ptr<Node> & x) {
+		void right_rotate(const std::shared_ptr<Node> & x) {
 			std::shared_ptr<Node> y = x->left;
 			if (y != nullptr) {
 				x->left = y->right;

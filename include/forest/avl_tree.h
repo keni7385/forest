@@ -61,7 +61,7 @@ namespace forest {
       if (x == nullptr) return 0;
       return size(x->left) + size(x->right) + 1;
     }
-    void rotate_right(std::shared_ptr<Node> & rotation_root) {
+    void rotate_right(const std::shared_ptr<Node> & rotation_root) {
       std::shared_ptr<Node> new_root = rotation_root->left;
       std::shared_ptr<Node> orphan_subtree = new_root->right;
 
@@ -82,7 +82,7 @@ namespace forest {
       new_root->parent = rotation_root->parent;
       rotation_root->parent = new_root;
     }
-    void rotate_left(std::shared_ptr<Node> & rotation_root) {
+    void rotate_left(const std::shared_ptr<Node> & rotation_root) {
       std::shared_ptr<Node>  new_root = rotation_root->right;
       std::shared_ptr<Node>  orphan_subtree = new_root->left;
 
