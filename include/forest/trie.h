@@ -28,7 +28,7 @@ namespace forest {
 			for (auto c : key) {
 				int index = c - 'a';
 				auto& slot = n->children[index];
-				if (!slot) return falsen->end;
+				if (!slot) return n->end;
 				n = slot.get();
 			}
 			return n->end;
