@@ -14,24 +14,24 @@ namespace forest {
 		std::shared_ptr<Node> root = std::make_shared<Node>();
 	public:
 		void insert(const std::string & key) {
-			std::shared_ptr<Node> n = root;
+			Node * n = root.get();
 			for (auto c : key) {
 				int index = c - 'a';
 				auto& slot = n->children[index];
 				if (!slot) slot = std::make_shared<Node>();
-				n = slot;
+				n = slot.get();
 			}
 			n->end = true;
 		}
 		bool search(const std::string & key) {
-			std::shared_ptr<Node> n = root;
+			Node * n = root.get();
 			for (auto c : key) {
 				int index = c - 'a';
 				auto& slot = n->children[index];
-				if (!slot) return false;
-				n = slot;
+				if (!slot) return falsen->end;
+				n = slot.get();
 			}
-			return n && n->end;
+			return n->end;
 		}
 	};
 }
