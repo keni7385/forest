@@ -11,7 +11,7 @@ namespace forest {
 			std::shared_ptr<Node> children[26];
 			bool end = false;
 		};
-		std::shared_ptr<Node> root = std::make_shared<Node>();;
+		std::shared_ptr<Node> root = std::make_shared<Node>();
 	public:
 		void insert(const std::string & key) {
 			std::shared_ptr<Node> n = root;

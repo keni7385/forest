@@ -9,12 +9,10 @@ before_install:
 script:
   - bash build_tests.sh
   - bash run_tests.sh
-  - bash build_examples.sh
-  - bash run_examples.sh
   - codecov
 env:
   global:
-    - MAKEFLAGS="-j 4"
+    - MAKEFLAGS="-j 6"
 notifications:
   email:
     - xorz57@gmail.com
