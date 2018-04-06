@@ -28,11 +28,11 @@ Forest is an open-source, template library of tree data structures written in C+
 - `vcpkg install forest`
 
 #### Or simply download the header files
-- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.1/binary_search_tree.h)
-- [AVL Tree](https://github.com/xorz57/forest/releases/download/7.0.1/avl_tree.h)
-- [Red Black Tree](https://github.com/xorz57/forest/releases/download/7.0.1/red_black_tree.h)
-- [Splay Tree](https://github.com/xorz57/forest/releases/download/7.0.1/splay_tree.h)
-- [Trie](https://github.com/xorz57/forest/releases/download/7.0.1/trie.h)
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.3/binary_search_tree.h)
+- [AVL Tree](https://github.com/xorz57/forest/releases/download/7.0.3/avl_tree.h)
+- [Red Black Tree](https://github.com/xorz57/forest/releases/download/7.0.3/red_black_tree.h)
+- [Splay Tree](https://github.com/xorz57/forest/releases/download/7.0.3/splay_tree.h)
+- [Trie](https://github.com/xorz57/forest/releases/download/7.0.3/trie.h)
 
 ## Example Code
 
@@ -49,11 +49,11 @@ int main() {
 	forest::red_black_tree <int, std::string> red_black_tree;
 
 	// Insert 7 plain nodes
-	red_black_tree.insert(2, "Thor");
-	red_black_tree.insert(4, "Odin");
+	red_black_tree.insert(2 , "Thor");
+	red_black_tree.insert(4 , "Odin");
 	red_black_tree.insert(90, "Loki");
-	red_black_tree.insert(3, "Baldr");
-	red_black_tree.insert(0, "Frigg");
+	red_black_tree.insert(3 , "Baldr");
+	red_black_tree.insert(0 , "Frigg");
 	red_black_tree.insert(14, "Eir");
 	red_black_tree.insert(45, "Heimdall");
 
@@ -63,5 +63,3 @@ int main() {
 	return 0;
 }
 ```
-
-Refer to the [Quick Start Guide](https://github.com/xorz57/forest/wiki/Quick-Start-Guide) page for further information and examples.

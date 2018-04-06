@@ -9,7 +9,7 @@ before_install:
 script:
   - bash build_tests.sh
   - bash run_tests.sh
-  - codecov
+  - cd tests && codecov
 env:
   global:
     - MAKEFLAGS="-j 6"
