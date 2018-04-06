@@ -25,8 +25,8 @@ namespace forest {
 		}
 		bool search(const std::string & key) {
 			std::shared_ptr<Node> n = root;
-			for (int i = 0; i < key.length(); i++) {
-				int index = key[i] - 'a';
+			for (auto c : key) {
+				int index = c - 'a';
 				auto& slot = n->children[index];
 				if (!slot) return false;
 				n = slot;
