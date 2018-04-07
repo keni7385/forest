@@ -12,15 +12,15 @@ namespace forest {
   private:
     struct Node {
       T key;
-  	  U value;
-	    int balance_factor;
+      U value;
+      int balance_factor;
       std::weak_ptr<Node> parent;
       std::shared_ptr<Node> left;
       std::shared_ptr<Node> right;
       Node(T key, U value) {
         this->key = key;
-	    	this->value = value;
-	    }
+        this->value = value;
+      }
     };
     std::shared_ptr<Node> root;
     void pre_order_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
@@ -237,7 +237,7 @@ namespace forest {
       return size(root);
     }
     bool empty() const{
-		  return (root == nullptr);
+      return (root == nullptr);
     }
   };
 }
