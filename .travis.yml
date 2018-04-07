@@ -4,16 +4,21 @@ compiler:
   - gcc
 os:
   - linux
-before_install:
-  - sudo pip install codecov
-script:
-  - bash build_tests.sh
-  - bash run_tests.sh
-after_success:
-  - cd tests && codecov
 env:
   global:
     - MAKEFLAGS="-j 6"
 notifications:
   email:
     - xorz57@gmail.com
+before_install:
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
+install:
+  - sudo apt-get install -qq g++-5
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+  - sudo pip install codecov
+script:
+  - bash build_tests.sh
+  - bash run_tests.sh
+after_success:
+  - cd tests && codecov
