@@ -12,15 +12,15 @@ namespace forest {
   private:
     struct Node {
       T key;
-  	  U value;
-	    int balance_factor;
+      U value;
+      int balance_factor;
       std::weak_ptr<Node> parent;
       std::shared_ptr<Node> left;
       std::shared_ptr<Node> right;
       Node(T key, U value) {
         this->key = key;
-	    	this->value = value;
-	    }
+        this->value = value;
+      }
     };
     std::shared_ptr<Node> root;
     void pre_order_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
@@ -61,7 +61,7 @@ namespace forest {
       if (x == nullptr) return 0;
       return size(x->left) + size(x->right) + 1;
     }
-    void rotate_right(std::shared_ptr<Node> & rotation_root) {
+    void rotate_right(const std::shared_ptr<Node> & rotation_root) {
       std::shared_ptr<Node> new_root = rotation_root->left;
       std::shared_ptr<Node> orphan_subtree = new_root->right;
 
@@ -82,7 +82,7 @@ namespace forest {
       new_root->parent = rotation_root->parent;
       rotation_root->parent = new_root;
     }
-    void rotate_left(std::shared_ptr<Node> & rotation_root) {
+    void rotate_left(const std::shared_ptr<Node> & rotation_root) {
       std::shared_ptr<Node>  new_root = rotation_root->right;
       std::shared_ptr<Node>  orphan_subtree = new_root->left;
 
@@ -237,7 +237,7 @@ namespace forest {
       return size(root);
     }
     bool empty() const{
-		return (root == nullptr);
+      return !root;
     }
   };
 }
