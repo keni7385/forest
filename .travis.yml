@@ -9,6 +9,7 @@ before_install:
 script:
   - bash build_tests.sh
   - bash run_tests.sh
+after_success:
   - cd tests && codecov
 env:
   global:
