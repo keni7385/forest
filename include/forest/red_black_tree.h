@@ -281,7 +281,7 @@ namespace forest {
       return size(root);
     }
     bool empty() const {
-      return root == nullptr;
+      return !root;
     }
   };
 }
