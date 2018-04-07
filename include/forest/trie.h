@@ -10,7 +10,8 @@ namespace forest {
     static constexpr size_t alphabet_size = 1 + 'z' - 'a';
 		int char_to_int(char c) {
       int index = c - 'a';
-      if (index <0 || index >= alphabet_size) throw std::invalid_argument("oops");
+      if (index < 0 || index >= alphabet_size) throw std::invalid_argument("oops");
+      return index;
     }
 		struct Node {
 			std::shared_ptr<Node> children[alphabet_size];
