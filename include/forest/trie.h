@@ -12,7 +12,7 @@ namespace forest {
 			return c - 'a';
 		}
 		bool validate(std::string key) {
-			int index;
+			size_t index;
 			for (auto c : key) {
 				try {
 					index = char_to_int(c);
@@ -36,7 +36,7 @@ namespace forest {
 			if (!validate(key)) return false;
 			Node * n = root.get();
 			for (auto c : key) {
-				int index = char_to_int(c);
+				size_t index = char_to_int(c);
 				auto& slot = n->children[index];
 				if (!slot) slot = std::make_unique<Node>();
 				n = slot.get();
@@ -48,7 +48,7 @@ namespace forest {
 			if (!validate(key)) return false;
 			Node * n = root.get();
 			for (auto c : key) {
-				int index = char_to_int(c);
+				size_t index = char_to_int(c);
 				auto& slot = n->children[index];
 				if (!slot) return false;
 				n = slot.get();
