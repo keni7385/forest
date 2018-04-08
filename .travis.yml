@@ -36,7 +36,6 @@ before_install:
 install:
   - sudo pip install codecov
 script:
-  - bash build_tests.sh
-  - bash run_tests.sh
+  - g++ --version
 after_success:
   - cd tests && codecov
