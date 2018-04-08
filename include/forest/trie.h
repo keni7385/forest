@@ -8,14 +8,14 @@ namespace forest {
 	class trie {
 	private:
 		static constexpr size_t alphabet_size = 1 + 'z' - 'a';
-		int char_to_int(char c) {
+		size_t to_index(char c) {
 			return c - 'a';
 		}
 		bool validate(std::string key) {
 			size_t index;
 			for (auto c : key) {
 				try {
-					index = char_to_int(c);
+					index = to_index(c);
 					if (index < 0 || index >= alphabet_size) {
 						throw std::invalid_argument("[forest::trie] unsupported character found");
 					}
@@ -36,7 +36,7 @@ namespace forest {
 			if (!validate(key)) return false;
 			Node * n = root.get();
 			for (auto c : key) {
-				size_t index = char_to_int(c);
+				size_t index = to_index(c);
 				auto& slot = n->children[index];
 				if (!slot) slot = std::make_unique<Node>();
 				n = slot.get();
@@ -48,7 +48,7 @@ namespace forest {
 			if (!validate(key)) return false;
 			Node * n = root.get();
 			for (auto c : key) {
-				size_t index = char_to_int(c);
+				size_t index = to_index(c);
 				auto& slot = n->children[index];
 				if (!slot) return false;
 				n = slot.get();
