@@ -10,21 +10,29 @@ matrix:
           sources:
           - ubuntu-toolchain-r-test
           packages:
-          - g++-7
+          - g++-5
       env:
-        - MATRIX_EVAL="CXX=g++-7"
+        - MATRIX_EVAL="CXX=g++-5"
     - os: linux
       addons:
         apt:
           sources:
           - ubuntu-toolchain-r-test
           packages:
-          - g++-5
+          - g++-6
       env:
-        - MATRIX_EVAL="CXX=g++-5"
-
+        - MATRIX_EVAL="CXX=g++-6"
+    - os: linux
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - g++-7
+      env:
+        - MATRIX_EVAL="CXX=g++-7"
 before_install:
-    - eval "${MATRIX_EVAL}"
+  - eval "${MATRIX_EVAL}"
 install:
   - sudo pip install codecov
 script:
