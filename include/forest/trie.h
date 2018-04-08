@@ -19,17 +19,18 @@ namespace forest {
 					if (index < 0 || index >= alphabet_size) {
 						throw std::invalid_argument("[forest::trie] unsupported character found");
 					}
-				} catch (std::invalid_argument e) {
+				}
+				catch (std::invalid_argument e) {
 					return false;
 				}
 			}
 			return true;
 		}
 		struct Node {
-			std::shared_ptr<Node> children[alphabet_size];
+			std::unique_ptr<Node> children[alphabet_size];
 			bool end = false;
 		};
-		std::shared_ptr<Node> root = std::make_shared<Node>();
+		std::unique_ptr<Node> root = std::make_unique<Node>();
 	public:
 		bool insert(const std::string & key) {
 			if (!validate(key)) return false;
@@ -37,7 +38,7 @@ namespace forest {
 			for (auto c : key) {
 				int index = char_to_int(c);
 				auto& slot = n->children[index];
-				if (!slot) slot = std::make_shared<Node>();
+				if (!slot) slot = std::make_unique<Node>();
 				n = slot.get();
 			}
 			n->end = true;
