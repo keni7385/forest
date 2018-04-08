@@ -1,4 +1,4 @@
-CXXFLAGS=-std=c++11 -Wall -Werror --coverage
+CXXFLAGS=-std=c++14 -Wall -Werror --coverage
 
 test: test_main.o test_binary_search_tree.o test_avl_tree.o test_splay_tree.o test_red_black_tree.o test_trie.o
 	$(CXX) test_main.o test_binary_search_tree.o test_avl_tree.o test_splay_tree.o test_red_black_tree.o test_trie.o $(CXXFLAGS) -o test
