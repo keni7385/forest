@@ -25,7 +25,7 @@ Forest is an open-source, template library of tree data structures written in C+
 ## Installation
 
 #### Use your favorite package manager
-- `vcpkg install forest`
+- `vcpkg install forest --head`
 
 #### Or simply download the header files
 - [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.5/binary_search_tree.h)
