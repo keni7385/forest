@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CLA assistant](https://cla-assistant.io/readme/badge/xorz57/forest)](https://cla-assistant.io/xorz57/forest)
 
-Forest is an open-source, template library of tree data structures written in C++11.
+Forest is an open-source, template library of tree data structures written in C++14.
 
 ## Features
 
@@ -28,11 +28,11 @@ Forest is an open-source, template library of tree data structures written in C+
 - `vcpkg install forest`
 
 #### Or simply download the header files
-- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.4/binary_search_tree.h)
-- [AVL Tree](https://github.com/xorz57/forest/releases/download/7.0.4/avl_tree.h)
-- [Red Black Tree](https://github.com/xorz57/forest/releases/download/7.0.4/red_black_tree.h)
-- [Splay Tree](https://github.com/xorz57/forest/releases/download/7.0.4/splay_tree.h)
-- [Trie](https://github.com/xorz57/forest/releases/download/7.0.4/trie.h)
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.5/binary_search_tree.h)
+- [AVL Tree](https://github.com/xorz57/forest/releases/download/7.0.5/avl_tree.h)
+- [Red Black Tree](https://github.com/xorz57/forest/releases/download/7.0.5/red_black_tree.h)
+- [Splay Tree](https://github.com/xorz57/forest/releases/download/7.0.5/splay_tree.h)
+- [Trie](https://github.com/xorz57/forest/releases/download/7.0.5/trie.h)
 
 ## Example Code
 
