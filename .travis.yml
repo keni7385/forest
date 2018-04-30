@@ -8,6 +8,10 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-5
+env:
+  - EVAL="CXX=g++-5"
+before_install:
+  - eval "${EVAL}"
 install:
   - sudo pip install codecov
 script:
