@@ -16,8 +16,3 @@ option(BUILD_EXAMPLES on)
 if(BUILD_EXAMPLES)
 	add_subdirectory(examples)
 endif()
-
-option(BUILD_BENCHMARKS off)
-if(BUILD_BENCHMARKS)
-	add_subdirectory(benchmarks)
-endif()
