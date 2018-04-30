@@ -7,22 +7,17 @@
 namespace forest {
 	class trie {
 	private:
-		static constexpr size_t alphabet_size = 1 + 'z' - 'a';
+		static constexpr size_t alphabet_size = 26;
 		size_t to_index(char c) {
 			return c - 'a';
 		}
-		bool validate(std::string key) {
+		bool validate(const std::string & key) {
 			size_t index;
 			for (auto c : key) {
-				try {
 					index = to_index(c);
 					if (index < 0 || index >= alphabet_size) {
-						throw std::invalid_argument("[forest::trie] unsupported character found");
+						return false;
 					}
-				}
-				catch (std::invalid_argument e) {
-					return false;
-				}
 			}
 			return true;
 		}
