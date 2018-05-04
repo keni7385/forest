@@ -1,0 +1,23 @@
+project(tests)
+
+set(CMAKE_CXX_STANDARD 14)
+
+add_executable(test_binary_search_tree test_binary_search_tree.cpp)
+target_link_libraries(test_binary_search_tree forest)
+target_link_libraries(test_binary_search_tree catch)
+
+add_executable(test_avl_tree test_avl_tree.cpp)
+target_link_libraries(test_avl_tree forest)
+target_link_libraries(test_avl_tree catch)
+
+add_executable(test_red_black_tree test_red_black_tree.cpp)
+target_link_libraries(test_red_black_tree forest)
+target_link_libraries(test_red_black_tree catch)
+
+add_executable(test_splay_tree test_splay_tree.cpp)
+target_link_libraries(test_splay_tree forest)
+target_link_libraries(test_splay_tree catch)
+
+add_executable(test_trie test_trie.cpp)
+target_link_libraries(test_trie forest)
+target_link_libraries(test_trie catch)

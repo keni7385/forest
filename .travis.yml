@@ -1,50 +1,21 @@
-language: cpp 
+language: cpp
 dist: trusty
-matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-4.9
-      env:
-        - MATRIX_EVAL="CXX=g++-4.9"
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-5
-      env:
-        - MATRIX_EVAL="CXX=g++-5"
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-      env:
-        - MATRIX_EVAL="CXX=g++-6"
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-      env:
-        - MATRIX_EVAL="CXX=g++-7"
-install:
-  - sudo pip install codecov
-before_script:
-  - eval "${MATRIX_EVAL}"
+os:
+  - linux
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-5
 script:
-  - curl -o include/catch.hpp -O https://raw.githubusercontent.com/catchorg/Catch2/master/single_include/catch.hpp
-  - bash build_tests.sh
-  - bash run_tests.sh
-after_success:
-  - cd tests && codecov
+  - export CXX=/usr/bin/g++-5
+  - mkdir build
+  - cd build
+  - cmake .. -DBUILD_TESTS=ON
+  - make -j6
+  - tests/test_binary_search_tree
+  - tests/test_avl_tree
+  - tests/test_red_black_tree
+  - tests/test_splay_tree
+  - tests/test_trie

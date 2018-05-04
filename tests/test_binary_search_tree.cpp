@@ -1,3 +1,4 @@
+#define CATCH_CONFIG_MAIN
 #include <catch.hpp>
 #include <forest/binary_search_tree.h>
 

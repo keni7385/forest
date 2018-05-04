@@ -2,9 +2,7 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7e0feb3d79ca41649aa207eeeef065dc)](https://www.codacy.com/app/xorz57/forest?utm_source=github.com&utm_medium=referral&utm_content=xorz57/forest&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/xorz57/forest.svg?branch=master)](https://travis-ci.org/xorz57/forest)
-[![codecov](https://codecov.io/gh/xorz57/forest/branch/master/graph/badge.svg)](https://codecov.io/gh/xorz57/forest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CLA assistant](https://cla-assistant.io/readme/badge/xorz57/forest)](https://cla-assistant.io/xorz57/forest)
 
 ## Features
 
@@ -26,11 +24,11 @@
 - `vcpkg install forest --head`
 
 #### Or simply download the header files
-- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.6/binary_search_tree.h)
-- [AVL Tree](https://github.com/xorz57/forest/releases/download/7.0.6/avl_tree.h)
-- [Red Black Tree](https://github.com/xorz57/forest/releases/download/7.0.6/red_black_tree.h)
-- [Splay Tree](https://github.com/xorz57/forest/releases/download/7.0.6/splay_tree.h)
-- [Trie](https://github.com/xorz57/forest/releases/download/7.0.6/trie.h)
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.7/binary_search_tree.h)
+- [AVL Tree](https://github.com/xorz57/forest/releases/download/7.0.7/avl_tree.h)
+- [Red Black Tree](https://github.com/xorz57/forest/releases/download/7.0.7/red_black_tree.h)
+- [Splay Tree](https://github.com/xorz57/forest/releases/download/7.0.7/splay_tree.h)
+- [Trie](https://github.com/xorz57/forest/releases/download/7.0.7/trie.h)
 
 ## Example Code
 
