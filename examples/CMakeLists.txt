@@ -1,5 +1,7 @@
 project(examples)
 
+set(CMAKE_CXX_STANDARD 14)
+
 add_executable(example_binary_search_tree example_binary_search_tree.cpp)
 target_link_libraries(example_binary_search_tree forest)
 
