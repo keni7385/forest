@@ -1,4 +1,4 @@
-language: cpp 
+language: cpp
 dist: trusty
 os:
   - linux
@@ -8,14 +8,10 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-5
-env:
-  - EVAL="CXX=g++-5"
-before_install:
-  - eval "${EVAL}"
-install:
-  - sudo pip install codecov
 script:
+  - export CXX=/usr/bin/g++-5
   - mkdir build
   - cd build
-  - cmake .. -DBUILD_EXAMPLES=ON
-  - make
+  - cmake .. -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON
+  - make -j6
+  - 
