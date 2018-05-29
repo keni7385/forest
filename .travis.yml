@@ -14,8 +14,4 @@ script:
   - cd build
   - cmake .. -DBUILD_TESTS=ON
   - make -j6
-  - tests/test_binary_search_tree
-  - tests/test_avl_tree
-  - tests/test_red_black_tree
-  - tests/test_splay_tree
-  - tests/test_trie
+  - tests/test_all
