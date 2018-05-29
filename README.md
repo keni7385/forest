@@ -24,11 +24,11 @@
 - `vcpkg install forest --head`
 
 #### Or simply download the header files
-- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.7/binary_search_tree.h)
-- [AVL Tree](https://github.com/xorz57/forest/releases/download/7.0.7/avl_tree.h)
-- [Red Black Tree](https://github.com/xorz57/forest/releases/download/7.0.7/red_black_tree.h)
-- [Splay Tree](https://github.com/xorz57/forest/releases/download/7.0.7/splay_tree.h)
-- [Trie](https://github.com/xorz57/forest/releases/download/7.0.7/trie.h)
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.8/binary_search_tree.h)
+- [AVL Tree](https://github.com/xorz57/forest/releases/download/7.0.8/avl_tree.h)
+- [Red Black Tree](https://github.com/xorz57/forest/releases/download/7.0.8/red_black_tree.h)
+- [Splay Tree](https://github.com/xorz57/forest/releases/download/7.0.8/splay_tree.h)
+- [Trie](https://github.com/xorz57/forest/releases/download/7.0.8/trie.h)
 
 ## Example Code
 
@@ -37,8 +37,6 @@ Forest is best explained through [examples](https://github.com/xorz57/forest/tre
 ```cpp
 #include "red_black_tree.h"
 #include <string>
-
-auto handler = [](const int & key, const std::string & value) { std::cout << key << "->" << value << std::endl; };
 
 int main() {
 	// Generate a red-black tree with integer keys and std::string values
@@ -54,7 +52,7 @@ int main() {
 	red_black_tree.insert(45, "Heimdall");
 
 	// Perform In-Order-Traversal
-	red_black_tree.in_order_traversal(handler);
+	red_black_tree.in_order_traversal([](auto key, auto value) { std::cout << key << "->" << value << std::endl; });
 
 	return 0;
 }
