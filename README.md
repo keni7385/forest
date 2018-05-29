@@ -21,14 +21,14 @@
 ## Installation
 
 #### Use your favorite package manager
-- `vcpkg install forest --head`
+- `vcpkg install forest --head` (latest)
 
 #### Or simply download the header files
-- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.8/binary_search_tree.h)
-- [AVL Tree](https://github.com/xorz57/forest/releases/download/7.0.8/avl_tree.h)
-- [Red Black Tree](https://github.com/xorz57/forest/releases/download/7.0.8/red_black_tree.h)
-- [Splay Tree](https://github.com/xorz57/forest/releases/download/7.0.8/splay_tree.h)
-- [Trie](https://github.com/xorz57/forest/releases/download/7.0.8/trie.h)
+- [Binary Search Tree](https://github.com/xorz57/forest/releases/download/7.0.9/binary_search_tree.h)
+- [AVL Tree](https://github.com/xorz57/forest/releases/download/7.0.9/avl_tree.h)
+- [Red Black Tree](https://github.com/xorz57/forest/releases/download/7.0.9/red_black_tree.h)
+- [Splay Tree](https://github.com/xorz57/forest/releases/download/7.0.9/splay_tree.h)
+- [Trie](https://github.com/xorz57/forest/releases/download/7.0.9/trie.h)
 
 ## Example Code
 
