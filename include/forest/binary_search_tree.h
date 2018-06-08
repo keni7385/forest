@@ -174,5 +174,8 @@ namespace forest {
     bool empty() const {
       return !root_;
     }
+    std::shared_ptr<const Node> root() {
+      return root_;
+    }
   };
 }
