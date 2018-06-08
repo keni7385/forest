@@ -47,7 +47,7 @@ SCENARIO("Test Red Black Tree") {
       red_black_tree.insert(14, 0);
       red_black_tree.insert(45, 0);
       THEN("Test root") {
-        auto root = binary_search_tree.root();
+        auto root = red_black_tree.root();
         REQUIRE(root != nullptr);
         REQUIRE(root->key == 4);
       }
@@ -103,7 +103,7 @@ SCENARIO("Test Red Black Tree") {
         red_black_tree.insert(i, 0);
       }
       THEN("Test root") {
-        auto root = binary_search_tree.root();
+        auto root = red_black_tree.root();
         REQUIRE(root != nullptr);
         REQUIRE(root->key == 3);
       }
@@ -159,7 +159,7 @@ SCENARIO("Test Red Black Tree") {
         red_black_tree.insert(i, 0);
       }
       THEN("Test root") {
-        auto root = binary_search_tree.root();
+        auto root = red_black_tree.root();
         REQUIRE(root != nullptr);
         REQUIRE(root->key == 6);
       }
