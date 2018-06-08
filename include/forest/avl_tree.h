@@ -207,7 +207,7 @@ namespace forest {
       }
       return nullptr;
     }
-    std::shared_ptr<Node> predecessor(const T & key) {
+    std::shared_ptr<const Node> predecessor(const T & key) {
       std::shared_ptr<Node> x = root_;
       while (x != nullptr) {
         if (key > x->key) {
