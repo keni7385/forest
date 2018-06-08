@@ -5,6 +5,9 @@ SCENARIO("Test Red Black Tree") {
   GIVEN("A Red Black Tree") {
     forest::red_black_tree <int, int> red_black_tree;
     WHEN("The Red Black Tree is empty") {
+      THEN("Test root") {
+        REQUIRE(red_black_tree.root() == nullptr);
+      }
       THEN("Test empty") {
         REQUIRE(red_black_tree.empty() == true);
       }
@@ -43,6 +46,11 @@ SCENARIO("Test Red Black Tree") {
       red_black_tree.insert(0 , 0);
       red_black_tree.insert(14, 0);
       red_black_tree.insert(45, 0);
+      THEN("Test root") {
+        auto root = binary_search_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 4);
+      }
       THEN("Test empty") {
         REQUIRE(red_black_tree.empty() == false);
       }
@@ -94,6 +102,11 @@ SCENARIO("Test Red Black Tree") {
       for (int i = 0; i < 10; i++) {
         red_black_tree.insert(i, 0);
       }
+      THEN("Test root") {
+        auto root = binary_search_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 3);
+      }
       THEN("Test empty") {
         REQUIRE(red_black_tree.empty() == false);
       }
@@ -144,6 +157,11 @@ SCENARIO("Test Red Black Tree") {
     WHEN("Nodes are inserted in descending order") {
       for (int i = 9; i >= 0; i--) {
         red_black_tree.insert(i, 0);
+      }
+      THEN("Test root") {
+        auto root = binary_search_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 6);
       }
       THEN("Test empty") {
         REQUIRE(red_black_tree.empty() == false);
