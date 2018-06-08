@@ -25,11 +25,11 @@ namespace forest {
 			std::unique_ptr<Node> children[alphabet_size];
 			bool end = false;
 		};
-		std::unique_ptr<Node> root = std::make_unique<Node>();
+		std::unique_ptr<Node> root_ = std::make_unique<Node>();
 	public:
 		bool insert(const std::string & key) {
 			if (!validate(key)) return false;
-			Node * n = root.get();
+			Node * n = root_.get();
 			for (auto c : key) {
 				size_t index = to_index(c);
 				auto& slot = n->children[index];
@@ -41,7 +41,7 @@ namespace forest {
 		}
 		bool search(const std::string & key) {
 			if (!validate(key)) return false;
-			Node * n = root.get();
+			Node * n = root_.get();
 			for (auto c : key) {
 				size_t index = to_index(c);
 				auto& slot = n->children[index];

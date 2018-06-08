@@ -21,7 +21,7 @@ namespace forest {
         this->value = value;
       }
     };
-    std::shared_ptr<Node> root;
+    std::shared_ptr<Node> root_;
     void pre_order_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
       if (x == nullptr) return;
       handler(x->key, x->value);
@@ -62,19 +62,19 @@ namespace forest {
     }
   public:
     void pre_order_traversal(void handler(const T & key, const U & value)) {
-      pre_order_traversal(root, handler);
+      pre_order_traversal(root_, handler);
     }
     void in_order_traversal(void handler(const T & key, const U & value)) {
-      in_order_traversal(root, handler);
+      in_order_traversal(root_, handler);
     }
     void post_order_traversal(void handler(const T & key, const U & value)) {
-      post_order_traversal(root, handler);
+      post_order_traversal(root_, handler);
     }
     void breadth_first_traversal(void handler(const T & key, const U & value)) {
-      breadth_first_traversal(root, handler);
+      breadth_first_traversal(root_, handler);
     }
     void insert(const T & key, const U & value) {
-      std::shared_ptr<Node> current = root;
+      std::shared_ptr<Node> current = root_;
       std::shared_ptr<Node> parent = nullptr;
       while (current != nullptr) {
         parent = current;
@@ -87,7 +87,7 @@ namespace forest {
       current = std::make_shared<Node>(key, value);
       current->parent = parent;
       if (parent == nullptr) {
-        root = current;
+        root_ = current;
       } else if (current->key > parent->key) {
         parent->right = current;
       } else if (current->key < parent->key) {
@@ -95,7 +95,7 @@ namespace forest {
       }
     }
     std::shared_ptr<const Node> search(const T & key) {
-      std::shared_ptr<Node> x = root;
+      std::shared_ptr<Node> x = root_;
       while (x != nullptr) {
         if (key > x->key) {
           x = x->right;
@@ -108,19 +108,19 @@ namespace forest {
       return nullptr;
     }
     std::shared_ptr<const Node> minimum() {
-      std::shared_ptr<Node> x = root;
+      std::shared_ptr<Node> x = root_;
       if (x == nullptr) return nullptr;
       while (x->left != nullptr) x = x->left;
       return x;
     }
     std::shared_ptr<const Node> maximum() {
-      std::shared_ptr<Node> x = root;
+      std::shared_ptr<Node> x = root_;
       if (x == nullptr) return nullptr;
       while (x->right != nullptr) x = x->right;
       return x;
     }
     std::shared_ptr<const Node> successor(const T & key) {
-      std::shared_ptr<Node> x = root;
+      std::shared_ptr<Node> x = root_;
       while (x != nullptr) {
         if (key > x->key) {
           x = x->right;
@@ -143,7 +143,7 @@ namespace forest {
       return nullptr;
     }
     std::shared_ptr<const Node> predecessor(const T & key) {
-      std::shared_ptr<Node> x = root;
+      std::shared_ptr<Node> x = root_;
       while (x != nullptr) {
         if (key > x->key) {
           x = x->right;
@@ -166,13 +166,13 @@ namespace forest {
       return nullptr;
     }
     size_t height() {
-      return height(root);
+      return height(root_);
     }
     size_t size() {
-      return size(root);
+      return size(root_);
     }
     bool empty() const {
-      return !root;
+      return !root_;
     }
   };
 }
