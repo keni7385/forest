@@ -5,6 +5,9 @@ SCENARIO("Test Splay Tree") {
   GIVEN("A Splay Tree") {
     forest::splay_tree <int, int> splay_tree;
     WHEN("The Splay Tree is empty") {
+      THEN("Test root") {
+        REQUIRE(splay_tree.root() == nullptr);
+      }
       THEN("Test empty") {
         REQUIRE(splay_tree.empty() == true);
       }
@@ -43,6 +46,11 @@ SCENARIO("Test Splay Tree") {
       splay_tree.insert(0 , 0);
       splay_tree.insert(14, 0);
       splay_tree.insert(45, 0);
+      THEN("Test root") {
+        auto root = splay_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 45);
+      }
       THEN("Test empty") {
         REQUIRE(splay_tree.empty() == false);
       }
@@ -94,6 +102,11 @@ SCENARIO("Test Splay Tree") {
       for (int i = 0; i < 10; i++) {
         splay_tree.insert(i, 0);
       }
+      THEN("Test root") {
+        auto root = splay_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 9);
+      }
       THEN("Test empty") {
         REQUIRE(splay_tree.empty() == false);
       }
@@ -144,6 +157,11 @@ SCENARIO("Test Splay Tree") {
     WHEN("Nodes are inserted in descending order") {
       for (int i = 9; i >= 0; i--) {
         splay_tree.insert(i, 0);
+      }
+      THEN("Test root") {
+        auto root = splay_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 0);
       }
       THEN("Test empty") {
         REQUIRE(splay_tree.empty() == false);
