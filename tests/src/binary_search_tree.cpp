@@ -1,5 +1,5 @@
 #include <catch.hpp>
-#include <forest/binary_search_tree.h>
+#include <forest/binary_search_tree.hpp>
 
 SCENARIO("Test Binary Search Tree") {
   GIVEN("A Binary Search Tree") {
