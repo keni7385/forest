@@ -2,16 +2,9 @@ language: cpp
 dist: trusty
 os:
   - linux
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-5
 script:
-  - export CXX=/usr/bin/g++-5
   - mkdir build
   - cd build
   - cmake ..
   - make -j6
-  - tests/test_all
+  - tests/tests
