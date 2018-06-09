@@ -1,10 +1,13 @@
 #include <catch.hpp>
-#include <forest/avl_tree.h>
+#include <forest/avl_tree.hpp>
 
 SCENARIO("Test AVL Tree") {
   GIVEN("An AVL Tree") {
     forest::avl_tree <int, int> avl_tree;
     WHEN("The AVL Tree is empty") {
+      THEN("Test root") {
+        REQUIRE(avl_tree.root() == nullptr);
+      }
       THEN("Test empty") {
         REQUIRE(avl_tree.empty() == true);
       }
@@ -43,6 +46,11 @@ SCENARIO("Test AVL Tree") {
       avl_tree.insert(0 , 0);
       avl_tree.insert(14, 0);
       avl_tree.insert(45, 0);
+      THEN("Test root") {
+        auto root = avl_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 4);
+      }
       THEN("Test empty") {
         REQUIRE(avl_tree.empty() == false);
       }
@@ -94,6 +102,11 @@ SCENARIO("Test AVL Tree") {
       for (int i = 0; i < 10; i++) {
         avl_tree.insert(i, 0);
       }
+      THEN("Test root") {
+        auto root = avl_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 3);
+      }
       THEN("Test empty") {
         REQUIRE(avl_tree.empty() == false);
       }
@@ -144,6 +157,11 @@ SCENARIO("Test AVL Tree") {
     WHEN("Nodes are inserted in descending order") {
       for (int i = 9; i >= 0; i--) {
         avl_tree.insert(i, 0);
+      }
+      THEN("Test root") {
+        auto root = avl_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 6);
       }
       THEN("Test empty") {
         REQUIRE(avl_tree.empty() == false);
