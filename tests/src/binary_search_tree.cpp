@@ -1,10 +1,13 @@
 #include <catch.hpp>
-#include <forest/binary_search_tree.h>
+#include <forest/binary_search_tree.hpp>
 
 SCENARIO("Test Binary Search Tree") {
   GIVEN("A Binary Search Tree") {
     forest::binary_search_tree <int, int> binary_search_tree;
     WHEN("The Binary Search Tree is empty") {
+      THEN("Test root") {
+        REQUIRE(binary_search_tree.root() == nullptr);
+      }
       THEN("Test empty") {
         REQUIRE(binary_search_tree.empty() == true);
       }
@@ -43,6 +46,11 @@ SCENARIO("Test Binary Search Tree") {
       binary_search_tree.insert(0 , 0);
       binary_search_tree.insert(14, 0);
       binary_search_tree.insert(45, 0);
+      THEN("Test root") {
+        auto root = binary_search_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 4);
+      }
       THEN("Test empty") {
         REQUIRE(binary_search_tree.empty() == false);
       }
@@ -94,6 +102,11 @@ SCENARIO("Test Binary Search Tree") {
       for (int i = 0; i < 10; i++) {
         binary_search_tree.insert(i, 0);
       }
+      THEN("Test root") {
+        auto root = binary_search_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 0);
+      }
       THEN("Test empty") {
         REQUIRE(binary_search_tree.empty() == false);
       }
@@ -144,6 +157,11 @@ SCENARIO("Test Binary Search Tree") {
     WHEN("Nodes are inserted in descending order") {
       for (int i = 9; i >= 0; i--) {
         binary_search_tree.insert(i, 0);
+      }
+      THEN("Test root") {
+        auto root = binary_search_tree.root();
+        REQUIRE(root != nullptr);
+        REQUIRE(root->key == 9);
       }
       THEN("Test empty") {
         REQUIRE(binary_search_tree.empty() == false);
