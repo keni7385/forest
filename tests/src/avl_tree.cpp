@@ -1,5 +1,5 @@
 #include <catch.hpp>
-#include <forest/avl_tree.h>
+#include <forest/avl_tree.hpp>
 
 SCENARIO("Test AVL Tree") {
   GIVEN("An AVL Tree") {
