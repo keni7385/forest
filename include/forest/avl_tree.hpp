@@ -14,56 +14,53 @@ namespace forest {
       T key;
       U value;
       int balance_factor;
-      std::weak_ptr<Node> parent;
-      std::shared_ptr<Node> left;
-      std::shared_ptr<Node> right;
-      Node(T key, U value) {
-        this->key = key;
-        this->value = value;
-      }
+      Node * parent;
+      Node * left;
+      Node * right;
+      Node(T key, U value) :key(key), value(value), balance_factor(0), parent(nullptr), left(nullptr), right(nullptr){}
     };
-    std::shared_ptr<Node> root_;
-    void pre_order_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
+    Node * root_;
+    void pre_order_traversal(Node * x, void handler(const T & key, const U & value)) {
       if (x == nullptr) return;
       handler(x->key, x->value);
       pre_order_traversal(x->left, handler);
       pre_order_traversal(x->right, handler);
     }
-    void in_order_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
+    void in_order_traversal(Node * x, void handler(const T & key, const U & value)) {
       if (x == nullptr) return;
       in_order_traversal(x->left, handler);
       handler(x->key, x->value);
       in_order_traversal(x->right, handler);
     }
-    void post_order_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
+    void post_order_traversal(Node * x, void handler(const T & key, const U & value)) {
       if (x == nullptr) return;
       post_order_traversal(x->left, handler);
       post_order_traversal(x->right, handler);
       handler(x->key, x->value);
     }
-    void breadth_first_traversal(std::shared_ptr<Node> & x, void handler(const T & key, const U & value)) {
+    void breadth_first_traversal(Node * x, void handler(const T & key, const U & value)) {
       std::queue <std::shared_ptr<Node> > queue;
       if (x == nullptr) return;
       queue.push(x);
       while(queue.empty() == false) {
-        std::shared_ptr<Node> y = queue.front();
+        Node * y = queue.front();
         handler(y->key, y->value);
         queue.pop();
         if (y->left != nullptr) queue.push(y->left);
         if (y->right != nullptr) queue.push(y->right);
       }
     }
-    size_t height(std::shared_ptr<Node> & x) {
+    size_t height(Node * x) {
       if (x == nullptr) return 0;
       return std::max(height(x->left), height(x->right)) + 1;
     }
-    size_t size(std::shared_ptr<Node> & x) {
+    size_t size(Node * x) {
       if (x == nullptr) return 0;
       return size(x->left) + size(x->right) + 1;
     }
-    void rotate_right(const std::shared_ptr<Node> & rotation_root) {
-      std::shared_ptr<Node> new_root = rotation_root->left;
-      std::shared_ptr<Node> orphan_subtree = new_root->right;
+    void rotate_right(Node * rotation_root) {
+      Node * new_root = rotation_root->left;
+      Node * orphan_subtree = new_root->right;
 
       rotation_root->left = orphan_subtree;
       if (orphan_subtree != nullptr) {
@@ -72,19 +69,19 @@ namespace forest {
 
       new_root->right = rotation_root;
 
-      if (rotation_root->parent.lock() == nullptr) {
+      if (rotation_root->parent == nullptr) {
         root_ = new_root;
-      } else if(rotation_root == rotation_root->parent.lock()->left) {
-        rotation_root->parent.lock()->left = new_root;
-      } else if (rotation_root == rotation_root->parent.lock()->right) {
-        rotation_root->parent.lock()->right = new_root;
+      } else if(rotation_root == rotation_root->parent->left) {
+        rotation_root->parent->left = new_root;
+      } else if (rotation_root == rotation_root->parent->right) {
+        rotation_root->parent->right = new_root;
       }
       new_root->parent = rotation_root->parent;
       rotation_root->parent = new_root;
     }
-    void rotate_left(const std::shared_ptr<Node> & rotation_root) {
-      std::shared_ptr<Node>  new_root = rotation_root->right;
-      std::shared_ptr<Node>  orphan_subtree = new_root->left;
+    void rotate_left(Node * rotation_root) {
+      Node * new_root = rotation_root->right;
+      Node * orphan_subtree = new_root->left;
 
       rotation_root->right = orphan_subtree;
       if (orphan_subtree != nullptr) {
@@ -93,17 +90,18 @@ namespace forest {
 
       new_root->left = rotation_root;
 
-      if (rotation_root->parent.lock() == nullptr) {
+      if (rotation_root->parent == nullptr) {
         root_ = new_root;
-      } else if(rotation_root == rotation_root->parent.lock()->left) {
-        rotation_root->parent.lock()->left = new_root;
+      } else if(rotation_root == rotation_root->parent->left) {
+        rotation_root->parent->left = new_root;
       } else {
-        rotation_root->parent.lock()->right = new_root;
+        rotation_root->parent->right = new_root;
       }
       new_root->parent = rotation_root->parent;
       rotation_root->parent = new_root;
     }
   public:
+    avl_tree() : root_(nullptr) {}
     void pre_order_traversal(void handler(const T & key, const U & value)) {
       pre_order_traversal(root_, handler);
     }
@@ -117,9 +115,9 @@ namespace forest {
       breadth_first_traversal(root_, handler);
     }
     void insert(const T & key, const U & value) {
-      std::shared_ptr<Node> current = root_;
-      std::shared_ptr<Node> parent = nullptr;
-      std::shared_ptr<Node> inserted_node;
+      Node * current = root_;
+      Node * parent = nullptr;
+      Node * inserted_node = nullptr;
 
       while (current != nullptr) {
         parent = current;
@@ -130,7 +128,7 @@ namespace forest {
         }
       }
 
-      current = std::make_shared<Node>(key, value);
+      current = new Node(key, value);
       current->parent = parent;
 
       if(parent == nullptr) {
@@ -156,11 +154,11 @@ namespace forest {
           }
           rotate_left(current);
         }
-        current = current->parent.lock();
+        current = current->parent;
       }
     }
-    std::shared_ptr<const Node> search(const T & key) {
-      std::shared_ptr<Node> x = root_;
+    const Node * search(const T & key) {
+      Node * x = root_;
       while (x != nullptr) {
         if (key > x->key) {
           x = x->right;
@@ -172,20 +170,20 @@ namespace forest {
       }
       return nullptr;
     }
-    std::shared_ptr<const Node> minimum() {
-      std::shared_ptr<Node> x = root_;
+    const Node * minimum() {
+      Node * x = root_;
       if (x == nullptr) return nullptr;
       while(x->left != nullptr) x = x->left;
       return x;
     }
-    std::shared_ptr<const Node> maximum() {
-      std::shared_ptr<Node> x = root_;
+    const Node * maximum() {
+      Node * x = root_;
       if (x == nullptr) return nullptr;
       while(x->right != nullptr) x = x->right;
       return x;
     }
-    std::shared_ptr<const Node> successor(const T & key) {
-      std::shared_ptr<Node> x = root_;
+    const Node * successor(const T & key) {
+      Node * x = root_;
       while (x != nullptr) {
         if (key > x->key) {
           x = x->right;
@@ -197,18 +195,18 @@ namespace forest {
             while(x->left != nullptr) x = x->left;
             return x;
           }
-          std::shared_ptr<Node> parent = x->parent.lock();
+          Node * parent = x->parent;
           while (parent != nullptr && x == parent->right) {
             x = parent;
-            parent = parent->parent.lock();
+            parent = parent->parent;
           }
           return parent;
         }
       }
       return nullptr;
     }
-    std::shared_ptr<const Node> predecessor(const T & key) {
-      std::shared_ptr<Node> x = root_;
+    const Node * predecessor(const T & key) {
+      Node * x = root_;
       while (x != nullptr) {
         if (key > x->key) {
           x = x->right;
@@ -220,10 +218,10 @@ namespace forest {
             while(x->right != nullptr) x = x->right;
             return x;
           }
-          std::shared_ptr<Node> parent = x->parent.lock();
+          Node * parent = x->parent;
           while (parent != nullptr && x == parent->left) {
             x = parent;
-            parent = parent->parent.lock();
+            parent = parent->parent;
           }
           return parent;
         }
@@ -236,10 +234,10 @@ namespace forest {
     size_t size() {
       return size(root_);
     }
-    bool empty() const{
+    bool empty() const {
       return !root_;
     }
-    std::shared_ptr<const Node> root() {
+    const Node * root() {
       return root_;
     }
   };
