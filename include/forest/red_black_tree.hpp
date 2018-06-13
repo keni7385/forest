@@ -65,7 +65,7 @@ namespace forest {
     }
     void left_rotate(Node * root) noexcept {
       Node * y = root->right;
-      if (root != nullptr) {
+      if (y != nullptr) {
         root->right = y->left;
         if (y->left != nullptr) y->left->parent = root;
         y->parent = root->parent;
