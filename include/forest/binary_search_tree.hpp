@@ -17,6 +17,10 @@ namespace forest {
       Node * left;
       Node * right;
       Node(const T key, const U value) : key(key), value(value), parent(nullptr), left(nullptr), right(nullptr) { }
+      ~Node() {
+        delete left;
+        delete right;
+      }
     };
     Node * root_;
     void pre_order_traversal(const Node * root, void handler(const T & key, const U & value)) noexcept {
@@ -59,6 +63,9 @@ namespace forest {
     }
   public:
     binary_search_tree() : root_(nullptr) { }
+    ~binary_search_tree() {
+      delete root_;
+    }
     void pre_order_traversal(void handler(const T & key, const U & value)) noexcept {
       pre_order_traversal(root_, handler);
     }

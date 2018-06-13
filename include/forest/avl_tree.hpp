@@ -18,6 +18,10 @@ namespace forest {
       Node * left;
       Node * right;
       Node(const T key, const U value) :key(key), value(value), balance_factor(0), parent(nullptr), left(nullptr), right(nullptr){}
+      ~Node() {
+        delete left;
+        delete right;
+      }
     };
     Node * root_;
     void pre_order_traversal(const Node * root, void handler(const T & key, const U & value)) noexcept {
@@ -102,6 +106,9 @@ namespace forest {
     }
   public:
     avl_tree() : root_(nullptr) { }
+    ~avl_tree() {
+      delete root_;
+    }
     void pre_order_traversal(void handler(const T & key, const U & value)) noexcept {
       pre_order_traversal(root_, handler);
     }
