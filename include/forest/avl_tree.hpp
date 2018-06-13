@@ -146,8 +146,6 @@ namespace forest {
         parent->left = current;
       }
 
-      inserted_node = current;
-
       while (current != nullptr) {
         current->balance_factor = (height(current->right) - height(current->left));
         if (current->balance_factor == -2) {
