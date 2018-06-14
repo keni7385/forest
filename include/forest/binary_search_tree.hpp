@@ -87,6 +87,9 @@ namespace forest {
           current = current->right;
         } else if (key < current->key) {
           current = current->left;
+        } else if (key == current->key) {
+          current->value = value;
+          return;
         }
       }
       current = new Node(key, value);
