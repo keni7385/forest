@@ -6,18 +6,18 @@
 
 ## Features
 
-|Operations|`binary_search_tree.hpp`|`avl_tree.hpp`|`red_black_tree.hpp`|`splay_tree.hpp`|
-|---|---|---|---|---|
-|`insert(key, value)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`search(key)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`delete(key)`|:x:|:x:|:x:|:x:|
-|`pre_order_traversal(handler)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`in_order_traversal(handler)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`post_order_traversal(handler)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`breadth_first_traversal(handler)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`in_order_predecessor(key)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`in_order_succecessor(key)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`root()`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|Operations|`avl_tree.hpp`|`red_black_tree.hpp`|`splay_tree.hpp`|
+|---|---|---|---|
+|`insert(key, value)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`search(key)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`delete(key)`|:x:|:x:|:x:|
+|`pre_order_traversal(handler)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`in_order_traversal(handler)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`post_order_traversal(handler)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`breadth_first_traversal(handler)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`in_order_predecessor(key)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`in_order_succecessor(key)`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`root()`|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 
 ## Installation
 
