@@ -2,7 +2,6 @@ project(tests)
 
 add_executable(tests
               src/main.cpp
-              src/binary_search_tree.cpp
               src/avl_tree.cpp
               src/red_black_tree.cpp
               src/splay_tree.cpp)
