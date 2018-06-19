@@ -48,11 +48,11 @@ namespace forest {
       if (root == nullptr) return;
       queue.push(root);
       while (queue.empty() == false) {
-        Node * y = queue.front();
-        handler(y->key, y->value);
+        Node * current = queue.front();
+        handler(current->key, current->value);
         queue.pop();
-        if (y->left != nullptr) queue.push(y->left);
-        if (y->right != nullptr) queue.push(y->right);
+        if (current->left != nullptr) queue.push(current->left);
+        if (current->right != nullptr) queue.push(current->right);
       }
     }
     size_t height(const Node * root) noexcept {

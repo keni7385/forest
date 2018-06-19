@@ -17,7 +17,7 @@ namespace forest {
       Node * parent;
       Node * left;
       Node * right;
-      Node(const T key, const U value) :key(key), value(value), balance_factor(0), parent(nullptr), left(nullptr), right(nullptr) {}
+      Node(const T key, const U value) :key(key), value(value), balance_factor(0), parent(nullptr), left(nullptr), right(nullptr) { }
       ~Node() {
         delete left;
         delete right;
