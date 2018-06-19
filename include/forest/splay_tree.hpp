@@ -61,48 +61,52 @@ namespace forest {
       if (root == nullptr) return 0;
       return size(root->left) + size(root->right) + 1;
     }
-    void left_rotate(Node * root) noexcept {
-      Node * y = root->right;
-      if (y != nullptr) {
-        root->right = y->left;
-        if (y->left != nullptr) y->left->parent = root;
-        y->parent = root->parent;
+    void rotate_right(Node * rotation_root) noexcept {
+      Node * new_root = rotation_root->left;
+      Node * orphan_subtree = new_root->right;
+
+      rotation_root->left = orphan_subtree;
+      if (orphan_subtree != nullptr) {
+        orphan_subtree->parent = rotation_root;
       }
-      if (root->parent == nullptr) {
-        root_ = y;
-      } else if (root == root->parent->left) {
-        root->parent->left = y;
-      } else {
-        root->parent->right = y;
+
+      new_root->right = rotation_root;
+
+      if (rotation_root->parent == nullptr) {
+        root_ = new_root;
+      } else if(rotation_root == rotation_root->parent->left) {
+        rotation_root->parent->left = new_root;
+      } else if (rotation_root == rotation_root->parent->right) {
+        rotation_root->parent->right = new_root;
       }
-      if (y != nullptr) {
-        y->left = root;
-      }
-      root->parent = y;
+      new_root->parent = rotation_root->parent;
+      rotation_root->parent = new_root;
     }
-    void right_rotate(Node * root) noexcept {
-      Node * y = root->left;
-      if (y != nullptr) {
-        root->left = y->right;
-        if (y->right != nullptr) y->right->parent = root;
-        y->parent = root->parent;
+    void rotate_left(Node * rotation_root) noexcept {
+      Node * new_root = rotation_root->right;
+      Node * orphan_subtree = new_root->left;
+
+      rotation_root->right = orphan_subtree;
+      if (orphan_subtree != nullptr) {
+        orphan_subtree->parent = rotation_root;
       }
-      if (root->parent == nullptr) {
-        root_ = y;
-      } else if (root == root->parent->left) {
-        root->parent->left = y;
+
+      new_root->left = rotation_root;
+
+      if (rotation_root->parent == nullptr) {
+        root_ = new_root;
+      } else if(rotation_root == rotation_root->parent->left) {
+        rotation_root->parent->left = new_root;
       } else {
-        root->parent->right = y;
+        rotation_root->parent->right = new_root;
       }
-      if (y != nullptr) {
-        y->right = root;
-      }
-      root->parent = y;
+      new_root->parent = rotation_root->parent;
+      rotation_root->parent = new_root;
     }
     Node * find_parent(Node * n) noexcept {
       return n->parent;
     }
-    Node * find_grand_parent(Node * n) noexcept {
+    Node * find_grandparent(Node * n) noexcept {
       if (find_parent(n) != nullptr) {
         return find_parent(n)->parent;
       }
@@ -110,24 +114,24 @@ namespace forest {
     }
     void splay(Node * n) noexcept {
       while (find_parent(n) != nullptr) {
-        if (find_grand_parent(n) == nullptr) {
+        if (find_grandparent(n) == nullptr) {
           if (find_parent(n)->left == n) {
-            right_rotate(find_parent(n));
+            rotate_right(find_parent(n));
           } else if (find_parent(n)->right == n) {
-            left_rotate(find_parent(n));
+            rotate_left(find_parent(n));
           }
-        } else if (find_parent(n)->left == n && find_grand_parent(n)->left == find_parent(n)) {
-          right_rotate(find_grand_parent(n));
-          right_rotate(find_parent(n));
-        } else if (find_parent(n)->right == n && find_grand_parent(n)->right == find_parent(n)) {
-          left_rotate(find_grand_parent(n));
-          left_rotate(find_parent(n));
-        } else if (find_parent(n)->left == n && find_grand_parent(n)->right == find_parent(n)) {
-          right_rotate(find_parent(n));
-          left_rotate(find_parent(n));
-        } else if (find_parent(n)->right == n && find_grand_parent(n)->left == find_parent(n)) {
-          left_rotate(find_parent(n));
-          right_rotate(find_parent(n));
+        } else if (find_parent(n)->left == n && find_grandparent(n)->left == find_parent(n)) {
+          rotate_right(find_grandparent(n));
+          rotate_right(find_parent(n));
+        } else if (find_parent(n)->right == n && find_grandparent(n)->right == find_parent(n)) {
+          rotate_left(find_grandparent(n));
+          rotate_left(find_parent(n));
+        } else if (find_parent(n)->left == n && find_grandparent(n)->right == find_parent(n)) {
+          rotate_right(find_parent(n));
+          rotate_left(find_parent(n));
+        } else if (find_parent(n)->right == n && find_grandparent(n)->left == find_parent(n)) {
+          rotate_left(find_parent(n));
+          rotate_right(find_parent(n));
         }
       }
     }
