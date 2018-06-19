@@ -104,6 +104,14 @@ namespace forest {
       new_root->parent = rotation_root->parent;
       rotation_root->parent = new_root;
     }
+    Node * find_parent(Node * n) noexcept {
+      if (n != nullptr) return n->parent;
+      return nullptr;
+    }
+    Node * find_grandparent(Node * n) noexcept {
+      if (find_parent(n) != nullptr) return find_parent(n)->parent;
+      return nullptr;
+    }
   public:
     avl_tree() : root_(nullptr) { }
     ~avl_tree() {
