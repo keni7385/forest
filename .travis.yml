@@ -6,5 +6,5 @@ script:
   - mkdir build
   - cd build
   - cmake ..
-  - make -j6
+  - make
   - tests/tests
