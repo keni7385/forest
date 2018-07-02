@@ -37,6 +37,15 @@ SCENARIO("Test AVL Tree") {
         auto result = avl_tree.search(555);
         REQUIRE(result == nullptr);
       }
+      THEN("Call pre_order_traversal") {
+        avl_tree.pre_order_traversal([](auto key, auto value) {});
+      }
+      THEN("Call in_order_traversal") {
+        avl_tree.in_order_traversal([](auto key, auto value) {});
+      }
+      THEN("Call post_order_traversal") {
+        avl_tree.post_order_traversal([](auto key, auto value) {});
+      }
     }
     WHEN("Nodes are inserted in random order") {
       avl_tree.insert(4 , 0);
@@ -97,6 +106,15 @@ SCENARIO("Test AVL Tree") {
         REQUIRE(result != nullptr);
         REQUIRE(result->key == 3);
       }
+      THEN("Call pre_order_traversal") {
+        avl_tree.pre_order_traversal([](auto key, auto value) {});
+      }
+      THEN("Call in_order_traversal") {
+        avl_tree.in_order_traversal([](auto key, auto value) {});
+      }
+      THEN("Call post_order_traversal") {
+        avl_tree.post_order_traversal([](auto key, auto value) {});
+      }
     }
     WHEN("Nodes are inserted in ascending order") {
       for (int i = 0; i < 10; i++) {
@@ -153,6 +171,15 @@ SCENARIO("Test AVL Tree") {
         REQUIRE(result != nullptr);
         REQUIRE(result->key == 3);
       }
+      THEN("Call pre_order_traversal") {
+        avl_tree.pre_order_traversal([](auto key, auto value) {});
+      }
+      THEN("Call in_order_traversal") {
+        avl_tree.in_order_traversal([](auto key, auto value) {});
+      }
+      THEN("Call post_order_traversal") {
+        avl_tree.post_order_traversal([](auto key, auto value) {});
+      }
     }
     WHEN("Nodes are inserted in descending order") {
       for (int i = 9; i >= 0; i--) {
@@ -208,6 +235,15 @@ SCENARIO("Test AVL Tree") {
         auto result = avl_tree.search(3);
         REQUIRE(result != nullptr);
         REQUIRE(result->key == 3);
+      }
+      THEN("Call pre_order_traversal") {
+        avl_tree.pre_order_traversal([](auto key, auto value) {});
+      }
+      THEN("Call in_order_traversal") {
+        avl_tree.in_order_traversal([](auto key, auto value) {});
+      }
+      THEN("Call post_order_traversal") {
+        avl_tree.post_order_traversal([](auto key, auto value) {});
       }
     }
   }

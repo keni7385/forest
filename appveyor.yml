@@ -1,0 +1,11 @@
+version: '{build}'
+image: Ubuntu
+build_script:
+- sh: >-
+    mkdir build
+
+    cd build
+
+    cmake ..
+
+    make
