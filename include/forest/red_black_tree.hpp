@@ -156,7 +156,9 @@ namespace forest {
       root_->color = black;
     }
   public:
-    red_black_tree() {}
+    red_black_tree() {
+      
+    }
     ~red_black_tree() {
       delete root_;
     }

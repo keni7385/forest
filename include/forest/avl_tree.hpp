@@ -111,7 +111,9 @@ namespace forest {
       return nullptr;
     }
   public:
-    avl_tree() {}
+    avl_tree() {
+      
+    }
     ~avl_tree() {
       delete root_;
     }

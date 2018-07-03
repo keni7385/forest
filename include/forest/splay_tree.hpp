@@ -133,7 +133,9 @@ namespace forest {
       }
     }
   public:
-    splay_tree() {}
+    splay_tree() {
+      
+    }
     ~splay_tree() {
       delete root_;
     }
