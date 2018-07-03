@@ -10,7 +10,9 @@ namespace forest {
   private:
     enum Color { red, black };
     struct Node {
-      Node(const T key, const U value, const Color color) : key(key), value(value), color(color) {}
+      Node(const T KEY, const U VALUE, const Color COLOR) : key(KEY), value(VALUE), color(COLOR) {
+
+      }
       ~Node() {
         delete left;
         delete right;

@@ -9,7 +9,9 @@ namespace forest {
   class splay_tree {
   private:
     struct Node {
-      Node(const T key, const U value) : key(key), value(value) {}
+      Node(const T KEY, const U VALUE) : key(KEY), value(VALUE) {
+
+      }
       ~Node() {
         delete left;
         delete right;
