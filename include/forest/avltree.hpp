@@ -9,7 +9,9 @@ namespace forest {
   class avltree {
   private:
     struct node {
-      node(const T KEY, const U VALUE) :key(KEY), value(VALUE) {}
+      node(const T KEY, const U VALUE) :key(KEY), value(VALUE) {
+        
+      }
       ~node() {
         delete left;
         delete right;
