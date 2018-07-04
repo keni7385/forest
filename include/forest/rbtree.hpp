@@ -105,14 +105,6 @@ namespace forest {
       new_root->parent = rotation_root->parent;
       rotation_root->parent = new_root;
     }
-    node * find_parent(node * n) noexcept {
-      if (n) return n->parent;
-      return nullptr;
-    }
-    node * find_grandparent(node * n) noexcept {
-      if (find_parent(n)) return find_parent(n)->parent;
-      return nullptr;
-    }
     void fix(node * n) noexcept {
       node * parent {nullptr};
       node * grand_parent {nullptr};

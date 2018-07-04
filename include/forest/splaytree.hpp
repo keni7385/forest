@@ -103,34 +103,26 @@ namespace forest {
       new_root->parent = rotation_root->parent;
       rotation_root->parent = new_root;
     }
-    node * find_parent(node * n) noexcept {
-      if (n) return n->parent;
-      return nullptr;
-    }
-    node * find_grandparent(node * n) noexcept {
-      if (find_parent(n)) return find_parent(n)->parent;
-      return nullptr;
-    }
-    void splay(node * n) noexcept {
-      while (find_parent(n)) {
-        if (!find_grandparent(n)) {
-          if (find_parent(n)->left == n) {
-            rotate_right(find_parent(n));
-          } else if (find_parent(n)->right == n) {
-            rotate_left(find_parent(n));
+    void fix(node * n) noexcept {
+      while (n->parent) {
+        if (!n->parent->parent) {
+          if (n->parent->left == n) {
+            rotate_right(n->parent);
+          } else if (n->parent->right == n) {
+            rotate_left(n->parent);
           }
-        } else if (find_parent(n)->left == n && find_grandparent(n)->left == find_parent(n)) {
-          rotate_right(find_grandparent(n));
-          rotate_right(find_parent(n));
-        } else if (find_parent(n)->right == n && find_grandparent(n)->right == find_parent(n)) {
-          rotate_left(find_grandparent(n));
-          rotate_left(find_parent(n));
-        } else if (find_parent(n)->left == n && find_grandparent(n)->right == find_parent(n)) {
-          rotate_right(find_parent(n));
-          rotate_left(find_parent(n));
-        } else if (find_parent(n)->right == n && find_grandparent(n)->left == find_parent(n)) {
-          rotate_left(find_parent(n));
-          rotate_right(find_parent(n));
+        } else if (n->parent->left == n && n->parent->parent->left == n->parent) {
+          rotate_right(n->parent->parent);
+          rotate_right(n->parent);
+        } else if (n->parent->right == n && n->parent->parent->right == n->parent) {
+          rotate_left(n->parent->parent);
+          rotate_left(n->parent);
+        } else if (n->parent->left == n && n->parent->parent->right == n->parent) {
+          rotate_right(n->parent);
+          rotate_left(n->parent);
+        } else if (n->parent->right == n && n->parent->parent->left == n->parent) {
+          rotate_left(n->parent);
+          rotate_right(n->parent);
         }
       }
     }
@@ -176,7 +168,7 @@ namespace forest {
       } else if (current->key < parent->key) {
         parent->left = current;
       }
-      splay(current);
+      fix(current);
     }
     const node * search(const T & key) noexcept {
       node * current {root_};

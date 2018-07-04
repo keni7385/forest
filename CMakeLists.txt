@@ -10,4 +10,4 @@ target_include_directories(forest INTERFACE include)
 add_library(catch INTERFACE)
 target_include_directories(catch INTERFACE ext/catch)
 
-add_subdirectory(tests)
+add_subdirectory(test)

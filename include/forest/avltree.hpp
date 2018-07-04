@@ -104,13 +104,22 @@ namespace forest {
       new_root->parent = rotation_root->parent;
       rotation_root->parent = new_root;
     }
-    node * find_parent(node * n) noexcept {
-      if (n) return n->parent;
-      return nullptr;
-    }
-    node * find_grandparent(node * n) noexcept {
-      if (find_parent(n)) return find_parent(n)->parent;
-      return nullptr;
+    void fix(node * n) noexcept {
+      while (n) {
+        n->balance_factor = (height(n->right) - height(n->left));
+        if (n->balance_factor == -2) {
+          if (n->left->balance_factor == 1) {
+            rotate_left(n->left);
+          }
+          rotate_right(n);
+        } else if (n->balance_factor == 2) {
+          if (n->right->balance_factor == -1) {
+            rotate_right(n->right);
+          }
+          rotate_left(n);
+        }
+        n = n->parent;
+      }
     }
   public:
     avltree() {
@@ -158,22 +167,7 @@ namespace forest {
       } else if (current->key < parent->key) {
         parent->left = current;
       }
-
-      while (current) {
-        current->balance_factor = (height(current->right) - height(current->left));
-        if (current->balance_factor == -2) {
-          if (current->left->balance_factor == 1) {
-            rotate_left(current->left);
-          }
-          rotate_right(current);
-        } else if (current->balance_factor == 2) {
-          if (current->right->balance_factor == -1) {
-            rotate_right(current->right);
-          }
-          rotate_left(current);
-        }
-        current = current->parent;
-      }
+      fix(current);
     }
     const node * search(const T & key) noexcept {
       node * current {root_};
