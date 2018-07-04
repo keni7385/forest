@@ -10,7 +10,7 @@ namespace forest {
   private:
     enum Color { red, black };
     struct node {
-      node(const T KEY, const U VALUE, const Color COLOR) : key(KEY), value(VALUE), color(COLOR) {
+      node(const T & KEY, const U & VALUE, const Color & COLOR) : key(KEY), value(VALUE), color(COLOR) {
 
       }
       ~node() {
@@ -66,14 +66,11 @@ namespace forest {
     void rotate_right(node * rotation_root) noexcept {
       node * new_root {rotation_root->left};
       node * orphan_subtree {new_root->right};
-
       rotation_root->left = orphan_subtree;
       if (orphan_subtree) {
         orphan_subtree->parent = rotation_root;
       }
-
       new_root->right = rotation_root;
-
       if (!rotation_root->parent) {
         root_ = new_root;
       } else if(rotation_root == rotation_root->parent->left) {
@@ -87,14 +84,11 @@ namespace forest {
     void rotate_left(node * rotation_root) noexcept {
       node * new_root {rotation_root->right};
       node * orphan_subtree {new_root->left};
-
       rotation_root->right = orphan_subtree;
       if (orphan_subtree) {
         orphan_subtree->parent = rotation_root;
       }
-
       new_root->left = rotation_root;
-
       if (!rotation_root->parent) {
         root_ = new_root;
       } else if(rotation_root == rotation_root->parent->left) {

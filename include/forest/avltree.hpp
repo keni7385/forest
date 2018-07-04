@@ -9,7 +9,7 @@ namespace forest {
   class avltree {
   private:
     struct node {
-      node(const T KEY, const U VALUE) :key(KEY), value(VALUE) {
+      node(const T & KEY, const U & VALUE) :key(KEY), value(VALUE) {
         
       }
       ~node() {
@@ -18,7 +18,7 @@ namespace forest {
       }
       T key;
       U value;
-      int balance_factor {0};
+      char balance_factor {0};
       node * parent {nullptr};
       node * left {nullptr};
       node * right {nullptr};
@@ -65,14 +65,11 @@ namespace forest {
     void rotate_right(node * rotation_root) noexcept {
       node * new_root {rotation_root->left};
       node * orphan_subtree {new_root->right};
-
       rotation_root->left = orphan_subtree;
       if (orphan_subtree) {
         orphan_subtree->parent = rotation_root;
       }
-
       new_root->right = rotation_root;
-
       if (!rotation_root->parent) {
         root_ = new_root;
       } else if(rotation_root == rotation_root->parent->left) {
@@ -86,14 +83,11 @@ namespace forest {
     void rotate_left(node * rotation_root) noexcept {
       node * new_root {rotation_root->right};
       node * orphan_subtree {new_root->left};
-
       rotation_root->right = orphan_subtree;
       if (orphan_subtree) {
         orphan_subtree->parent = rotation_root;
       }
-
       new_root->left = rotation_root;
-
       if (!rotation_root->parent) {
         root_ = new_root;
       } else if(rotation_root == rotation_root->parent->left) {
@@ -144,7 +138,6 @@ namespace forest {
       node * current {root_};
       node * parent {nullptr};
       node * inserted_node {nullptr};
-
       while (current) {
         parent = current;
         if (key > current->key) {
@@ -156,10 +149,8 @@ namespace forest {
           return;
         }
       }
-
       current = new node(key, value);
       current->parent = parent;
-
       if(!parent) {
         root_ = current;
       } else if (current->key > parent->key) {
