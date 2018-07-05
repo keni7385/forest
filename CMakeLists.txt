@@ -11,3 +11,5 @@ add_library(catch INTERFACE)
 target_include_directories(catch INTERFACE ext/catch)
 
 add_subdirectory(test)
+
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include FILES_MATCHING PATTERN "*.hpp")
