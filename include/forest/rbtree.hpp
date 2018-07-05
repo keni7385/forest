@@ -6,73 +6,72 @@
 
 namespace forest {
   template <typename T, typename U>
-  class red_black_tree {
+  class rbtree {
   private:
     enum Color { red, black };
-    struct Node {
-      T key;
-      U value;
-      Color color;
-      Node * parent {nullptr};
-      Node * left {nullptr};
-      Node * right {nullptr};
-      Node(const T key, const U value, const Color color) : key(key), value(value), color(color) {}
-      ~Node() {
+    struct node {
+      node(const T & KEY, const U & VALUE, const Color & COLOR) : key(KEY), value(VALUE), color(COLOR) {
+
+      }
+      ~node() {
         delete left;
         delete right;
       }
+      T key;
+      U value;
+      Color color;
+      node * parent {nullptr};
+      node * left {nullptr};
+      node * right {nullptr};
     };
-    Node * root_ {nullptr};
-    void pre_order_traversal(const Node * root, void handler(const T & key, const U & value)) noexcept {
-      if (root == nullptr) return;
+    node * root_ {nullptr};
+    void pre_order_traversal(const node * root, void handler(const T & key, const U & value)) noexcept {
+      if (!root) return;
       handler(root->key, root->value);
       pre_order_traversal(root->left, handler);
       pre_order_traversal(root->right, handler);
     }
-    void in_order_traversal(const Node * root, void handler(const T & key, const U & value)) noexcept {
-      if (root == nullptr) return;
+    void in_order_traversal(const node * root, void handler(const T & key, const U & value)) noexcept {
+      if (!root) return;
       in_order_traversal(root->left, handler);
       handler(root->key, root->value);
       in_order_traversal(root->right, handler);
     }
-    void post_order_traversal(const Node * root, void handler(const T & key, const U & value)) noexcept {
-      if (root == nullptr) return;
+    void post_order_traversal(const node * root, void handler(const T & key, const U & value)) noexcept {
+      if (!root) return;
       post_order_traversal(root->left, handler);
       post_order_traversal(root->right, handler);
       handler(root->key, root->value);
     }
-    void breadth_first_traversal(const Node * root, void handler(const T & key, const U & value)) noexcept {
-      std::queue <const Node *> queue;
-      if (root == nullptr) return;
+    void breadth_first_traversal(const node * root, void handler(const T & key, const U & value)) noexcept {
+      std::queue <const node *> queue;
+      if (!root) return;
       queue.push(root);
-      while (queue.empty() == false) {
-        Node * current {queue.front()};
+      while (!queue.empty()) {
+        node * current {queue.front()};
         handler(current->key, current->value);
         queue.pop();
-        if (current->left != nullptr) queue.push(current->left);
-        if (current->right != nullptr) queue.push(current->right);
+        if (current->left) queue.push(current->left);
+        if (current->right) queue.push(current->right);
       }
     }
-    size_t height(const Node * root) noexcept {
-      if (root == nullptr) return 0;
+    size_t height(const node * root) noexcept {
+      if (!root) return 0;
       return std::max(height(root->left), height(root->right)) + 1;
     }
-    size_t size(const Node * root) noexcept {
-      if (root == nullptr) return 0;
+    size_t size(const node * root) noexcept {
+      if (!root) return 0;
       return size(root->left) + size(root->right) + 1;
     }
-    void rotate_right(Node * rotation_root) noexcept {
-      Node * new_root {rotation_root->left};
-      Node * orphan_subtree {new_root->right};
-
+    void rotate_right(node * rotation_root) noexcept {
+      node * new_root {rotation_root->left};
+      node * orphan_subtree {new_root->right};
       rotation_root->left = orphan_subtree;
-      if (orphan_subtree != nullptr) {
+      if (orphan_subtree) {
         orphan_subtree->parent = rotation_root;
       }
-
       new_root->right = rotation_root;
-
-      if (rotation_root->parent == nullptr) {
+      if (!rotation_root->parent) {
         root_ = new_root;
       } else if(rotation_root == rotation_root->parent->left) {
         rotation_root->parent->left = new_root;
@@ -82,18 +81,15 @@ namespace forest {
       new_root->parent = rotation_root->parent;
       rotation_root->parent = new_root;
     }
-    void rotate_left(Node * rotation_root) noexcept {
-      Node * new_root {rotation_root->right};
-      Node * orphan_subtree {new_root->left};
-
+    void rotate_left(node * rotation_root) noexcept {
+      node * new_root {rotation_root->right};
+      node * orphan_subtree {new_root->left};
       rotation_root->right = orphan_subtree;
-      if (orphan_subtree != nullptr) {
+      if (orphan_subtree) {
         orphan_subtree->parent = rotation_root;
       }
-
       new_root->left = rotation_root;
-
-      if (rotation_root->parent == nullptr) {
+      if (!rotation_root->parent) {
         root_ = new_root;
       } else if(rotation_root == rotation_root->parent->left) {
         rotation_root->parent->left = new_root;
@@ -103,23 +99,15 @@ namespace forest {
       new_root->parent = rotation_root->parent;
       rotation_root->parent = new_root;
     }
-    Node * find_parent(Node * n) noexcept {
-      if (n != nullptr) return n->parent;
-      return nullptr;
-    }
-    Node * find_grandparent(Node * n) noexcept {
-      if (find_parent(n) != nullptr) return find_parent(n)->parent;
-      return nullptr;
-    }
-    void fix(Node * n) noexcept {
-      Node * parent {nullptr};
-      Node * grand_parent {nullptr};
+    void fix(node * n) noexcept {
+      node * parent {nullptr};
+      node * grand_parent {nullptr};
       while ((n != root_) && (n->color != black) && (n->parent->color == red)) {
         parent = n->parent;
         grand_parent = n->parent->parent;
         if (parent == grand_parent->left) {
-          Node * uncle {grand_parent->right};
-          if (uncle != nullptr && uncle->color == red) {
+          node * uncle {grand_parent->right};
+          if (uncle && uncle->color == red) {
             grand_parent->color = red;
             parent->color = black;
             uncle->color = black;
@@ -135,8 +123,8 @@ namespace forest {
             n = parent;
           }
         } else {
-          Node * uncle {grand_parent->left};
-          if ((uncle != nullptr) && (uncle->color == red)) {
+          node * uncle {grand_parent->left};
+          if (uncle && (uncle->color == red)) {
             grand_parent->color = red;
             parent->color = black;
             uncle->color = black;
@@ -156,8 +144,10 @@ namespace forest {
       root_->color = black;
     }
   public:
-    red_black_tree() {}
-    ~red_black_tree() {
+    rbtree() {
+      
+    }
+    ~rbtree() {
       delete root_;
     }
     void pre_order_traversal(void handler(const T & key, const U & value)) noexcept {
@@ -173,8 +163,8 @@ namespace forest {
       breadth_first_traversal(root_, handler);
     }
     void insert(const T & key, const U & value) noexcept {
-      Node * current {root_};
-      Node * parent {nullptr};
+      node * current {root_};
+      node * parent {nullptr};
       while (current != nullptr) {
         parent = current;
         if (key > current->key) {
@@ -186,9 +176,9 @@ namespace forest {
           return;
         }
       }
-      current = new Node(key, value, red);
+      current = new node(key, value, red);
       current->parent = parent;
-      if (parent == nullptr) {
+      if (!parent) {
         root_ = current;
       } else if (current->key > parent->key) {
         parent->right = current;
@@ -197,9 +187,9 @@ namespace forest {
       }
       fix(current);
     }
-    const Node * search(const T & key) noexcept {
-      Node * current {root_};
-      while (current != nullptr) {
+    const node * search(const T & key) noexcept {
+      node * current {root_};
+      while (current) {
         if (key > current->key) {
           current = current->right;
         } else if (key < current->key) {
@@ -210,33 +200,33 @@ namespace forest {
       }
       return nullptr;
     }
-    const Node * minimum() noexcept {
-      Node * current = {root_};
-      if (current == nullptr) return nullptr;
-      while (current->left != nullptr) current = current->left;
+    const node * minimum() noexcept {
+      node * current = {root_};
+      if (!current) return nullptr;
+      while (current->left) current = current->left;
       return current;
     }
-    const Node * maximum() noexcept {
-      Node * current {root_};
-      if (current == nullptr) return nullptr;
-      while (current->right != nullptr) current = current->right;
+    const node * maximum() noexcept {
+      node * current {root_};
+      if (!current) return nullptr;
+      while (current->right) current = current->right;
       return current;
     }
-    const Node * successor(const T & key) noexcept {
-      Node * current {root_};
-      while (current != nullptr) {
+    const node * successor(const T & key) noexcept {
+      node * current {root_};
+      while (current) {
         if (key > current->key) {
           current = current->right;
         } else if (key < current->key) {
           current = current->left;
         } else {
-          if (current->right != nullptr) {
+          if (current->right) {
             current = current->right;
-            while (current->left != nullptr) current = current->left;
+            while (current->left) current = current->left;
             return current;
           }
-          Node * parent {current->parent};
-          while (parent != nullptr && current == parent->right) {
+          node * parent {current->parent};
+          while (parent && current == parent->right) {
             current = parent;
             parent = parent->parent;
           }
@@ -245,21 +235,21 @@ namespace forest {
       }
       return nullptr;
     }
-    const Node * predecessor(const T & key) {
-      Node * current {root_};
-      while (current != nullptr) {
+    const node * predecessor(const T & key) {
+      node * current {root_};
+      while (current) {
         if (key > current->key) {
           current = current->right;
         } else if (key < current->key) {
           current = current->left;
         } else {
-          if (current->left != nullptr) {
+          if (current->left) {
             current = current->left;
-            while (current->right != nullptr) current = current->right;
+            while (current->right) current = current->right;
             return current;
           }
-          Node * parent {current->parent};
-          while (parent != nullptr && current == parent->left) {
+          node * parent {current->parent};
+          while (parent && current == parent->left) {
             current = parent;
             parent = parent->parent;
           }
@@ -277,7 +267,7 @@ namespace forest {
     bool empty() noexcept {
       return !root_;
     }
-    const Node * root() noexcept {
+    const node * root() noexcept {
       return root_;
     }
   };
