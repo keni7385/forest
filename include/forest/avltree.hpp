@@ -23,7 +23,7 @@ namespace forest {
       node * left {nullptr};
       node * right {nullptr};
     };
-    node * root_ {nullptr};
+    node * mRoot {nullptr};
     void pre_order_traversal(const node * root, void handler(const T & key, const U & value)) noexcept {
       if (!root) return;
       handler(root->key, root->value);
@@ -71,7 +71,7 @@ namespace forest {
       }
       new_root->right = rotation_root;
       if (!rotation_root->parent) {
-        root_ = new_root;
+        mRoot = new_root;
       } else if(rotation_root == rotation_root->parent->left) {
         rotation_root->parent->left = new_root;
       } else if (rotation_root == rotation_root->parent->right) {
@@ -89,7 +89,7 @@ namespace forest {
       }
       new_root->left = rotation_root;
       if (!rotation_root->parent) {
-        root_ = new_root;
+        mRoot = new_root;
       } else if(rotation_root == rotation_root->parent->left) {
         rotation_root->parent->left = new_root;
       } else {
@@ -120,22 +120,22 @@ namespace forest {
       
     }
     ~avltree() {
-      delete root_;
+      delete mRoot;
     }
     void pre_order_traversal(void handler(const T & key, const U & value)) noexcept {
-      pre_order_traversal(root_, handler);
+      pre_order_traversal(mRoot, handler);
     }
     void in_order_traversal(void handler(const T & key, const U & value)) noexcept {
-      in_order_traversal(root_, handler);
+      in_order_traversal(mRoot, handler);
     }
     void post_order_traversal(void handler(const T & key, const U & value)) noexcept {
-      post_order_traversal(root_, handler);
+      post_order_traversal(mRoot, handler);
     }
     void breadth_first_traversal(void handler(const T & key, const U & value)) noexcept {
-      breadth_first_traversal(root_, handler);
+      breadth_first_traversal(mRoot, handler);
     }
     void insert(const T & key, const U & value) noexcept {
-      node * current {root_};
+      node * current {mRoot};
       node * parent {nullptr};
       node * inserted_node {nullptr};
       while (current) {
@@ -152,7 +152,7 @@ namespace forest {
       current = new node(key, value);
       current->parent = parent;
       if(!parent) {
-        root_ = current;
+        mRoot = current;
       } else if (current->key > parent->key) {
         parent->right = current;
       } else if (current->key < parent->key) {
@@ -161,7 +161,7 @@ namespace forest {
       fix(current);
     }
     const node * search(const T & key) noexcept {
-      node * current {root_};
+      node * current {mRoot};
       while (current) {
         if (key > current->key) {
           current = current->right;
@@ -174,19 +174,19 @@ namespace forest {
       return nullptr;
     }
     const node * minimum() noexcept {
-      node * current {root_};
+      node * current {mRoot};
       if (!current) return nullptr;
       while(current->left) current = current->left;
       return current;
     }
     const node * maximum() noexcept {
-      node * current {root_};
+      node * current {mRoot};
       if (!current) return nullptr;
       while(current->right) current = current->right;
       return current;
     }
     const node * successor(const T & key) noexcept {
-      node * current {root_};
+      node * current {mRoot};
       while (current) {
         if (key > current->key) {
           current = current->right;
@@ -209,7 +209,7 @@ namespace forest {
       return nullptr;
     }
     const node * predecessor(const T & key) noexcept {
-      node * current {root_};
+      node * current {mRoot};
       while (current) {
         if (key > current->key) {
           current = current->right;
@@ -232,16 +232,16 @@ namespace forest {
       return nullptr;
     }
     size_t height() noexcept {
-      return height(root_);
+      return height(mRoot);
     }
     size_t size() noexcept {
-      return size(root_);
+      return size(mRoot);
     }
     bool empty() noexcept {
-      return !root_;
+      return !mRoot;
     }
     const node * root() noexcept {
-      return root_;
+      return mRoot;
     }
   };
 }
