@@ -9,3 +9,5 @@ build_script:
     cmake ..
 
     make
+
+    ./test/tests
