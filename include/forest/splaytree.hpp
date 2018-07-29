@@ -22,7 +22,7 @@ namespace forest {
       splaynode * left {nullptr};
       splaynode * right {nullptr};
     };
-    splaynode * _root {nullptr};
+    splaynode * tree_root {nullptr};
     void pre_order_traversal(const splaynode * root, void handler(const T & key, const U & value)) noexcept {
       if (!root) return;
       handler(root->key, root->value);
@@ -70,7 +70,7 @@ namespace forest {
       }
       new_root->right = rotation_root;
       if (!rotation_root->parent) {
-        _root = new_root;
+        tree_root = new_root;
       } else if(rotation_root == rotation_root->parent->left) {
         rotation_root->parent->left = new_root;
       } else if (rotation_root == rotation_root->parent->right) {
@@ -88,7 +88,7 @@ namespace forest {
       }
       new_root->left = rotation_root;
       if (!rotation_root->parent) {
-        _root = new_root;
+        tree_root = new_root;
       } else if(rotation_root == rotation_root->parent->left) {
         rotation_root->parent->left = new_root;
       } else {
@@ -125,22 +125,22 @@ namespace forest {
 
     }
     ~splaytree() {
-      delete _root;
+      delete tree_root;
     }
     void pre_order_traversal(void handler(const T & key, const U & value)) noexcept {
-      pre_order_traversal(_root, handler);
+      pre_order_traversal(tree_root, handler);
     }
     void in_order_traversal(void handler(const T & key, const U & value)) noexcept {
-      in_order_traversal(_root, handler);
+      in_order_traversal(tree_root, handler);
     }
     void post_order_traversal(void handler(const T & key, const U & value)) noexcept {
-      post_order_traversal(_root, handler);
+      post_order_traversal(tree_root, handler);
     }
     void breadth_first_traversal(void handler(const T & key, const U & value)) noexcept {
-      breadth_first_traversal(_root, handler);
+      breadth_first_traversal(tree_root, handler);
     }
     void insert(const T & key, const U & value) noexcept {
-      splaynode * current {_root};
+      splaynode * current {tree_root};
       splaynode * parent {nullptr};
       while (current) {
         parent = current;
@@ -156,7 +156,7 @@ namespace forest {
       current = new splaynode(key, value);
       current->parent = parent;
       if (!parent) {
-        _root = current;
+        tree_root = current;
       } else if (current->key > parent->key) {
         parent->right = current;
       } else if (current->key < parent->key) {
@@ -165,7 +165,7 @@ namespace forest {
       fix(current);
     }
     const splaynode * search(const T & key) noexcept {
-      splaynode * current {_root};
+      splaynode * current {tree_root};
       while (current) {
         if (key > current->key) {
           current = current->right;
@@ -178,19 +178,19 @@ namespace forest {
       return nullptr;
     }
     const splaynode * minimum() noexcept {
-      splaynode * current {_root};
+      splaynode * current {tree_root};
       if (!current) return nullptr;
       while (current->left) current = current->left;
       return current;
     }
     const splaynode * maximum() noexcept {
-      splaynode * current {_root};
+      splaynode * current {tree_root};
       if (!current) return nullptr;
       while (current->right) current = current->right;
       return current;
     }
     const splaynode * successor(const T & key) noexcept {
-      splaynode * current {_root};
+      splaynode * current {tree_root};
       while (current) {
         if (key > current->key) {
           current = current->right;
@@ -213,7 +213,7 @@ namespace forest {
       return nullptr;
     }
     const splaynode * predecessor(const T & key) noexcept {
-      splaynode * current {_root};
+      splaynode * current {tree_root};
       while (current) {
         if (key > current->key) {
           current = current->right;
@@ -236,16 +236,16 @@ namespace forest {
       return nullptr;
     }
     size_t height() noexcept {
-      return height(_root);
+      return height(tree_root);
     }
     size_t size() noexcept {
-      return size(_root);
+      return size(tree_root);
     }
     bool empty() const noexcept {
-      return !_root;
+      return !tree_root;
     }
     const splaynode * root() noexcept {
-      return _root;
+      return tree_root;
     }
   };
 }
