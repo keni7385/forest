@@ -137,7 +137,6 @@ namespace forest {
     void insert(const T & key, const U & value) noexcept {
       avlnode * current {tree_root};
       avlnode * parent {nullptr};
-      avlnode * inserted_node {nullptr};
       while (current) {
         parent = current;
         if (key > current->key) {
