@@ -9,6 +9,7 @@ namespace forest {
   class splaytree {
   private:
     struct splaynode {
+      splaynode() = default;
       splaynode(const T & KEY, const U & VALUE) : key(KEY), value(VALUE) {
 
       }
@@ -121,9 +122,7 @@ namespace forest {
       }
     }
   public:
-    splaytree() {
-
-    }
+    splaytree() = default;
     ~splaytree() {
       delete tree_root;
     }

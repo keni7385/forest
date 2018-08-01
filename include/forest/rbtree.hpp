@@ -13,6 +13,7 @@ namespace forest {
       BLACK
     };
     struct rbnode {
+      rbnode() = default;
       rbnode(const T & KEY, const U & VALUE, const rbcolor & COLOR) : key(KEY), value(VALUE), color(COLOR) {
 
       }
@@ -147,9 +148,7 @@ namespace forest {
       tree_root->color = BLACK;
     }
   public:
-    rbtree() {
-
-    }
+    rbtree() = default;
     ~rbtree() {
       delete tree_root;
     }

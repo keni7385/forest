@@ -9,6 +9,7 @@ namespace forest {
   class avltree {
   private:
     struct avlnode {
+      avlnode() = default;
       avlnode(const T & KEY, const U & VALUE) :key(KEY), value(VALUE) {
 
       }
@@ -116,9 +117,7 @@ namespace forest {
       }
     }
   public:
-    avltree() {
-
-    }
+    avltree() = default;
     ~avltree() {
       delete tree_root;
     }
