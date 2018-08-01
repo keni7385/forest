@@ -8,7 +8,7 @@ add_library(forest INTERFACE)
 target_include_directories(forest INTERFACE include)
 
 add_library(catch INTERFACE)
-target_include_directories(catch INTERFACE ext/catch)
+target_include_directories(catch INTERFACE ext/catch/include)
 
 add_subdirectory(test)
 add_subdirectory(examples)
