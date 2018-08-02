@@ -1,8 +1,10 @@
 #pragma once
 
 #include <algorithm>
+#include <initializer_list>
 #include <memory>
 #include <queue>
+#include <utility>
 
 namespace forest {
   template <typename T, typename U>
@@ -118,6 +120,11 @@ namespace forest {
     }
   public:
     avltree() = default;
+    avltree(std::initializer_list <std::pair <T, U> > list) {
+      for (auto element : list) {
+        insert(element.first, element.second);
+      }
+    }
     ~avltree() {
       delete tree_root;
     }
