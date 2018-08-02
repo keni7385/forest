@@ -10,4 +10,4 @@ build_script:
 
     make
 
-    ./build/test/FOREST_TESTS
+    ./test/FOREST_TEST
