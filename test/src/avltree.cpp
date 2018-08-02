@@ -1,5 +1,25 @@
 #include <catch.hpp>
 #include <forest/avltree.hpp>
+#include <string>
+
+TEST_CASE("Test AVL Tree Constructor") {
+  forest::avltree <int, std::string> avltree({
+    {2 , "Thor"},
+    {4 , "Odin"},
+    {90, "Loki"},
+    {3 , "Baldr"},
+    {0 , "Frigg"},
+    {14, "Eir"},
+    {45, "Heimdall"}
+  });
+  REQUIRE(avltree.search(2 )->value == "Thor");
+  REQUIRE(avltree.search(4 )->value == "Odin");
+  REQUIRE(avltree.search(90)->value == "Loki");
+  REQUIRE(avltree.search(3 )->value == "Baldr");
+  REQUIRE(avltree.search(0 )->value == "Frigg");
+  REQUIRE(avltree.search(14)->value == "Eir");
+  REQUIRE(avltree.search(45)->value == "Heimdall");
+}
 
 SCENARIO("Test AVL Tree") {
   GIVEN("An AVL Tree") {

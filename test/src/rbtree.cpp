@@ -1,5 +1,25 @@
 #include <catch.hpp>
 #include <forest/rbtree.hpp>
+#include <string>
+
+TEST_CASE("Test Red Black Tree Constructor") {
+  forest::rbtree <int, std::string> rbtree({
+    {2 , "Thor"},
+    {4 , "Odin"},
+    {90, "Loki"},
+    {3 , "Baldr"},
+    {0 , "Frigg"},
+    {14, "Eir"},
+    {45, "Heimdall"}
+  });
+  REQUIRE(rbtree.search(2 )->value == "Thor");
+  REQUIRE(rbtree.search(4 )->value == "Odin");
+  REQUIRE(rbtree.search(90)->value == "Loki");
+  REQUIRE(rbtree.search(3 )->value == "Baldr");
+  REQUIRE(rbtree.search(0 )->value == "Frigg");
+  REQUIRE(rbtree.search(14)->value == "Eir");
+  REQUIRE(rbtree.search(45)->value == "Heimdall");
+}
 
 SCENARIO("Test Red Black Tree") {
   GIVEN("A Red Black Tree") {

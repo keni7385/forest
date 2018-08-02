@@ -1,5 +1,25 @@
 #include <catch.hpp>
 #include <forest/splaytree.hpp>
+#include <string>
+
+TEST_CASE("Test Splay Tree Constructor") {
+  forest::splaytree <int, std::string> splaytree({
+    {2 , "Thor"},
+    {4 , "Odin"},
+    {90, "Loki"},
+    {3 , "Baldr"},
+    {0 , "Frigg"},
+    {14, "Eir"},
+    {45, "Heimdall"}
+  });
+  REQUIRE(splaytree.search(2 )->value == "Thor");
+  REQUIRE(splaytree.search(4 )->value == "Odin");
+  REQUIRE(splaytree.search(90)->value == "Loki");
+  REQUIRE(splaytree.search(3 )->value == "Baldr");
+  REQUIRE(splaytree.search(0 )->value == "Frigg");
+  REQUIRE(splaytree.search(14)->value == "Eir");
+  REQUIRE(splaytree.search(45)->value == "Heimdall");
+}
 
 SCENARIO("Test Splay Tree") {
   GIVEN("A Splay Tree") {
