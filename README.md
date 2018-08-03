@@ -25,6 +25,14 @@
 
 #### Or simply [download](https://github.com/xorz57/forest/releases/latest) the header files
 
+#### Or use CMake
+
+```sh
+$ mkdir build
+$ cmake ..
+$ sudo make install
+```
+
 ## Examples
 
 #### Inserting nodes
