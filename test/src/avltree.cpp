@@ -2,6 +2,8 @@
 #include <forest/avltree.hpp>
 #include <string>
 
+auto handler = [](const int & key, const int & value) {};
+
 TEST_CASE("Test AVL Tree Constructor") {
   forest::avltree <int, std::string> avltree({
     {2 , "Thor"},
@@ -58,13 +60,13 @@ SCENARIO("Test AVL Tree") {
         REQUIRE(result == nullptr);
       }
       THEN("Call pre_order_traversal") {
-        avltree.pre_order_traversal([](auto key, auto value) {});
+        avltree.pre_order_traversal(handler);
       }
       THEN("Call in_order_traversal") {
-        avltree.in_order_traversal([](auto key, auto value) {});
+        avltree.in_order_traversal(handler);
       }
       THEN("Call post_order_traversal") {
-        avltree.post_order_traversal([](auto key, auto value) {});
+        avltree.post_order_traversal(handler);
       }
     }
     WHEN("Nodes are inserted in random order") {
@@ -127,13 +129,13 @@ SCENARIO("Test AVL Tree") {
         REQUIRE(result->key == 3);
       }
       THEN("Call pre_order_traversal") {
-        avltree.pre_order_traversal([](auto key, auto value) {});
+        avltree.pre_order_traversal(handler);
       }
       THEN("Call in_order_traversal") {
-        avltree.in_order_traversal([](auto key, auto value) {});
+        avltree.in_order_traversal(handler);
       }
       THEN("Call post_order_traversal") {
-        avltree.post_order_traversal([](auto key, auto value) {});
+        avltree.post_order_traversal(handler);
       }
     }
     WHEN("Nodes are inserted in ascending order") {
@@ -192,13 +194,13 @@ SCENARIO("Test AVL Tree") {
         REQUIRE(result->key == 3);
       }
       THEN("Call pre_order_traversal") {
-        avltree.pre_order_traversal([](auto key, auto value) {});
+        avltree.pre_order_traversal(handler);
       }
       THEN("Call in_order_traversal") {
-        avltree.in_order_traversal([](auto key, auto value) {});
+        avltree.in_order_traversal(handler);
       }
       THEN("Call post_order_traversal") {
-        avltree.post_order_traversal([](auto key, auto value) {});
+        avltree.post_order_traversal(handler);
       }
     }
     WHEN("Nodes are inserted in descending order") {
@@ -257,13 +259,13 @@ SCENARIO("Test AVL Tree") {
         REQUIRE(result->key == 3);
       }
       THEN("Call pre_order_traversal") {
-        avltree.pre_order_traversal([](auto key, auto value) {});
+        avltree.pre_order_traversal(handler);
       }
       THEN("Call in_order_traversal") {
-        avltree.in_order_traversal([](auto key, auto value) {});
+        avltree.in_order_traversal(handler);
       }
       THEN("Call post_order_traversal") {
-        avltree.post_order_traversal([](auto key, auto value) {});
+        avltree.post_order_traversal(handler);
       }
     }
   }

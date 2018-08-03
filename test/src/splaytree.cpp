@@ -2,6 +2,8 @@
 #include <forest/splaytree.hpp>
 #include <string>
 
+auto handler = [](const int & key, const int & value) {};
+
 TEST_CASE("Test Splay Tree Constructor") {
   forest::splaytree <int, std::string> splaytree({
     {2 , "Thor"},
@@ -58,13 +60,13 @@ SCENARIO("Test Splay Tree") {
         REQUIRE(result == nullptr);
       }
       THEN("Call pre_order_traversal") {
-        splaytree.pre_order_traversal([](auto key, auto value) {});
+        splaytree.pre_order_traversal(handler);
       }
       THEN("Call in_order_traversal") {
-        splaytree.in_order_traversal([](auto key, auto value) {});
+        splaytree.in_order_traversal(handler);
       }
       THEN("Call post_order_traversal") {
-        splaytree.post_order_traversal([](auto key, auto value) {});
+        splaytree.post_order_traversal(handler);
       }
     }
     WHEN("Nodes are inserted in random order") {
@@ -127,13 +129,13 @@ SCENARIO("Test Splay Tree") {
         REQUIRE(result->key == 3);
       }
       THEN("Call pre_order_traversal") {
-        splaytree.pre_order_traversal([](auto key, auto value) {});
+        splaytree.pre_order_traversal(handler);
       }
       THEN("Call in_order_traversal") {
-        splaytree.in_order_traversal([](auto key, auto value) {});
+        splaytree.in_order_traversal(handler);
       }
       THEN("Call post_order_traversal") {
-        splaytree.post_order_traversal([](auto key, auto value) {});
+        splaytree.post_order_traversal(handler);
       }
     }
     WHEN("Nodes are inserted in ascending order") {
@@ -192,13 +194,13 @@ SCENARIO("Test Splay Tree") {
         REQUIRE(result->key == 3);
       }
       THEN("Call pre_order_traversal") {
-        splaytree.pre_order_traversal([](auto key, auto value) {});
+        splaytree.pre_order_traversal(handler);
       }
       THEN("Call in_order_traversal") {
-        splaytree.in_order_traversal([](auto key, auto value) {});
+        splaytree.in_order_traversal(handler);
       }
       THEN("Call post_order_traversal") {
-        splaytree.post_order_traversal([](auto key, auto value) {});
+        splaytree.post_order_traversal(handler);
       }
     }
     WHEN("Nodes are inserted in descending order") {
@@ -257,13 +259,13 @@ SCENARIO("Test Splay Tree") {
         REQUIRE(result->key == 3);
       }
       THEN("Call pre_order_traversal") {
-        splaytree.pre_order_traversal([](auto key, auto value) {});
+        splaytree.pre_order_traversal(handler);
       }
       THEN("Call in_order_traversal") {
-        splaytree.in_order_traversal([](auto key, auto value) {});
+        splaytree.in_order_traversal(handler);
       }
       THEN("Call post_order_traversal") {
-        splaytree.post_order_traversal([](auto key, auto value) {});
+        splaytree.post_order_traversal(handler);
       }
     }
   }
