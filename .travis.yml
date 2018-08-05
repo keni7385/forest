@@ -1,0 +1,10 @@
+language: cpp
+dist: trusty
+os:
+  - linux
+script:
+  - mkdir build
+  - cd build
+  - cmake .. -DFOREST_BUILD_TESTS=ON
+  - make
+  - ./test/FOREST_TEST

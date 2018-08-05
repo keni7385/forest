@@ -6,6 +6,8 @@ build_script:
 
     cd build
 
-    cmake ..
+    cmake .. -DFOREST_BUILD_TESTS=ON
 
     make
+
+    ./test/FOREST_TEST
