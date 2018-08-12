@@ -14,7 +14,8 @@ namespace forest {
       RED,
       BLACK
     };
-    struct rbnode {
+    class rbnode {
+    public:
       rbnode() = default;
       rbnode(const T & KEY, const U & VALUE, const rbcolor & COLOR) : key(KEY), value(VALUE), color(COLOR) {
 
@@ -25,6 +26,8 @@ namespace forest {
       }
       T key;
       U value;
+      friend class rbtree;
+    private:
       rbcolor color;
       rbnode * parent {nullptr};
       rbnode * left {nullptr};

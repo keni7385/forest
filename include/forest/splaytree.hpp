@@ -10,7 +10,8 @@ namespace forest {
   template <typename T, typename U>
   class splaytree {
   private:
-    struct splaynode {
+    class splaynode {
+    public:
       splaynode() = default;
       splaynode(const T & KEY, const U & VALUE) : key(KEY), value(VALUE) {
 
@@ -21,6 +22,8 @@ namespace forest {
       }
       T key;
       U value;
+      friend class splaytree;
+    private:
       splaynode * parent {nullptr};
       splaynode * left {nullptr};
       splaynode * right {nullptr};

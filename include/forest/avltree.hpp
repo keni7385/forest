@@ -10,7 +10,8 @@ namespace forest {
   template <typename T, typename U>
   class avltree {
   private:
-    struct avlnode {
+    class avlnode {
+    public:
       avlnode() = default;
       avlnode(const T & KEY, const U & VALUE) :key(KEY), value(VALUE) {
 
@@ -21,6 +22,8 @@ namespace forest {
       }
       T key;
       U value;
+      friend class avltree;
+    private:
       char balance_factor {0};
       avlnode * parent {nullptr};
       avlnode * left {nullptr};
