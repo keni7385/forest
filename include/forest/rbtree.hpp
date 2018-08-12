@@ -156,6 +156,10 @@ namespace forest {
         insert(element.first, element.second);
       }
     }
+    rbtree(const rbtree &) = delete;
+    rbtree(rbtree &&) = delete;
+    rbtree& operator=(const rbtree &) = delete;
+    rbtree& operator=(rbtree &&) = delete;
     ~rbtree() {
       delete tree_root;
     }

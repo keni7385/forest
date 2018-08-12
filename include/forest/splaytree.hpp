@@ -130,6 +130,10 @@ namespace forest {
         insert(element.first, element.second);
       }
     }
+    splaytree(const splaytree &) = delete;
+    splaytree(splaytree &&) = delete;
+    splaytree& operator=(const splaytree &) = delete;
+    splaytree& operator=(splaytree &&) = delete;
     ~splaytree() {
       delete tree_root;
     }

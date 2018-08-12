@@ -125,6 +125,10 @@ namespace forest {
         insert(element.first, element.second);
       }
     }
+    avltree(const avltree &) = delete;
+    avltree(avltree &&) = delete;
+    avltree& operator=(const avltree &) = delete;
+    avltree& operator=(avltree &&) = delete;
     ~avltree() {
       delete tree_root;
     }
