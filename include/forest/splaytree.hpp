@@ -16,6 +16,10 @@ namespace forest {
       splaynode(const T & KEY, const U & VALUE) : key(KEY), value(VALUE) {
 
       }
+      splaynode(const splaynode &) = delete;
+      splaynode(splaynode &&) = delete;
+      splaynode& operator=(const splaynode &) = delete;
+      splaynode& operator=(splaynode &&) = delete;
       ~splaynode() {
         delete left;
         delete right;

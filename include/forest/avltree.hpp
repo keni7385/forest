@@ -16,6 +16,10 @@ namespace forest {
       avlnode(const T & KEY, const U & VALUE) :key(KEY), value(VALUE) {
 
       }
+      avlnode(const avlnode &) = delete;
+      avlnode(avlnode &&) = delete;
+      avlnode& operator=(const avlnode &) = delete;
+      avlnode& operator=(avlnode &&) = delete;
       ~avlnode() {
         delete left;
         delete right;

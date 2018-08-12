@@ -20,6 +20,10 @@ namespace forest {
       rbnode(const T & KEY, const U & VALUE, const rbcolor & COLOR) : key(KEY), value(VALUE), color(COLOR) {
 
       }
+      rbnode(const rbnode &) = delete;
+      rbnode(rbnode &&) = delete;
+      rbnode& operator=(const rbnode &) = delete;
+      rbnode& operator=(rbnode &&) = delete;
       ~rbnode() {
         delete left;
         delete right;
