@@ -1,4 +1,4 @@
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <forest/avltree.hpp>
 #include <string>
 

@@ -1,3 +1,7 @@
+/**
+ * @file rbtree.hpp
+ */
+
 #pragma once
 
 #include <algorithm>
@@ -158,7 +162,7 @@ namespace forest {
     }
   public:
     rbtree() = default;
-    rbtree(std::initializer_list <std::pair <T, U> > list) {
+    explicit rbtree(std::initializer_list <std::pair <T, U> > list) {
       for (auto element : list) {
         insert(element.first, element.second);
       }

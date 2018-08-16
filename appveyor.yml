@@ -1,13 +1,17 @@
 version: '{build}'
 image: Ubuntu
+install:
+- sh: git submodule update --init --recursive
 build_script:
 - sh: >-
     mkdir build
 
     cd build
-
-    cmake .. -DFOREST_BUILD_TESTS=ON
-
+    
+    cmake .. -DBUILD_TESTS=ON
+    
     make
+    
+    cd test
 
-    ./test/FOREST_TEST
+    ctest

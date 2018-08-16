@@ -3,6 +3,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/8e5jutnq0a8b458f/branch/master?svg=true)](https://ci.appveyor.com/project/xorz57/forest/branch/master)
 [![Build Status](https://travis-ci.org/xorz57/forest.svg?branch=master)](https://travis-ci.org/xorz57/forest)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f2eb2dcf98794d03b5cf0d4c9910db39)](https://www.codacy.com/app/xorz57/forest?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=xorz57/forest&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/xorz57/forest/branch/master/graph/badge.svg)](https://codecov.io/gh/xorz57/forest)
 
 ## Features
 
