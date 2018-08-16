@@ -1,5 +1,6 @@
 /**
  * @file avltree.hpp
+ * @author George Fotopoulos
  */
 
 #pragma once

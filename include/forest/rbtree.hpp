@@ -1,5 +1,6 @@
 /**
  * @file rbtree.hpp
+ * @author George Fotopoulos
  */
 
 #pragma once

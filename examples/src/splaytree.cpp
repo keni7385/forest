@@ -1,3 +1,8 @@
+/*
+ * @file splaytree.cpp
+ * @author George Fotopoulos
+ */
+
 #include <forest/splaytree.hpp>
 #include <iostream>
 #include <string>

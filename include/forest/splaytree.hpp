@@ -1,5 +1,6 @@
 /**
  * @file splaytree.hpp
+ * @author George Fotopoulos
  */
 
 #pragma once
