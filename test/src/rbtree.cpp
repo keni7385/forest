@@ -1,4 +1,9 @@
-#include <catch.hpp>
+/*
+ * @file rbtree.cpp
+ * @author George Fotopoulos
+ */
+
+#include <catch2/catch.hpp>
 #include <forest/rbtree.hpp>
 #include <string>
 

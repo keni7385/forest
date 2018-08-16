@@ -1,3 +1,8 @@
+/*
+ * @file rbtree.cpp
+ * @author George Fotopoulos
+ */
+
 #include <forest/rbtree.hpp>
 #include <iostream>
 #include <string>

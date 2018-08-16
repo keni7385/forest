@@ -1,3 +1,8 @@
+/**
+ * @file avltree.hpp
+ * @author George Fotopoulos
+ */
+
 #pragma once
 
 #include <algorithm>
@@ -127,7 +132,7 @@ namespace forest {
     }
   public:
     avltree() = default;
-    avltree(std::initializer_list <std::pair <T, U> > list) {
+    explicit avltree(std::initializer_list <std::pair <T, U> > list) {
       for (auto element : list) {
         insert(element.first, element.second);
       }

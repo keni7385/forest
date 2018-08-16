@@ -1,3 +1,8 @@
+/*
+ * @file avltree.cpp
+ * @author George Fotopoulos
+ */
+
 #include <forest/avltree.hpp>
 #include <iostream>
 #include <string>

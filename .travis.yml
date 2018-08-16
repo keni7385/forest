@@ -5,6 +5,8 @@ os:
 script:
   - mkdir build
   - cd build
-  - cmake .. -DFOREST_BUILD_TESTS=ON
-  - make
-  - ./test/FOREST_TEST
+  - cmake .. -DBUILD_TESTS=ON -DENABLE_COVERAGE=ON
+  - make -j2
+  - cd test
+  - ctest
+  - bash <(curl -s https://codecov.io/bash)

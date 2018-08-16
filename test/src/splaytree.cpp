@@ -1,4 +1,9 @@
-#include <catch.hpp>
+/*
+ * @file splaytree.cpp
+ * @author George Fotopoulos
+ */
+
+#include <catch2/catch.hpp>
 #include <forest/splaytree.hpp>
 #include <string>
 

@@ -1,4 +1,9 @@
-#include <catch.hpp>
+/*
+ * @file avltree.cpp
+ * @author George Fotopoulos
+ */
+
+#include <catch2/catch.hpp>
 #include <forest/avltree.hpp>
 #include <string>
 

@@ -1,3 +1,8 @@
+/**
+ * @file splaytree.hpp
+ * @author George Fotopoulos
+ */
+
 #pragma once
 
 #include <algorithm>
@@ -132,7 +137,7 @@ namespace forest {
     }
   public:
     splaytree() = default;
-    splaytree(std::initializer_list <std::pair <T, U> > list) {
+    explicit splaytree(std::initializer_list <std::pair <T, U> > list) {
       for (auto element : list) {
         insert(element.first, element.second);
       }
