@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 
-project(examples)
+project(FOREST_EXAMPLES)
 
 add_executable(example_avltree src/avltree.cpp)
 target_link_libraries(example_avltree forest)
