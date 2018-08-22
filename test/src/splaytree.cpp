@@ -9,6 +9,14 @@
 
 auto handler = [](const int & key, const int & value) {};
 
+TEST_CASE("Test Splay Tree Duplicate Key Insertion") {
+  forest::splaytree <int, std::string> splaytree;
+  splaytree.insert(0, "Thor");
+  REQUIRE(splaytree.search(0)->value == "Thor");
+  splaytree.insert(0, "Loki");
+  REQUIRE(splaytree.search(0)->value == "Loki");
+}
+
 TEST_CASE("Test Splay Tree Constructor") {
   forest::splaytree <int, std::string> splaytree({
     {2 , "Thor"},

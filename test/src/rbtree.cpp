@@ -9,6 +9,14 @@
 
 auto handler = [](const int & key, const int & value) {};
 
+TEST_CASE("Test Red Black Tree Duplicate Key Insertion") {
+  forest::rbtree <int, std::string> rbtree;
+  rbtree.insert(0, "Thor");
+  REQUIRE(rbtree.search(0)->value == "Thor");
+  rbtree.insert(0, "Loki");
+  REQUIRE(rbtree.search(0)->value == "Loki");
+}
+
 TEST_CASE("Test Red Black Tree Constructor") {
   forest::rbtree <int, std::string> rbtree({
     {2 , "Thor"},

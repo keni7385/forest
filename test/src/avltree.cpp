@@ -9,6 +9,14 @@
 
 auto handler = [](const int & key, const int & value) {};
 
+TEST_CASE("Test AVL Tree Duplicate Key Insertion") {
+  forest::avltree <int, std::string> avltree;
+  avltree.insert(0, "Thor");
+  REQUIRE(avltree.search(0)->value == "Thor");
+  avltree.insert(0, "Loki");
+  REQUIRE(avltree.search(0)->value == "Loki");
+}
+
 TEST_CASE("Test AVL Tree Constructor") {
   forest::avltree <int, std::string> avltree({
     {2 , "Thor"},
