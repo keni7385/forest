@@ -4,18 +4,17 @@ project(FOREST_TESTS)
 
 if (CMAKE_COMPILER_IS_GNUCC)
   option(ENABLE_COVERAGE OFF)
-
   if (ENABLE_COVERAGE)
-    add_compile_options(--coverage -O0)
+    add_compile_options(--coverage)
   endif()
 endif()
 
 enable_testing()
 
-add_executable(test_forest src/main.cpp
-                           src/avltree.cpp
-                           src/rbtree.cpp
-                           src/splaytree.cpp)
+add_executable(test_forest src/test_main.cpp
+                           src/test_avltree.cpp
+                           src/test_rbtree.cpp
+                           src/test_splaytree.cpp)
 target_link_libraries(test_forest Catch2 forest)
 
 if (CMAKE_COMPILER_IS_GNUCC)

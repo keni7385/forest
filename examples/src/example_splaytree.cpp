@@ -1,5 +1,5 @@
 /*
- * @file splaytree.cpp
+ * @file example_splaytree.cpp
  * @author George Fotopoulos
  */
 

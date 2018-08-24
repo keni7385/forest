@@ -1,5 +1,5 @@
 /*
- * @file rbtree.cpp
+ * @file example_rbtree.cpp
  * @author George Fotopoulos
  */
 

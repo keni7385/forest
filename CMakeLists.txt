@@ -12,7 +12,7 @@ target_include_directories(forest INTERFACE include)
 
 if (BUILD_TESTS)
   add_library(Catch2 INTERFACE)
-  target_include_directories(Catch2 INTERFACE ext/Catch2/single_include)
+  target_include_directories(Catch2 INTERFACE third_party/Catch2/single_include)
 
   add_subdirectory(test)
 endif()

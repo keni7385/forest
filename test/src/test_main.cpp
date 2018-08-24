@@ -1,5 +1,5 @@
 /*
- * @file main.cpp
+ * @file test_main.cpp
  * @author George Fotopoulos
  */
 

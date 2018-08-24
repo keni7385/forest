@@ -12,6 +12,9 @@
 #include <utility>
 
 namespace forest {
+  /**
+   * @brief Red-Black tree class
+   */
   template <typename T, typename U>
   class rbtree {
   private:
@@ -162,31 +165,67 @@ namespace forest {
       tree_root->color = BLACK;
     }
   public:
+    /**
+     * @brief Default constructor.
+     */
     rbtree() = default;
+    /**
+     * @brief Initializer list constructor.
+     */
     explicit rbtree(std::initializer_list <std::pair <T, U> > list) {
       for (auto element : list) {
         insert(element.first, element.second);
       }
     }
+    /**
+     * @brief Copy constructor.
+     */
     rbtree(const rbtree &) = delete;
+    /**
+     * @brief Move constructor.
+     */
     rbtree(rbtree &&) = delete;
+    /**
+     * @brief Copy assignment operator.
+     */
     rbtree& operator=(const rbtree &) = delete;
+    /**
+     * @brief Move assignment operator.
+     */
     rbtree& operator=(rbtree &&) = delete;
+    /**
+     * @brief Destructor.
+     */
     ~rbtree() {
       delete tree_root;
     }
+    /**
+     * @brief Performs pre-order traversal from root.
+     */
     void pre_order_traversal(void handler(const T & key, const U & value)) noexcept {
       pre_order_traversal(tree_root, handler);
     }
+    /**
+     * @brief Performs in-order traversal from root.
+     */
     void in_order_traversal(void handler(const T & key, const U & value)) noexcept {
       in_order_traversal(tree_root, handler);
     }
+    /**
+     * @brief Performs post-order traversal from root.
+     */
     void post_order_traversal(void handler(const T & key, const U & value)) noexcept {
       post_order_traversal(tree_root, handler);
     }
+    /**
+     * @brief Performs breadth first traversal from root.
+     */
     void breadth_first_traversal(void handler(const T & key, const U & value)) noexcept {
       breadth_first_traversal(tree_root, handler);
     }
+    /**
+     * @brief Inserts a node and rebalances the tree.
+     */
     void insert(const T & key, const U & value) noexcept {
       rbnode * current {tree_root};
       rbnode * parent {nullptr};
@@ -212,6 +251,9 @@ namespace forest {
       }
       fix(current);
     }
+    /**
+     * @return The node the matching key, nullptr otherwise.
+     */
     const rbnode * search(const T & key) noexcept {
       rbnode * current {tree_root};
       while (current) {
@@ -225,18 +267,27 @@ namespace forest {
       }
       return nullptr;
     }
+    /**
+     * @return The node the minimum key, nullptr otherwise.
+     */
     const rbnode * minimum() noexcept {
       rbnode * current = {tree_root};
       if (!current) return nullptr;
       while (current->left) current = current->left;
       return current;
     }
+    /**
+     * @return The node the maximum key, nullptr otherwise.
+     */
     const rbnode * maximum() noexcept {
       rbnode * current {tree_root};
       if (!current) return nullptr;
       while (current->right) current = current->right;
       return current;
     }
+    /**
+     * @return The successor of a node if it exists, nullptr otherwise.
+     */
     const rbnode * successor(const T & key) noexcept {
       rbnode * current {tree_root};
       while (current) {
@@ -260,6 +311,9 @@ namespace forest {
       }
       return nullptr;
     }
+    /**
+     * @return The predecessor of a node if it exists, nullptr otherwise.
+     */
     const rbnode * predecessor(const T & key) {
       rbnode * current {tree_root};
       while (current) {
@@ -283,15 +337,27 @@ namespace forest {
       }
       return nullptr;
     }
+    /**
+     * @return The height of the tree.
+     */
     size_t height() noexcept {
       return height(tree_root);
     }
+    /**
+     * @return The number of nodes in the tree.
+     */
     size_t size() noexcept {
       return size(tree_root);
     }
+    /**
+     * @return True if tree is empty, false otherwise.
+     */
     bool empty() noexcept {
       return !tree_root;
     }
+    /**
+     * @return The root of the tree, nullptr otherwise.
+     */
     const rbnode * root() noexcept {
       return tree_root;
     }

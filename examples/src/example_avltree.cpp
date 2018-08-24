@@ -1,5 +1,5 @@
 /*
- * @file avltree.cpp
+ * @file example_avltree.cpp
  * @author George Fotopoulos
  */
 

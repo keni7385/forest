@@ -12,13 +12,16 @@
 #include <utility>
 
 namespace forest {
+  /**
+   * @brief AVL tree class.
+   */
   template <typename T, typename U>
   class avltree {
   private:
     class avlnode {
     public:
       avlnode() = default;
-      avlnode(const T & KEY, const U & VALUE) :key(KEY), value(VALUE) {
+      avlnode(const T & KEY, const U & VALUE) : key(KEY), value(VALUE) {
 
       }
       avlnode(const avlnode &) = delete;
@@ -131,31 +134,67 @@ namespace forest {
       }
     }
   public:
+    /**
+     * @brief Default constructor.
+     */
     avltree() = default;
+    /**
+     * @brief Initializer list constructor.
+     */
     explicit avltree(std::initializer_list <std::pair <T, U> > list) {
       for (auto element : list) {
         insert(element.first, element.second);
       }
     }
+    /**
+     * @brief Copy constructor.
+     */
     avltree(const avltree &) = delete;
+    /**
+     * @brief Move constructor.
+     */
     avltree(avltree &&) = delete;
+    /**
+     * @brief Copy assignment operator.
+     */
     avltree& operator=(const avltree &) = delete;
+    /**
+     * @brief Move assignment operator.
+     */
     avltree& operator=(avltree &&) = delete;
+    /**
+     * @brief Destructor.
+     */
     ~avltree() {
       delete tree_root;
     }
+    /**
+     * @brief Performs pre-order traversal from root.
+     */
     void pre_order_traversal(void handler(const T & key, const U & value)) noexcept {
       pre_order_traversal(tree_root, handler);
     }
+    /**
+     * @brief Performs in-order traversal from root.
+     */
     void in_order_traversal(void handler(const T & key, const U & value)) noexcept {
       in_order_traversal(tree_root, handler);
     }
+    /**
+     * @brief Performs post-order traversal from root.
+     */
     void post_order_traversal(void handler(const T & key, const U & value)) noexcept {
       post_order_traversal(tree_root, handler);
     }
+    /**
+     * @brief Performs breadth first traversal from root.
+     */
     void breadth_first_traversal(void handler(const T & key, const U & value)) noexcept {
       breadth_first_traversal(tree_root, handler);
     }
+    /**
+     * @brief Inserts a node and rebalances the tree.
+     */
     void insert(const T & key, const U & value) noexcept {
       avlnode * current {tree_root};
       avlnode * parent {nullptr};
@@ -181,6 +220,9 @@ namespace forest {
       }
       fix(current);
     }
+    /**
+     * @return The node the matching key, nullptr otherwise.
+     */
     const avlnode * search(const T & key) noexcept {
       avlnode * current {tree_root};
       while (current) {
@@ -194,18 +236,27 @@ namespace forest {
       }
       return nullptr;
     }
+    /**
+     * @return The node with the minimum key, nullptr otherwise.
+     */
     const avlnode * minimum() noexcept {
       avlnode * current {tree_root};
       if (!current) return nullptr;
       while(current->left) current = current->left;
       return current;
     }
+    /**
+     * @return The node with the maximum key, nullptr otherwise.
+     */
     const avlnode * maximum() noexcept {
       avlnode * current {tree_root};
       if (!current) return nullptr;
       while(current->right) current = current->right;
       return current;
     }
+    /**
+     * @return The successor of a node, nullptr otherwise.
+     */
     const avlnode * successor(const T & key) noexcept {
       avlnode * current {tree_root};
       while (current) {
@@ -229,6 +280,9 @@ namespace forest {
       }
       return nullptr;
     }
+    /**
+     * @return The predecessor of the node if it exists, nullptr otherwise.
+     */
     const avlnode * predecessor(const T & key) noexcept {
       avlnode * current {tree_root};
       while (current) {
@@ -252,15 +306,27 @@ namespace forest {
       }
       return nullptr;
     }
+    /**
+     * @return The height of the tree.
+     */
     size_t height() noexcept {
       return height(tree_root);
     }
+    /**
+     * @return The number of nodes in the tree.
+     */
     size_t size() noexcept {
       return size(tree_root);
     }
+    /**
+     * @return True if tree is empty, false otherwise.
+     */
     bool empty() noexcept {
       return !tree_root;
     }
+    /**
+     * @return The root of the tree, nullptr otherwise.
+     */
     const avlnode * root() noexcept {
       return tree_root;
     }
