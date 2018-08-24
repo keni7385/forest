@@ -332,7 +332,7 @@ namespace forest {
     /**
      * @return The root of the tree, nullptr otherwise.
      */
-    const rbnode * root() noexcept {
+    const splaynode * root() noexcept {
       return tree_root;
     }
   };
