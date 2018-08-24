@@ -33,3 +33,8 @@
 
 # CMake
 build
+
+# Doxygen
+doc/html
+doc/latex
+doc/man
