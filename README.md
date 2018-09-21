@@ -30,7 +30,10 @@
 #### Or use CMake
 
 ```sh
+$ git clone https://github.com/xorz57/forest.git
+$ cd forest
 $ mkdir build
+$ cd build
 $ cmake ..
 $ sudo make install
 ```
@@ -243,4 +246,15 @@ int main() {
 
   return 0;
 }
+```
+
+## Development
+
+```sh
+$ git clone --recursive https://github.com/xorz57/forest.git
+$ cd forest
+$ mkdir build
+$ cd build
+$ cmake .. -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
+$ make
 ```

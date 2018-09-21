@@ -12,6 +12,9 @@
 #include <utility>
 
 namespace forest {
+  /**
+   * @brief Splay tree class
+   */
   template <typename T, typename U>
   class splaytree {
   private:
@@ -136,31 +139,67 @@ namespace forest {
       }
     }
   public:
+    /**
+     * @brief Default constructor.
+     */
     splaytree() = default;
+    /**
+     * @brief Initializer list constructor.
+     */
     explicit splaytree(std::initializer_list <std::pair <T, U> > list) {
       for (auto element : list) {
         insert(element.first, element.second);
       }
     }
+    /**
+     * @brief Copy constructor.
+     */
     splaytree(const splaytree &) = delete;
+    /**
+     * @brief Move constructor.
+     */
     splaytree(splaytree &&) = delete;
+    /**
+     * @brief Copy assignment operator.
+     */
     splaytree& operator=(const splaytree &) = delete;
+    /**
+     * @brief Move assignment operator.
+     */
     splaytree& operator=(splaytree &&) = delete;
+    /**
+     * @brief Destructor.
+     */
     ~splaytree() {
       delete tree_root;
     }
+    /**
+     * @brief Performs pre-order traversal.
+     */
     void pre_order_traversal(void handler(const T & key, const U & value)) noexcept {
       pre_order_traversal(tree_root, handler);
     }
+    /**
+     * @brief Performs in-order traversal.
+     */
     void in_order_traversal(void handler(const T & key, const U & value)) noexcept {
       in_order_traversal(tree_root, handler);
     }
+    /**
+     * @brief Performs post-order traversal.
+     */
     void post_order_traversal(void handler(const T & key, const U & value)) noexcept {
       post_order_traversal(tree_root, handler);
     }
+    /**
+     * @brief Performs breadth first traversal.
+     */
     void breadth_first_traversal(void handler(const T & key, const U & value)) noexcept {
       breadth_first_traversal(tree_root, handler);
     }
+    /**
+     * @brief Inserts a node and rebalances the tree.
+     */
     void insert(const T & key, const U & value) noexcept {
       splaynode * current {tree_root};
       splaynode * parent {nullptr};
@@ -186,6 +225,9 @@ namespace forest {
       }
       fix(current);
     }
+    /**
+     * @return The node with the matching key, nullptr otherwise.
+     */
     const splaynode * search(const T & key) noexcept {
       splaynode * current {tree_root};
       while (current) {
@@ -199,18 +241,27 @@ namespace forest {
       }
       return nullptr;
     }
+    /**
+     * @return The node with the minimum key, nullptr otherwise.
+     */
     const splaynode * minimum() noexcept {
       splaynode * current {tree_root};
       if (!current) return nullptr;
       while (current->left) current = current->left;
       return current;
     }
+    /**
+     * @return The node with the maximum key, nullptr otherwise.
+     */
     const splaynode * maximum() noexcept {
       splaynode * current {tree_root};
       if (!current) return nullptr;
       while (current->right) current = current->right;
       return current;
     }
+    /**
+     * @return The successor of a node if it exists, nullptr otherwise.
+     */
     const splaynode * successor(const T & key) noexcept {
       splaynode * current {tree_root};
       while (current) {
@@ -234,6 +285,9 @@ namespace forest {
       }
       return nullptr;
     }
+    /**
+     * @return The predecessor of a node if it exists, nullptr otherwise.
+     */
     const splaynode * predecessor(const T & key) noexcept {
       splaynode * current {tree_root};
       while (current) {
@@ -257,15 +311,27 @@ namespace forest {
       }
       return nullptr;
     }
+    /**
+     * @return The height of the tree.
+     */
     size_t height() noexcept {
       return height(tree_root);
     }
+    /**
+     * @return The number of nodes in the tree.
+     */
     size_t size() noexcept {
       return size(tree_root);
     }
-    bool empty() const noexcept {
+    /**
+     * @return True if tree is empty, false otherwise.
+     */
+    bool empty() noexcept {
       return !tree_root;
     }
+    /**
+     * @return The root of the tree, nullptr otherwise.
+     */
     const splaynode * root() noexcept {
       return tree_root;
     }
