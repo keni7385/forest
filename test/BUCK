@@ -1,0 +1,10 @@
+cxx_binary(
+  name = 'test', 
+  srcs = glob([
+    'src/**/*.cpp', 
+  ]), 
+  deps = [
+    '//:forest', 
+    '//ext:catch', 
+  ], 
+)

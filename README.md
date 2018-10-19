@@ -35,6 +35,15 @@ $ cmake ..
 $ sudo make install
 ```
 
+#### Or use [Buck](https://buckbuild.com/)
+
+```sh
+$ buck run test 
+$ buck run examples:avltree
+$ buck run examples:rbtree
+$ buck run examples:splaytree
+```
+
 ## Examples
 
 #### Inserting nodes
