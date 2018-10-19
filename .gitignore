@@ -33,3 +33,8 @@
 
 # CMake
 build
+
+# Buck
+/buck-out
+/.buckd
+.buckconfig.local
