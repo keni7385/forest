@@ -1,11 +1,11 @@
 prebuilt_cxx_library(
-  name = 'catch', 
-  header_namespace = '', 
-  header_only = True, 
+  name = 'catch',
+  header_namespace = '',
+  header_only = True,
   exported_headers = subdir_glob([
-    ('catchorg/Catch2/single_include', '**/*.hpp'), 
-  ]), 
+    ('catchorg/Catch2/single_include', '**/*.hpp'),
+  ]),
   visibility = [
-    '//...', 
-  ], 
+    '//...',
+  ],
 )

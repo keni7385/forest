@@ -1,8 +1,8 @@
 cxx_binary(
-  name = 'AVLTree', 
+  name = 'AVLTree',
   srcs = [
-    'src/TestAVLTree.cpp', 
-  ], 
+    'src/TestAVLTree.cpp',
+  ],
   deps = [
     '//:forest',
     '//ext:catch',
@@ -10,10 +10,10 @@ cxx_binary(
 )
 
 cxx_binary(
-  name = 'BinarySearchTree', 
+  name = 'BinarySearchTree',
   srcs = [
-    'src/TestBinarySearchTree.cpp', 
-  ], 
+    'src/TestBinarySearchTree.cpp',
+  ],
   deps = [
     '//:forest',
     '//ext:catch',
@@ -21,10 +21,10 @@ cxx_binary(
 )
 
 cxx_binary(
-  name = 'RedBlackTree', 
+  name = 'RedBlackTree',
   srcs = [
-    'src/TestRedBlackTree.cpp', 
-  ], 
+    'src/TestRedBlackTree.cpp',
+  ],
   deps = [
     '//:forest',
     '//ext:catch',
@@ -32,10 +32,10 @@ cxx_binary(
 )
 
 cxx_binary(
-  name = 'SplayTree', 
+  name = 'SplayTree',
   srcs = [
-    'src/TestSplayTree.cpp', 
-  ], 
+    'src/TestSplayTree.cpp',
+  ],
   deps = [
     '//:forest',
     '//ext:catch',
