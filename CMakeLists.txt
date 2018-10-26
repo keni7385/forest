@@ -13,6 +13,7 @@ target_include_directories(forest INTERFACE ${CMAKE_SOURCE_DIR}/include)
 if (BUILD_TESTS)
   add_library(Catch2 INTERFACE)
   target_include_directories(Catch2 INTERFACE ${CMAKE_SOURCE_DIR}/ext/catchorg/Catch2/single_include)
+  enable_testing()
   add_subdirectory(test)
 endif()
 

@@ -15,8 +15,6 @@ if (CMAKE_COMPILER_IS_GNUCC)
   endif()
 endif()
 
-enable_testing()
-
 add_executable(TestAVLTree ${TestAVLTreeSource})
 target_link_libraries(TestAVLTree Catch2 forest)
 
