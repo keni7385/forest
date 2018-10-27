@@ -7,6 +7,10 @@ set(CMAKE_CXX_STANDARD 14)
 option(BUILD_EXAMPLES OFF)
 option(BUILD_TESTS OFF)
 
+if(MSVC)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /STACK:10000000")
+endif()
+
 add_library(forest INTERFACE)
 target_include_directories(forest INTERFACE ${CMAKE_SOURCE_DIR}/include)
 
