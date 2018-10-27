@@ -9,7 +9,7 @@ static void BM_SplayTree_Search_Average_Case(benchmark::State & state) {
 
 	forest::SplayTree <int, int> SplayTree;
 	for (int i = 0; i < state.range(0); ++i) {
-		SplayTree.insert(i, 0);
+		SplayTree.insert(dis(gen), 0);
 	}
 
 	for (auto _ : state) {
@@ -17,6 +17,6 @@ static void BM_SplayTree_Search_Average_Case(benchmark::State & state) {
 	}
 	state.SetComplexityN(state.range(0));
 }
-BENCHMARK(BM_SplayTree_Search_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 20)->Complexity(benchmark::oLogN);
+BENCHMARK(BM_SplayTree_Search_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oLogN);
 
 BENCHMARK_MAIN();

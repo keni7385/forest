@@ -2,20 +2,6 @@
 #include <forest/RedBlackTree.hpp>
 #include <random>
 
-static void BM_RedBlackTree_Search_Worst_Case(benchmark::State & state) {
-	forest::RedBlackTree <int, int> RedBlackTree;
-
-	for (int i = 0; i < state.range(0); ++i) {
-		RedBlackTree.insert(i, 0);
-	}
-
-	for (auto _ : state) {
-		benchmark::DoNotOptimize(RedBlackTree.search(state.range(0) - 1));
-	}
-	state.SetComplexityN(state.range(0));
-}
-BENCHMARK(BM_RedBlackTree_Search_Worst_Case)->RangeMultiplier(2)->Range(1, 1 << 20)->Complexity(benchmark::oLogN);
-
 static void BM_RedBlackTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
@@ -23,7 +9,7 @@ static void BM_RedBlackTree_Search_Average_Case(benchmark::State & state) {
 
 	forest::RedBlackTree <int, int> RedBlackTree;
 	for (int i = 0; i < state.range(0); ++i) {
-		RedBlackTree.insert(i, 0);
+		RedBlackTree.insert(dis(gen), 0);
 	}
 
 	for (auto _ : state) {

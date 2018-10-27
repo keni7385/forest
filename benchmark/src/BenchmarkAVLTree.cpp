@@ -2,20 +2,6 @@
 #include <forest/AVLTree.hpp>
 #include <random>
 
-static void BM_AVLTree_Search_Worst_Case(benchmark::State & state) {
-	forest::AVLTree <int, int> AVLTree;
-
-	for (int i = 0; i < state.range(0); ++i) {
-		AVLTree.insert(i, 0);
-	}
-
-	for (auto _ : state) {
-		benchmark::DoNotOptimize(AVLTree.search(state.range(0) - 1));
-	}
-	state.SetComplexityN(state.range(0));
-}
-BENCHMARK(BM_AVLTree_Search_Worst_Case)->RangeMultiplier(2)->Range(1, 1 << 20)->Complexity(benchmark::oLogN);
-
 static void BM_AVLTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
@@ -23,7 +9,7 @@ static void BM_AVLTree_Search_Average_Case(benchmark::State & state) {
 
 	forest::AVLTree <int, int> AVLTree;
 	for (int i = 0; i < state.range(0); ++i) {
-		AVLTree.insert(i, 0);
+		AVLTree.insert(dis(gen), 0);
 	}
 
 	for (auto _ : state) {

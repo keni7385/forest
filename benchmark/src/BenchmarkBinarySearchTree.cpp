@@ -23,7 +23,7 @@ static void BM_BinarySearchTree_Search_Average_Case(benchmark::State & state) {
 
 	forest::BinarySearchTree <int, int> BinarySearchTree;
 	for (int i = 0; i < state.range(0); ++i) {
-		BinarySearchTree.insert(i, 0);
+		BinarySearchTree.insert(dis(gen), 0);
 	}
 
 	for (auto _ : state) {
