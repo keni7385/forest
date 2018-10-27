@@ -276,7 +276,7 @@ namespace forest {
 			}
 			fix(current);
 		}
-		const RedBlackTreeNode * search(const Key & key) noexcept {
+		RedBlackTreeNode * search(const Key & key) noexcept {
 			RedBlackTreeNode * current{ tree_root };
 			while (current) {
 				if (key > current->key) {

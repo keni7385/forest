@@ -31,7 +31,7 @@ namespace forest {
 
 		public:
 			AVLTreeNode() = default;
-			AVLTreeNode(const Key & KEY, const Value & VALUE) :key(KEY), value(VALUE) { }
+			AVLTreeNode(const Key & KEY, const Value & VALUE) : key(KEY), value(VALUE) { }
 			AVLTreeNode(const AVLTreeNode &) = delete;
 			AVLTreeNode(AVLTreeNode &&) = delete;
 			AVLTreeNode& operator=(const AVLTreeNode &) = delete;
@@ -127,7 +127,7 @@ namespace forest {
 		}
 
 	private:
-		AVLTreeNode * insert(AVLTreeNode * root, Key key, Value value) {
+		AVLTreeNode * insert(AVLTreeNode * root, const Key & key, const Value & value) {
 			if (root == nullptr) return new AVLTreeNode(key, value);
 			if (key < root->key) root->left = insert(root->left, key, value);
 			else if (key > root->key) root->right = insert(root->right, key, value);
@@ -156,7 +156,7 @@ namespace forest {
 
 			return root;
 		}
-		AVLTreeNode * remove(AVLTreeNode * root, Key key) {
+		AVLTreeNode * remove(AVLTreeNode * root, const Key & key) {
 			if (!root) return nullptr;
 			else if (key < root->key) root->left = remove(root->left, key);
 			else if (key > root->key) root->right = remove(root->right, key);

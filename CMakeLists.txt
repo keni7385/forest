@@ -22,7 +22,7 @@ if (BUILD_EXAMPLES)
 endif()
 
 if (BUILD_BENCHMARKS)
-  set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Suppressing benchmark's tests" FORCE)
+  set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Suppressing Google Benchmark's Tests" FORCE)
   add_subdirectory(ext/google/benchmark)
   add_subdirectory(benchmark)
 endif()
