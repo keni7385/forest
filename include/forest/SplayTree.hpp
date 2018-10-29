@@ -167,10 +167,10 @@ namespace forest {
 		}
 
 	private:
-		void destroy(SplayTreeNode * root) {
+		void clear(SplayTreeNode * root) {
 			if (!root) return;
-			if (root->left != nullptr) destroy(root->left);
-			if (root->right != nullptr) destroy(root->right);
+			if (root->left != nullptr) clear(root->left);
+			if (root->right != nullptr) clear(root->right);
 			delete root;
 			root = nullptr;
 		}
@@ -187,7 +187,7 @@ namespace forest {
 		SplayTree& operator=(const SplayTree &) = delete;
 		SplayTree& operator=(SplayTree &&) = delete;
 		~SplayTree() {
-			destroy(tree_root);
+			clear();
 		}
 
 	public:
@@ -264,6 +264,12 @@ namespace forest {
 				}
 			}
 			return nullptr;
+		}
+
+	public:
+		void clear() {
+			clear(tree_root);
+			tree_root = nullptr;
 		}
 	};
 }

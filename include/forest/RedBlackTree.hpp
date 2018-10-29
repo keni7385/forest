@@ -193,10 +193,10 @@ namespace forest {
 		}
 
 	private:
-		void destroy(RedBlackTreeNode * root) {
+		void clear(RedBlackTreeNode * root) {
 			if (!root) return;
-			if (root->left != nullptr) destroy(root->left);
-			if (root->right != nullptr) destroy(root->right);
+			if (root->left != nullptr) clear(root->left);
+			if (root->right != nullptr) clear(root->right);
 			delete root;
 			root = nullptr;
 		}
@@ -213,7 +213,7 @@ namespace forest {
 		RedBlackTree& operator=(const RedBlackTree &) = delete;
 		RedBlackTree& operator=(RedBlackTree &&) = delete;
 		~RedBlackTree() {
-			destroy(tree_root);
+			clear();
 		}
 
 	public:
@@ -290,6 +290,12 @@ namespace forest {
 				}
 			}
 			return nullptr;
+		}
+
+	public:
+		void clear() {
+			clear(tree_root);
+			tree_root = nullptr;
 		}
 	};
 }
