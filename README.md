@@ -8,10 +8,10 @@
 
 ## How to Install
 
-#### Using vcpkg (CMake)
+#### Using [vcpkg](https://github.com/Microsoft/vcpkg) (CMake)
 - `vcpkg install forest --head`
 
-#### Using buckaroo (Buck)
+#### Using [buckaroo](https://github.com/LoopPerfect/buckaroo) (Buck)
 - `buckaroo install xorz57/forest`
 
 #### Using [CMake](https://cmake.org/)
