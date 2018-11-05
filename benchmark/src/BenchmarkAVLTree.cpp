@@ -29,7 +29,7 @@
 static void BM_AVLTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(0, state.range(0) - 1);
+	std::uniform_int_distribution<> dis(0, state.range(0));
 
 	forest::AVLTree <int, int> AVLTree;
 	for (int i = 0; i < state.range(0); ++i) {
@@ -61,7 +61,7 @@ BENCHMARK(BM_AVLTree_Insert_Worst_Case)->RangeMultiplier(2)->Range(1, 1 << 20)->
 static void BM_AVLTree_Insert_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(0, state.range(0) - 1);
+	std::uniform_int_distribution<> dis(0, state.range(0));
 
 	forest::AVLTree <int, int> AVLTree;
 	

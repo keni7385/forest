@@ -29,7 +29,7 @@
 static void BM_SplayTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(0, state.range(0) - 1);
+	std::uniform_int_distribution<> dis(0, state.range(0));
 
 	forest::SplayTree <int, int> SplayTree;
 	for (int i = 0; i < state.range(0); ++i) {

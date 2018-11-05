@@ -84,7 +84,7 @@ SCENARIO("Test AVL Tree") {
 			}
 		}
 		WHEN("Nodes are inserted in ascending order") {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 10; ++i) {
 				AVLTree.insert(i, 0);
 			}
 			THEN("Test size") {
@@ -114,7 +114,7 @@ SCENARIO("Test AVL Tree") {
 			}
 		}
 		WHEN("Nodes are inserted in descending order") {
-			for (int i = 9; i >= 0; i--) {
+			for (int i = 9; i >= 0; --i) {
 				AVLTree.insert(i, 0);
 			}
 			THEN("Test size") {
