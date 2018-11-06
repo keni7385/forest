@@ -41,3 +41,25 @@ cxx_binary(
     '//ext:catch',
   ],
 )
+
+cxx_binary(
+  name = 'KDTree',
+  srcs = [
+    'src/TestKDTree.cpp',
+  ],
+  deps = [
+    '//:forest',
+    '//ext:catch',
+  ],
+)
+
+cxx_binary(
+  name = 'QuadTree',
+  srcs = [
+    'src/TestQuadTree.cpp',
+  ],
+  deps = [
+    '//:forest',
+    '//ext:catch',
+  ],
+)

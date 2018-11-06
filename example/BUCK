@@ -37,3 +37,23 @@ cxx_binary(
     '//:forest', 
   ], 
 )
+
+cxx_binary(
+  name = 'KDTree', 
+  srcs = [
+    'src/ExampleKDTree.cpp', 
+  ], 
+  deps = [
+    '//:forest', 
+  ], 
+)
+
+cxx_binary(
+  name = 'QuadTree', 
+  srcs = [
+    'src/ExampleQuadTree.cpp', 
+  ], 
+  deps = [
+    '//:forest', 
+  ], 
+)

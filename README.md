@@ -39,8 +39,11 @@ $ make
 ```sh
 $ buck run test
 $ buck run example:AVLTree
+$ buck run example:BinarySearchTree
 $ buck run example:RedBlackTree
 $ buck run example:SplayTree
+$ buck run example:KDTree
+$ buck run example:QuadTree
 ```
 
 ## Examples
