@@ -69,7 +69,7 @@ namespace forest {
 	private:
 		template <typename E>
 		class Rectangle {
-			template<typename U, unsigned K> friend class QuadTree;
+			template<typename U, unsigned L> friend class QuadTree;
 
 		private:
 			E x;
