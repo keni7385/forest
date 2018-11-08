@@ -36,8 +36,11 @@ namespace forest {
 			friend class KDTree;
 
 		private:
-			KDTreeNode * less{ nullptr };
-			KDTreeNode * greater{ nullptr };
+			KDTreeNode * left{ nullptr };
+			KDTreeNode * right{ nullptr };
+
+		private:
+			int height{ 1 };
 
 		public:
 			std::array<T, K> point;
@@ -54,62 +57,30 @@ namespace forest {
 	private:
 		KDTreeNode * insert(KDTreeNode * root, const std::array <T, K> & point, unsigned depth) {
 			if (!root) return new KDTreeNode(point);
-
 			unsigned current = depth % K;
-
 			if (point[current] < (root->point[current])) {
-				root->less = insert(root->less, point, depth + 1);
+				root->left = insert(root->left, point, depth + 1);
 			}
 			else {
-				root->greater = insert(root->greater, point, depth + 1);
+				root->right = insert(root->right, point, depth + 1);
 			}
-
+			root->height = std::max(height(root->left), height(root->right)) + 1;
 			return root;
 		}
 		KDTreeNode * search(KDTreeNode * root, const std::array<T, K> & point, unsigned depth) {
 			if (!root) return nullptr;
-
 			if (root->point == point) return root;
-
 			unsigned current = depth % K;
-
 			if (point[current] < root->point[current]) {
-				return search(root->less, point, depth + 1);
+				return search(root->left, point, depth + 1);
 			}
 			else {
-				return search(root->greater, point, depth + 1);
+				return search(root->right, point, depth + 1);
 			}
-		}
-		KDTreeNode * remove(KDTreeNode * root, const std::array <T, K> & point, unsigned depth) {
-			if (!root) return nullptr;
-
-			int current = depth % K;
-
-			if (root->point == point) {
-				if (root->greater) {
-					KDTreeNode * min = minimum(root->greater, current);
-					root->point = min->point;
-					root->greater = remove(root->greater, min->point, depth + 1);
-				}
-				else if (root->less) {
-					KDTreeNode * min = minimum(root->less, current);
-					root->point = min->point;
-					root->greater = remove(root->less, min->point, depth + 1);
-				}
-				else {
-					delete root;
-					root = nullptr;
-				}
-				return root;
-			}
-
-			if (point[current] < root->point[current]) root->less = remove(root->less, point, depth + 1);
-			else root->greater = remove(root->greater, point, depth + 1);
-			return root;
 		}
 
 	private:
-		KDTreeNode * minimum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, int dimension) {
+		KDTreeNode * minimum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, unsigned dimension) {
 			KDTreeNode * tmp = x;
 			if (y && y->point[dimension] < tmp->point[dimension]) tmp = y;
 			if (z && z->point[dimension] < tmp->point[dimension]) tmp = z;
@@ -117,22 +88,19 @@ namespace forest {
 		}
 		KDTreeNode * minimum(KDTreeNode * root, unsigned dimension, unsigned depth) {
 			if (!root) return nullptr;
-
 			unsigned current = depth % K;
-
 			if (current == dimension) {
-				if (!root->less) return root;
-				return minimum(root->less, dimension, depth + 1);
+				if (!root->left) return root;
+				return minimum(root->left, dimension, depth + 1);
 			}
-
-			return minimum(root, minimum(root->less, dimension, depth + 1), minimum(root->greater, dimension, depth + 1), dimension);
+			return minimum(root, minimum(root->left, dimension, depth + 1), minimum(root->right, dimension, depth + 1), dimension);
 		}
 		KDTreeNode * minimum(KDTreeNode * root, unsigned dimension) {
 			return minimum(root, dimension, 0);
 		}
 
 	private:
-		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, int dimension) {
+		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, unsigned dimension) {
 			KDTreeNode * tmp = x;
 			if (y && y->point[dimension] > tmp->point[dimension]) tmp = y;
 			if (z && z->point[dimension] > tmp->point[dimension]) tmp = z;
@@ -140,25 +108,32 @@ namespace forest {
 		}
 		KDTreeNode * maximum(KDTreeNode * root, unsigned dimension, unsigned depth) {
 			if (!root) return nullptr;
-
 			unsigned current = depth % K;
-
 			if (current == dimension) {
-				if (!root->greater) return root;
-				return maximum(root->greater, dimension, depth + 1);
+				if (!root->right) return root;
+				return maximum(root->right, dimension, depth + 1);
 			}
-
-			return maximum(root, maximum(root->less, dimension, depth + 1), maximum(root->greater, dimension, depth + 1), dimension);
+			return maximum(root, maximum(root->left, dimension, depth + 1), maximum(root->right, dimension, depth + 1), dimension);
 		}
 		KDTreeNode * maximum(KDTreeNode * root, unsigned dimension) {
 			return maximum(root, dimension, 0);
 		}
 
 	private:
+		int height(const KDTreeNode * root) noexcept {
+			if (!root) return 0;
+			return root->height;
+		}
+		int size(const KDTreeNode * root) noexcept {
+			if (!root) return 0;
+			return size(root->left) + size(root->right) + 1;
+		}
+
+	private:
 		void clear(KDTreeNode * root) {
 			if (!root) return;
-			if (root->less != nullptr) clear(root->less);
-			if (root->greater != nullptr) clear(root->greater);
+			if (root->left) clear(root->left);
+			if (root->right) clear(root->right);
 			delete root;
 			root = nullptr;
 		}
@@ -176,9 +151,6 @@ namespace forest {
 		KDTreeNode * search(const std::array <T, K> & point) {
 			return search(tree_root, point, 0);
 		}
-		void remove(const std::array <T, K> & point) {
-			tree_root = remove(tree_root, point, 0);
-		}
 
 	public:
 		KDTreeNode * minimum(unsigned dimension) {
@@ -186,6 +158,14 @@ namespace forest {
 		}
 		KDTreeNode * maximum(unsigned dimension) {
 			return maximum(tree_root, dimension, 0);
+		}
+
+	public:
+		int height() noexcept {
+			return height(tree_root);
+		}
+		int size() noexcept {
+			return size(tree_root);
 		}
 
 	public:

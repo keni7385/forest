@@ -30,6 +30,12 @@ SCENARIO("Test Binary Search Tree") {
 	GIVEN("A Binary Search Tree") {
 		forest::BinarySearchTree <int, int> BinarySearchTree;
 		WHEN("The Binary Search Tree is empty") {
+			THEN("Test height") {
+				REQUIRE(BinarySearchTree.height() == 0);
+			}
+			THEN("Test size") {
+				REQUIRE(BinarySearchTree.size() == 0);
+			}
 			THEN("Test maximum") {
 				auto max = BinarySearchTree.maximum();
 				REQUIRE(max == nullptr);
@@ -42,6 +48,11 @@ SCENARIO("Test Binary Search Tree") {
 				auto result = BinarySearchTree.search(555);
 				REQUIRE(result == nullptr);
 			}
+			THEN("Test clear") {
+				BinarySearchTree.clear();
+				REQUIRE(BinarySearchTree.height() == 0);
+				REQUIRE(BinarySearchTree.size() == 0);
+			}
 		}
 		WHEN("Nodes are inserted in random order") {
 			BinarySearchTree.insert(4 , 0);
@@ -51,6 +62,12 @@ SCENARIO("Test Binary Search Tree") {
 			BinarySearchTree.insert(0 , 0);
 			BinarySearchTree.insert(14, 0);
 			BinarySearchTree.insert(45, 0);
+			THEN("Test height") {
+				REQUIRE(BinarySearchTree.height() == 4);
+			}
+			THEN("Test size") {
+				REQUIRE(BinarySearchTree.size() == 7);
+			}
 			THEN("Test maximum") {
 				auto max = BinarySearchTree.maximum();
 				REQUIRE(max != nullptr);
@@ -70,10 +87,27 @@ SCENARIO("Test Binary Search Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
+			THEN("Test remove") {
+				BinarySearchTree.remove(45);
+				REQUIRE(BinarySearchTree.search(45) == nullptr);
+				REQUIRE(BinarySearchTree.height() == 3);
+				REQUIRE(BinarySearchTree.size() == 6);
+			}
+			THEN("Test clear") {
+				BinarySearchTree.clear();
+				REQUIRE(BinarySearchTree.height() == 0);
+				REQUIRE(BinarySearchTree.size() == 0);
+			}
 		}
 		WHEN("Nodes are inserted in ascending order") {
 			for (int i = 0; i < 10; ++i) {
 				BinarySearchTree.insert(i, 0);
+			}
+			THEN("Test height") {
+				REQUIRE(BinarySearchTree.height() == 10);
+			}
+			THEN("Test size") {
+				REQUIRE(BinarySearchTree.size() == 10);
 			}
 			THEN("Test maximum") {
 				auto max = BinarySearchTree.maximum();
@@ -93,12 +127,29 @@ SCENARIO("Test Binary Search Tree") {
 				auto result = BinarySearchTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
+			}
+			THEN("Test remove") {
+				BinarySearchTree.remove(0);
+				REQUIRE(BinarySearchTree.search(0) == nullptr);
+				REQUIRE(BinarySearchTree.height() == 9);
+				REQUIRE(BinarySearchTree.size() == 9);
+			}
+			THEN("Test clear") {
+				BinarySearchTree.clear();
+				REQUIRE(BinarySearchTree.height() == 0);
+				REQUIRE(BinarySearchTree.size() == 0);
 			}
 		}
 		WHEN("Nodes are inserted in descending order") {
 			for (int i = 9; i >= 0; --i) {
 				BinarySearchTree.insert(i, 0);
 			}
+			THEN("Test height") {
+				REQUIRE(BinarySearchTree.height() == 10);
+			}
+			THEN("Test size") {
+				REQUIRE(BinarySearchTree.size() == 10);
+			}
 			THEN("Test maximum") {
 				auto max = BinarySearchTree.maximum();
 				REQUIRE(max != nullptr);
@@ -117,6 +168,17 @@ SCENARIO("Test Binary Search Tree") {
 				auto result = BinarySearchTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
+			}
+			THEN("Test remove") {
+				BinarySearchTree.remove(0);
+				REQUIRE(BinarySearchTree.search(0) == nullptr);
+				REQUIRE(BinarySearchTree.height() == 9);
+				REQUIRE(BinarySearchTree.size() == 9);
+			}
+			THEN("Test clear") {
+				BinarySearchTree.clear();
+				REQUIRE(BinarySearchTree.height() == 0);
+				REQUIRE(BinarySearchTree.size() == 0);
 			}
 		}
 	}

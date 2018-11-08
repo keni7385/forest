@@ -155,7 +155,11 @@ namespace forest {
 					//root->left = remove(root->left, max->key);
 				}
 			}
+
+			if (!root) return nullptr;
+			
 			root->height = std::max(height(root->left), height(root->right)) + 1;
+			
 			return root;
 		}
 		BinarySearchTreeNode * search(BinarySearchTreeNode * root, const Key & key) noexcept {

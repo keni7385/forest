@@ -35,6 +35,9 @@ int main() {
 	KDTree.insert({ -5, -5 });
 	KDTree.insert({ 5, -5 });
 
+	std::cout << "height()" << " = " << KDTree.height() << std::endl;
+	std::cout << "size()" << " = " << KDTree.size() << std::endl;
+
 	std::cout << "search({ 5, 5 })" << " = ";
 	if (KDTree.search({ 5, 5 })) {
 		std::cout << "Found" << std::endl;
@@ -46,6 +49,24 @@ int main() {
 	std::cout << "search({ 1, 1 })" << " = ";
 	if (KDTree.search({ 1, 1 })) {
 		std::cout << "Found" << std::endl;
+	}
+	else {
+		std::cout << "Not Found" << std::endl;
+	}
+
+	std::cout << "minimum(0)" << " = ";
+	auto min = KDTree.minimum(0);
+	if (min) {
+		std::cout << "(" << min->point[0] << ", " << min->point[1] << ")" << std::endl;
+	}
+	else {
+		std::cout << "Not Found" << std::endl;
+	}
+
+	std::cout << "maximum(0)" << " = ";
+	auto max = KDTree.maximum(0);
+	if (max) {
+		std::cout << "(" << max->point[0] << ", " << max->point[1] << ")" << std::endl;
 	}
 	else {
 		std::cout << "Not Found" << std::endl;

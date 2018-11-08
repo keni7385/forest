@@ -48,6 +48,11 @@ SCENARIO("Test Splay Tree") {
 				auto result = SplayTree.search(555);
 				REQUIRE(result == nullptr);
 			}
+			THEN("Test clear") {
+				SplayTree.clear();
+				REQUIRE(SplayTree.height() == 0);
+				REQUIRE(SplayTree.size() == 0);
+			}
 		}
 		WHEN("Nodes are inserted in random order") {
 			SplayTree.insert(4 , 0);
@@ -82,6 +87,11 @@ SCENARIO("Test Splay Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
+			THEN("Test clear") {
+				SplayTree.clear();
+				REQUIRE(SplayTree.height() == 0);
+				REQUIRE(SplayTree.size() == 0);
+			}
 		}
 		WHEN("Nodes are inserted in ascending order") {
 			for (int i = 0; i < 10; ++i) {
@@ -112,6 +122,11 @@ SCENARIO("Test Splay Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
+			THEN("Test clear") {
+				SplayTree.clear();
+				REQUIRE(SplayTree.height() == 0);
+				REQUIRE(SplayTree.size() == 0);
+			}
 		}
 		WHEN("Nodes are inserted in descending order") {
 			for (int i = 9; i >= 0; --i) {
@@ -141,6 +156,11 @@ SCENARIO("Test Splay Tree") {
 				auto result = SplayTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
+			}
+			THEN("Test clear") {
+				SplayTree.clear();
+				REQUIRE(SplayTree.height() == 0);
+				REQUIRE(SplayTree.size() == 0);
 			}
 		}
 	}

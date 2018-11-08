@@ -30,6 +30,12 @@ SCENARIO("Test KD Tree") {
 	GIVEN("A KD Tree") {
 		forest::KDTree <int, 2> KDTree;
 		WHEN("The KD Tree is empty") {
+			THEN("Test height") {
+				REQUIRE(KDTree.height() == 0);
+			}
+			THEN("Test size") {
+				REQUIRE(KDTree.size() == 0);
+			}
 			THEN("Test maximum of dimension 0") {
 				auto max = KDTree.maximum(0);
 				REQUIRE(max == nullptr);
@@ -42,12 +48,23 @@ SCENARIO("Test KD Tree") {
 				auto result = KDTree.search({ 0, 0 });
 				REQUIRE(result == nullptr);
 			}
+			THEN("Test clear") {
+				KDTree.clear();
+				REQUIRE(KDTree.height() == 0);
+				REQUIRE(KDTree.size() == 0);
+			}
 		}
 		WHEN("Nodes are inserted in random order") {
 			KDTree.insert({ 1, 2 });
 			KDTree.insert({ -1, 1 });
 			KDTree.insert({ 3, 4 });
 			KDTree.insert({ -4, 3 });
+			THEN("Test height") {
+				REQUIRE(KDTree.height() == 3);
+			}
+			THEN("Test size") {
+				REQUIRE(KDTree.size() == 4);
+			}
 			THEN("Test maximum") {
 				auto max = KDTree.maximum(0);
 				REQUIRE(max != nullptr);
@@ -70,10 +87,21 @@ SCENARIO("Test KD Tree") {
 				REQUIRE(result->point[0] == -4);
 				REQUIRE(result->point[1] == 3);
 			}
+			THEN("Test clear") {
+				KDTree.clear();
+				REQUIRE(KDTree.height() == 0);
+				REQUIRE(KDTree.size() == 0);
+			}
 		}
 		WHEN("Nodes are inserted in ascending order") {
 			for (int i = 0; i < 10; ++i) {
 				KDTree.insert({ i, i });
+			}
+			THEN("Test height") {
+				REQUIRE(KDTree.height() == 10);
+			}
+			THEN("Test size") {
+				REQUIRE(KDTree.size() == 10);
 			}
 			THEN("Test maximum") {
 				auto max = KDTree.maximum(0);
@@ -96,12 +124,23 @@ SCENARIO("Test KD Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->point[0] == 5);
 				REQUIRE(result->point[1] == 5);
+			}
+			THEN("Test clear") {
+				KDTree.clear();
+				REQUIRE(KDTree.height() == 0);
+				REQUIRE(KDTree.size() == 0);
 			}
 		}
 		WHEN("Nodes are inserted in descending order") {
 			for (int i = 9; i >= 0; --i) {
 				KDTree.insert({ i, i });
 			}
+			THEN("Test height") {
+				REQUIRE(KDTree.height() == 10);
+			}
+			THEN("Test size") {
+				REQUIRE(KDTree.size() == 10);
+			}
 			THEN("Test maximum") {
 				auto max = KDTree.maximum(0);
 				REQUIRE(max != nullptr);
@@ -123,6 +162,11 @@ SCENARIO("Test KD Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->point[0] == 5);
 				REQUIRE(result->point[1] == 5);
+			}
+			THEN("Test clear") {
+				KDTree.clear();
+				REQUIRE(KDTree.height() == 0);
+				REQUIRE(KDTree.size() == 0);
 			}
 		}
 	}

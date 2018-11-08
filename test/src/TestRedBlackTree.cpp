@@ -48,6 +48,11 @@ SCENARIO("Test Red Black Tree") {
 				auto result = RedBlackTree.search(555);
 				REQUIRE(result == nullptr);
 			}
+			THEN("Test clear") {
+				RedBlackTree.clear();
+				REQUIRE(RedBlackTree.height() == 0);
+				REQUIRE(RedBlackTree.size() == 0);
+			}
 		}
 		WHEN("Nodes are inserted in random order") {
 			RedBlackTree.insert(4 , 0);
@@ -82,6 +87,11 @@ SCENARIO("Test Red Black Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
+			THEN("Test clear") {
+				RedBlackTree.clear();
+				REQUIRE(RedBlackTree.height() == 0);
+				REQUIRE(RedBlackTree.size() == 0);
+			}
 		}
 		WHEN("Nodes are inserted in ascending order") {
 			for (int i = 0; i < 10; ++i) {
@@ -112,6 +122,11 @@ SCENARIO("Test Red Black Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
+			THEN("Test clear") {
+				RedBlackTree.clear();
+				REQUIRE(RedBlackTree.height() == 0);
+				REQUIRE(RedBlackTree.size() == 0);
+			}
 		}
 		WHEN("Nodes are inserted in descending order") {
 			for (int i = 9; i >= 0; --i) {
@@ -141,6 +156,11 @@ SCENARIO("Test Red Black Tree") {
 				auto result = RedBlackTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
+			}
+			THEN("Test clear") {
+				RedBlackTree.clear();
+				REQUIRE(RedBlackTree.height() == 0);
+				REQUIRE(RedBlackTree.size() == 0);
 			}
 		}
 	}

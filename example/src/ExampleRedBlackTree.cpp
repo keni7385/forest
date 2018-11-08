@@ -57,7 +57,7 @@ int main() {
 
 	std::cout << "search(3)" << " = ";
 	auto result = RedBlackTree.search(3);
-	if (result != nullptr) {
+	if (result) {
 		std::cout << "Found" << std::endl;
 	}
 	else {
@@ -66,7 +66,7 @@ int main() {
 
 	std::cout << "minimum()" << " = ";
 	auto min = RedBlackTree.minimum();
-	if (min != nullptr) {
+	if (min) {
 		std::cout << min->key << std::endl;
 	}
 	else {
@@ -75,7 +75,7 @@ int main() {
 
 	std::cout << "maximum()" << " = ";
 	auto max = RedBlackTree.maximum();
-	if (max != nullptr) {
+	if (max) {
 		std::cout << max->key << std::endl;
 	}
 	else {

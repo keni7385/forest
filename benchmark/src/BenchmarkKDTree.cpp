@@ -26,19 +26,41 @@
 #include <forest/KDTree.hpp>
 #include <random>
 
+static void BM_KDTree_Insert_Average_Case(benchmark::State & state) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(-state.range(0) / 2, state.range(0) / 2);
+
+	forest::KDTree <int, 2> KDTree;
+
+	for (auto _ : state) {
+		state.PauseTiming();
+		KDTree.clear();
+		state.ResumeTiming();
+		for (int i = 0; i < state.range(0); ++i) {
+			KDTree.insert({ dis(gen), dis(gen) });
+		}
+	}
+
+	state.SetComplexityN(state.range(0));
+}
+BENCHMARK(BM_KDTree_Insert_Average_Case)->RangeMultiplier(2)->Range(2, 1 << 20)->Complexity(benchmark::oNLogN);
+
 static void BM_KDTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(-state.range(0) / 2, state.range(0) / 2);
 
-	forest::KDTree <int, 3> KDTree;
+	forest::KDTree <int, 2> KDTree;
+
 	for (int i = 0; i < state.range(0); ++i) {
-		KDTree.insert({ dis(gen), dis(gen), dis(gen)});
+		KDTree.insert({ dis(gen), dis(gen)});
 	}
 
 	for (auto _ : state) {
-		benchmark::DoNotOptimize(KDTree.search({ dis(gen), dis(gen), dis(gen) }));
+		benchmark::DoNotOptimize(KDTree.search({ dis(gen), dis(gen) }));
 	}
+
 	state.SetComplexityN(state.range(0));
 }
 BENCHMARK(BM_KDTree_Search_Average_Case)->RangeMultiplier(2)->Range(2, 1 << 20)->Complexity(benchmark::oLogN);

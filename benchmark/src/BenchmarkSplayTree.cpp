@@ -26,12 +26,33 @@
 #include <forest/SplayTree.hpp>
 #include <random>
 
+static void BM_SplayTree_Insert_Average_Case(benchmark::State & state) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, state.range(0));
+
+	forest::SplayTree <int, int> SplayTree;
+
+	for (auto _ : state) {
+		for (int i = 0; i < state.range(0); ++i) {
+			SplayTree.insert(dis(gen), 0);
+		}
+		state.PauseTiming();
+		SplayTree.clear();
+		state.ResumeTiming();
+	}
+
+	state.SetComplexityN(state.range(0));
+}
+BENCHMARK(BM_SplayTree_Insert_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 20)->Complexity(benchmark::oNLogN);
+
 static void BM_SplayTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, state.range(0));
 
 	forest::SplayTree <int, int> SplayTree;
+
 	for (int i = 0; i < state.range(0); ++i) {
 		SplayTree.insert(dis(gen), 0);
 	}
@@ -39,8 +60,66 @@ static void BM_SplayTree_Search_Average_Case(benchmark::State & state) {
 	for (auto _ : state) {
 		benchmark::DoNotOptimize(SplayTree.search(dis(gen)));
 	}
+
 	state.SetComplexityN(state.range(0));
 }
 BENCHMARK(BM_SplayTree_Search_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oLogN);
+
+static void BM_SplayTree_Search_Worst_Case(benchmark::State & state) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, state.range(0));
+
+	forest::SplayTree <int, int> SplayTree;
+
+	for (int i = 0; i < state.range(0); ++i) {
+		SplayTree.insert(i, 0);
+	}
+
+	for (auto _ : state) {
+		benchmark::DoNotOptimize(SplayTree.search(dis(gen)));
+	}
+
+	state.SetComplexityN(state.range(0));
+}
+BENCHMARK(BM_SplayTree_Search_Worst_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oLogN);
+
+static void BM_SplayTree_Minimum_Average_Case(benchmark::State & state) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, state.range(0));
+
+	forest::SplayTree <int, int> SplayTree;
+
+	for (int i = 0; i < state.range(0); ++i) {
+		SplayTree.insert(dis(gen), 0);
+	}
+
+	for (auto _ : state) {
+		benchmark::DoNotOptimize(SplayTree.minimum());
+	}
+
+	state.SetComplexityN(state.range(0));
+}
+BENCHMARK(BM_SplayTree_Minimum_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::o1);
+
+static void BM_SplayTree_Maximum_Average_Case(benchmark::State & state) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, state.range(0));
+
+	forest::SplayTree <int, int> SplayTree;
+
+	for (int i = 0; i < state.range(0); ++i) {
+		SplayTree.insert(dis(gen), 0);
+	}
+
+	for (auto _ : state) {
+		benchmark::DoNotOptimize(SplayTree.maximum());
+	}
+
+	state.SetComplexityN(state.range(0));
+}
+BENCHMARK(BM_SplayTree_Maximum_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::o1);
 
 BENCHMARK_MAIN();

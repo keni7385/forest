@@ -26,7 +26,6 @@
 #include <catch2/catch.hpp>
 #include <forest/QuadTree.hpp>
 
-
 SCENARIO("Test Quad Tree") {
 	GIVEN("A Quad Tree") {
 		forest::QuadTree <int, 2> QuadTree(0, 0, 20, 20);
@@ -49,6 +48,17 @@ SCENARIO("Test Quad Tree") {
 				auto result = QuadTree.search({ -4, 3 });
 				REQUIRE(result == true);
 			}
+			THEN("Test clear()") {
+				QuadTree.clear();
+				auto result1 = QuadTree.search({ 1, 2 });
+				REQUIRE(result1 == false);
+				auto result2 = QuadTree.search({ -1, 1 });
+				REQUIRE(result2 == false);
+				auto result3 = QuadTree.search({ 3, 4 });
+				REQUIRE(result3 == false);
+				auto result4 = QuadTree.search({ -4, 3 });
+				REQUIRE(result4 == false);
+			}
 		}
 		WHEN("Nodes are inserted in ascending order") {
 			for (int i = 0; i < 10; ++i) {
@@ -62,6 +72,13 @@ SCENARIO("Test Quad Tree") {
 				auto result = QuadTree.search({ 5, 5 });
 				REQUIRE(result == true);
 			}
+			THEN("Test clear()") {
+				QuadTree.clear();
+				for (int i = 0; i < 10; ++i) {
+					auto result = QuadTree.search({ i, i });
+					REQUIRE(result == false);
+				}
+			}
 		}
 		WHEN("Nodes are inserted in descending order") {
 			for (int i = 9; i >= 0; --i) {
@@ -74,6 +91,13 @@ SCENARIO("Test Quad Tree") {
 			THEN("Test search for a node that does exist") {
 				auto result = QuadTree.search({ 5, 5 });
 				REQUIRE(result == true);
+			}
+			THEN("Test clear()") {
+				QuadTree.clear();
+				for (int i = 9; i >= 0; --i) {
+					auto result = QuadTree.search({ i, i });
+					REQUIRE(result == false);
+				}
 			}
 		}
 	}

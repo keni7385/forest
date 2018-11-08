@@ -149,10 +149,7 @@ namespace forest {
 
 	private:
 		void query(const Rectangle <T> & area, std::vector <Point<T>> & results) const {
-			if (!area.intersects(boundary)) {
-				return;
-			}
-
+			if (!area.intersects(boundary)) return;
 			if (subdivided) {
 				NW->query(area, results);
 				NE->query(area, results);
@@ -183,7 +180,6 @@ namespace forest {
 	public:
 		bool insert(const Point <T> & point) {
 			if (!boundary.contains(point)) return false;
-
 			if (!subdivided) {
 				children.push_back(point);
 				if (children.size() > K) {
@@ -214,7 +210,6 @@ namespace forest {
 		}
 		bool search(const Point <T> & point) {
 			if (!boundary.contains(point)) return false;
-
 			if (subdivided) {
 				if (NW->search(point)) return true;
 				else if (NE->search(point)) return true;
@@ -235,23 +230,18 @@ namespace forest {
 	public:
 		void clear() {
 			if (!this) return;
-
 			if (subdivided == true) {
 				NW->clear();
 				NE->clear();
 				SW->clear();
 				SE->clear();
 			}
-
 			subdivided = false;
-
 			children.clear();
-
 			delete NW;
 			delete NE;
 			delete SW;
 			delete SE;
-
 			NW = nullptr;
 			NE = nullptr;
 			SW = nullptr;
