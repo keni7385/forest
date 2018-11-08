@@ -31,90 +31,90 @@ namespace forest {
 	template <typename T, unsigned K>
 	class QuadTree {
 	private:
-		template <typename T>
+		template <typename D>
 		class Point {
 			template<typename U> friend class Rectangle;
 
 		private:
-			T x;
-			T y;
+			D x;
+			D y;
 
 		public:
 			Point() = default;
-			Point(const T & X, const T & Y) : x(X), y(Y) { }
+			Point(const D & X, const D & Y) : x(X), y(Y) { }
 			~Point() = default;
 
 		public:
-			void setX(const T & X) {
+			void setX(const D & X) {
 				x = X;
 			}
-			void setY(const T & Y) {
+			void setY(const D & Y) {
 				y = Y;
 			}
 
 		public:
-			T getX() const {
+			D getX() const {
 				return x;
 			}
-			T getY() const {
+			D getY() const {
 				return y;
 			}
 
 		public:
-			friend bool operator == (const Point<T> & lhs, const Point<T> & rhs) {
+			friend bool operator == (const Point<D> & lhs, const Point<D> & rhs) {
 				return lhs.x == rhs.x && lhs.y == rhs.y;
 			}
 		};
 
 	private:
-		template <typename T>
+		template <typename E>
 		class Rectangle {
 			template<typename U, unsigned K> friend class QuadTree;
 
 		private:
-			T x;
-			T y;
-			T w;
-			T h;
+			E x;
+			E y;
+			E w;
+			E h;
 
 		public:
 			Rectangle() = default;
-			Rectangle(const T & X, const T & Y, const T & W, const T & H) : x(X), y(Y), w(W), h(H) { }
+			Rectangle(const E & X, const E & Y, const E & W, const E & H) : x(X), y(Y), w(W), h(H) { }
 			~Rectangle() = default;
 
 		public:
-			void setX(const T & X) {
+			void setX(const E & X) {
 				x = X;
 			}
-			void setY(const T & Y) {
+			void setY(const E & Y) {
 				y = Y;
 			}
-			void setW(const T & W) {
+			void setW(const E & W) {
 				w = W;
 			}
-			void setH(const T & H) {
+			void setH(const E & H) {
 				h = H;
 			}
 
 		public:
-			T getX() const {
+			E getX() const {
 				return x;
 			}
-			T getY() const {
+			E getY() const {
 				return y;
 			}
-			T getW() const {
+			E getW() const {
 				return w;
 			}
-			T getH() const {
+			E getH() const {
 				return h;
 			}
 
 		public:
-			bool contains(const Point <T> & point) const {
+			bool contains(const Point <E> & point) const {
 				return point.x >= x - w && point.x <= x + w && point.y >= y - h && point.y <= y + h;
 			}
-			bool intersects(const Rectangle <T> & other) const {
+			bool intersects(const Rectangle <E> & other) const {
 				return !(x - w > other.x + other.w || x + w < other.x - other.w || y - h > other.y + other.h || y + h < other.y - other.h);
 			}
 		};
