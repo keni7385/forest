@@ -42,7 +42,7 @@ namespace forest {
 			AVLTreeNode * right{ nullptr };
 
 		private:
-			int height{ 1 };
+			unsigned height{ 1 };
 
 		public:
 			Key key;
@@ -106,7 +106,7 @@ namespace forest {
 		}
 
 	private:
-		int height(const AVLTreeNode * root) noexcept {
+		unsigned height(const AVLTreeNode * root) noexcept {
 			if (!root) return 0;
 			return root->height;
 		}
@@ -114,7 +114,7 @@ namespace forest {
 			if (!root) return 0;
 			return height(root->left) - height(root->right);
 		}
-		int size(const AVLTreeNode * root) noexcept {
+		unsigned size(const AVLTreeNode * root) noexcept {
 			if (!root) return 0;
 			return size(root->left) + size(root->right) + 1;
 		}
@@ -146,7 +146,7 @@ namespace forest {
 		}
 
 	private:
-		AVLTreeNode * insert(AVLTreeNode * root, const Key & key, const Value & value) {
+		AVLTreeNode * insert(AVLTreeNode * root, const Key & key, const Value & value) noexcept {
 			if (root == nullptr) return new AVLTreeNode(key, value);
 			if (key < root->key) root->left = insert(root->left, key, value);
 			else if (key > root->key) root->right = insert(root->right, key, value);
@@ -175,7 +175,7 @@ namespace forest {
 
 			return root;
 		}
-		AVLTreeNode * remove(AVLTreeNode * root, const Key & key) {
+		AVLTreeNode * remove(AVLTreeNode * root, const Key & key) noexcept {
 			if (!root) return nullptr;
 			else if (key < root->key) root->left = remove(root->left, key);
 			else if (key > root->key) root->right = remove(root->right, key);
@@ -249,7 +249,7 @@ namespace forest {
 		}
 
 	private:
-		void clear(AVLTreeNode * root) {
+		void clear(AVLTreeNode * root) noexcept {
 			if (!root) return;
 			if (root->left) clear(root->left);
 			if (root->right) clear(root->right);
@@ -295,10 +295,10 @@ namespace forest {
 		}
 
 	public:
-		int height() noexcept {
+		unsigned height() noexcept {
 			return height(tree_root);
 		}
-		int size() noexcept {
+		unsigned size() noexcept {
 			return size(tree_root);
 		}
 
@@ -306,7 +306,7 @@ namespace forest {
 		void insert(const Key & key, const Value & value) noexcept {
 			tree_root = insert(tree_root, key, value);
 		}
-		void remove(const Key & key) {
+		void remove(const Key & key) noexcept {
 			tree_root = remove(tree_root, key);
 		}
 		AVLTreeNode * search(const Key & key) noexcept {
@@ -314,7 +314,7 @@ namespace forest {
 		}
 
 	public:
-		void clear() {
+		void clear() noexcept {
 			clear(tree_root);
 			tree_root = nullptr;
 		}

@@ -133,7 +133,7 @@ namespace forest {
 		QuadTree * SE{ nullptr };
 
 	private:
-		void subdivide() {
+		void subdivide() noexcept {
 			const Arithmetic half_w = boundary.w / 2;
 			const Arithmetic half_h = boundary.h / 2;
 
@@ -146,7 +146,7 @@ namespace forest {
 		}
 
 	private:
-		void query(const Rectangle <Arithmetic> & area, std::vector <Point<Arithmetic>> & results) const {
+		void query(const Rectangle <Arithmetic> & area, std::vector <Point<Arithmetic>> & results) noexcept {
 			if (!area.intersects(boundary)) return;
 			if (subdivided) {
 				NW->query(area, results);
@@ -176,7 +176,7 @@ namespace forest {
 		}
 
 	public:
-		bool insert(const Point <Arithmetic> & point) {
+		bool insert(const Point <Arithmetic> & point) noexcept {
 			if (!boundary.contains(point)) return false;
 			if (!subdivided) {
 				children.push_back(point);
@@ -201,12 +201,12 @@ namespace forest {
 				return false;
 			}
 		}
-		std::vector<Point<Arithmetic>> query(const Rectangle <Arithmetic> & area) {
+		std::vector<Point<Arithmetic>> query(const Rectangle <Arithmetic> & area) noexcept {
 			std::vector <Point<Arithmetic>> results;
 			query(area, results);
 			return results;
 		}
-		bool search(const Point <Arithmetic> & point) {
+		bool search(const Point <Arithmetic> & point) noexcept {
 			if (!boundary.contains(point)) return false;
 			if (subdivided) {
 				if (NW->search(point)) return true;
@@ -226,7 +226,7 @@ namespace forest {
 		}
 
 	public:
-		void clear() {
+		void clear() noexcept {
 			if (!this) return;
 			if (subdivided == true) {
 				NW->clear();

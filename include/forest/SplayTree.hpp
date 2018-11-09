@@ -186,7 +186,7 @@ namespace forest {
 		}
 
 	private:
-		void clear(SplayTreeNode * root) {
+		void clear(SplayTreeNode * root) noexcept {
 			if (!root) return;
 			if (root->left != nullptr) clear(root->left);
 			if (root->right != nullptr) clear(root->right);
@@ -286,7 +286,7 @@ namespace forest {
 		}
 
 	public:
-		void clear() {
+		void clear() noexcept {
 			clear(tree_root);
 			tree_root = nullptr;
 		}

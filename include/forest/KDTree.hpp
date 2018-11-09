@@ -55,7 +55,7 @@ namespace forest {
 		KDTreeNode * tree_root{ nullptr };
 
 	private:
-		KDTreeNode * insert(KDTreeNode * root, const std::array <Arithmetic, Dimensions> & point, unsigned depth) {
+		KDTreeNode * insert(KDTreeNode * root, const std::array <Arithmetic, Dimensions> & point, unsigned depth) noexcept {
 			if (!root) return new KDTreeNode(point);
 			unsigned current = depth % Dimensions;
 			if (point[current] < (root->point[current])) {
@@ -67,7 +67,7 @@ namespace forest {
 			root->height = std::max(height(root->left), height(root->right)) + 1;
 			return root;
 		}
-		KDTreeNode * search(KDTreeNode * root, const std::array<Arithmetic, Dimensions> & point, unsigned depth) {
+		KDTreeNode * search(KDTreeNode * root, const std::array<Arithmetic, Dimensions> & point, unsigned depth) noexcept {
 			if (!root) return nullptr;
 			if (root->point == point) return root;
 			unsigned current = depth % Dimensions;
@@ -80,13 +80,13 @@ namespace forest {
 		}
 
 	private:
-		KDTreeNode * minimum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, unsigned dimension) {
+		KDTreeNode * minimum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, unsigned dimension) noexcept {
 			KDTreeNode * tmp = x;
 			if (y && y->point[dimension] < tmp->point[dimension]) tmp = y;
 			if (z && z->point[dimension] < tmp->point[dimension]) tmp = z;
 			return tmp;
 		}
-		KDTreeNode * minimum(KDTreeNode * root, unsigned dimension, unsigned depth) {
+		KDTreeNode * minimum(KDTreeNode * root, unsigned dimension, unsigned depth) noexcept {
 			if (!root) return nullptr;
 			unsigned current = depth % Dimensions;
 			if (current == dimension) {
@@ -95,18 +95,18 @@ namespace forest {
 			}
 			return minimum(root, minimum(root->left, dimension, depth + 1), minimum(root->right, dimension, depth + 1), dimension);
 		}
-		KDTreeNode * minimum(KDTreeNode * root, unsigned dimension) {
+		KDTreeNode * minimum(KDTreeNode * root, unsigned dimension) noexcept {
 			return minimum(root, dimension, 0);
 		}
 
 	private:
-		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, unsigned dimension) {
+		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, unsigned dimension) noexcept {
 			KDTreeNode * tmp = x;
 			if (y && y->point[dimension] > tmp->point[dimension]) tmp = y;
 			if (z && z->point[dimension] > tmp->point[dimension]) tmp = z;
 			return tmp;
 		}
-		KDTreeNode * maximum(KDTreeNode * root, unsigned dimension, unsigned depth) {
+		KDTreeNode * maximum(KDTreeNode * root, unsigned dimension, unsigned depth) noexcept {
 			if (!root) return nullptr;
 			unsigned current = depth % Dimensions;
 			if (current == dimension) {
@@ -115,7 +115,7 @@ namespace forest {
 			}
 			return maximum(root, maximum(root->left, dimension, depth + 1), maximum(root->right, dimension, depth + 1), dimension);
 		}
-		KDTreeNode * maximum(KDTreeNode * root, unsigned dimension) {
+		KDTreeNode * maximum(KDTreeNode * root, unsigned dimension) noexcept {
 			return maximum(root, dimension, 0);
 		}
 
@@ -130,7 +130,7 @@ namespace forest {
 		}
 
 	private:
-		void clear(KDTreeNode * root) {
+		void clear(KDTreeNode * root) noexcept {
 			if (!root) return;
 			if (root->left) clear(root->left);
 			if (root->right) clear(root->right);
@@ -145,18 +145,18 @@ namespace forest {
 		}
 
 	public:
-		void insert(const std::array <Arithmetic, Dimensions> & point) {
+		void insert(const std::array <Arithmetic, Dimensions> & point) noexcept {
 			tree_root = insert(tree_root, point, 0);
 		}
-		KDTreeNode * search(const std::array <Arithmetic, Dimensions> & point) {
+		KDTreeNode * search(const std::array <Arithmetic, Dimensions> & point) noexcept {
 			return search(tree_root, point, 0);
 		}
 
 	public:
-		KDTreeNode * minimum(unsigned dimension) {
+		KDTreeNode * minimum(unsigned dimension) noexcept {
 			return minimum(tree_root, dimension, 0);
 		}
-		KDTreeNode * maximum(unsigned dimension) {
+		KDTreeNode * maximum(unsigned dimension) noexcept {
 			return maximum(tree_root, dimension, 0);
 		}
 
@@ -169,7 +169,7 @@ namespace forest {
 		}
 
 	public:
-		void clear() {
+		void clear() noexcept {
 			clear(tree_root);
 			tree_root = nullptr;
 		}

@@ -42,7 +42,7 @@ namespace forest {
 			BinarySearchTreeNode * right{ nullptr };
 
 		private:
-			int height{ 1 };
+			unsigned height{ 1 };
 
 		public:
 			Key key;
@@ -106,11 +106,11 @@ namespace forest {
 		}
 
 	private:
-		int height(const BinarySearchTreeNode * root) noexcept {
+		unsigned height(const BinarySearchTreeNode * root) noexcept {
 			if (!root) return 0;
 			return root->height;
 		}
-		int size(const BinarySearchTreeNode * root) noexcept {
+		unsigned size(const BinarySearchTreeNode * root) noexcept {
 			if (!root) return 0;
 			return size(root->left) + size(root->right) + 1;
 		}
@@ -172,7 +172,7 @@ namespace forest {
 		}
 
 	private:
-		void clear(BinarySearchTreeNode * root) {
+		void clear(BinarySearchTreeNode * root) noexcept {
 			if (!root) return;
 			if (root->left != nullptr) clear(root->left);
 			if (root->right != nullptr) clear(root->right);
@@ -218,10 +218,10 @@ namespace forest {
 		}
 
 	public:
-		int height() noexcept {
+		unsigned height() noexcept {
 			return height(tree_root);
 		}
-		int size() noexcept {
+		unsigned size() noexcept {
 			return size(tree_root);
 		}
 
@@ -237,7 +237,7 @@ namespace forest {
 		}
 
 	public:
-		void clear() {
+		void clear() noexcept {
 			clear(tree_root);
 			tree_root = nullptr;
 		}
