@@ -87,6 +87,12 @@ SCENARIO("Test AVL Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
+			THEN("Test remove") {
+				AVLTree.remove(4);
+				REQUIRE(AVLTree.search(4) == nullptr);
+				REQUIRE(AVLTree.height() == 3);
+				REQUIRE(AVLTree.size() == 6);
+			}
 			THEN("Test clear") {
 				AVLTree.clear();
 				REQUIRE(AVLTree.height() == 0);
@@ -122,6 +128,12 @@ SCENARIO("Test AVL Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
+			THEN("Test remove") {
+				AVLTree.remove(3);
+				REQUIRE(AVLTree.search(3) == nullptr);
+				REQUIRE(AVLTree.height() == 4);
+				REQUIRE(AVLTree.size() == 9);
+			}
 			THEN("Test clear") {
 				AVLTree.clear();
 				REQUIRE(AVLTree.height() == 0);
@@ -156,6 +168,12 @@ SCENARIO("Test AVL Tree") {
 				auto result = AVLTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
+			}
+			THEN("Test remove") {
+				AVLTree.remove(6);
+				REQUIRE(AVLTree.search(6) == nullptr);
+				REQUIRE(AVLTree.height() == 4);
+				REQUIRE(AVLTree.size() == 9);
 			}
 			THEN("Test clear") {
 				AVLTree.clear();
