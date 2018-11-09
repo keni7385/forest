@@ -28,100 +28,100 @@
 #include <algorithm>
 
 namespace forest {
-	template <typename T, unsigned K>
+	template <typename Arithmetic, unsigned Capacity>
 	class QuadTree {
 	private:
-		template <typename D>
+		template <typename U>
 		class Point {
 		private:
-			D x;
-			D y;
+			U x;
+			U y;
 
 		public:
 			Point() = default;
-			Point(const D & X, const D & Y) : x(X), y(Y) { }
+			Point(const U & X, const U & Y) : x(X), y(Y) { }
 			~Point() = default;
 
 		public:
-			void setX(const D & X) {
+			void setX(const U & X) {
 				x = X;
 			}
-			void setY(const D & Y) {
+			void setY(const U & Y) {
 				y = Y;
 			}
 
 		public:
-			D getX() const {
+			U getX() const {
 				return x;
 			}
-			D getY() const {
+			U getY() const {
 				return y;
 			}
 
 		public:
-			friend bool operator == (const Point<D> & lhs, const Point<D> & rhs) {
+			friend bool operator == (const Point<U> & lhs, const Point<U> & rhs) {
 				return lhs.x == rhs.x && lhs.y == rhs.y;
 			}
 		};
 
 	private:
-		template <typename E>
+		template <typename U>
 		class Rectangle {
-			template<typename U, unsigned L> friend class QuadTree;
+			template<typename T, unsigned K> friend class QuadTree;
 
 		private:
-			E x;
-			E y;
-			E w;
-			E h;
+			U x;
+			U y;
+			U w;
+			U h;
 
 		public:
 			Rectangle() = default;
-			Rectangle(const E & X, const E & Y, const E & W, const E & H) : x(X), y(Y), w(W), h(H) { }
+			Rectangle(const U & X, const U & Y, const U & W, const U & H) : x(X), y(Y), w(W), h(H) { }
 			~Rectangle() = default;
 
 		public:
-			void setX(const E & X) {
+			void setX(const U & X) {
 				x = X;
 			}
-			void setY(const E & Y) {
+			void setY(const U & Y) {
 				y = Y;
 			}
-			void setW(const E & W) {
+			void setW(const U & W) {
 				w = W;
 			}
-			void setH(const E & H) {
+			void setH(const U & H) {
 				h = H;
 			}
 
 		public:
-			E getX() const {
+			U getX() const {
 				return x;
 			}
-			E getY() const {
+			U getY() const {
 				return y;
 			}
-			E getW() const {
+			U getW() const {
 				return w;
 			}
-			E getH() const {
+			U getH() const {
 				return h;
 			}
 
 		public:
-			bool contains(const Point <E> & point) const {
+			bool contains(const Point <U> & point) const {
 				return point.getX() >= x - w && point.getX() <= x + w && point.getY() >= y - h && point.getY() <= y + h;
 			}
-			bool intersects(const Rectangle <E> & other) const {
+			bool intersects(const Rectangle <U> & other) const {
 				return !(x - w > other.x + other.w || x + w < other.x - other.w || y - h > other.y + other.h || y + h < other.y - other.h);
 			}
 		};
 
 	private:
-		std::vector <Point <T>> children;
+		std::vector <Point <Arithmetic>> children;
 
 	private:
-		Rectangle <T> boundary;
+		Rectangle <Arithmetic> boundary;
 
 	private:
 		bool subdivided{ false };
@@ -134,8 +134,8 @@ namespace forest {
 
 	private:
 		void subdivide() {
-			const T half_w = boundary.w / 2;
-			const T half_h = boundary.h / 2;
+			const Arithmetic half_w = boundary.w / 2;
+			const Arithmetic half_h = boundary.h / 2;
 
 			NW = new QuadTree(boundary.x - half_w, boundary.y + half_h, half_w, half_h);
 			NE = new QuadTree(boundary.x + half_w, boundary.y + half_h, half_w, half_h);
@@ -146,7 +146,7 @@ namespace forest {
 		}
 
 	private:
-		void query(const Rectangle <T> & area, std::vector <Point<T>> & results) const {
+		void query(const Rectangle <Arithmetic> & area, std::vector <Point<Arithmetic>> & results) const {
 			if (!area.intersects(boundary)) return;
 			if (subdivided) {
 				NW->query(area, results);
@@ -165,7 +165,7 @@ namespace forest {
 
 	public:
 		QuadTree() = delete;
-		QuadTree(const T & X, const T & Y, const T & W, const T & H) {
+		QuadTree(const Arithmetic & X, const Arithmetic & Y, const Arithmetic & W, const Arithmetic & H) {
 			boundary.x = X;
 			boundary.y = Y;
 			boundary.w = W;
@@ -176,13 +176,13 @@ namespace forest {
 		}
 
 	public:
-		bool insert(const Point <T> & point) {
+		bool insert(const Point <Arithmetic> & point) {
 			if (!boundary.contains(point)) return false;
 			if (!subdivided) {
 				children.push_back(point);
-				if (children.size() > K) {
+				if (children.size() > Capacity) {
 					subdivide();
-					typename std::vector <Point<T>>::iterator it = children.begin();
+					typename std::vector <Point<Arithmetic>>::iterator it = children.begin();
 					while (it != children.end()) {
 						if (NW->boundary.contains(*it)) NW->insert(*it);
 						else if (NE->boundary.contains(*it)) NE->insert(*it);
@@ -201,12 +201,12 @@ namespace forest {
 				return false;
 			}
 		}
-		std::vector<Point<T>> query(const Rectangle <T> & area) {
-			std::vector <Point<T>> results;
+		std::vector<Point<Arithmetic>> query(const Rectangle <Arithmetic> & area) {
+			std::vector <Point<Arithmetic>> results;
 			query(area, results);
 			return results;
 		}
-		bool search(const Point <T> & point) {
+		bool search(const Point <Arithmetic> & point) {
 			if (!boundary.contains(point)) return false;
 			if (subdivided) {
 				if (NW->search(point)) return true;

@@ -29,7 +29,7 @@
 #include <memory>
 
 namespace forest {
-	template <typename T, unsigned K>
+	template <typename Arithmetic, unsigned Dimensions>
 	class KDTree {
 	private:
 		class KDTreeNode {
@@ -43,11 +43,11 @@ namespace forest {
 			int height{ 1 };
 
 		public:
-			std::array<T, K> point;
+			std::array<Arithmetic, Dimensions> point;
 
 		public:
 			KDTreeNode() = default;
-			explicit KDTreeNode(const std::array <T, K> & POINT) : point(POINT) { }
+			explicit KDTreeNode(const std::array <Arithmetic, Dimensions> & POINT) : point(POINT) { }
 			~KDTreeNode() = default;
 		};
 
@@ -55,9 +55,9 @@ namespace forest {
 		KDTreeNode * tree_root{ nullptr };
 
 	private:
-		KDTreeNode * insert(KDTreeNode * root, const std::array <T, K> & point, unsigned depth) {
+		KDTreeNode * insert(KDTreeNode * root, const std::array <Arithmetic, Dimensions> & point, unsigned depth) {
 			if (!root) return new KDTreeNode(point);
-			unsigned current = depth % K;
+			unsigned current = depth % Dimensions;
 			if (point[current] < (root->point[current])) {
 				root->left = insert(root->left, point, depth + 1);
 			}
@@ -67,10 +67,10 @@ namespace forest {
 			root->height = std::max(height(root->left), height(root->right)) + 1;
 			return root;
 		}
-		KDTreeNode * search(KDTreeNode * root, const std::array<T, K> & point, unsigned depth) {
+		KDTreeNode * search(KDTreeNode * root, const std::array<Arithmetic, Dimensions> & point, unsigned depth) {
 			if (!root) return nullptr;
 			if (root->point == point) return root;
-			unsigned current = depth % K;
+			unsigned current = depth % Dimensions;
 			if (point[current] < root->point[current]) {
 				return search(root->left, point, depth + 1);
 			}
@@ -88,7 +88,7 @@ namespace forest {
 		}
 		KDTreeNode * minimum(KDTreeNode * root, unsigned dimension, unsigned depth) {
 			if (!root) return nullptr;
-			unsigned current = depth % K;
+			unsigned current = depth % Dimensions;
 			if (current == dimension) {
 				if (!root->left) return root;
 				return minimum(root->left, dimension, depth + 1);
@@ -108,7 +108,7 @@ namespace forest {
 		}
 		KDTreeNode * maximum(KDTreeNode * root, unsigned dimension, unsigned depth) {
 			if (!root) return nullptr;
-			unsigned current = depth % K;
+			unsigned current = depth % Dimensions;
 			if (current == dimension) {
 				if (!root->right) return root;
 				return maximum(root->right, dimension, depth + 1);
@@ -145,10 +145,10 @@ namespace forest {
 		}
 
 	public:
-		void insert(const std::array <T, K> & point) {
+		void insert(const std::array <Arithmetic, Dimensions> & point) {
 			tree_root = insert(tree_root, point, 0);
 		}
-		KDTreeNode * search(const std::array <T, K> & point) {
+		KDTreeNode * search(const std::array <Arithmetic, Dimensions> & point) {
 			return search(tree_root, point, 0);
 		}
 
@@ -175,7 +175,7 @@ namespace forest {
 		}
 	};
 
-	template <typename T> using Tree1D = KDTree<T, 1>;
-	template <typename T> using Tree2D = KDTree<T, 2>;
-	template <typename T> using Tree3D = KDTree<T, 3>;
+	template <typename Arithmetic> using Tree1D = KDTree<Arithmetic, 1>;
+	template <typename Arithmetic> using Tree2D = KDTree<Arithmetic, 2>;
+	template <typename Arithmetic> using Tree3D = KDTree<Arithmetic, 3>;
 }
