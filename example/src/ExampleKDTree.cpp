@@ -27,7 +27,7 @@
 #include <array>
 
 int main() {
-	forest::KDTree <int, 2> KDTree;
+	forest::KDTree <float, 2> KDTree;
 
 	KDTree.insert({ 0, 0 });
 	KDTree.insert({ -5, 5 });
