@@ -32,6 +32,8 @@ namespace forest {
 	class QuadTree {
 	public:
 		template <typename U>
+		class Rectangle;
+		template <typename U>
 		class Point {
 			template<typename T> friend class Rectangle;
 		private:
