@@ -29,9 +29,9 @@
 static void BM_QuadTree_Insert_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(-state.range(0) / 2, state.range(0) / 2);
+	std::uniform_real_distribution<> dis(-state.range(0) / 2, state.range(0) / 2);
 
-	forest::QuadTree <int, 10> QuadTree(0, 0, state.range(0) / 2, state.range(0) / 2);
+	forest::QuadTree <double, 10> QuadTree(0, 0, state.range(0) / 2, state.range(0) / 2);
 
 	for (auto _ : state) {
 		state.PauseTiming();
@@ -49,9 +49,9 @@ BENCHMARK(BM_QuadTree_Insert_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15
 static void BM_QuadTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(-state.range(0) / 2, state.range(0) / 2);
+	std::uniform_real_distribution<> dis(-state.range(0) / 2, state.range(0) / 2);
 
-	forest::QuadTree <int, 10> QuadTree(0, 0, state.range(0) / 2, state.range(0) / 2);
+	forest::QuadTree <double, 10> QuadTree(0, 0, state.range(0) / 2, state.range(0) / 2);
 
 	for (int i = 0; i < state.range(0); ++i) {
 		QuadTree.insert({ dis(gen), dis(gen) });
@@ -64,5 +64,24 @@ static void BM_QuadTree_Search_Average_Case(benchmark::State & state) {
 	state.SetComplexityN(state.range(0));
 }
 BENCHMARK(BM_QuadTree_Search_Average_Case)->RangeMultiplier(2)->Range(2, 1 << 20)->Complexity(benchmark::oLogN);
+
+static void BM_QuadTree_Query_Average_Case(benchmark::State & state) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<> dis(-state.range(0) / 2, state.range(0) / 2);
+
+	forest::QuadTree <double, 10> QuadTree(0, 0, state.range(0) / 2, state.range(0) / 2);
+
+	for (int i = 0; i < state.range(0); ++i) {
+		QuadTree.insert({ dis(gen), dis(gen) });
+	}
+
+	for (auto _ : state) {
+		benchmark::DoNotOptimize(QuadTree.query({ 0, 0, dis(gen), dis(gen) }));
+	}
+
+	state.SetComplexityN(state.range(0));
+}
+BENCHMARK(BM_QuadTree_Query_Average_Case)->RangeMultiplier(2)->Range(2, 1 << 20)->Complexity(benchmark::oN);
 
 BENCHMARK_MAIN();
