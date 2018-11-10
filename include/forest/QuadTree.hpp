@@ -222,8 +222,8 @@ namespace forest {
 			}
 			else {
 				if (NW->remove(point) || NE->remove(point) || SW->remove(point) || SE->remove(point)) {
-					if (NW->children.empty() && NE->children.empty() && SW->children.empty() && SE->children.empty()) {
-						if (!NW->divided && !NE->divided && !SW->divided && !SE->divided) {
+					if (!NW->divided && !NE->divided && !SW->divided && !SE->divided) {
+						if (NW->children.empty() && NE->children.empty() && SW->children.empty() && SE->children.empty()) {
 							merge();
 						}
 					}
