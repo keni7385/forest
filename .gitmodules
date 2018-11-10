@@ -1,3 +1,6 @@
-[submodule "ext/Catch2"]
-	path = ext/Catch2
+[submodule "ext/google/benchmark"]
+	path = ext/google/benchmark
+	url = https://github.com/google/benchmark
+[submodule "ext/catchorg/Catch2"]
+	path = ext/catchorg/Catch2
 	url = https://github.com/catchorg/Catch2.git
