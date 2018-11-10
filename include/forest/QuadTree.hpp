@@ -33,6 +33,7 @@ namespace forest {
 	public:
 		template <typename U>
 		class Point {
+			template<typename T> friend class Rectangle;
 		private:
 			U x;
 			U y;
@@ -110,7 +111,7 @@ namespace forest {
 
 		public:
 			bool contains(const Point <U> & point) const {
-				return point.getX() >= x - w && point.getX() <= x + w && point.getY() >= y - h && point.getY() <= y + h;
+				return point.x >= x - w && point.x <= x + w && point.y >= y - h && point.y <= y + h;
 			}
 			bool intersects(const Rectangle <U> & other) const {
 				return !(x - w > other.x + other.w || x + w < other.x - other.w || y - h > other.y + other.h || y + h < other.y - other.h);

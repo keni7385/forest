@@ -40,7 +40,7 @@ namespace forest {
 			KDTreeNode * right{ nullptr };
 
 		private:
-			int height{ 1 };
+			unsigned height{ 1 };
 
 		public:
 			std::array<Arithmetic, Dimensions> point;
@@ -120,11 +120,11 @@ namespace forest {
 		}
 
 	private:
-		int height(const KDTreeNode * root) noexcept {
+		unsigned height(const KDTreeNode * root) noexcept {
 			if (!root) return 0;
 			return root->height;
 		}
-		int size(const KDTreeNode * root) noexcept {
+		unsigned size(const KDTreeNode * root) noexcept {
 			if (!root) return 0;
 			return size(root->left) + size(root->right) + 1;
 		}
@@ -161,10 +161,10 @@ namespace forest {
 		}
 
 	public:
-		int height() noexcept {
+		unsigned height() noexcept {
 			return height(tree_root);
 		}
-		int size() noexcept {
+		unsigned size() noexcept {
 			return size(tree_root);
 		}
 
