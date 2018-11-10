@@ -30,25 +30,22 @@ SCENARIO("Test Binary Search Tree") {
 	GIVEN("A Binary Search Tree") {
 		forest::BinarySearchTree <int, int> BinarySearchTree;
 		WHEN("The Binary Search Tree is empty") {
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(BinarySearchTree.height() == 0);
 			}
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(BinarySearchTree.size() == 0);
 			}
-			THEN("Test maximum") {
-				auto max = BinarySearchTree.maximum();
-				REQUIRE(max == nullptr);
+			THEN("Test maximum()") {
+				REQUIRE(BinarySearchTree.maximum() == nullptr);
 			}
-			THEN("Test minimum") {
-				auto min = BinarySearchTree.minimum();
-				REQUIRE(min == nullptr);
+			THEN("Test minimum()") {
+				REQUIRE(BinarySearchTree.minimum() == nullptr);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = BinarySearchTree.search(555);
-				REQUIRE(result == nullptr);
+			THEN("Test search(555)") {
+				REQUIRE(BinarySearchTree.search(555) == nullptr);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				BinarySearchTree.clear();
 				REQUIRE(BinarySearchTree.height() == 0);
 				REQUIRE(BinarySearchTree.size() == 0);
@@ -62,38 +59,37 @@ SCENARIO("Test Binary Search Tree") {
 			BinarySearchTree.insert(0 , 0);
 			BinarySearchTree.insert(14, 0);
 			BinarySearchTree.insert(45, 0);
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(BinarySearchTree.height() == 4);
 			}
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(BinarySearchTree.size() == 7);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = BinarySearchTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 90);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = BinarySearchTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = BinarySearchTree.search(1337);
-				REQUIRE(result == nullptr);
+			THEN("Test search(1337)") {
+				REQUIRE(BinarySearchTree.search(1337) == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = BinarySearchTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test remove") {
+			THEN("Test remove(45)") {
 				BinarySearchTree.remove(45);
 				REQUIRE(BinarySearchTree.search(45) == nullptr);
 				REQUIRE(BinarySearchTree.height() == 3);
 				REQUIRE(BinarySearchTree.size() == 6);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				BinarySearchTree.clear();
 				REQUIRE(BinarySearchTree.height() == 0);
 				REQUIRE(BinarySearchTree.size() == 0);
@@ -103,38 +99,37 @@ SCENARIO("Test Binary Search Tree") {
 			for (int i = 0; i < 10; ++i) {
 				BinarySearchTree.insert(i, 0);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(BinarySearchTree.height() == 10);
 			}
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(BinarySearchTree.size() == 10);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = BinarySearchTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 9);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = BinarySearchTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = BinarySearchTree.search(1337);
-				REQUIRE(result == nullptr);
+			THEN("Test search(1337)") {
+				REQUIRE(BinarySearchTree.search(1337) == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = BinarySearchTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test remove") {
+			THEN("Test remove(0)") {
 				BinarySearchTree.remove(0);
 				REQUIRE(BinarySearchTree.search(0) == nullptr);
 				REQUIRE(BinarySearchTree.height() == 9);
 				REQUIRE(BinarySearchTree.size() == 9);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				BinarySearchTree.clear();
 				REQUIRE(BinarySearchTree.height() == 0);
 				REQUIRE(BinarySearchTree.size() == 0);
@@ -144,38 +139,37 @@ SCENARIO("Test Binary Search Tree") {
 			for (int i = 9; i >= 0; --i) {
 				BinarySearchTree.insert(i, 0);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(BinarySearchTree.height() == 10);
 			}
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(BinarySearchTree.size() == 10);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = BinarySearchTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 9);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = BinarySearchTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = BinarySearchTree.search(1337);
-				REQUIRE(result == nullptr);
+			THEN("Test search(1337)") {
+				REQUIRE(BinarySearchTree.search(1337) == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = BinarySearchTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test remove") {
+			THEN("Test remove(0)") {
 				BinarySearchTree.remove(0);
 				REQUIRE(BinarySearchTree.search(0) == nullptr);
 				REQUIRE(BinarySearchTree.height() == 9);
 				REQUIRE(BinarySearchTree.size() == 9);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				BinarySearchTree.clear();
 				REQUIRE(BinarySearchTree.height() == 0);
 				REQUIRE(BinarySearchTree.size() == 0);

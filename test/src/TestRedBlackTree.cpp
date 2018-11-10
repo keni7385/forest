@@ -30,25 +30,22 @@ SCENARIO("Test Red Black Tree") {
 	GIVEN("A Red Black Tree") {
 		forest::RedBlackTree <int, int> RedBlackTree;
 		WHEN("The Red Black Tree is empty") {
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(RedBlackTree.size() == 0);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(RedBlackTree.height() == 0);
 			}
-			THEN("Test maximum") {
-				auto max = RedBlackTree.maximum();
-				REQUIRE(max == nullptr);
+			THEN("Test maximum()") {
+				REQUIRE(RedBlackTree.maximum() == nullptr);
 			}
-			THEN("Test minimum") {
-				auto min = RedBlackTree.minimum();
-				REQUIRE(min == nullptr);
+			THEN("Test minimum()") {
+				REQUIRE(RedBlackTree.minimum() == nullptr);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = RedBlackTree.search(555);
-				REQUIRE(result == nullptr);
+			THEN("Test search(555)") {
+				REQUIRE(RedBlackTree.search(555) == nullptr);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				RedBlackTree.clear();
 				REQUIRE(RedBlackTree.height() == 0);
 				REQUIRE(RedBlackTree.size() == 0);
@@ -62,32 +59,31 @@ SCENARIO("Test Red Black Tree") {
 			RedBlackTree.insert(0 , 0);
 			RedBlackTree.insert(14, 0);
 			RedBlackTree.insert(45, 0);
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(RedBlackTree.size() == 7);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(RedBlackTree.height() == 3);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = RedBlackTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 90);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = RedBlackTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = RedBlackTree.search(1337);
-				REQUIRE(result == nullptr);
+			THEN("Test search(1337)") {
+				REQUIRE(RedBlackTree.search(1337) == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = RedBlackTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				RedBlackTree.clear();
 				REQUIRE(RedBlackTree.height() == 0);
 				REQUIRE(RedBlackTree.size() == 0);
@@ -97,32 +93,31 @@ SCENARIO("Test Red Black Tree") {
 			for (int i = 0; i < 10; ++i) {
 				RedBlackTree.insert(i, 0);
 			}
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(RedBlackTree.size() == 10);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(RedBlackTree.height() == 5);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = RedBlackTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 9);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = RedBlackTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = RedBlackTree.search(1337);
-				REQUIRE(result == nullptr);
+			THEN("Test search(1337)") {
+				REQUIRE(RedBlackTree.search(1337) == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = RedBlackTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				RedBlackTree.clear();
 				REQUIRE(RedBlackTree.height() == 0);
 				REQUIRE(RedBlackTree.size() == 0);
@@ -132,32 +127,31 @@ SCENARIO("Test Red Black Tree") {
 			for (int i = 9; i >= 0; --i) {
 				RedBlackTree.insert(i, 0);
 			}
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(RedBlackTree.size() == 10);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(RedBlackTree.height() == 5);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = RedBlackTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 9);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = RedBlackTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = RedBlackTree.search(1337);
-				REQUIRE(result == nullptr);
+			THEN("Test search(1337)") {
+				REQUIRE(RedBlackTree.search(1337) == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = RedBlackTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				RedBlackTree.clear();
 				REQUIRE(RedBlackTree.height() == 0);
 				REQUIRE(RedBlackTree.size() == 0);

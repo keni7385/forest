@@ -30,7 +30,7 @@ SCENARIO("Test Quad Tree") {
 	GIVEN("A Quad Tree") {
 		forest::QuadTree <float, 2> QuadTree(0, 0, 10, 10);
 		WHEN("The Quad Tree is empty") {
-			THEN("Test search for a node that does not exist") {
+			THEN("Test search({ 0, 0 })") {
 				REQUIRE(QuadTree.search({ 0, 0 }) == false);
 			}
 		}
@@ -39,10 +39,10 @@ SCENARIO("Test Quad Tree") {
 			QuadTree.insert({ -1, 1 });
 			QuadTree.insert({ 3, 4 });
 			QuadTree.insert({ -4, 3 });
-			THEN("Test search for a node that does not exist") {
+			THEN("Test search({ 0, 0 })") {
 				REQUIRE(QuadTree.search({ 0, 0 }) == false);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search({ -4, 3 })") {
 				REQUIRE(QuadTree.search({ -4, 3 }) == true);
 			}
 			THEN("Test remove({ 1, 2 })") {
@@ -61,10 +61,10 @@ SCENARIO("Test Quad Tree") {
 			for (float i = 0; i < 10; ++i) {
 				QuadTree.insert({ i, i });
 			}
-			THEN("Test search for a node that does not exist") {
+			THEN("Test search({ -1, -1 })") {
 				REQUIRE(QuadTree.search({ -1, -1 }) == false);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search({ 5, 5 })") {
 				REQUIRE(QuadTree.search({ 5, 5 }) == true);
 			}
 			THEN("Test remove({ i, i })") {
@@ -84,10 +84,10 @@ SCENARIO("Test Quad Tree") {
 			for (float i = 9; i >= 0; --i) {
 				QuadTree.insert({ i, i });
 			}
-			THEN("Test search for a node that does not exist") {
+			THEN("Test search({ -1, -1 })") {
 				REQUIRE(QuadTree.search({ -1, -1 }) == false);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search({ 5, 5 })") {
 				REQUIRE(QuadTree.search({ 5, 5 }) == true);
 			}
 			THEN("Test remove({ i, i })") {

@@ -30,25 +30,22 @@ SCENARIO("Test AVL Tree") {
 	GIVEN("An AVL Tree") {
 		forest::AVLTree <int, int> AVLTree;
 		WHEN("The AVL Tree is empty") {
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(AVLTree.size() == 0);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(AVLTree.height() == 0);
 			}
-			THEN("Test maximum") {
-				auto max = AVLTree.maximum();
-				REQUIRE(max == nullptr);
+			THEN("Test maximum()") {
+				REQUIRE(AVLTree.maximum() == nullptr);
 			}
-			THEN("Test minimum") {
-				auto min = AVLTree.minimum();
-				REQUIRE(min == nullptr);
+			THEN("Test minimum()") {
+				REQUIRE(AVLTree.minimum() == nullptr);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = AVLTree.search(555);
-				REQUIRE(result == nullptr);
+			THEN("Test search(555)") {
+				REQUIRE(AVLTree.search(555) == nullptr);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				AVLTree.clear();
 				REQUIRE(AVLTree.height() == 0);
 				REQUIRE(AVLTree.size() == 0);
@@ -62,38 +59,37 @@ SCENARIO("Test AVL Tree") {
 			AVLTree.insert(0 , 0);
 			AVLTree.insert(14, 0);
 			AVLTree.insert(45, 0);
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(AVLTree.size() == 7);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(AVLTree.height() == 3);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = AVLTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 90);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = AVLTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = AVLTree.search(1337);
-				REQUIRE(result == nullptr);
+			THEN("Test search(1337)") {
+				REQUIRE(AVLTree.search(1337) == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = AVLTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test remove") {
+			THEN("Test remove(4)") {
 				AVLTree.remove(4);
 				REQUIRE(AVLTree.search(4) == nullptr);
 				REQUIRE(AVLTree.height() == 3);
 				REQUIRE(AVLTree.size() == 6);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				AVLTree.clear();
 				REQUIRE(AVLTree.height() == 0);
 				REQUIRE(AVLTree.size() == 0);
@@ -103,38 +99,37 @@ SCENARIO("Test AVL Tree") {
 			for (int i = 0; i < 10; ++i) {
 				AVLTree.insert(i, 0);
 			}
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(AVLTree.size() == 10);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(AVLTree.height() == 4);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = AVLTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 9);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = AVLTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = AVLTree.search(1337);
-				REQUIRE(result == nullptr);
+			THEN("Test search(1337)") {
+				REQUIRE(AVLTree.search(1337) == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = AVLTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test remove") {
+			THEN("Test remove(3)") {
 				AVLTree.remove(3);
 				REQUIRE(AVLTree.search(3) == nullptr);
 				REQUIRE(AVLTree.height() == 4);
 				REQUIRE(AVLTree.size() == 9);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				AVLTree.clear();
 				REQUIRE(AVLTree.height() == 0);
 				REQUIRE(AVLTree.size() == 0);
@@ -144,38 +139,37 @@ SCENARIO("Test AVL Tree") {
 			for (int i = 9; i >= 0; --i) {
 				AVLTree.insert(i, 0);
 			}
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(AVLTree.size() == 10);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(AVLTree.height() == 4);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = AVLTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 9);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = AVLTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
-				auto result = AVLTree.search(1337);
-				REQUIRE(result == nullptr);
+			THEN("Test search(1337)") {
+				REQUIRE(AVLTree.search(1337) == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = AVLTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test remove") {
+			THEN("Test remove(6)") {
 				AVLTree.remove(6);
 				REQUIRE(AVLTree.search(6) == nullptr);
 				REQUIRE(AVLTree.height() == 4);
 				REQUIRE(AVLTree.size() == 9);
 			}
-			THEN("Test clear") {
+			THEN("Test clear()") {
 				AVLTree.clear();
 				REQUIRE(AVLTree.height() == 0);
 				REQUIRE(AVLTree.size() == 0);
