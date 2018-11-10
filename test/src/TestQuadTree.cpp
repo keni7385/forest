@@ -28,11 +28,10 @@
 
 SCENARIO("Test Quad Tree") {
 	GIVEN("A Quad Tree") {
-		forest::QuadTree <int, 2> QuadTree(0, 0, 20, 20);
+		forest::QuadTree <float, 2> QuadTree(0, 0, 10, 10);
 		WHEN("The Quad Tree is empty") {
 			THEN("Test search for a node that does not exist") {
-				auto result = QuadTree.search({ 0, 0 });
-				REQUIRE(result == false);
+				REQUIRE(QuadTree.search({ 0, 0 }) == false);
 			}
 		}
 		WHEN("Nodes are inserted in random order") {
@@ -41,62 +40,66 @@ SCENARIO("Test Quad Tree") {
 			QuadTree.insert({ 3, 4 });
 			QuadTree.insert({ -4, 3 });
 			THEN("Test search for a node that does not exist") {
-				auto result = QuadTree.search({ 0, 0 });
-				REQUIRE(result == false);
+				REQUIRE(QuadTree.search({ 0, 0 }) == false);
 			}
 			THEN("Test search for a node that does exist") {
-				auto result = QuadTree.search({ -4, 3 });
-				REQUIRE(result == true);
+				REQUIRE(QuadTree.search({ -4, 3 }) == true);
+			}
+			THEN("Test remove({ 1, 2 })") {
+				REQUIRE(QuadTree.remove({ 1, 2 }) == true);
+				REQUIRE(QuadTree.search({ 1, 2 }) == false);
 			}
 			THEN("Test clear()") {
 				QuadTree.clear();
-				auto result1 = QuadTree.search({ 1, 2 });
-				REQUIRE(result1 == false);
-				auto result2 = QuadTree.search({ -1, 1 });
-				REQUIRE(result2 == false);
-				auto result3 = QuadTree.search({ 3, 4 });
-				REQUIRE(result3 == false);
-				auto result4 = QuadTree.search({ -4, 3 });
-				REQUIRE(result4 == false);
+				REQUIRE(QuadTree.search({ 1, 2 }) == false);
+				REQUIRE(QuadTree.search({ -1, 1 }) == false);
+				REQUIRE(QuadTree.search({ 3, 4 }) == false);
+				REQUIRE(QuadTree.search({ -4, 3 }) == false);
 			}
 		}
 		WHEN("Nodes are inserted in ascending order") {
-			for (int i = 0; i < 10; ++i) {
+			for (float i = 0; i < 10; ++i) {
 				QuadTree.insert({ i, i });
 			}
 			THEN("Test search for a node that does not exist") {
-				auto result = QuadTree.search({ -1, -1 });
-				REQUIRE(result == false);
+				REQUIRE(QuadTree.search({ -1, -1 }) == false);
 			}
 			THEN("Test search for a node that does exist") {
-				auto result = QuadTree.search({ 5, 5 });
-				REQUIRE(result == true);
+				REQUIRE(QuadTree.search({ 5, 5 }) == true);
+			}
+			THEN("Test remove({ i, i })") {
+				for (float i = 0; i < 4; ++i) {
+					REQUIRE(QuadTree.remove({ i, i }) == true);
+					REQUIRE(QuadTree.search({ i, i }) == false);
+				}
 			}
 			THEN("Test clear()") {
 				QuadTree.clear();
-				for (int i = 0; i < 10; ++i) {
-					auto result = QuadTree.search({ i, i });
-					REQUIRE(result == false);
+				for (float i = 0; i < 10; ++i) {
+					REQUIRE(QuadTree.search({ i, i }) == false);
 				}
 			}
 		}
 		WHEN("Nodes are inserted in descending order") {
-			for (int i = 9; i >= 0; --i) {
+			for (float i = 9; i >= 0; --i) {
 				QuadTree.insert({ i, i });
 			}
 			THEN("Test search for a node that does not exist") {
-				auto result = QuadTree.search({ -1, -1 });
-				REQUIRE(result == false);
+				REQUIRE(QuadTree.search({ -1, -1 }) == false);
 			}
 			THEN("Test search for a node that does exist") {
-				auto result = QuadTree.search({ 5, 5 });
-				REQUIRE(result == true);
+				REQUIRE(QuadTree.search({ 5, 5 }) == true);
+			}
+			THEN("Test remove({ i, i })") {
+				for (float i = 4; i >= 0; --i) {
+					REQUIRE(QuadTree.remove({ i, i }) == true);
+					REQUIRE(QuadTree.search({ i, i }) == false);
+				}
 			}
 			THEN("Test clear()") {
 				QuadTree.clear();
-				for (int i = 9; i >= 0; --i) {
-					auto result = QuadTree.search({ i, i });
-					REQUIRE(result == false);
+				for (float i = 9; i >= 0; --i) {
+					REQUIRE(QuadTree.search({ i, i }) == false);
 				}
 			}
 		}
