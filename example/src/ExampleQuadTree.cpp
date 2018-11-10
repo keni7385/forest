@@ -54,9 +54,15 @@ int main() {
 		QuadTree.remove({ i, i });
 	}
 
-	std::vector<forest::QuadTree<float, 2>::Point<float>> results;
+	std::cout << std::endl;
 
-	results = QuadTree.query({ 0, 0, 10, 10 });
+	auto results = QuadTree.query({ 0, 0, 10, 10 });
+
+	std::cout << "query({ 0, 0, 10, 10 })" << " = {" << std::endl;
+	for (auto point : results) {
+		std::cout << "(" << point.getX() << ", " << point.getY() << ")" << std::endl;
+	}
+	std::cout << "}" << std::endl;
 
 	QuadTree.clear();
 
