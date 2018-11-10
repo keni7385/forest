@@ -35,7 +35,7 @@ int main() {
 	AVLTree.insert(3 , "Baldr");
 	AVLTree.insert(0 , "Frigg");
 	AVLTree.insert(14, "Eir");
-	AVLTree.insert(45, "Heimdall");
+	AVLTree.insert(45, "Einar");
 
 	std::cout << "pre_order_traversal()" << std::endl;
 	AVLTree.pre_order_traversal([](auto key, auto value) {
