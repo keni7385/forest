@@ -25,6 +25,7 @@
 #include <forest/QuadTree.hpp>
 #include <iostream>
 #include <array>
+#include <vector>
 
 int main() {
 	forest::QuadTree <float, 2> QuadTree(0, 0, 10, 10);
@@ -52,6 +53,10 @@ int main() {
 		std::cout << "remove({ " << i << ", " << i << " })" << std::endl;
 		QuadTree.remove({ i, i });
 	}
+
+	std::vector<forest::QuadTree<float, 2>::Point<float>> results;
+
+	results = QuadTree.query({ 0, 0, 10, 10 });
 
 	QuadTree.clear();
 
