@@ -124,7 +124,7 @@ namespace forest {
 		Rectangle <Arithmetic> boundary;
 
 	private:
-		bool subdivided{ false };
+		bool divided{ false };
 
 	private:
 		QuadTree * NW{ nullptr };
@@ -133,7 +133,7 @@ namespace forest {
 		QuadTree * SE{ nullptr };
 
 	private:
-		void subdivide() noexcept {
+		void divide() noexcept {
 			const Arithmetic half_w = boundary.w / 2;
 			const Arithmetic half_h = boundary.h / 2;
 
@@ -142,13 +142,26 @@ namespace forest {
 			SW = new QuadTree(boundary.x - half_w, boundary.y - half_h, half_w, half_h);
 			SE = new QuadTree(boundary.x + half_w, boundary.y - half_h, half_w, half_h);
 
-			subdivided = true;
+			divided = true;
+		}
+		void merge() noexcept {
+			delete NW;
+			delete NE;
+			delete SW;
+			delete SE;
+			
+			NW = nullptr;
+			NE = nullptr;
+			SW = nullptr;
+			SE = nullptr;
+
+			divided = false;
 		}
 
 	private:
 		void query(const Rectangle <Arithmetic> & area, std::vector <Point<Arithmetic>> & results) noexcept {
 			if (!area.intersects(boundary)) return;
-			if (subdivided) {
+			if (divided) {
 				NW->query(area, results);
 				NE->query(area, results);
 				SW->query(area, results);
@@ -178,10 +191,10 @@ namespace forest {
 	public:
 		bool insert(const Point <Arithmetic> & point) noexcept {
 			if (!boundary.contains(point)) return false;
-			if (!subdivided) {
+			if (!divided) {
 				children.push_back(point);
 				if (children.size() > Capacity) {
-					subdivide();
+					divide();
 					typename std::vector <Point<Arithmetic>>::iterator it = children.begin();
 					while (it != children.end()) {
 						if (NW->boundary.contains(*it)) NW->insert(*it);
@@ -201,6 +214,24 @@ namespace forest {
 				return false;
 			}
 		}
+		bool remove(const Point<Arithmetic> & point) {
+			if (!boundary.contains(point)) return false;
+			if (!divided) {
+				children.erase(std::remove(children.begin(), children.end(), point), children.end());
+				return true;
+			}
+			else {
+				if (NW->remove(point) || NE->remove(point) || SW->remove(point) || SE->remove(point)) {
+					if (NW->children.empty() && NE->children.empty() && SW->children.empty() && SE->children.empty()) {
+						merge();
+					}
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
 		std::vector<Point<Arithmetic>> query(const Rectangle <Arithmetic> & area) noexcept {
 			std::vector <Point<Arithmetic>> results;
 			query(area, results);
@@ -208,12 +239,13 @@ namespace forest {
 		}
 		bool search(const Point <Arithmetic> & point) noexcept {
 			if (!boundary.contains(point)) return false;
-			if (subdivided) {
-				if (NW->search(point)) return true;
-				else if (NE->search(point)) return true;
-				else if (SW->search(point)) return true;
-				else if (SE->search(point)) return true;
-				else return false;
+			if (divided) {
+				if (NW->search(point) || NE->search(point) || SW->search(point) || SE->search(point)) {
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 			else {
 				if (std::find(children.begin(), children.end(), point) != children.end()) {
@@ -228,22 +260,14 @@ namespace forest {
 	public:
 		void clear() noexcept {
 			if (!this) return;
-			if (subdivided == true) {
+			if (divided == true) {
 				NW->clear();
 				NE->clear();
 				SW->clear();
 				SE->clear();
 			}
-			subdivided = false;
 			children.clear();
-			delete NW;
-			delete NE;
-			delete SW;
-			delete SE;
-			NW = nullptr;
-			NE = nullptr;
-			SW = nullptr;
-			SE = nullptr;
+			merge();
 		}
 	};
 }
