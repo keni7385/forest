@@ -27,28 +27,30 @@
 #include <array>
 
 int main() {
-	forest::QuadTree <int, 2> QuadTree(0, 0, 10, 10);
+	forest::QuadTree <float, 2> QuadTree(0, 0, 10, 10);
 
-	QuadTree.insert({ 0, 0 });
-	QuadTree.insert({ -5, 5 });
-	QuadTree.insert({ 5, 5 });
-	QuadTree.insert({ -5, -5 });
-	QuadTree.insert({ 5, -5 });
-
-	std::cout << "search({ 5, 5 })" << " = ";
-	if (QuadTree.search({ 5, 5 })) {
-		std::cout << "Found" << std::endl;
-	}
-	else {
-		std::cout << "Not Found" << std::endl;
+	for (float i = -5; i < 5; ++i) {
+		std::cout << "insert({ " << i << ", " << i << " })" << std::endl;
+		QuadTree.insert({ i, i });
 	}
 
-	std::cout << "search({ 1, 1 })" << " = ";
-	if (QuadTree.search({ 1, 1 })) {
-		std::cout << "Found" << std::endl;
+	std::cout << std::endl;
+
+	for (float i = 0; i < 15; ++i) {
+		std::cout << "search({ " << i << ", " << i << " })" << " = ";
+		if (QuadTree.search({ i, i })) {
+			std::cout << "Found" << std::endl;
+		}
+		else {
+			std::cout << "Not Found" << std::endl;
+		}
 	}
-	else {
-		std::cout << "Not Found" << std::endl;
+
+	std::cout << std::endl;
+
+	for (float i = 0; i < 5; ++i) {
+		std::cout << "remove({ " << i << ", " << i << " })" << std::endl;
+		QuadTree.remove({ i, i });
 	}
 
 	QuadTree.clear();
