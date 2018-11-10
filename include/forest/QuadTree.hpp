@@ -28,7 +28,7 @@
 #include <algorithm>
 
 namespace forest {
-	template <typename Arithmetic, unsigned Capacity>
+	template <typename Arithmetic, unsigned Capacity = 1>
 	class QuadTree {
 	public:
 		template <typename U>
@@ -138,10 +138,10 @@ namespace forest {
 			const Arithmetic half_w = boundary.w / 2;
 			const Arithmetic half_h = boundary.h / 2;
 
-			NW = new QuadTree(boundary.x - half_w, boundary.y + half_h, half_w, half_h);
-			NE = new QuadTree(boundary.x + half_w, boundary.y + half_h, half_w, half_h);
-			SW = new QuadTree(boundary.x - half_w, boundary.y - half_h, half_w, half_h);
-			SE = new QuadTree(boundary.x + half_w, boundary.y - half_h, half_w, half_h);
+			NW = new QuadTree <Arithmetic, Capacity> (boundary.x - half_w, boundary.y + half_h, half_w, half_h);
+			NE = new QuadTree <Arithmetic, Capacity> (boundary.x + half_w, boundary.y + half_h, half_w, half_h);
+			SW = new QuadTree <Arithmetic, Capacity> (boundary.x - half_w, boundary.y - half_h, half_w, half_h);
+			SE = new QuadTree <Arithmetic, Capacity> (boundary.x + half_w, boundary.y - half_h, half_w, half_h);
 
 			divided = true;
 		}
