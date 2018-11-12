@@ -25,12 +25,73 @@
 #pragma once
 
 #include <array>
+#include <vector>
 #include <algorithm>
 #include <memory>
 
 namespace forest {
 	template <typename Arithmetic, unsigned Dimensions>
 	class KDTree {
+	public:
+		using Point = std::vector<Arithmetic>;
+		using Points = std::vector<Point>;
+
+	public:
+		template <typename RArithmetic, unsigned RDimensions>
+		class Range {
+			static_assert(RDimensions > 0, "Invalid Range Dimensions");
+
+		public:
+			using Point = std::vector<RArithmetic>;
+
+		private:
+			Point origin;
+			Point transform;
+
+		public:
+			Range() = default;
+			Range(const Point & ORIGIN, const Point & TRANSFORM) : origin(ORIGIN), transform(TRANSFORM) { }
+			~Range() = default;
+
+		public:
+			void setOrigin(const Point & ORIGIN) {
+				origin = ORIGIN;
+			}
+			void setTransform(const Point & TRANSFORM) {
+				transform = TRANSFORM;
+			}
+
+		public:
+			Point getOrigin() const {
+				return origin;
+			}
+			Point getTransform() const {
+				return transform;
+			}
+
+		public:
+			bool contains(const Point & point) const {
+				bool flag = true;
+				for (unsigned i = 0; i < RDimensions; ++i) {
+					if (!(point[i] >= origin[i] - transform[i] && point[i] <= origin[i] + transform[i])) {
+						flag = false;
+						break;
+					}
+				}
+				return flag;
+			}
+			bool intersects(const Range & other) const {
+				bool flag = false;
+				for (unsigned i = 0; i < RDimensions; ++i) {
+					if (origin[i] - transform[i] <= other.origin[i] + other.transform[i] && origin[i] + transform[i] >= other.origin[i] - other.transform[i]) {
+						flag = true;
+						break;
+					}
+				}
+				return flag;
+			}
+		};
+
 	private:
 		class KDTreeNode {
 			friend class KDTree;
@@ -39,15 +100,12 @@ namespace forest {
 			KDTreeNode * left{ nullptr };
 			KDTreeNode * right{ nullptr };
 
-		private:
-			unsigned height{ 1 };
-
 		public:
-			std::array<Arithmetic, Dimensions> point;
+			Point point;
 
 		public:
 			KDTreeNode() = default;
-			explicit KDTreeNode(const std::array <Arithmetic, Dimensions> & POINT) : point(POINT) { }
+			explicit KDTreeNode(const Point & POINT) : point(POINT) { }
 			~KDTreeNode() = default;
 		};
 
@@ -55,7 +113,7 @@ namespace forest {
 		KDTreeNode * tree_root{ nullptr };
 
 	private:
-		KDTreeNode * insert(KDTreeNode * root, const std::array <Arithmetic, Dimensions> & point, unsigned depth) noexcept {
+		KDTreeNode * insert(KDTreeNode * root, const Point & point, unsigned depth) noexcept {
 			if (!root) return new KDTreeNode(point);
 			unsigned current = depth % Dimensions;
 			if (point[current] < (root->point[current])) {
@@ -64,10 +122,9 @@ namespace forest {
 			else {
 				root->right = insert(root->right, point, depth + 1);
 			}
-			root->height = std::max(height(root->left), height(root->right)) + 1;
 			return root;
 		}
-		KDTreeNode * search(KDTreeNode * root, const std::array<Arithmetic, Dimensions> & point, unsigned depth) noexcept {
+		KDTreeNode * search(KDTreeNode * root, const Point & point, unsigned depth) noexcept {
 			if (!root) return nullptr;
 			if (root->point == point) return root;
 			unsigned current = depth % Dimensions;
@@ -78,13 +135,65 @@ namespace forest {
 				return search(root->right, point, depth + 1);
 			}
 		}
+		KDTreeNode * remove(KDTreeNode * root, const Point & point, unsigned depth) {
+			if (!root) return nullptr;
 
+			int current = depth % Dimensions;
+
+			if (point == root->point) {
+				if (!root->left && !root->right) {
+					delete root;
+					root = nullptr;
+					return root;
+				}
+				if (root->right) {
+					KDTreeNode * min = minimum(root->right, current);
+					if (root && min)
+						std::swap(root->point, min->point);
+					root->right = remove(root->right, min->point, depth + 1);
+				}
+				else {
+					KDTreeNode *min = minimum(root->left, current);
+					if (root && min)
+						std::swap(root->point, min->point);
+					root->left = remove(root->left, min->point, depth + 1);
+				}
+			}
+			else {
+				if (point[current] < root->point[current]) {
+					root->left = remove(root->left, point, depth + 1);
+				}
+				else {
+					root->right = remove(root->right, point, depth + 1);
+				}
+			}
+
+			return root;
+		}
+		void query(KDTreeNode * root, const Range <Arithmetic, Dimensions> & area, Points & results) noexcept {
+			if (!root) return;
+			if (area.contains(root->point)) {
+				results.push_back(root->point);
+			}
+			query(root->left, area, results);
+			query(root->right, area, results);
+		}
 	private:
+		KDTreeNode * minimum(KDTreeNode * x, KDTreeNode * y, unsigned dimension) noexcept {
+			if (x && y) {
+				if (x->point[dimension] < y->point[dimension]) {
+					return x;
+				}
+				else {
+					return y;
+				}
+			}
+			else if (x) return x;
+			else if (y) return y;
+			else return nullptr;
+		}
 		KDTreeNode * minimum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, unsigned dimension) noexcept {
-			KDTreeNode * tmp = x;
-			if (y && y->point[dimension] < tmp->point[dimension]) tmp = y;
-			if (z && z->point[dimension] < tmp->point[dimension]) tmp = z;
-			return tmp;
+			return minimum(x, minimum(y, z, dimension), dimension);
 		}
 		KDTreeNode * minimum(KDTreeNode * root, unsigned dimension, unsigned depth) noexcept {
 			if (!root) return nullptr;
@@ -100,11 +209,21 @@ namespace forest {
 		}
 
 	private:
+		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, unsigned dimension) noexcept {
+			if (x && y) {
+				if (x->point[dimension] > y->point[dimension]) {
+					return x;
+				}
+				else {
+					return y;
+				}
+			}
+			else if (x) return x;
+			else if (y) return y;
+			else return nullptr;
+		}
 		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, unsigned dimension) noexcept {
-			KDTreeNode * tmp = x;
-			if (y && y->point[dimension] > tmp->point[dimension]) tmp = y;
-			if (z && z->point[dimension] > tmp->point[dimension]) tmp = z;
-			return tmp;
+			return maximum(x, maximum(y, z, dimension), dimension);
 		}
 		KDTreeNode * maximum(KDTreeNode * root, unsigned dimension, unsigned depth) noexcept {
 			if (!root) return nullptr;
@@ -120,10 +239,6 @@ namespace forest {
 		}
 
 	private:
-		unsigned height(const KDTreeNode * root) noexcept {
-			if (!root) return 0;
-			return root->height;
-		}
 		unsigned size(const KDTreeNode * root) noexcept {
 			if (!root) return 0;
 			return size(root->left) + size(root->right) + 1;
@@ -145,11 +260,19 @@ namespace forest {
 		}
 
 	public:
-		void insert(const std::array <Arithmetic, Dimensions> & point) noexcept {
+		void insert(const Point & point) noexcept {
 			tree_root = insert(tree_root, point, 0);
 		}
-		KDTreeNode * search(const std::array <Arithmetic, Dimensions> & point) noexcept {
+		KDTreeNode * search(const Point & point) noexcept {
 			return search(tree_root, point, 0);
+		}
+		void remove(const Point & point) {
+			tree_root = remove(tree_root, point, 0);
+		}
+		Points query(const Range <Arithmetic, Dimensions> & area) noexcept {
+			Points results;
+			query(tree_root, area, results);
+			return results;
 		}
 
 	public:
@@ -161,9 +284,6 @@ namespace forest {
 		}
 
 	public:
-		unsigned height() noexcept {
-			return height(tree_root);
-		}
 		unsigned size() noexcept {
 			return size(tree_root);
 		}
