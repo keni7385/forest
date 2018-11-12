@@ -51,8 +51,8 @@ namespace forest {
 			SplayTreeNode(const Key & KEY, const Value & VALUE) : key(KEY), value(VALUE) { }
 			SplayTreeNode(const SplayTreeNode &) = delete;
 			SplayTreeNode(SplayTreeNode &&) = delete;
-			SplayTreeNode& operator=(const SplayTreeNode &) = delete;
-			SplayTreeNode& operator=(SplayTreeNode &&) = delete;
+			SplayTreeNode & operator=(const SplayTreeNode &) = delete;
+			SplayTreeNode & operator=(SplayTreeNode &&) = delete;
 			~SplayTreeNode() = default;
 		};
 
@@ -203,8 +203,8 @@ namespace forest {
 		}
 		SplayTree(const SplayTree &) = delete;
 		SplayTree(SplayTree &&) = delete;
-		SplayTree& operator=(const SplayTree &) = delete;
-		SplayTree& operator=(SplayTree &&) = delete;
+		SplayTree & operator=(const SplayTree &) = delete;
+		SplayTree & operator=(SplayTree &&) = delete;
 		~SplayTree() {
 			clear();
 		}

@@ -189,8 +189,8 @@ namespace forest {
 		}
 		BinarySearchTree(const BinarySearchTree &) = delete;
 		BinarySearchTree(BinarySearchTree &&) = delete;
-		BinarySearchTree& operator=(const BinarySearchTree &) = delete;
-		BinarySearchTree& operator=(BinarySearchTree &&) = delete;
+		BinarySearchTree & operator=(const BinarySearchTree &) = delete;
+		BinarySearchTree & operator=(BinarySearchTree &&) = delete;
 		~BinarySearchTree() {
 			clear();
 		}

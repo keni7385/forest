@@ -30,6 +30,8 @@
 namespace forest {
 	template <typename Arithmetic, unsigned Capacity = 1>
 	class QuadTree {
+		static_assert(Capacity > 0, "Invalid QuadTree Capacity");
+
 	public:
 		template <typename U>
 		class Rectangle;
@@ -120,8 +122,12 @@ namespace forest {
 			}
 		};
 
+	public:
+		using Points = std::vector <Point <Arithmetic>>;
+		using PointsIt = typename std::vector <Point <Arithmetic>>::iterator;
+
 	private:
-		std::vector <Point <Arithmetic>> children;
+		Points children;
 
 	private:
 		Rectangle <Arithmetic> boundary;
@@ -162,7 +168,7 @@ namespace forest {
 		}
 
 	private:
-		void query(const Rectangle <Arithmetic> & area, std::vector <Point<Arithmetic>> & results) noexcept {
+		void query(const Rectangle <Arithmetic> & area, Points & results) noexcept {
 			if (!area.intersects(boundary)) return;
 			if (divided) {
 				NW->query(area, results);
@@ -198,7 +204,7 @@ namespace forest {
 				children.push_back(point);
 				if (children.size() > Capacity) {
 					divide();
-					typename std::vector <Point<Arithmetic>>::iterator it = children.begin();
+					PointsIt it = children.begin();
 					while (it != children.end()) {
 						if (NW->boundary.contains(*it)) NW->insert(*it);
 						else if (NE->boundary.contains(*it)) NE->insert(*it);
@@ -237,8 +243,8 @@ namespace forest {
 				}
 			}
 		}
-		std::vector<Point<Arithmetic>> query(const Rectangle <Arithmetic> & area) noexcept {
-			std::vector <Point<Arithmetic>> results;
+		Points query(const Rectangle <Arithmetic> & area) noexcept {
+			Points results;
 			query(area, results);
 			return results;
 		}
@@ -264,7 +270,6 @@ namespace forest {
 
 	public:
 		void clear() noexcept {
-			if (!this) return;
 			if (divided == true) {
 				NW->clear();
 				NE->clear();

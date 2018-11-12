@@ -58,8 +58,8 @@ namespace forest {
 			RedBlackTreeNode(const Key & KEY, const Value & VALUE, const Color & COLOR) : key(KEY), value(VALUE), color(COLOR) { }
 			RedBlackTreeNode(const RedBlackTreeNode &) = delete;
 			RedBlackTreeNode(RedBlackTreeNode &&) = delete;
-			RedBlackTreeNode& operator=(const RedBlackTreeNode &) = delete;
-			RedBlackTreeNode& operator=(RedBlackTreeNode &&) = delete;
+			RedBlackTreeNode & operator=(const RedBlackTreeNode &) = delete;
+			RedBlackTreeNode & operator=(RedBlackTreeNode &&) = delete;
 			~RedBlackTreeNode() = default;
 		};
 
@@ -229,8 +229,8 @@ namespace forest {
 		}
 		RedBlackTree(const RedBlackTree &) = delete;
 		RedBlackTree(RedBlackTree &&) = delete;
-		RedBlackTree& operator=(const RedBlackTree &) = delete;
-		RedBlackTree& operator=(RedBlackTree &&) = delete;
+		RedBlackTree & operator=(const RedBlackTree &) = delete;
+		RedBlackTree & operator=(RedBlackTree &&) = delete;
 		~RedBlackTree() {
 			clear();
 		}

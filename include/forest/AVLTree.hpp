@@ -53,8 +53,8 @@ namespace forest {
 			AVLTreeNode(const Key & KEY, const Value & VALUE) : key(KEY), value(VALUE) { }
 			AVLTreeNode(const AVLTreeNode &) = delete;
 			AVLTreeNode(AVLTreeNode &&) = delete;
-			AVLTreeNode& operator=(const AVLTreeNode &) = delete;
-			AVLTreeNode& operator=(AVLTreeNode &&) = delete;
+			AVLTreeNode & operator=(const AVLTreeNode &) = delete;
+			AVLTreeNode & operator=(AVLTreeNode &&) = delete;
 			~AVLTreeNode() = default;
 		};
 
@@ -266,8 +266,8 @@ namespace forest {
 		}
 		AVLTree(const AVLTree &) = delete;
 		AVLTree(AVLTree &&) = delete;
-		AVLTree& operator=(const AVLTree &) = delete;
-		AVLTree& operator=(AVLTree &&) = delete;
+		AVLTree & operator=(const AVLTree &) = delete;
+		AVLTree & operator=(AVLTree &&) = delete;
 		~AVLTree() {
 			clear();
 		}
