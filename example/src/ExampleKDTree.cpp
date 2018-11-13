@@ -35,7 +35,6 @@ int main() {
 	KDTree.insert({ -5, -5 });
 	KDTree.insert({ 5, -5 });
 
-	std::cout << "height()" << " = " << KDTree.height() << std::endl;
 	std::cout << "size()" << " = " << KDTree.size() << std::endl;
 
 	std::cout << "search({ 5, 5 })" << " = ";
@@ -71,6 +70,12 @@ int main() {
 	else {
 		std::cout << "Not Found" << std::endl;
 	}
+
+	KDTree.remove({ 0, 0 });
+	KDTree.remove({ -5, 5 });
+	KDTree.remove({ 5, 5 });
+	KDTree.remove({ -5, -5 });
+	KDTree.remove({ 5, -5 });
 
 	KDTree.clear();
 
