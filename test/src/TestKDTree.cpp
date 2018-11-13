@@ -42,6 +42,10 @@ SCENARIO("Test KD Tree") {
 			THEN("Test search({ 0, 0 })") {
 				REQUIRE(KDTree.search({ 0, 0 }) == nullptr);
 			}
+			THEN("Test remove({ 0 , 0 })") {
+				KDTree.remove({ 0, 0 });
+				REQUIRE(KDTree.search({ 0, 0 }) == nullptr);
+			}
 			THEN("Test clear()") {
 				KDTree.clear();
 				REQUIRE(KDTree.size() == 0);
@@ -109,6 +113,12 @@ SCENARIO("Test KD Tree") {
 				REQUIRE(result->point[0] == 5);
 				REQUIRE(result->point[1] == 5);
 			}
+			THEN("Test remove({ i, i })") {
+				for (float i = 0; i < 5; ++i) {
+					KDTree.remove({ i, i });
+					REQUIRE(KDTree.search({ i, i }) == nullptr);
+				}
+			}
 			THEN("Test clear()") {
 				KDTree.clear();
 				REQUIRE(KDTree.size() == 0);
@@ -141,6 +151,12 @@ SCENARIO("Test KD Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->point[0] == 5);
 				REQUIRE(result->point[1] == 5);
+			}
+			THEN("Test remove({ i, i })") {
+				for (float i = 4; i >= 0; --i) {
+					KDTree.remove({ i, i });
+					REQUIRE(KDTree.search({ i, i }) == nullptr);
+				}
 			}
 			THEN("Test clear()") {
 				KDTree.clear();
