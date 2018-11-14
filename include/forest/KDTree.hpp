@@ -25,7 +25,7 @@
 #pragma once
 
 #include <vector>
-//#include <array>
+#include <array>
 #include <algorithm>
 
 namespace forest {
@@ -33,8 +33,8 @@ namespace forest {
 	class KDTree {
 		static_assert(Dimensions > 0, "Invalid KDTree Dimensions");
 	public:
-		using Point = std::vector<Arithmetic>;
-		//using Point = std::array<Arithmetic, Dimensions>;
+		//using Point = std::vector<Arithmetic>;
+		using Point = std::array<Arithmetic, Dimensions>;
 		using Points = std::vector<Point>;
 		using PointsIt = typename Points::iterator;
 
