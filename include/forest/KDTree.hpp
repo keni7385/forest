@@ -72,6 +72,7 @@ namespace forest {
 	private:
 		KDTreeNode * minimum(KDTreeNode * x, KDTreeNode * y, const unsigned dimension) noexcept {
 			if (x && y) {
+				if (x->point.empty() || y->point.empty()) return nullptr;
 				if (x->point[dimension] < y->point[dimension]) {
 					return x;
 				}
@@ -79,8 +80,12 @@ namespace forest {
 					return y;
 				}
 			}
-			else if (x) return x;
-			else if (y) return y;
+			else if (x) {
+				return x;
+			}
+			else if (y) {
+				return y;
+			}
 			else return nullptr;
 		}
 		KDTreeNode * minimum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, const unsigned dimension) noexcept {
@@ -102,6 +107,7 @@ namespace forest {
 	private:
 		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, const unsigned dimension) noexcept {
 			if (x && y) {
+				if (x->point.empty() || y->point.empty()) return nullptr;
 				if (x->point[dimension] > y->point[dimension]) {
 					return x;
 				}
