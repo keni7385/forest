@@ -26,7 +26,7 @@
 #include <forest/QuadTree.hpp>
 #include <random>
 
-static void BM_QuadTree_Insert_Average_Case(benchmark::State & state) {
+static void BM_QuadTree_Create_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<> dis(-state.range(0) / 2, state.range(0) / 2);
@@ -44,7 +44,7 @@ static void BM_QuadTree_Insert_Average_Case(benchmark::State & state) {
 
 	state.SetComplexityN(state.range(0));
 }
-BENCHMARK(BM_QuadTree_Insert_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oNLogN);
+BENCHMARK(BM_QuadTree_Create_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 20)->Complexity(benchmark::oNLogN);
 
 static void BM_QuadTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;

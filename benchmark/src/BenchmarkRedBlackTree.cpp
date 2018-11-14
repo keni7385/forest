@@ -26,7 +26,7 @@
 #include <forest/RedBlackTree.hpp>
 #include <random>
 
-static void BM_RedBlackTree_Insert_Average_Case(benchmark::State & state) {
+static void BM_RedBlackTree_Create_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, state.range(0));
@@ -44,7 +44,7 @@ static void BM_RedBlackTree_Insert_Average_Case(benchmark::State & state) {
 
 	state.SetComplexityN(state.range(0));
 }
-BENCHMARK(BM_RedBlackTree_Insert_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 20)->Complexity(benchmark::oNLogN);
+BENCHMARK(BM_RedBlackTree_Create_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 20)->Complexity(benchmark::oNLogN);
 
 static void BM_RedBlackTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;

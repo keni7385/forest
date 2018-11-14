@@ -26,7 +26,7 @@
 #include <forest/BinarySearchTree.hpp>
 #include <random>
 
-static void BM_BinarySearchTree_Insert_Average_Case(benchmark::State & state) {
+static void BM_BinarySearchTree_Create_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, state.range(0));
@@ -44,9 +44,9 @@ static void BM_BinarySearchTree_Insert_Average_Case(benchmark::State & state) {
 
 	state.SetComplexityN(state.range(0));
 }
-BENCHMARK(BM_BinarySearchTree_Insert_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oNLogN);
+BENCHMARK(BM_BinarySearchTree_Create_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oNLogN);
 
-static void BM_BinarySearchTree_Insert_Worst_Case(benchmark::State & state) {
+static void BM_BinarySearchTree_Create_Worst_Case(benchmark::State & state) {
 	forest::BinarySearchTree <int, int> BinarySearchTree;
 
 	for (auto _ : state) {
@@ -60,7 +60,7 @@ static void BM_BinarySearchTree_Insert_Worst_Case(benchmark::State & state) {
 	
 	state.SetComplexityN(state.range(0));
 }
-BENCHMARK(BM_BinarySearchTree_Insert_Worst_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oNSquared);
+BENCHMARK(BM_BinarySearchTree_Create_Worst_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oNSquared);
 
 static void BM_BinarySearchTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;
