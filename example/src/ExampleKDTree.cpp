@@ -38,6 +38,8 @@ int main() {
 		{ 6, 0, 6, 0 },
 	};
 
+	KDTree.fill(points.begin(), points.end());
+
 	std::cout << "search({ 6, 0, 6, 0 })" << " = ";
 	if (KDTree.search({ 6, 0, 6, 0 })) {
 		std::cout << "Found" << std::endl;

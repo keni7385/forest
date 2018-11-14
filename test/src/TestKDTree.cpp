@@ -41,7 +41,7 @@ SCENARIO("Test KD Tree") {
 			}
 			THEN("Test remove({ 0 , 0 })") {
 				KDTree.remove({ 0, 0 });
-				REQUIRE(KDTree.search({ 0, 0 }));
+				REQUIRE(KDTree.search({ 0, 0 }) == false);
 			}
 		}
 		WHEN("Nodes are inserted in random order") {
@@ -51,6 +51,7 @@ SCENARIO("Test KD Tree") {
 				{  3, 4 },
 				{ -4, 3 },
 			};
+			KDTree.fill(points.begin(), points.end());
 			THEN("Test maximum(0)") {
 				auto max = KDTree.maximum(0);
 				REQUIRE(max != nullptr);
@@ -67,8 +68,7 @@ SCENARIO("Test KD Tree") {
 				REQUIRE(KDTree.search({ 0, 0 }) == false);
 			}
 			THEN("Test search({ -4, 3 })") {
-				auto result = KDTree.search({ -4, 3 });
-				REQUIRE(result != false);
+				REQUIRE(KDTree.search({ -4, 3 }) != false);
 			}
 		}
 	}
