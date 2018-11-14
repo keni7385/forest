@@ -31,15 +31,22 @@ static void BM_KDTree_Create_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<> dis(-state.range(0) / 2, state.range(0) / 2);
 
-	forest::KDTree <double, 2> KDTree;
+	forest::KDTree<double, 2>::Points points;
+	forest::KDTree<double, 2> KDTree;
 
 	for (auto _ : state) {
 		state.PauseTiming();
+		points.clear();
+		for (double i = 0; i < state.range(0); ++i) {
+			points.push_back({ dis(gen), dis(gen) });
+		}
+		state.ResumeTiming();
+		
+		KDTree.fill(points.begin(), points.end());
+
+		state.PauseTiming();
 		KDTree.clear();
 		state.ResumeTiming();
-		for (int i = 0; i < state.range(0); ++i) {
-			KDTree.insert({ dis(gen), dis(gen) });
-		}
 	}
 
 	state.SetComplexityN(state.range(0));
@@ -51,11 +58,12 @@ static void BM_KDTree_Search_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<> dis(-state.range(0) / 2, state.range(0) / 2);
 
-	forest::KDTree <double, 2> KDTree;
-
-	for (int i = 0; i < state.range(0); ++i) {
-		KDTree.insert({ dis(gen), dis(gen)});
+	forest::KDTree<double, 2>::Points points;
+	for (double i = 0; i < state.range(0); ++i) {
+		points.push_back({ dis(gen), dis(gen) });
 	}
+
+	forest::KDTree <double, 2> KDTree(points.begin(), points.end());
 
 	for (auto _ : state) {
 		benchmark::DoNotOptimize(KDTree.search({ dis(gen), dis(gen) }));

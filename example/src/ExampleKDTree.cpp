@@ -24,58 +24,39 @@
 
 #include <forest/KDTree.hpp>
 #include <iostream>
-#include <array>
 
 int main() {
-	forest::KDTree <float, 2> KDTree;
+	forest::KDTree <float, 4> KDTree;
 
-	KDTree.insert({ 0, 0 });
-	KDTree.insert({ -5, 5 });
-	KDTree.insert({ 5, 5 });
-	KDTree.insert({ -5, -5 });
-	KDTree.insert({ 5, -5 });
+	forest::KDTree<float, 4>::Points points{
+		{ 0, 6, 0, 6 },
+		{ 1, 5, 1, 5 },
+		{ 2, 4, 2, 4 },
+		{ 3, 3, 3, 3 },
+		{ 4, 2, 4, 2 },
+		{ 5, 1, 5, 1 },
+		{ 6, 0, 6, 0 },
+	};
 
-	std::cout << "size()" << " = " << KDTree.size() << std::endl;
-
-	std::cout << "search({ 5, 5 })" << " = ";
-	if (KDTree.search({ 5, 5 })) {
+	std::cout << "search({ 6, 0, 6, 0 })" << " = ";
+	if (KDTree.search({ 6, 0, 6, 0 })) {
 		std::cout << "Found" << std::endl;
 	}
 	else {
 		std::cout << "Not Found" << std::endl;
 	}
 
-	std::cout << "search({ 1, 1 })" << " = ";
-	if (KDTree.search({ 1, 1 })) {
+	std::cout << "remove({ 3, 3, 3, 3 })" << std::endl;
+	KDTree.remove({ 3, 3, 3, 3 });
+
+
+	std::cout << "search({ 3, 3, 3, 3 })" << " = ";
+	if (KDTree.search({ 3, 3, 3, 3 })) {
 		std::cout << "Found" << std::endl;
 	}
 	else {
 		std::cout << "Not Found" << std::endl;
 	}
-
-	std::cout << "minimum(0)" << " = ";
-	auto min = KDTree.minimum(0);
-	if (min) {
-		std::cout << "(" << min->point[0] << ", " << min->point[1] << ")" << std::endl;
-	}
-	else {
-		std::cout << "Not Found" << std::endl;
-	}
-
-	std::cout << "maximum(0)" << " = ";
-	auto max = KDTree.maximum(0);
-	if (max) {
-		std::cout << "(" << max->point[0] << ", " << max->point[1] << ")" << std::endl;
-	}
-	else {
-		std::cout << "Not Found" << std::endl;
-	}
-
-	KDTree.remove({ 0, 0 });
-	KDTree.remove({ -5, 5 });
-	KDTree.remove({ 5, 5 });
-	KDTree.remove({ -5, -5 });
-	KDTree.remove({ 5, -5 });
 
 	KDTree.clear();
 

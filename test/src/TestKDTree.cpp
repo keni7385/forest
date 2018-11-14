@@ -30,9 +30,6 @@ SCENARIO("Test KD Tree") {
 	GIVEN("A KD Tree") {
 		forest::KDTree <float, 2> KDTree;
 		WHEN("The KD Tree is empty") {
-			THEN("Test size()") {
-				REQUIRE(KDTree.size() == 0);
-			}
 			THEN("Test maximum(0)") {
 				REQUIRE(KDTree.maximum(0) == nullptr);
 			}
@@ -40,25 +37,20 @@ SCENARIO("Test KD Tree") {
 				REQUIRE(KDTree.minimum(0) == nullptr);
 			}
 			THEN("Test search({ 0, 0 })") {
-				REQUIRE(KDTree.search({ 0, 0 }) == nullptr);
+				REQUIRE(KDTree.search({ 0, 0 }) == false);
 			}
 			THEN("Test remove({ 0 , 0 })") {
 				KDTree.remove({ 0, 0 });
-				REQUIRE(KDTree.search({ 0, 0 }) == nullptr);
-			}
-			THEN("Test clear()") {
-				KDTree.clear();
-				REQUIRE(KDTree.size() == 0);
+				REQUIRE(KDTree.search({ 0, 0 }));
 			}
 		}
 		WHEN("Nodes are inserted in random order") {
-			KDTree.insert({ 1, 2 });
-			KDTree.insert({ -1, 1 });
-			KDTree.insert({ 3, 4 });
-			KDTree.insert({ -4, 3 });
-			THEN("Test size()") {
-				REQUIRE(KDTree.size() == 4);
-			}
+			forest::KDTree<float, 2>::Points points{
+				{  1, 2 },
+				{ -1, 1 },
+				{  3, 4 },
+				{ -4, 3 },
+			};
 			THEN("Test maximum(0)") {
 				auto max = KDTree.maximum(0);
 				REQUIRE(max != nullptr);
@@ -72,95 +64,11 @@ SCENARIO("Test KD Tree") {
 				REQUIRE(min->point[1] == 3);
 			}
 			THEN("Test search({ 0, 0 })") {
-				REQUIRE(KDTree.search({ 0, 0 }) == nullptr);
+				REQUIRE(KDTree.search({ 0, 0 }) == false);
 			}
 			THEN("Test search({ -4, 3 })") {
 				auto result = KDTree.search({ -4, 3 });
-				REQUIRE(result != nullptr);
-				REQUIRE(result->point[0] == -4);
-				REQUIRE(result->point[1] == 3);
-			}
-			THEN("Test clear()") {
-				KDTree.clear();
-				REQUIRE(KDTree.size() == 0);
-			}
-		}
-		WHEN("Nodes are inserted in ascending order") {
-			for (float i = 0; i < 10; ++i) {
-				KDTree.insert({ i, i });
-			}
-			THEN("Test size()") {
-				REQUIRE(KDTree.size() == 10);
-			}
-			THEN("Test maximum(0)") {
-				auto max = KDTree.maximum(0);
-				REQUIRE(max != nullptr);
-				REQUIRE(max->point[0] == 9);
-				REQUIRE(max->point[1] == 9);
-			}
-			THEN("Test minimum(0)") {
-				auto min = KDTree.minimum(0);
-				REQUIRE(min != nullptr);
-				REQUIRE(min->point[0] == 0);
-				REQUIRE(min->point[1] == 0);
-			}
-			THEN("Test search({ -1, -1 })") {
-				REQUIRE(KDTree.search({ -1, -1 }) == nullptr);
-			}
-			THEN("Test search({ 5, 5 })") {
-				auto result = KDTree.search({ 5, 5 });
-				REQUIRE(result != nullptr);
-				REQUIRE(result->point[0] == 5);
-				REQUIRE(result->point[1] == 5);
-			}
-			THEN("Test remove({ i, i })") {
-				for (float i = 0; i < 5; ++i) {
-					KDTree.remove({ i, i });
-					REQUIRE(KDTree.search({ i, i }) == nullptr);
-				}
-			}
-			THEN("Test clear()") {
-				KDTree.clear();
-				REQUIRE(KDTree.size() == 0);
-			}
-		}
-		WHEN("Nodes are inserted in descending order") {
-			for (float i = 9; i >= 0; --i) {
-				KDTree.insert({ i, i });
-			}
-			THEN("Test size()") {
-				REQUIRE(KDTree.size() == 10);
-			}
-			THEN("Test maximum(0)") {
-				auto max = KDTree.maximum(0);
-				REQUIRE(max != nullptr);
-				REQUIRE(max->point[0] == 9);
-				REQUIRE(max->point[1] == 9);
-			}
-			THEN("Test minimum(0)") {
-				auto min = KDTree.minimum(0);
-				REQUIRE(min != nullptr);
-				REQUIRE(min->point[0] == 0);
-				REQUIRE(min->point[1] == 0);
-			}
-			THEN("Test search({ -1, -1 })") {
-				REQUIRE(KDTree.search({ -1, -1 }) == nullptr);
-			}
-			THEN("Test search({ 5, 5 })") {
-				auto result = KDTree.search({ 5, 5 });
-				REQUIRE(result != nullptr);
-				REQUIRE(result->point[0] == 5);
-				REQUIRE(result->point[1] == 5);
-			}
-			THEN("Test remove({ i, i })") {
-				for (float i = 4; i >= 0; --i) {
-					KDTree.remove({ i, i });
-					REQUIRE(KDTree.search({ i, i }) == nullptr);
-				}
-			}
-			THEN("Test clear()") {
-				KDTree.clear();
-				REQUIRE(KDTree.size() == 0);
+				REQUIRE(result != false);
 			}
 		}
 	}
