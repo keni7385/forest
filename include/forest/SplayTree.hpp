@@ -25,6 +25,7 @@
 #pragma once
 
 #include <algorithm>
+#include <functional>
 #include <initializer_list>
 #include <memory>
 #include <queue>
@@ -33,6 +34,9 @@
 namespace forest {
 	template <typename Key, typename Value>
 	class SplayTree {
+	public:
+		using Handler = std::function <void(const Key &, const Value &)>;
+
 	private:
 		class SplayTreeNode {
 			friend class SplayTree;
@@ -60,25 +64,25 @@ namespace forest {
 		SplayTreeNode * tree_root{ nullptr };
 
 	private:
-		void pre_order_traversal(const SplayTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void pre_order_traversal(const SplayTreeNode * root, Handler handler) {
 			if (!root) return;
 			handler(root->key, root->value);
 			pre_order_traversal(root->left, handler);
 			pre_order_traversal(root->right, handler);
 		}
-		void in_order_traversal(const SplayTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void in_order_traversal(const SplayTreeNode * root, Handler handler) {
 			if (!root) return;
 			in_order_traversal(root->left, handler);
 			handler(root->key, root->value);
 			in_order_traversal(root->right, handler);
 		}
-		void post_order_traversal(const SplayTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void post_order_traversal(const SplayTreeNode * root, Handler handler) {
 			if (!root) return;
 			post_order_traversal(root->left, handler);
 			post_order_traversal(root->right, handler);
 			handler(root->key, root->value);
 		}
-		void breadth_first_traversal(const SplayTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void breadth_first_traversal(const SplayTreeNode * root, Handler handler) {
 			if (!root) return;
 			std::queue <const SplayTreeNode *> queue;
 			queue.push(root);
@@ -92,29 +96,29 @@ namespace forest {
 		}
 
 	private:
-		SplayTreeNode * minimum(SplayTreeNode * root) noexcept {
+		SplayTreeNode * minimum(SplayTreeNode * root) {
 			if (!root) return nullptr;
 			while (root->left) root = root->left;
 			return root;
 		}
-		SplayTreeNode * maximum(SplayTreeNode * root) noexcept {
+		SplayTreeNode * maximum(SplayTreeNode * root) {
 			if (!root) return nullptr;
 			while (root->right) root = root->right;
 			return root;
 		}
 
 	private:
-		int height(const SplayTreeNode * root) noexcept {
+		int height(const SplayTreeNode * root) {
 			if (!root) return 0;
 			return std::max(height(root->left), height(root->right)) + 1;
 		}
-		int size(const SplayTreeNode * root) noexcept {
+		int size(const SplayTreeNode * root) {
 			if (!root) return 0;
 			return size(root->left) + size(root->right) + 1;
 		}
 
 	private:
-		void rotate_right(SplayTreeNode * rotation_root) noexcept {
+		void rotate_right(SplayTreeNode * rotation_root) {
 			SplayTreeNode * new_root{ rotation_root->left };
 			SplayTreeNode * orphan_subtree{ new_root->right };
 			rotation_root->left = orphan_subtree;
@@ -134,7 +138,7 @@ namespace forest {
 			new_root->parent = rotation_root->parent;
 			rotation_root->parent = new_root;
 		}
-		void rotate_left(SplayTreeNode * rotation_root) noexcept {
+		void rotate_left(SplayTreeNode * rotation_root) {
 			SplayTreeNode * new_root{ rotation_root->right };
 			SplayTreeNode * orphan_subtree{ new_root->left };
 			rotation_root->right = orphan_subtree;
@@ -156,7 +160,7 @@ namespace forest {
 		}
 
 	private:
-		void fix(SplayTreeNode * root) noexcept {
+		void fix(SplayTreeNode * root) {
 			while (root->parent) {
 				if (!root->parent->parent) {
 					if (root->parent->left == root) {
@@ -186,7 +190,7 @@ namespace forest {
 		}
 
 	private:
-		void clear(SplayTreeNode * root) noexcept {
+		void clear(SplayTreeNode * root) {
 			if (!root) return;
 			if (root->left != nullptr) clear(root->left);
 			if (root->right != nullptr) clear(root->right);
@@ -210,37 +214,37 @@ namespace forest {
 		}
 
 	public:
-		void pre_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void pre_order_traversal(Handler handler) {
 			pre_order_traversal(tree_root, handler);
 		}
-		void in_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void in_order_traversal(Handler handler) {
 			in_order_traversal(tree_root, handler);
 		}
-		void post_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void post_order_traversal(Handler handler) {
 			post_order_traversal(tree_root, handler);
 		}
-		void breadth_first_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void breadth_first_traversal(Handler handler) {
 			breadth_first_traversal(tree_root, handler);
 		}
 
 	public:
-		SplayTreeNode * minimum() noexcept {
+		SplayTreeNode * minimum() {
 			return minimum(tree_root);
 		}
-		SplayTreeNode * maximum() noexcept {
+		SplayTreeNode * maximum() {
 			return maximum(tree_root);
 		}
 
 	public:
-		int height() noexcept {
+		int height() {
 			return height(tree_root);
 		}
-		int size() noexcept {
+		int size() {
 			return size(tree_root);
 		}
 
 	public:
-		void insert(const Key & key, const Value & value) noexcept {
+		void insert(const Key & key, const Value & value) {
 			SplayTreeNode * current{ tree_root };
 			SplayTreeNode * parent{ nullptr };
 			while (current) {
@@ -269,7 +273,7 @@ namespace forest {
 			}
 			fix(current);
 		}
-		SplayTreeNode * search(const Key & key) noexcept {
+		SplayTreeNode * search(const Key & key) {
 			SplayTreeNode * current{ tree_root };
 			while (current) {
 				if (key > current->key) {
@@ -286,7 +290,7 @@ namespace forest {
 		}
 
 	public:
-		void clear() noexcept {
+		void clear() {
 			clear(tree_root);
 			tree_root = nullptr;
 		}

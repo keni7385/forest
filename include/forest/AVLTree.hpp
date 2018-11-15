@@ -25,6 +25,7 @@
 #pragma once
 
 #include <algorithm>
+#include <functional>
 #include <initializer_list>
 #include <memory>
 #include <queue>
@@ -33,6 +34,9 @@
 namespace forest {
 	template <typename Key, typename Value>
 	class AVLTree {
+	public:
+		using Handler = std::function <void(const Key &, const Value &)>;
+
 	private:
 		class AVLTreeNode {
 			friend class AVLTree;
@@ -62,25 +66,25 @@ namespace forest {
 		AVLTreeNode * tree_root{ nullptr };
 
 	private:
-		void pre_order_traversal(const AVLTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void pre_order_traversal(const AVLTreeNode * root, Handler handler) {
 			if (!root) return;
 			handler(root->key, root->value);
 			pre_order_traversal(root->left, handler);
 			pre_order_traversal(root->right, handler);
 		}
-		void in_order_traversal(const AVLTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void in_order_traversal(const AVLTreeNode * root, Handler handler) {
 			if (!root) return;
 			in_order_traversal(root->left, handler);
 			handler(root->key, root->value);
 			in_order_traversal(root->right, handler);
 		}
-		void post_order_traversal(const AVLTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void post_order_traversal(const AVLTreeNode * root, Handler handler) {
 			if (!root) return;
 			post_order_traversal(root->left, handler);
 			post_order_traversal(root->right, handler);
 			handler(root->key, root->value);
 		}
-		void breadth_first_traversal(const AVLTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void breadth_first_traversal(const AVLTreeNode * root, Handler handler) {
 			std::queue <const AVLTreeNode *> queue;
 			if (!root) return;
 			queue.push(root);
@@ -94,33 +98,35 @@ namespace forest {
 		}
 	
 	private:
-		AVLTreeNode * minimum(AVLTreeNode * root) noexcept {
+		AVLTreeNode * minimum(AVLTreeNode * root) {
 			if (!root) return nullptr;
 			while (root->left) root = root->left;
 			return root;
 		}
-		AVLTreeNode * maximum(AVLTreeNode * root) noexcept {
+		AVLTreeNode * maximum(AVLTreeNode * root) {
 			if (!root) return nullptr;
 			while (root->right) root = root->right;
 			return root;
 		}
 
 	private:
-		unsigned height(const AVLTreeNode * root) noexcept {
-			if (!root) return 0;
-			return root->height;
-		}
-		int balance(const AVLTreeNode * root) noexcept {
+		int balance(const AVLTreeNode * root) {
 			if (!root) return 0;
 			return height(root->left) - height(root->right);
 		}
-		unsigned size(const AVLTreeNode * root) noexcept {
+
+	private:
+		unsigned height(const AVLTreeNode * root) {
+			if (!root) return 0;
+			return root->height;
+		}
+		unsigned size(const AVLTreeNode * root) {
 			if (!root) return 0;
 			return size(root->left) + size(root->right) + 1;
 		}
 
 	private:
-		AVLTreeNode * rotate_right(AVLTreeNode * root) noexcept {
+		AVLTreeNode * rotate_right(AVLTreeNode * root) {
 			AVLTreeNode * pivot{ root->left };
 			AVLTreeNode * orphan{ pivot->right };
 
@@ -132,7 +138,7 @@ namespace forest {
 
 			return pivot;
 		}
-		AVLTreeNode * rotate_left(AVLTreeNode * root) noexcept {
+		AVLTreeNode * rotate_left(AVLTreeNode * root) {
 			AVLTreeNode * pivot{ root->right };
 			AVLTreeNode * orphan{ pivot->left };
 
@@ -146,7 +152,7 @@ namespace forest {
 		}
 
 	private:
-		AVLTreeNode * insert(AVLTreeNode * root, const Key & key, const Value & value) noexcept {
+		AVLTreeNode * insert(AVLTreeNode * root, const Key & key, const Value & value) {
 			if (root == nullptr) return new AVLTreeNode(key, value);
 			if (key < root->key) root->left = insert(root->left, key, value);
 			else if (key > root->key) root->right = insert(root->right, key, value);
@@ -175,7 +181,7 @@ namespace forest {
 
 			return root;
 		}
-		AVLTreeNode * remove(AVLTreeNode * root, const Key & key) noexcept {
+		AVLTreeNode * remove(AVLTreeNode * root, const Key & key) {
 			if (!root) return nullptr;
 			else if (key < root->key) root->left = remove(root->left, key);
 			else if (key > root->key) root->right = remove(root->right, key);
@@ -233,7 +239,7 @@ namespace forest {
 
 			return root;
 		}
-		AVLTreeNode * search(AVLTreeNode * root, const Key & key) noexcept {
+		AVLTreeNode * search(AVLTreeNode * root, const Key & key) {
 			while (root) {
 				if (key > root->key) {
 					root = root->right;
@@ -249,7 +255,7 @@ namespace forest {
 		}
 
 	private:
-		void clear(AVLTreeNode * root) noexcept {
+		void clear(AVLTreeNode * root) {
 			if (!root) return;
 			if (root->left) clear(root->left);
 			if (root->right) clear(root->right);
@@ -273,48 +279,48 @@ namespace forest {
 		}
 
 	public:
-		void pre_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void pre_order_traversal(Handler handler) {
 			pre_order_traversal(tree_root, handler);
 		}
-		void in_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void in_order_traversal(Handler handler) {
 			in_order_traversal(tree_root, handler);
 		}
-		void post_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void post_order_traversal(Handler handler) {
 			post_order_traversal(tree_root, handler);
 		}
-		void breadth_first_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void breadth_first_traversal(Handler handler) {
 			breadth_first_traversal(tree_root, handler);
 		}
 
 	public:
-		AVLTreeNode * minimum() noexcept {
+		AVLTreeNode * minimum() {
 			return minimum(tree_root);
 		}
-		AVLTreeNode * maximum() noexcept {
+		AVLTreeNode * maximum() {
 			return maximum(tree_root);
 		}
 
 	public:
-		unsigned height() noexcept {
+		unsigned height() {
 			return height(tree_root);
 		}
-		unsigned size() noexcept {
+		unsigned size() {
 			return size(tree_root);
 		}
 
 	public:
-		void insert(const Key & key, const Value & value) noexcept {
+		void insert(const Key & key, const Value & value) {
 			tree_root = insert(tree_root, key, value);
 		}
-		void remove(const Key & key) noexcept {
+		void remove(const Key & key) {
 			tree_root = remove(tree_root, key);
 		}
-		AVLTreeNode * search(const Key & key) noexcept {
+		AVLTreeNode * search(const Key & key) {
 			return search(tree_root, key);
 		}
 
 	public:
-		void clear() noexcept {
+		void clear() {
 			clear(tree_root);
 			tree_root = nullptr;
 		}

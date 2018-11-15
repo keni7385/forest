@@ -25,6 +25,7 @@
 #pragma once
 
 #include <algorithm>
+#include <functional>
 #include <initializer_list>
 #include <memory>
 #include <queue>
@@ -62,25 +63,25 @@ namespace forest {
 		BinarySearchTreeNode * tree_root{ nullptr };
 
 	private:
-		void pre_order_traversal(const BinarySearchTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void pre_order_traversal(const BinarySearchTreeNode * root, std::function <void(const Key &, const Value &)> handler) {
 			if (!root) return;
 			handler(root->key, root->value);
 			pre_order_traversal(root->left, handler);
 			pre_order_traversal(root->right, handler);
 		}
-		void in_order_traversal(const BinarySearchTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void in_order_traversal(const BinarySearchTreeNode * root, std::function <void(const Key &, const Value &)> handler) {
 			if (!root) return;
 			in_order_traversal(root->left, handler);
 			handler(root->key, root->value);
 			in_order_traversal(root->right, handler);
 		}
-		void post_order_traversal(const BinarySearchTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void post_order_traversal(const BinarySearchTreeNode * root, std::function <void(const Key &, const Value &)> handler) {
 			if (!root) return;
 			post_order_traversal(root->left, handler);
 			post_order_traversal(root->right, handler);
 			handler(root->key, root->value);
 		}
-		void breadth_first_traversal(const BinarySearchTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void breadth_first_traversal(const BinarySearchTreeNode * root, std::function <void(const Key &, const Value &)> handler) {
 			if (!root) return;
 			std::queue <const BinarySearchTreeNode *> queue;
 			queue.push(root);
@@ -94,36 +95,36 @@ namespace forest {
 		}
 
 	private:
-		BinarySearchTreeNode * minimum(BinarySearchTreeNode * root) noexcept {
+		BinarySearchTreeNode * minimum(BinarySearchTreeNode * root) {
 			if (root == nullptr) return nullptr;
 			while (root->left != nullptr) root = root->left;
 			return root;
 		}
-		BinarySearchTreeNode * maximum(BinarySearchTreeNode * root) noexcept {
+		BinarySearchTreeNode * maximum(BinarySearchTreeNode * root) {
 			if (root == nullptr) return nullptr;
 			while (root->right != nullptr) root = root->right;
 			return root;
 		}
 
 	private:
-		unsigned height(const BinarySearchTreeNode * root) noexcept {
+		unsigned height(const BinarySearchTreeNode * root) {
 			if (!root) return 0;
 			return root->height;
 		}
-		unsigned size(const BinarySearchTreeNode * root) noexcept {
+		unsigned size(const BinarySearchTreeNode * root) {
 			if (!root) return 0;
 			return size(root->left) + size(root->right) + 1;
 		}
 
 	private:
-		BinarySearchTreeNode * insert(BinarySearchTreeNode * root, const Key & key, const Value & value) noexcept {
+		BinarySearchTreeNode * insert(BinarySearchTreeNode * root, const Key & key, const Value & value) {
 			if (!root) return new BinarySearchTreeNode(key, value);
 			else if (key < root->key) root->left = insert(root->left, key, value);
 			else if (key > root->key) root->right = insert(root->right, key, value);
 			root->height = std::max(height(root->left), height(root->right)) + 1;
 			return root;
 		}
-		BinarySearchTreeNode * remove(BinarySearchTreeNode * root, const Key & key) noexcept {
+		BinarySearchTreeNode * remove(BinarySearchTreeNode * root, const Key & key) {
 			if (!root) return nullptr;
 			else if (key < root->key) root->left = remove(root->left, key);
 			else if (key > root->key) root->right = remove(root->right, key);
@@ -162,7 +163,7 @@ namespace forest {
 			
 			return root;
 		}
-		BinarySearchTreeNode * search(BinarySearchTreeNode * root, const Key & key) noexcept {
+		BinarySearchTreeNode * search(BinarySearchTreeNode * root, const Key & key) {
 			while (root != nullptr) {
 				if (key > root->key) root = root->right;
 				else if (key < root->key) root = root->left;
@@ -172,7 +173,7 @@ namespace forest {
 		}
 
 	private:
-		void clear(BinarySearchTreeNode * root) noexcept {
+		void clear(BinarySearchTreeNode * root) {
 			if (!root) return;
 			if (root->left != nullptr) clear(root->left);
 			if (root->right != nullptr) clear(root->right);
@@ -196,48 +197,48 @@ namespace forest {
 		}
 
 	public:
-		void pre_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void pre_order_traversal(std::function <void(const Key &, const Value &)> handler) {
 			pre_order_traversal(tree_root, handler);
 		}
-		void in_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void in_order_traversal(std::function <void(const Key &, const Value &)> handler) {
 			in_order_traversal(tree_root, handler);
 		}
-		void post_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void post_order_traversal(std::function <void(const Key &, const Value &)> handler) {
 			post_order_traversal(tree_root, handler);
 		}
-		void breadth_first_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void breadth_first_traversal(std::function <void(const Key &, const Value &)> handler) {
 			breadth_first_traversal(tree_root, handler);
 		}
 
 	public:
-		BinarySearchTreeNode * minimum() noexcept {
+		BinarySearchTreeNode * minimum() {
 			return minimum(tree_root);
 		}
-		BinarySearchTreeNode * maximum() noexcept {
+		BinarySearchTreeNode * maximum() {
 			return maximum(tree_root);
 		}
 
 	public:
-		unsigned height() noexcept {
+		unsigned height() {
 			return height(tree_root);
 		}
-		unsigned size() noexcept {
+		unsigned size() {
 			return size(tree_root);
 		}
 
 	public:
-		void insert(const Key & key, const Value & value) noexcept {
+		void insert(const Key & key, const Value & value) {
 			tree_root = insert(tree_root, key, value);
 		}
 		void remove(const Key & key) noexcept {
 			tree_root = remove(tree_root, key);
 		}
-		BinarySearchTreeNode * search(const Key & key) noexcept {
+		BinarySearchTreeNode * search(const Key & key) {
 			return search(tree_root, key);
 		}
 
 	public:
-		void clear() noexcept {
+		void clear() {
 			clear(tree_root);
 			tree_root = nullptr;
 		}

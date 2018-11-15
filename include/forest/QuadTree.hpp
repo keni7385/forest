@@ -38,6 +38,7 @@ namespace forest {
 		using Point = std::array <Arithmetic, 2>;
 		using Points = std::vector <Point>;
 		using PointsIt = typename std::vector <Point>::iterator;
+		using Handler = std::function<void(const Point &)>;
 
 	public:
 		class Range {
@@ -115,7 +116,7 @@ namespace forest {
 		QuadTree * SE{ nullptr };
 
 	private:
-		void divide() noexcept {
+		void divide() {
 			NW = new QuadTree <Arithmetic, Capacity>({
 				{ boundary.origin[0] - boundary.transform[0] / 2, boundary.origin[1] + boundary.transform[1] / 2 }, 
 				{ boundary.transform[0] / 2, boundary.transform[1] / 2 }
@@ -134,7 +135,7 @@ namespace forest {
 			});
 			divided = true;
 		}
-		void merge() noexcept {
+		void merge() {
 			delete NW;
 			delete NE;
 			delete SW;
@@ -154,7 +155,7 @@ namespace forest {
 		}
 
 	public:
-		bool insert(const Point & point) noexcept {
+		bool insert(const Point & point) {
 			if (!boundary.contains(point)) return false;
 			if (!divided) {
 				children.push_back(point);
@@ -189,7 +190,7 @@ namespace forest {
 			}
 			return false;
 		}
-		bool search(const Point & point) noexcept {
+		bool search(const Point & point) {
 			if (!boundary.contains(point)) return false;
 			if (divided) {
 				return NW->search(point) || NE->search(point) || SW->search(point) || SE->search(point);
@@ -198,7 +199,7 @@ namespace forest {
 				return std::find(children.begin(), children.end(), point) != children.end();
 			}
 		}
-		void query(const Range & range, std::function<void(const Point &)> handler) noexcept {
+		void query(const Range & range, Handler handler) {
 			if (!range.intersects(boundary)) return;
 			if (divided) {
 				NW->query(range, handler);
@@ -216,7 +217,7 @@ namespace forest {
 		}
 
 	public:
-		void clear() noexcept {
+		void clear() {
 			if (divided == true) {
 				NW->clear();
 				NE->clear();

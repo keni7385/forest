@@ -25,6 +25,7 @@
 #pragma once
 
 #include <algorithm>
+#include <functional>
 #include <initializer_list>
 #include <memory>
 #include <queue>
@@ -33,6 +34,9 @@
 namespace forest {
 	template <typename Key, typename Value>
 	class RedBlackTree {
+	public:
+		using Handler = std::function <void(const Key &, const Value &)>;
+
 	private:
 		enum Color {
 			RED,
@@ -67,25 +71,25 @@ namespace forest {
 		RedBlackTreeNode * tree_root{ nullptr };
 
 	private:
-		void pre_order_traversal(const RedBlackTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void pre_order_traversal(const RedBlackTreeNode * root, Handler handler) {
 			if (!root) return;
 			handler(root->key, root->value);
 			pre_order_traversal(root->left, handler);
 			pre_order_traversal(root->right, handler);
 		}
-		void in_order_traversal(const RedBlackTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void in_order_traversal(const RedBlackTreeNode * root, Handler handler) {
 			if (!root) return;
 			in_order_traversal(root->left, handler);
 			handler(root->key, root->value);
 			in_order_traversal(root->right, handler);
 		}
-		void post_order_traversal(const RedBlackTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void post_order_traversal(const RedBlackTreeNode * root, Handler handler) {
 			if (!root) return;
 			post_order_traversal(root->left, handler);
 			post_order_traversal(root->right, handler);
 			handler(root->key, root->value);
 		}
-		void breadth_first_traversal(const RedBlackTreeNode * root, void handler(const Key & key, const Value & value)) noexcept {
+		void breadth_first_traversal(const RedBlackTreeNode * root, Handler handler) {
 			std::queue <const RedBlackTreeNode *> queue;
 			if (!root) return;
 			queue.push(root);
@@ -99,29 +103,29 @@ namespace forest {
 		}
 
 	private:
-		RedBlackTreeNode * minimum(RedBlackTreeNode * root) noexcept {
+		RedBlackTreeNode * minimum(RedBlackTreeNode * root) {
 			if (!root) return nullptr;
 			while (root->left) root = root->left;
 			return root;
 		}
-		RedBlackTreeNode * maximum(RedBlackTreeNode * root) noexcept {
+		RedBlackTreeNode * maximum(RedBlackTreeNode * root) {
 			if (!root) return nullptr;
 			while (root->right) root = root->right;
 			return root;
 		}
 
 	private:
-		unsigned height(const RedBlackTreeNode * root) noexcept {
+		unsigned height(const RedBlackTreeNode * root) {
 			if (!root) return 0;
 			return std::max(height(root->left), height(root->right)) + 1;
 		}
-		unsigned size(const RedBlackTreeNode * root) noexcept {
+		unsigned size(const RedBlackTreeNode * root) {
 			if (!root) return 0;
 			return size(root->left) + size(root->right) + 1;
 		}
 
 	private:
-		void rotate_right(RedBlackTreeNode * rotation_root) noexcept {
+		void rotate_right(RedBlackTreeNode * rotation_root) {
 			RedBlackTreeNode * new_root{ rotation_root->left };
 			RedBlackTreeNode * orphan_subtree{ new_root->right };
 			rotation_root->left = orphan_subtree;
@@ -141,7 +145,7 @@ namespace forest {
 			new_root->parent = rotation_root->parent;
 			rotation_root->parent = new_root;
 		}
-		void rotate_left(RedBlackTreeNode * rotation_root) noexcept {
+		void rotate_left(RedBlackTreeNode * rotation_root) {
 			RedBlackTreeNode * new_root{ rotation_root->right };
 			RedBlackTreeNode * orphan_subtree{ new_root->left };
 			rotation_root->right = orphan_subtree;
@@ -163,7 +167,7 @@ namespace forest {
 		}
 
 	private:
-		void fix(RedBlackTreeNode * root) noexcept {
+		void fix(RedBlackTreeNode * root) {
 			RedBlackTreeNode * parent{ nullptr };
 			RedBlackTreeNode * grand_parent{ nullptr };
 			while ((root != tree_root) && (root->color != BLACK) && (root->parent->color == RED)) {
@@ -212,7 +216,7 @@ namespace forest {
 		}
 
 	private:
-		void clear(RedBlackTreeNode * root) noexcept {
+		void clear(RedBlackTreeNode * root) {
 			if (!root) return;
 			if (root->left != nullptr) clear(root->left);
 			if (root->right != nullptr) clear(root->right);
@@ -236,37 +240,37 @@ namespace forest {
 		}
 
 	public:
-		void pre_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void pre_order_traversal(Handler handler) {
 			pre_order_traversal(tree_root, handler);
 		}
-		void in_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void in_order_traversal(Handler handler) {
 			in_order_traversal(tree_root, handler);
 		}
-		void post_order_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void post_order_traversal(Handler handler) {
 			post_order_traversal(tree_root, handler);
 		}
-		void breadth_first_traversal(void handler(const Key & key, const Value & value)) noexcept {
+		void breadth_first_traversal(Handler handler) {
 			breadth_first_traversal(tree_root, handler);
 		}
 
 	public:
-		RedBlackTreeNode * minimum() noexcept {
+		RedBlackTreeNode * minimum() {
 			return minimum(tree_root);
 		}
-		RedBlackTreeNode * maximum() noexcept {
+		RedBlackTreeNode * maximum() {
 			return maximum(tree_root);
 		}
 
 	public:
-		unsigned height() noexcept {
+		unsigned height() {
 			return height(tree_root);
 		}
-		unsigned size() noexcept {
+		unsigned size() {
 			return size(tree_root);
 		}
 
 	public:
-		void insert(const Key & key, const Value & value) noexcept {
+		void insert(const Key & key, const Value & value) {
 			RedBlackTreeNode * current{ tree_root };
 			RedBlackTreeNode * parent{ nullptr };
 			while (current != nullptr) {
@@ -295,7 +299,7 @@ namespace forest {
 			}
 			fix(current);
 		}
-		RedBlackTreeNode * search(const Key & key) noexcept {
+		RedBlackTreeNode * search(const Key & key) {
 			RedBlackTreeNode * current{ tree_root };
 			while (current) {
 				if (key > current->key) {
@@ -312,7 +316,7 @@ namespace forest {
 		}
 
 	public:
-		void clear() noexcept {
+		void clear() {
 			clear(tree_root);
 			tree_root = nullptr;
 		}

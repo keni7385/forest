@@ -38,6 +38,7 @@ namespace forest {
 		using Point = std::array<Arithmetic, Dimensions>;
 		using Points = std::vector<Point>;
 		using PointsIt = typename Points::iterator;
+		using Handler = std::function<void(const Point &)>;
 
 	public:
 		class Range {
@@ -135,10 +136,10 @@ namespace forest {
 			else if (y) return y;
 			else return nullptr;
 		}
-		KDTreeNode * minimum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, const unsigned dimension) noexcept {
+		KDTreeNode * minimum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, const unsigned dimension) {
 			return minimum(x, minimum(y, z, dimension), dimension);
 		}
-		KDTreeNode * minimum(KDTreeNode * root, const unsigned dimension, const unsigned depth) noexcept {
+		KDTreeNode * minimum(KDTreeNode * root, const unsigned dimension, const unsigned depth) {
 			if (!root) return nullptr;
 			unsigned current = depth % Dimensions;
 			if (current == dimension) {
@@ -147,12 +148,12 @@ namespace forest {
 			}
 			return minimum(root, minimum(root->left, dimension, depth + 1), minimum(root->right, dimension, depth + 1), dimension);
 		}
-		KDTreeNode * minimum(KDTreeNode * root, const unsigned dimension) noexcept {
+		KDTreeNode * minimum(KDTreeNode * root, const unsigned dimension) {
 			return minimum(root, dimension, 0);
 		}
 
 	private:
-		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, const unsigned dimension) noexcept {
+		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, const unsigned dimension) {
 			if (x && y) {
 				if (x->point.empty() || y->point.empty()) return nullptr;
 				if (x->point[dimension] > y->point[dimension]) {
@@ -166,10 +167,10 @@ namespace forest {
 			else if (y) return y;
 			else return nullptr;
 		}
-		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, const unsigned dimension) noexcept {
+		KDTreeNode * maximum(KDTreeNode * x, KDTreeNode * y, KDTreeNode * z, const unsigned dimension) {
 			return maximum(x, maximum(y, z, dimension), dimension);
 		}
-		KDTreeNode * maximum(KDTreeNode * root, const unsigned dimension, const unsigned depth) noexcept {
+		KDTreeNode * maximum(KDTreeNode * root, const unsigned dimension, const unsigned depth) {
 			if (!root) return nullptr;
 			unsigned current = depth % Dimensions;
 			if (current == dimension) {
@@ -178,18 +179,18 @@ namespace forest {
 			}
 			return maximum(root, maximum(root->left, dimension, depth + 1), maximum(root->right, dimension, depth + 1), dimension);
 		}
-		KDTreeNode * maximum(KDTreeNode * root, const unsigned dimension) noexcept {
+		KDTreeNode * maximum(KDTreeNode * root, const unsigned dimension) {
 			return maximum(root, dimension, 0);
 		}
 
 	private:
-		unsigned size(const KDTreeNode * root) noexcept {
+		unsigned size(const KDTreeNode * root) {
 			if (!root) return 0;
 			return size(root->left) + size(root->right) + 1;
 		}
 
 	private:
-		bool search(const KDTreeNode * root, const Point & point, const unsigned depth) noexcept {
+		bool search(const KDTreeNode * root, const Point & point, const unsigned depth) {
 			if (!root) return false;
 			unsigned current = depth % Dimensions;
 			if (root->point.empty()) return false;
@@ -234,7 +235,7 @@ namespace forest {
 			}
 			return root;
 		}
-		void query(KDTreeNode * root, const Range & range, std::function<void(const Point &)> handler) noexcept {
+		void query(const KDTreeNode * root, const Range & range, Handler handler) {
 			if (!root) return;
 			if (range.contains(root->point)) {
 				handler(root->point);
@@ -244,7 +245,7 @@ namespace forest {
 		}
 
 	private:
-		void clear(KDTreeNode * root) noexcept {
+		void clear(KDTreeNode * root) {
 			if (!root) return;
 			if (root->left) clear(root->left);
 			if (root->right) clear(root->right);
@@ -262,34 +263,34 @@ namespace forest {
 		}
 
 	public:
-		KDTreeNode * minimum(const unsigned dimension) noexcept {
+		KDTreeNode * minimum(const unsigned dimension) {
 			return minimum(tree_root, dimension);
 		}
-		KDTreeNode * maximum(const unsigned dimension) noexcept {
+		KDTreeNode * maximum(const unsigned dimension) {
 			return maximum(tree_root, dimension);
 		}
 
 	public:
-		unsigned size() noexcept {
+		unsigned size() {
 			return size(tree_root);
 		}
 
 	public:
-		void fill(const PointsIt begin, const PointsIt end) noexcept {
+		void fill(const PointsIt begin, const PointsIt end) {
 			tree_root = new KDTreeNode(begin, end, 0);
 		}
-		bool search(const Point & point) noexcept {
+		bool search(const Point & point) {
 			return search(tree_root, point, 0);
 		}
-		void remove(const Point & point) noexcept {
+		void remove(const Point & point) {
 			tree_root = remove(tree_root, point, 0);
 		}
-		void query(const Range & range, std::function<void(const Point &)> handler) noexcept {
+		void query(const Range & range, Handler handler) {
 			query(tree_root, range, handler);
 		}
 
 	public:
-		void clear() noexcept {
+		void clear() {
 			clear(tree_root);
 			tree_root = nullptr;
 		}
