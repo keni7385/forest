@@ -24,113 +24,86 @@
 
 #pragma once
 
-#include <vector>
 #include <algorithm>
+#include <array>
+#include <functional>
+#include <vector>
 
 namespace forest {
-	template <typename Arithmetic, unsigned Capacity = 1>
+	template <typename Arithmetic, int Capacity = 1>
 	class QuadTree {
-		static_assert(Capacity > 0, "Invalid QuadTree Capacity");
+		static_assert(Capacity > 0, "Invalid QuadTree Dimensions");
 
 	public:
-		template <typename U>
-		class Rectangle;
-		template <typename U>
-		class Point {
-			template<typename T> friend class Rectangle;
-		private:
-			U x;
-			U y;
-
-		public:
-			Point() = default;
-			Point(const U & X, const U & Y) : x(X), y(Y) { }
-			~Point() = default;
-
-		public:
-			void setX(const U & X) {
-				x = X;
-			}
-			void setY(const U & Y) {
-				y = Y;
-			}
-
-		public:
-			U getX() const {
-				return x;
-			}
-			U getY() const {
-				return y;
-			}
-
-		public:
-			friend bool operator == (const Point<U> & lhs, const Point<U> & rhs) {
-				return lhs.x == rhs.x && lhs.y == rhs.y;
-			}
-		};
+		using Point = std::array <Arithmetic, 2>;
+		using Points = std::vector <Point>;
+		using PointsIt = typename std::vector <Point>::iterator;
 
 	public:
-		template <typename U>
-		class Rectangle {
-			template<typename T, unsigned K> friend class QuadTree;
+		class Range {
+			template <typename T, int K> friend class QuadTree;
 
 		private:
-			U x;
-			U y;
-			U w;
-			U h;
+			Point origin;
+			Point transform;
 
 		public:
-			Rectangle() = default;
-			Rectangle(const U & X, const U & Y, const U & W, const U & H) : x(X), y(Y), w(W), h(H) { }
-			~Rectangle() = default;
+			Range() = default;
+			Range(const Point & ORIGIN, const Point & TRANSFORM) : origin(ORIGIN), transform(TRANSFORM) { }
+			~Range() = default;
 
 		public:
-			void setX(const U & X) {
-				x = X;
+			void setOrigin(const Point & ORIGIN) {
+				origin = ORIGIN;
 			}
-			void setY(const U & Y) {
-				y = Y;
-			}
-			void setW(const U & W) {
-				w = W;
-			}
-			void setH(const U & H) {
-				h = H;
+			void setY(const Point & TRANSFORM) {
+				transform = TRANSFORM;
 			}
 
 		public:
-			U getX() const {
-				return x;
+			Point getOrigin() const {
+				return origin;
 			}
-			U getY() const {
-				return y;
-			}
-			U getW() const {
-				return w;
-			}
-			U getH() const {
-				return h;
+			Point getTransform() const {
+				return transform;
 			}
 
 		public:
-			bool contains(const Point <U> & point) const {
-				return point.x >= x - w && point.x <= x + w && point.y >= y - h && point.y <= y + h;
+			bool contains(const Point & point) const {
+				return point[0] >= origin[0] - transform[0] &&
+					   point[0] <= origin[0] + transform[0] &&
+					   point[1] >= origin[1] - transform[1] &&
+					   point[1] <= origin[1] + transform[1];
 			}
-			bool intersects(const Rectangle <U> & other) const {
-				return !(x - w > other.x + other.w || x + w < other.x - other.w || y - h > other.y + other.h || y + h < other.y - other.h);
+			//bool contains(const Point & point) const {
+			//	for (int i = 0; i < 2; ++i) {
+			//		if (!(point[i] >= origin[i] - transform[i] && point[i] <= origin[i] + transform[i])) {
+			//			return false;
+			//		}
+			//	}
+			//	return true;
+			//}
+			bool intersects(const Range & other) const {
+				return origin[0] - transform[0] <= other.origin[0] + other.transform[0] &&
+					   origin[0] + transform[0] >= other.origin[0] - other.transform[0] &&
+					   origin[1] - transform[1] <= other.origin[1] + other.transform[1] &&
+					   origin[1] + transform[1] >= other.origin[1] - other.transform[1];
 			}
+			//bool intersects(const Range & other) const {
+			//	for (int i = 0; i < 2; ++i) {
+			//		if (!(origin[i] - transform[i] <= other.origin[i] + other.transform[i] && origin[i] + transform[i] >= other.origin[i] - other.transform[i])) {
+			//			return false;
+			//		}
+			//	}
+			//	return true;
+			//}
 		};
-
-	public:
-		using Points = std::vector <Point <Arithmetic>>;
-		using PointsIt = typename std::vector <Point <Arithmetic>>::iterator;
 
 	private:
 		Points children;
 
 	private:
-		Rectangle <Arithmetic> boundary;
+		Range boundary;
 
 	private:
 		bool divided{ false };
@@ -143,14 +116,22 @@ namespace forest {
 
 	private:
 		void divide() noexcept {
-			const Arithmetic half_w = boundary.w / 2;
-			const Arithmetic half_h = boundary.h / 2;
-
-			NW = new QuadTree <Arithmetic, Capacity> (boundary.x - half_w, boundary.y + half_h, half_w, half_h);
-			NE = new QuadTree <Arithmetic, Capacity> (boundary.x + half_w, boundary.y + half_h, half_w, half_h);
-			SW = new QuadTree <Arithmetic, Capacity> (boundary.x - half_w, boundary.y - half_h, half_w, half_h);
-			SE = new QuadTree <Arithmetic, Capacity> (boundary.x + half_w, boundary.y - half_h, half_w, half_h);
-
+			NW = new QuadTree <Arithmetic, Capacity>({
+				{ boundary.origin[0] - boundary.transform[0] / 2, boundary.origin[1] + boundary.transform[1] / 2 }, 
+				{ boundary.transform[0] / 2, boundary.transform[1] / 2 }
+			});
+			NE = new QuadTree <Arithmetic, Capacity>({
+				{ boundary.origin[0] + boundary.transform[0] / 2, boundary.origin[1] + boundary.transform[1] / 2 },
+				{ boundary.transform[0] / 2, boundary.transform[1] / 2 }
+			});
+			SW = new QuadTree <Arithmetic, Capacity>({
+				{ boundary.origin[0] - boundary.transform[0] / 2, boundary.origin[1] - boundary.transform[1] / 2 },
+				{ boundary.transform[0] / 2, boundary.transform[1] / 2 }
+			});
+			SE = new QuadTree <Arithmetic, Capacity>({
+				{ boundary.origin[0] + boundary.transform[0] / 2, boundary.origin[1] - boundary.transform[1] / 2 },
+				{ boundary.transform[0] / 2, boundary.transform[1] / 2 }
+			});
 			divided = true;
 		}
 		void merge() noexcept {
@@ -158,47 +139,22 @@ namespace forest {
 			delete NE;
 			delete SW;
 			delete SE;
-			
 			NW = nullptr;
 			NE = nullptr;
 			SW = nullptr;
 			SE = nullptr;
-
 			divided = false;
-		}
-
-	private:
-		void query(const Rectangle <Arithmetic> & area, Points & results) noexcept {
-			if (!area.intersects(boundary)) return;
-			if (divided) {
-				NW->query(area, results);
-				NE->query(area, results);
-				SW->query(area, results);
-				SE->query(area, results);
-			}
-			else {
-				for (auto child : children) {
-					if (area.contains(child)) {
-						results.push_back(child);
-					}
-				}
-			}
 		}
 
 	public:
 		QuadTree() = delete;
-		QuadTree(const Arithmetic & X, const Arithmetic & Y, const Arithmetic & W, const Arithmetic & H) {
-			boundary.x = X;
-			boundary.y = Y;
-			boundary.w = W;
-			boundary.h = H;
-		};
+		QuadTree(const Range & BOUNDARY) : boundary(BOUNDARY) { }
 		~QuadTree() {
 			clear();
 		}
 
 	public:
-		bool insert(const Point <Arithmetic> & point) noexcept {
+		bool insert(const Point & point) noexcept {
 			if (!boundary.contains(point)) return false;
 			if (!divided) {
 				children.push_back(point);
@@ -215,55 +171,46 @@ namespace forest {
 				}
 				return true;
 			}
-			else {
-				if (NW->insert(point)) return true;
-				else if (NE->insert(point)) return true;
-				else if (SW->insert(point)) return true;
-				else if (SE->insert(point)) return true;
-				return false;
-			}
+			return NW->insert(point) || NE->insert(point) || SW->insert(point) || SE->insert(point);
 		}
-		bool remove(const Point<Arithmetic> & point) {
+		bool remove(const Point & point) {
 			if (!boundary.contains(point)) return false;
 			if (!divided) {
 				children.erase(std::remove(children.begin(), children.end(), point), children.end());
 				return true;
 			}
-			else {
-				if (NW->remove(point) || NE->remove(point) || SW->remove(point) || SE->remove(point)) {
-					if (!NW->divided && !NE->divided && !SW->divided && !SE->divided) {
-						if (NW->children.empty() && NE->children.empty() && SW->children.empty() && SE->children.empty()) {
-							merge();
-						}
+			if (NW->remove(point) || NE->remove(point) || SW->remove(point) || SE->remove(point)) {
+				if (!NW->divided && !NE->divided && !SW->divided && !SE->divided) {
+					if (NW->children.empty() && NE->children.empty() && SW->children.empty() && SE->children.empty()) {
+						merge();
 					}
-					return true;
 				}
-				else {
-					return false;
-				}
+				return true;
 			}
+			return false;
 		}
-		Points query(const Rectangle <Arithmetic> & area) noexcept {
-			Points results;
-			query(area, results);
-			return results;
-		}
-		bool search(const Point <Arithmetic> & point) noexcept {
+		bool search(const Point & point) noexcept {
 			if (!boundary.contains(point)) return false;
 			if (divided) {
-				if (NW->search(point) || NE->search(point) || SW->search(point) || SE->search(point)) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return NW->search(point) || NE->search(point) || SW->search(point) || SE->search(point);
 			}
 			else {
-				if (std::find(children.begin(), children.end(), point) != children.end()) {
-					return true;
-				}
-				else {
-					return false;
+				return std::find(children.begin(), children.end(), point) != children.end();
+			}
+		}
+		void query(const Range & range, std::function<void(const Point &)> handler) noexcept {
+			if (!range.intersects(boundary)) return;
+			if (divided) {
+				NW->query(range, handler);
+				NE->query(range, handler);
+				SW->query(range, handler);
+				SE->query(range, handler);
+			}
+			else {
+				for (auto child : children) {
+					if (range.contains(child)) {
+						handler(child);
+					}
 				}
 			}
 		}

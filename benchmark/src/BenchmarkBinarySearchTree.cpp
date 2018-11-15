@@ -117,7 +117,7 @@ static void BM_BinarySearchTree_Minimum_Average_Case(benchmark::State & state) {
 	
 	state.SetComplexityN(state.range(0));
 }
-BENCHMARK(BM_BinarySearchTree_Minimum_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 20)->Complexity(benchmark::o1);
+BENCHMARK(BM_BinarySearchTree_Minimum_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::o1);
 
 static void BM_BinarySearchTree_Maximum_Average_Case(benchmark::State & state) {
 	std::random_device rd;
@@ -136,6 +136,6 @@ static void BM_BinarySearchTree_Maximum_Average_Case(benchmark::State & state) {
 	
 	state.SetComplexityN(state.range(0));
 }
-BENCHMARK(BM_BinarySearchTree_Maximum_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 20)->Complexity(benchmark::o1);
+BENCHMARK(BM_BinarySearchTree_Maximum_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::o1);
 
 BENCHMARK_MAIN();

@@ -28,7 +28,7 @@
 #include <vector>
 
 int main() {
-	forest::QuadTree <float, 2> QuadTree(0, 0, 10, 10);
+	forest::QuadTree <float, 2> QuadTree({ {0, 0 }, { 10, 10 } });
 
 	for (float i = -5; i < 5; ++i) {
 		std::cout << "insert({ " << i << ", " << i << " })" << std::endl;
@@ -56,14 +56,15 @@ int main() {
 
 	std::cout << std::endl;
 
-	auto results = QuadTree.query({ 0, 0, 10, 10 });
-
 	std::cout << "query({ 0, 0, 10, 10 })" << " = {" << std::endl;
-	for (auto point : results) {
-		std::cout << "(" << point.getX() << ", " << point.getY() << ")" << std::endl;
-	}
+	QuadTree.query({ { 0, 0 }, { 10, 10 } }, [](auto point) {
+		std::cout << "(" << point[0] << ", " << point[1] << ")" << std::endl;
+	});
 	std::cout << "}" << std::endl;
 
+	std::cout << std::endl;
+
+	std::cout << "clear()" << std::endl;
 	QuadTree.clear();
 
 #ifdef WIN32
