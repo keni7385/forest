@@ -104,7 +104,7 @@ SCENARIO("Test Quad Tree") {
 			}
 			THEN("Test query({ { 0 , 0 }, { 1, 1 } })") {
 				forest::QuadTree<float, 2>::Points results;
-				QuadTree.query({ { 0 , 0 }, { 3, 3 } }, [&results](auto point) {
+				QuadTree.query({ { 0 , 0 }, { 3, 3 } }, [&results](forest::QuadTree<float, 2>::Point point) {
 					results.push_back(point);
 				});
 				REQUIRE(results.size() == 4);
