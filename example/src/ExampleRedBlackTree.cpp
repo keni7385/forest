@@ -27,7 +27,7 @@
 #include <string>
 
 int main() {
-	forest::RedBlackTree <int, std::string> RedBlackTree;
+	forest::RedBlackTree<int, std::string> RedBlackTree;
 
 	RedBlackTree.insert(2, "Thor");
 	RedBlackTree.insert(4, "Odin");

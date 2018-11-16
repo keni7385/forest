@@ -27,7 +27,7 @@
 #include <string>
 
 int main() {
-	forest::AVLTree <int, std::string> AVLTree;
+	forest::AVLTree<int, std::string> AVLTree;
 
 	AVLTree.insert(2, "Thor");
 	AVLTree.insert(4, "Odin");

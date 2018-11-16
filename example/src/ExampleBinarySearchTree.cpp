@@ -27,7 +27,7 @@
 #include <string>
 
 int main() {
-	forest::BinarySearchTree <int, std::string> BinarySearchTree;
+	forest::BinarySearchTree<int, std::string> BinarySearchTree;
 
 	BinarySearchTree.insert(2, "Thor");
 	BinarySearchTree.insert(4, "Odin");

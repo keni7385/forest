@@ -31,7 +31,7 @@ static void BM_RedBlackTree_Create_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::RedBlackTree <int, int> RedBlackTree;
+	forest::RedBlackTree<int, int> RedBlackTree;
 
 	for (auto _ : state) {
 		for (int i = 0; i < state.range(0); ++i) {
@@ -51,7 +51,7 @@ static void BM_RedBlackTree_Search_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::RedBlackTree <int, int> RedBlackTree;
+	forest::RedBlackTree<int, int> RedBlackTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		RedBlackTree.insert(dis(gen), 0);
@@ -69,7 +69,7 @@ static void BM_RedBlackTree_Search_Worst_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::RedBlackTree <int, int> RedBlackTree;
+	forest::RedBlackTree<int, int> RedBlackTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		RedBlackTree.insert(i, 0);
@@ -88,7 +88,7 @@ static void BM_RedBlackTree_Minimum_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::RedBlackTree <int, int> RedBlackTree;
+	forest::RedBlackTree<int, int> RedBlackTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		RedBlackTree.insert(dis(gen), 0);
@@ -107,7 +107,7 @@ static void BM_RedBlackTree_Maximum_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::RedBlackTree <int, int> RedBlackTree;
+	forest::RedBlackTree<int, int> RedBlackTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		RedBlackTree.insert(dis(gen), 0);

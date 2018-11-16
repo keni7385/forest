@@ -27,7 +27,7 @@
 #include <string>
 
 int main() {
-	forest::SplayTree <int, std::string> SplayTree;
+	forest::SplayTree<int, std::string> SplayTree;
 
 	SplayTree.insert(2, "Thor");
 	SplayTree.insert(4, "Odin");

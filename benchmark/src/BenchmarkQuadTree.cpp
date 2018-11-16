@@ -31,7 +31,7 @@ static void BM_QuadTree_Create_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<> dis(-state.range(0) / 2.f, state.range(0) / 2.f);
 
-	forest::QuadTree <double, 10> QuadTree({ { 0, 0 }, { state.range(0) / 2.f, state.range(0) / 2.f } });
+	forest::QuadTree<double, 10> QuadTree({ { 0, 0 }, { state.range(0) / 2.f, state.range(0) / 2.f } });
 
 	for (auto _ : state) {
 		state.PauseTiming();
@@ -51,7 +51,7 @@ static void BM_QuadTree_Search_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<> dis(-state.range(0) / 2.f, state.range(0) / 2.f);
 
-	forest::QuadTree <double, 10> QuadTree({ { 0, 0 }, { state.range(0) / 2.f, state.range(0) / 2.f } });
+	forest::QuadTree<double, 10> QuadTree({ { 0, 0 }, { state.range(0) / 2.f, state.range(0) / 2.f } });
 
 	for (int i = 0; i < state.range(0); ++i) {
 		QuadTree.insert({ dis(gen), dis(gen) });
@@ -70,7 +70,7 @@ static void BM_QuadTree_Query_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<> dis(-state.range(0) / 2.f, state.range(0) / 2.f);
 
-	forest::QuadTree <double, 10> QuadTree({ { 0, 0 }, { state.range(0) / 2.f, state.range(0) / 2.f } });
+	forest::QuadTree<double, 10> QuadTree({ { 0, 0 }, { state.range(0) / 2.f, state.range(0) / 2.f } });
 
 	for (int i = 0; i < state.range(0); ++i) {
 		QuadTree.insert({ dis(gen), dis(gen) });

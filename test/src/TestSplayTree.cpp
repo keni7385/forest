@@ -28,7 +28,7 @@
 
 SCENARIO("Test Splay Tree") {
 	GIVEN("A Splay Tree") {
-		forest::SplayTree <int, int> SplayTree;
+		forest::SplayTree<int, int> SplayTree;
 		WHEN("The Splay Tree is empty") {
 			THEN("Test size") {
 				REQUIRE(SplayTree.size() == 0);

@@ -28,7 +28,7 @@
 
 SCENARIO("Test Red Black Tree") {
 	GIVEN("A Red Black Tree") {
-		forest::RedBlackTree <int, int> RedBlackTree;
+		forest::RedBlackTree<int, int> RedBlackTree;
 		WHEN("The Red Black Tree is empty") {
 			THEN("Test size()") {
 				REQUIRE(RedBlackTree.size() == 0);

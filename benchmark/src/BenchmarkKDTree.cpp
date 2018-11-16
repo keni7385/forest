@@ -63,7 +63,7 @@ static void BM_KDTree_Search_Average_Case(benchmark::State & state) {
 		points.push_back({ dis(gen), dis(gen) });
 	}
 
-	forest::KDTree <double, 2> KDTree(points.begin(), points.end());
+	forest::KDTree<double, 2> KDTree(points.begin(), points.end());
 
 	for (auto _ : state) {
 		benchmark::DoNotOptimize(KDTree.search({ dis(gen), dis(gen) }));
@@ -83,7 +83,7 @@ static void BM_KDTree_Minimum_Average_Case(benchmark::State & state) {
 		points.push_back({ dis(gen), dis(gen) });
 	}
 
-	forest::KDTree <double, 2> KDTree(points.begin(), points.end());
+	forest::KDTree<double, 2> KDTree(points.begin(), points.end());
 
 	for (auto _ : state) {
 		benchmark::DoNotOptimize(KDTree.minimum(0));
@@ -103,7 +103,7 @@ static void BM_KDTree_Maximum_Average_Case(benchmark::State & state) {
 		points.push_back({ dis(gen), dis(gen) });
 	}
 
-	forest::KDTree <double, 2> KDTree(points.begin(), points.end());
+	forest::KDTree<double, 2> KDTree(points.begin(), points.end());
 
 	for (auto _ : state) {
 		benchmark::DoNotOptimize(KDTree.maximum(0));
@@ -123,7 +123,7 @@ static void BM_KDTree_Query_Average_Case(benchmark::State & state) {
 		points.push_back({ dis(gen), dis(gen) });
 	}
 
-	forest::KDTree <double, 2> KDTree(points.begin(), points.end());
+	forest::KDTree<double, 2> KDTree(points.begin(), points.end());
 
 	for (auto _ : state) {
 		KDTree.query({ { 0, 0 }, { dis(gen), dis(gen) } }, [](auto point) {});

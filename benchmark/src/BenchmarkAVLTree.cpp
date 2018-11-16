@@ -31,7 +31,7 @@ static void BM_AVLTree_Create_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::AVLTree <int, int> AVLTree;
+	forest::AVLTree<int, int> AVLTree;
 
 	for (auto _ : state) {
 		for (int i = 0; i < state.range(0); ++i) {
@@ -51,7 +51,7 @@ static void BM_AVLTree_Search_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::AVLTree <int, int> AVLTree;
+	forest::AVLTree<int, int> AVLTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		AVLTree.insert(dis(gen), 0);
@@ -70,7 +70,7 @@ static void BM_AVLTree_Minimum_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::AVLTree <int, int> AVLTree;
+	forest::AVLTree<int, int> AVLTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		AVLTree.insert(dis(gen), 0);
@@ -89,7 +89,7 @@ static void BM_AVLTree_Maximum_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::AVLTree <int, int> AVLTree;
+	forest::AVLTree<int, int> AVLTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		AVLTree.insert(dis(gen), 0);

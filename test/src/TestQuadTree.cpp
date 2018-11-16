@@ -28,7 +28,7 @@
 
 SCENARIO("Test Quad Tree") {
 	GIVEN("A Quad Tree") {
-		forest::QuadTree <float, 2> QuadTree({ {0, 0 }, { 10, 10 } });
+		forest::QuadTree<float, 2> QuadTree({ {0, 0 }, { 10, 10 } });
 		WHEN("The Quad Tree is empty") {
 			THEN("Test search({ 0, 0 })") {
 				REQUIRE(QuadTree.search({ 0, 0 }) == false);
@@ -101,6 +101,13 @@ SCENARIO("Test Quad Tree") {
 				for (float i = 9; i >= 0; --i) {
 					REQUIRE(QuadTree.search({ i, i }) == false);
 				}
+			}
+			THEN("Test query({ { 0 , 0 }, { 1, 1 } })") {
+				forest::QuadTree<float, 2>::Points results;
+				QuadTree.query({ { 0 , 0 }, { 3, 3 } }, [&results](auto point) {
+					results.push_back(point);
+				});
+				REQUIRE(results.size() == 4);
 			}
 		}
 	}

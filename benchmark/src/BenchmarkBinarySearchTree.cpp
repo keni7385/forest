@@ -31,7 +31,7 @@ static void BM_BinarySearchTree_Create_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::BinarySearchTree <int, int> BinarySearchTree;
+	forest::BinarySearchTree<int, int> BinarySearchTree;
 
 	for (auto _ : state) {
 		state.PauseTiming();
@@ -47,7 +47,7 @@ static void BM_BinarySearchTree_Create_Average_Case(benchmark::State & state) {
 BENCHMARK(BM_BinarySearchTree_Create_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oNLogN);
 
 static void BM_BinarySearchTree_Create_Worst_Case(benchmark::State & state) {
-	forest::BinarySearchTree <int, int> BinarySearchTree;
+	forest::BinarySearchTree<int, int> BinarySearchTree;
 
 	for (auto _ : state) {
 		state.PauseTiming();
@@ -67,7 +67,7 @@ static void BM_BinarySearchTree_Search_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::BinarySearchTree <int, int> BinarySearchTree;
+	forest::BinarySearchTree<int, int> BinarySearchTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		BinarySearchTree.insert(dis(gen), 0);
@@ -86,7 +86,7 @@ static void BM_BinarySearchTree_Search_Worst_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::BinarySearchTree <int, int> BinarySearchTree;
+	forest::BinarySearchTree<int, int> BinarySearchTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		BinarySearchTree.insert(i, 0);
@@ -105,7 +105,7 @@ static void BM_BinarySearchTree_Minimum_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::BinarySearchTree <int, int> BinarySearchTree;
+	forest::BinarySearchTree<int, int> BinarySearchTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		BinarySearchTree.insert(dis(gen), 0);
@@ -124,7 +124,7 @@ static void BM_BinarySearchTree_Maximum_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::BinarySearchTree <int, int> BinarySearchTree;
+	forest::BinarySearchTree<int, int> BinarySearchTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		BinarySearchTree.insert(dis(gen), 0);
