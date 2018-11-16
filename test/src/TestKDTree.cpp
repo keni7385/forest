@@ -52,7 +52,7 @@ SCENARIO("Test KD Tree") {
 			}
 			THEN("Test query({ { 0 , 0 }, { 1, 1 } })") {
 				forest::KDTree<float, 2>::Points results;
-				KDTree.query({ { 0 , 0 }, { 1, 1 } }, [&results](auto point) {
+				KDTree.query({ { 0 , 0 }, { 1, 1 } }, [&results](const forest::KDTree<float, 2>::Point & point) {
 					results.push_back(point);
 				});
 				REQUIRE(results.empty() == true);
@@ -120,7 +120,7 @@ SCENARIO("Test KD Tree") {
 			}
 			THEN("Test query({ { 0 , 0 }, { 5, 5 } })") {
 				forest::KDTree<float, 2>::Points results;
-				KDTree.query({ { 0 , 0 }, { 5, 5 } }, [&results](auto point) {
+				KDTree.query({ { 0 , 0 }, { 5, 5 } }, [&results](const forest::KDTree<float, 2>::Point & point) {
 					results.push_back(point);
 				});
 				REQUIRE(results.size() == 7);
