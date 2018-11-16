@@ -221,8 +221,8 @@ namespace forest {
 	private:
 		void clear(RedBlackTreeNode * root) {
 			if (!root) return;
-			if (root->left != nullptr) clear(root->left);
-			if (root->right != nullptr) clear(root->right);
+			if (root->left) clear(root->left);
+			if (root->right) clear(root->right);
 			delete root;
 			root = nullptr;
 		}
@@ -277,7 +277,7 @@ namespace forest {
 		void insert(const Key & key, const Value & value) {
 			RedBlackTreeNode * current{ tree_root };
 			RedBlackTreeNode * parent{ nullptr };
-			while (current != nullptr) {
+			while (current) {
 				parent = current;
 				if (key > current->key) {
 					current = current->right;

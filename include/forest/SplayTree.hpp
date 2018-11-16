@@ -195,8 +195,8 @@ namespace forest {
 	private:
 		void clear(SplayTreeNode * root) {
 			if (!root) return;
-			if (root->left != nullptr) clear(root->left);
-			if (root->right != nullptr) clear(root->right);
+			if (root->left) clear(root->left);
+			if (root->right) clear(root->right);
 			delete root;
 			root = nullptr;
 		}

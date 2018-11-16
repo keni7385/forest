@@ -103,12 +103,12 @@ namespace forest {
 	private:
 		BinarySearchTreeNode * minimum(BinarySearchTreeNode * root) {
 			if (root == nullptr) return nullptr;
-			while (root->left != nullptr) root = root->left;
+			while (root->left) root = root->left;
 			return root;
 		}
 		BinarySearchTreeNode * maximum(BinarySearchTreeNode * root) {
 			if (root == nullptr) return nullptr;
-			while (root->right != nullptr) root = root->right;
+			while (root->right) root = root->right;
 			return root;
 		}
 
@@ -170,7 +170,7 @@ namespace forest {
 			return root;
 		}
 		BinarySearchTreeNode * search(BinarySearchTreeNode * root, const Key & key) {
-			while (root != nullptr) {
+			while (root) {
 				if (key > root->key) root = root->right;
 				else if (key < root->key) root = root->left;
 				else return root;
@@ -181,8 +181,8 @@ namespace forest {
 	private:
 		void clear(BinarySearchTreeNode * root) {
 			if (!root) return;
-			if (root->left != nullptr) clear(root->left);
-			if (root->right != nullptr) clear(root->right);
+			if (root->left) clear(root->left);
+			if (root->right) clear(root->right);
 			delete root;
 			root = nullptr;
 		}

@@ -154,7 +154,7 @@ namespace forest {
 
 	private:
 		AVLTreeNode * insert(AVLTreeNode * root, const Key & key, const Value & value) {
-			if (root == nullptr) return new AVLTreeNode(key, value);
+			if (!root) return new AVLTreeNode(key, value);
 			if (key < root->key) root->left = insert(root->left, key, value);
 			else if (key > root->key) root->right = insert(root->right, key, value);
 

@@ -295,7 +295,7 @@ namespace forest {
 
 	public:
 		void fill(const PointsIt begin, const PointsIt end) {
-			tree_root = new KDTreeNode(begin, end, 0);
+			if (!tree_root) tree_root = new KDTreeNode(begin, end, 0);
 		}
 		bool search(const Point & point) {
 			return search(tree_root, point, 0);
