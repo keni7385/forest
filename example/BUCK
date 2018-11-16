@@ -1,0 +1,59 @@
+cxx_binary(
+  name = 'AVLTree', 
+  srcs = [
+    'src/ExampleAVLTree.cpp', 
+  ], 
+  deps = [
+    '//:forest', 
+  ], 
+)
+
+cxx_binary(
+  name = 'BinarySearchTree', 
+  srcs = [
+    'src/ExampleBinarySearchTree.cpp', 
+  ], 
+  deps = [
+    '//:forest', 
+  ], 
+)
+
+cxx_binary(
+  name = 'RedBlackTree', 
+  srcs = [
+    'src/ExampleRedBlackTree.cpp', 
+  ], 
+  deps = [
+    '//:forest', 
+  ], 
+)
+
+cxx_binary(
+  name = 'SplayTree', 
+  srcs = [
+    'src/ExampleSplayTree.cpp', 
+  ], 
+  deps = [
+    '//:forest', 
+  ], 
+)
+
+cxx_binary(
+  name = 'KDTree', 
+  srcs = [
+    'src/ExampleKDTree.cpp', 
+  ], 
+  deps = [
+    '//:forest', 
+  ], 
+)
+
+cxx_binary(
+  name = 'QuadTree', 
+  srcs = [
+    'src/ExampleQuadTree.cpp', 
+  ], 
+  deps = [
+    '//:forest', 
+  ], 
+)
