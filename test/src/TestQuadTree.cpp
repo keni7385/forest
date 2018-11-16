@@ -102,6 +102,13 @@ SCENARIO("Test Quad Tree") {
 					REQUIRE(QuadTree.search({ i, i }) == false);
 				}
 			}
+			THEN("Test query({ { 0 , 0 }, { 1, 1 } })") {
+				forest::QuadTree<float, 2>::Points results;
+				QuadTree.query({ { 0 , 0 }, { 3, 3 } }, [&results](auto point) {
+					results.push_back(point);
+				});
+				REQUIRE(results.size() == 4);
+			}
 		}
 	}
 }

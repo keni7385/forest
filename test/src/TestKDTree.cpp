@@ -28,8 +28,11 @@
 
 SCENARIO("Test KD Tree") {
 	GIVEN("A KD Tree") {
-		forest::KDTree <float, 2> KDTree;
+		forest::KDTree<float, 2>KDTree;
 		WHEN("The KD Tree is empty") {
+			THEN("Test size()") {
+				REQUIRE(KDTree.size() == 0);
+			}
 			THEN("Test maximum(0)") {
 				REQUIRE(KDTree.maximum(0) == nullptr);
 			}
@@ -43,6 +46,17 @@ SCENARIO("Test KD Tree") {
 				KDTree.remove({ 0, 0 });
 				REQUIRE(KDTree.search({ 0, 0 }) == false);
 			}
+			THEN("Test clear()") {
+				KDTree.clear();
+				REQUIRE(KDTree.size() == 0);
+			}
+			THEN("Test query({ { 0 , 0 }, { 1, 1 } })") {
+				forest::KDTree<float, 2>::Points results;
+				KDTree.query({ { 0 , 0 }, { 1, 1 } }, [&results](auto point) {
+					results.push_back(point);
+				});
+				REQUIRE(results.empty() == true);
+			}
 		}
 		WHEN("Nodes are inserted in random order") {
 			forest::KDTree<float, 2>::Points points{
@@ -55,6 +69,9 @@ SCENARIO("Test KD Tree") {
 				{  3, -3 }
 			};
 			KDTree.fill(points.begin(), points.end());
+			THEN("Test size()") {
+				REQUIRE(KDTree.size() == 7);
+			}
 			THEN("Test maximum(0)") {
 				auto max = KDTree.maximum(0);
 				REQUIRE(max != nullptr);
@@ -96,6 +113,17 @@ SCENARIO("Test KD Tree") {
 			THEN("Test remove({ 3 , -3 })") {
 				KDTree.remove({ 3, -3 });
 				REQUIRE(KDTree.search({ 3, -3 }) == false);
+			}
+			THEN("Test clear()") {
+				KDTree.clear();
+				REQUIRE(KDTree.size() == 0);
+			}
+			THEN("Test query({ { 0 , 0 }, { 5, 5 } })") {
+				forest::KDTree<float, 2>::Points results;
+				KDTree.query({ { 0 , 0 }, { 5, 5 } }, [&results](auto point) {
+					results.push_back(point);
+				});
+				REQUIRE(results.size() == 7);
 			}
 		}
 	}
