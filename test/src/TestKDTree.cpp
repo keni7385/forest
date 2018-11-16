@@ -28,7 +28,7 @@
 
 SCENARIO("Test KD Tree") {
 	GIVEN("A KD Tree") {
-		forest::KDTree<float, 2>KDTree;
+		forest::KDTree<float, 2> KDTree;
 		WHEN("The KD Tree is empty") {
 			THEN("Test size()") {
 				REQUIRE(KDTree.size() == 0);

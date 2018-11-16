@@ -28,7 +28,7 @@
 
 SCENARIO("Test Binary Search Tree") {
 	GIVEN("A Binary Search Tree") {
-		forest::BinarySearchTree <int, int> BinarySearchTree;
+		forest::BinarySearchTree<int, int> BinarySearchTree;
 		WHEN("The Binary Search Tree is empty") {
 			THEN("Test height()") {
 				REQUIRE(BinarySearchTree.height() == 0);

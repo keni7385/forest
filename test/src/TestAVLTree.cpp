@@ -28,7 +28,7 @@
 
 SCENARIO("Test AVL Tree") {
 	GIVEN("An AVL Tree") {
-		forest::AVLTree <int, int> AVLTree;
+		forest::AVLTree<int, int> AVLTree;
 		WHEN("The AVL Tree is empty") {
 			THEN("Test size()") {
 				REQUIRE(AVLTree.size() == 0);

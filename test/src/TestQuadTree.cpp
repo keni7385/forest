@@ -28,7 +28,7 @@
 
 SCENARIO("Test Quad Tree") {
 	GIVEN("A Quad Tree") {
-		forest::QuadTree <float, 2> QuadTree({ {0, 0 }, { 10, 10 } });
+		forest::QuadTree<float, 2> QuadTree({ {0, 0 }, { 10, 10 } });
 		WHEN("The Quad Tree is empty") {
 			THEN("Test search({ 0, 0 })") {
 				REQUIRE(QuadTree.search({ 0, 0 }) == false);

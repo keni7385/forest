@@ -31,7 +31,7 @@ static void BM_SplayTree_Create_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::SplayTree <int, int> SplayTree;
+	forest::SplayTree<int, int> SplayTree;
 
 	for (auto _ : state) {
 		for (int i = 0; i < state.range(0); ++i) {
@@ -51,7 +51,7 @@ static void BM_SplayTree_Search_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::SplayTree <int, int> SplayTree;
+	forest::SplayTree<int, int> SplayTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		SplayTree.insert(dis(gen), 0);
@@ -70,7 +70,7 @@ static void BM_SplayTree_Search_Worst_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::SplayTree <int, int> SplayTree;
+	forest::SplayTree<int, int> SplayTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		SplayTree.insert(i, 0);
@@ -89,7 +89,7 @@ static void BM_SplayTree_Minimum_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::SplayTree <int, int> SplayTree;
+	forest::SplayTree<int, int> SplayTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		SplayTree.insert(dis(gen), 0);
@@ -108,7 +108,7 @@ static void BM_SplayTree_Maximum_Average_Case(benchmark::State & state) {
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
-	forest::SplayTree <int, int> SplayTree;
+	forest::SplayTree<int, int> SplayTree;
 
 	for (int i = 0; i < state.range(0); ++i) {
 		SplayTree.insert(dis(gen), 0);

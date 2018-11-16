@@ -26,7 +26,7 @@
 #include <iostream>
 
 int main() {
-	forest::KDTree <float, 4> KDTree;
+	forest::KDTree<float, 4> KDTree;
 
 	forest::KDTree<float, 4>::Points points{
 		{ 0, 6, 0, 6 },
