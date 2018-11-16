@@ -29,7 +29,7 @@
 static void BM_RedBlackTree_Create_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(0, state.range(0));
+	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
 	forest::RedBlackTree <int, int> RedBlackTree;
 
@@ -49,7 +49,7 @@ BENCHMARK(BM_RedBlackTree_Create_Average_Case)->RangeMultiplier(2)->Range(1, 1 <
 static void BM_RedBlackTree_Search_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(0, state.range(0));
+	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
 	forest::RedBlackTree <int, int> RedBlackTree;
 
@@ -67,7 +67,7 @@ BENCHMARK(BM_RedBlackTree_Search_Average_Case)->RangeMultiplier(2)->Range(1, 1 <
 static void BM_RedBlackTree_Search_Worst_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(0, state.range(0));
+	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
 	forest::RedBlackTree <int, int> RedBlackTree;
 
@@ -86,7 +86,7 @@ BENCHMARK(BM_RedBlackTree_Search_Worst_Case)->RangeMultiplier(2)->Range(1, 1 << 
 static void BM_RedBlackTree_Minimum_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(0, state.range(0));
+	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
 	forest::RedBlackTree <int, int> RedBlackTree;
 
@@ -105,7 +105,7 @@ BENCHMARK(BM_RedBlackTree_Minimum_Average_Case)->RangeMultiplier(2)->Range(1, 1 
 static void BM_RedBlackTree_Maximum_Average_Case(benchmark::State & state) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(0, state.range(0));
+	std::uniform_int_distribution<> dis(0, static_cast<int>(state.range(0)));
 
 	forest::RedBlackTree <int, int> RedBlackTree;
 
