@@ -29,11 +29,11 @@
 int main() {
 	forest::AVLTree <int, std::string> AVLTree;
 
-	AVLTree.insert(2 , "Thor");
-	AVLTree.insert(4 , "Odin");
+	AVLTree.insert(2, "Thor");
+	AVLTree.insert(4, "Odin");
 	AVLTree.insert(90, "Loki");
-	AVLTree.insert(3 , "Baldr");
-	AVLTree.insert(0 , "Frigg");
+	AVLTree.insert(3, "Baldr");
+	AVLTree.insert(0, "Frigg");
 	AVLTree.insert(14, "Eir");
 	AVLTree.insert(45, "Einar");
 

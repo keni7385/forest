@@ -41,7 +41,7 @@ static void BM_KDTree_Create_Average_Case(benchmark::State & state) {
 			points.push_back({ dis(gen), dis(gen) });
 		}
 		state.ResumeTiming();
-		
+
 		KDTree.fill(points.begin(), points.end());
 
 		state.PauseTiming();
@@ -91,7 +91,7 @@ static void BM_KDTree_Minimum_Average_Case(benchmark::State & state) {
 
 	state.SetComplexityN(state.range(0));
 }
-BENCHMARK(BM_KDTree_Minimum_Average_Case)->RangeMultiplier(2)->Range(2, 1 << 20)->Complexity([](auto n)->double{return std::sqrt(n); });
+BENCHMARK(BM_KDTree_Minimum_Average_Case)->RangeMultiplier(2)->Range(2, 1 << 20)->Complexity([](auto n)->double {return std::sqrt(n); });
 
 static void BM_KDTree_Maximum_Average_Case(benchmark::State & state) {
 	std::random_device rd;

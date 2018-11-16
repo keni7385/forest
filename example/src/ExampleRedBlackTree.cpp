@@ -29,11 +29,11 @@
 int main() {
 	forest::RedBlackTree <int, std::string> RedBlackTree;
 
-	RedBlackTree.insert(2 , "Thor");
-	RedBlackTree.insert(4 , "Odin");
+	RedBlackTree.insert(2, "Thor");
+	RedBlackTree.insert(4, "Odin");
 	RedBlackTree.insert(90, "Loki");
-	RedBlackTree.insert(3 , "Baldr");
-	RedBlackTree.insert(0 , "Frigg");
+	RedBlackTree.insert(3, "Baldr");
+	RedBlackTree.insert(0, "Frigg");
 	RedBlackTree.insert(14, "Eir");
 	RedBlackTree.insert(45, "Heimdall");
 

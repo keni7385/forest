@@ -52,11 +52,11 @@ SCENARIO("Test Binary Search Tree") {
 			}
 		}
 		WHEN("Nodes are inserted in random order") {
-			BinarySearchTree.insert(4 , 0);
-			BinarySearchTree.insert(2 , 0);
+			BinarySearchTree.insert(4, 0);
+			BinarySearchTree.insert(2, 0);
 			BinarySearchTree.insert(90, 0);
-			BinarySearchTree.insert(3 , 0);
-			BinarySearchTree.insert(0 , 0);
+			BinarySearchTree.insert(3, 0);
+			BinarySearchTree.insert(0, 0);
 			BinarySearchTree.insert(14, 0);
 			BinarySearchTree.insert(45, 0);
 			THEN("Test height()") {

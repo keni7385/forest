@@ -29,11 +29,11 @@
 int main() {
 	forest::SplayTree <int, std::string> SplayTree;
 
-	SplayTree.insert(2 , "Thor");
-	SplayTree.insert(4 , "Odin");
+	SplayTree.insert(2, "Thor");
+	SplayTree.insert(4, "Odin");
 	SplayTree.insert(90, "Loki");
-	SplayTree.insert(3 , "Baldr");
-	SplayTree.insert(0 , "Frigg");
+	SplayTree.insert(3, "Baldr");
+	SplayTree.insert(0, "Frigg");
 	SplayTree.insert(14, "Eir");
 	SplayTree.insert(45, "Heimdall");
 

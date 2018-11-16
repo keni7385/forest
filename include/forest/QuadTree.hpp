@@ -72,9 +72,9 @@ namespace forest {
 		public:
 			bool contains(const Point & point) const {
 				return point[0] >= origin[0] - transform[0] &&
-					   point[0] <= origin[0] + transform[0] &&
-					   point[1] >= origin[1] - transform[1] &&
-					   point[1] <= origin[1] + transform[1];
+					point[0] <= origin[0] + transform[0] &&
+					point[1] >= origin[1] - transform[1] &&
+					point[1] <= origin[1] + transform[1];
 			}
 			//bool contains(const Point & point) const {
 			//	for (int i = 0; i < 2; ++i) {
@@ -86,9 +86,9 @@ namespace forest {
 			//}
 			bool intersects(const Range & other) const {
 				return origin[0] - transform[0] <= other.origin[0] + other.transform[0] &&
-					   origin[0] + transform[0] >= other.origin[0] - other.transform[0] &&
-					   origin[1] - transform[1] <= other.origin[1] + other.transform[1] &&
-					   origin[1] + transform[1] >= other.origin[1] - other.transform[1];
+					origin[0] + transform[0] >= other.origin[0] - other.transform[0] &&
+					origin[1] - transform[1] <= other.origin[1] + other.transform[1] &&
+					origin[1] + transform[1] >= other.origin[1] - other.transform[1];
 			}
 			//bool intersects(const Range & other) const {
 			//	for (int i = 0; i < 2; ++i) {
@@ -118,21 +118,21 @@ namespace forest {
 	private:
 		void divide() {
 			NW = new QuadTree <Arithmetic, Capacity>({
-				{ boundary.origin[0] - boundary.transform[0] / 2, boundary.origin[1] + boundary.transform[1] / 2 }, 
+				{ boundary.origin[0] - boundary.transform[0] / 2, boundary.origin[1] + boundary.transform[1] / 2 },
 				{ boundary.transform[0] / 2, boundary.transform[1] / 2 }
-			});
+				});
 			NE = new QuadTree <Arithmetic, Capacity>({
 				{ boundary.origin[0] + boundary.transform[0] / 2, boundary.origin[1] + boundary.transform[1] / 2 },
 				{ boundary.transform[0] / 2, boundary.transform[1] / 2 }
-			});
+				});
 			SW = new QuadTree <Arithmetic, Capacity>({
 				{ boundary.origin[0] - boundary.transform[0] / 2, boundary.origin[1] - boundary.transform[1] / 2 },
 				{ boundary.transform[0] / 2, boundary.transform[1] / 2 }
-			});
+				});
 			SE = new QuadTree <Arithmetic, Capacity>({
 				{ boundary.origin[0] + boundary.transform[0] / 2, boundary.origin[1] - boundary.transform[1] / 2 },
 				{ boundary.transform[0] / 2, boundary.transform[1] / 2 }
-			});
+				});
 			divided = true;
 		}
 		void merge() {

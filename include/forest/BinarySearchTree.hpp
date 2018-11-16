@@ -27,13 +27,17 @@
 #include <algorithm>
 #include <functional>
 #include <initializer_list>
-#include <memory>
 #include <queue>
 #include <utility>
 
 namespace forest {
 	template <typename Key, typename Value>
 	class BinarySearchTree {
+	public:
+		using Pair = std::pair <Key, Value>;
+		using Pairs = std::initializer_list<Pair>;
+		using Handler = std::function <void(const Key &, const Value &)>;
+
 	private:
 		class BinarySearchTreeNode {
 			friend class BinarySearchTree;
@@ -54,34 +58,36 @@ namespace forest {
 			BinarySearchTreeNode(const Key & KEY, const Value & VALUE) : key(KEY), value(VALUE) { }
 			BinarySearchTreeNode(const BinarySearchTreeNode &) = delete;
 			BinarySearchTreeNode(BinarySearchTreeNode &&) = delete;
+			~BinarySearchTreeNode() = default;
+
+		public:
 			BinarySearchTreeNode & operator=(const BinarySearchTreeNode &) = delete;
 			BinarySearchTreeNode & operator=(BinarySearchTreeNode &&) = delete;
-			~BinarySearchTreeNode() = default;
 		};
 
 	private:
 		BinarySearchTreeNode * tree_root{ nullptr };
 
 	private:
-		void pre_order_traversal(const BinarySearchTreeNode * root, std::function <void(const Key &, const Value &)> handler) {
+		void pre_order_traversal(const BinarySearchTreeNode * root, Handler handler) {
 			if (!root) return;
 			handler(root->key, root->value);
 			pre_order_traversal(root->left, handler);
 			pre_order_traversal(root->right, handler);
 		}
-		void in_order_traversal(const BinarySearchTreeNode * root, std::function <void(const Key &, const Value &)> handler) {
+		void in_order_traversal(const BinarySearchTreeNode * root, Handler handler) {
 			if (!root) return;
 			in_order_traversal(root->left, handler);
 			handler(root->key, root->value);
 			in_order_traversal(root->right, handler);
 		}
-		void post_order_traversal(const BinarySearchTreeNode * root, std::function <void(const Key &, const Value &)> handler) {
+		void post_order_traversal(const BinarySearchTreeNode * root, Handler handler) {
 			if (!root) return;
 			post_order_traversal(root->left, handler);
 			post_order_traversal(root->right, handler);
 			handler(root->key, root->value);
 		}
-		void breadth_first_traversal(const BinarySearchTreeNode * root, std::function <void(const Key &, const Value &)> handler) {
+		void breadth_first_traversal(const BinarySearchTreeNode * root, Handler handler) {
 			if (!root) return;
 			std::queue <const BinarySearchTreeNode *> queue;
 			queue.push(root);
@@ -158,9 +164,9 @@ namespace forest {
 			}
 
 			if (!root) return nullptr;
-			
+
 			root->height = std::max(height(root->left), height(root->right)) + 1;
-			
+
 			return root;
 		}
 		BinarySearchTreeNode * search(BinarySearchTreeNode * root, const Key & key) {
@@ -183,30 +189,32 @@ namespace forest {
 
 	public:
 		BinarySearchTree() = default;
-		explicit BinarySearchTree(std::initializer_list <std::pair <Key, Value> > list) {
-			for (auto element : list) {
-				insert(element.first, element.second);
+		explicit BinarySearchTree(Pairs pairs) {
+			for (auto pair : pairs) {
+				insert(pair.first, pair.second);
 			}
 		}
 		BinarySearchTree(const BinarySearchTree &) = delete;
 		BinarySearchTree(BinarySearchTree &&) = delete;
-		BinarySearchTree & operator=(const BinarySearchTree &) = delete;
-		BinarySearchTree & operator=(BinarySearchTree &&) = delete;
 		~BinarySearchTree() {
 			clear();
 		}
 
 	public:
-		void pre_order_traversal(std::function <void(const Key &, const Value &)> handler) {
+		BinarySearchTree & operator=(const BinarySearchTree &) = delete;
+		BinarySearchTree & operator=(BinarySearchTree &&) = delete;
+
+	public:
+		void pre_order_traversal(Handler handler) {
 			pre_order_traversal(tree_root, handler);
 		}
-		void in_order_traversal(std::function <void(const Key &, const Value &)> handler) {
+		void in_order_traversal(Handler handler) {
 			in_order_traversal(tree_root, handler);
 		}
-		void post_order_traversal(std::function <void(const Key &, const Value &)> handler) {
+		void post_order_traversal(Handler handler) {
 			post_order_traversal(tree_root, handler);
 		}
-		void breadth_first_traversal(std::function <void(const Key &, const Value &)> handler) {
+		void breadth_first_traversal(Handler handler) {
 			breadth_first_traversal(tree_root, handler);
 		}
 

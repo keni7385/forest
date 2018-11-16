@@ -27,7 +27,6 @@
 #include <algorithm>
 #include <functional>
 #include <initializer_list>
-#include <memory>
 #include <queue>
 #include <utility>
 
@@ -35,6 +34,8 @@ namespace forest {
 	template <typename Key, typename Value>
 	class AVLTree {
 	public:
+		using Pair = std::pair <Key, Value>;
+		using Pairs = std::initializer_list<Pair>;
 		using Handler = std::function <void(const Key &, const Value &)>;
 
 	private:
@@ -96,7 +97,7 @@ namespace forest {
 				if (current->right) queue.push(current->right);
 			}
 		}
-	
+
 	private:
 		AVLTreeNode * minimum(AVLTreeNode * root) {
 			if (!root) return nullptr;
@@ -265,9 +266,9 @@ namespace forest {
 
 	public:
 		AVLTree() = default;
-		explicit AVLTree(std::initializer_list <std::pair <Key, Value> > list) {
-			for (auto element : list) {
-				insert(element.first, element.second);
+		explicit AVLTree(Pairs pairs) {
+			for (auto pair : pairs) {
+				insert(pair.first, pair.second);
 			}
 		}
 		AVLTree(const AVLTree &) = delete;

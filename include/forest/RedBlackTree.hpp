@@ -27,7 +27,6 @@
 #include <algorithm>
 #include <functional>
 #include <initializer_list>
-#include <memory>
 #include <queue>
 #include <utility>
 
@@ -35,6 +34,8 @@ namespace forest {
 	template <typename Key, typename Value>
 	class RedBlackTree {
 	public:
+		using Pair = std::pair <Key, Value>;
+		using Pairs = std::initializer_list<Pair>;
 		using Handler = std::function <void(const Key &, const Value &)>;
 
 	private:
@@ -62,9 +63,11 @@ namespace forest {
 			RedBlackTreeNode(const Key & KEY, const Value & VALUE, const Color & COLOR) : key(KEY), value(VALUE), color(COLOR) { }
 			RedBlackTreeNode(const RedBlackTreeNode &) = delete;
 			RedBlackTreeNode(RedBlackTreeNode &&) = delete;
+			~RedBlackTreeNode() = default;
+
+		public:
 			RedBlackTreeNode & operator=(const RedBlackTreeNode &) = delete;
 			RedBlackTreeNode & operator=(RedBlackTreeNode &&) = delete;
-			~RedBlackTreeNode() = default;
 		};
 
 	private:
@@ -226,18 +229,19 @@ namespace forest {
 
 	public:
 		RedBlackTree() = default;
-		explicit RedBlackTree(std::initializer_list <std::pair <Key, Value> > list) {
-			for (auto element : list) {
-				insert(element.first, element.second);
+		explicit RedBlackTree(Pairs pairs) {
+			for (auto pair : pairs) {
+				insert(pair.first, pair.second);
 			}
 		}
 		RedBlackTree(const RedBlackTree &) = delete;
 		RedBlackTree(RedBlackTree &&) = delete;
-		RedBlackTree & operator=(const RedBlackTree &) = delete;
-		RedBlackTree & operator=(RedBlackTree &&) = delete;
 		~RedBlackTree() {
 			clear();
 		}
+	public:
+		RedBlackTree & operator=(const RedBlackTree &) = delete;
+		RedBlackTree & operator=(RedBlackTree &&) = delete;
 
 	public:
 		void pre_order_traversal(Handler handler) {

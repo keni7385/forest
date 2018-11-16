@@ -29,11 +29,11 @@
 int main() {
 	forest::BinarySearchTree <int, std::string> BinarySearchTree;
 
-	BinarySearchTree.insert(2 , "Thor");
-	BinarySearchTree.insert(4 , "Odin");
+	BinarySearchTree.insert(2, "Thor");
+	BinarySearchTree.insert(4, "Odin");
 	BinarySearchTree.insert(90, "Loki");
-	BinarySearchTree.insert(3 , "Baldr");
-	BinarySearchTree.insert(0 , "Frigg");
+	BinarySearchTree.insert(3, "Baldr");
+	BinarySearchTree.insert(0, "Frigg");
 	BinarySearchTree.insert(14, "Eir");
 	BinarySearchTree.insert(45, "Heimdall");
 

@@ -57,7 +57,7 @@ static void BM_BinarySearchTree_Create_Worst_Case(benchmark::State & state) {
 			BinarySearchTree.insert(i, 0);
 		}
 	}
-	
+
 	state.SetComplexityN(state.range(0));
 }
 BENCHMARK(BM_BinarySearchTree_Create_Worst_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oNSquared);
@@ -76,7 +76,7 @@ static void BM_BinarySearchTree_Search_Average_Case(benchmark::State & state) {
 	for (auto _ : state) {
 		benchmark::DoNotOptimize(BinarySearchTree.search(dis(gen)));
 	}
-	
+
 	state.SetComplexityN(state.range(0));
 }
 BENCHMARK(BM_BinarySearchTree_Search_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oLogN);
@@ -95,7 +95,7 @@ static void BM_BinarySearchTree_Search_Worst_Case(benchmark::State & state) {
 	for (auto _ : state) {
 		benchmark::DoNotOptimize(BinarySearchTree.search(dis(gen)));
 	}
-	
+
 	state.SetComplexityN(state.range(0));
 }
 BENCHMARK(BM_BinarySearchTree_Search_Worst_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::oN);
@@ -114,7 +114,7 @@ static void BM_BinarySearchTree_Minimum_Average_Case(benchmark::State & state) {
 	for (auto _ : state) {
 		benchmark::DoNotOptimize(BinarySearchTree.minimum());
 	}
-	
+
 	state.SetComplexityN(state.range(0));
 }
 BENCHMARK(BM_BinarySearchTree_Minimum_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::o1);
@@ -133,7 +133,7 @@ static void BM_BinarySearchTree_Maximum_Average_Case(benchmark::State & state) {
 	for (auto _ : state) {
 		benchmark::DoNotOptimize(BinarySearchTree.maximum());
 	}
-	
+
 	state.SetComplexityN(state.range(0));
 }
 BENCHMARK(BM_BinarySearchTree_Maximum_Average_Case)->RangeMultiplier(2)->Range(1, 1 << 15)->Complexity(benchmark::o1);

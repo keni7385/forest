@@ -52,11 +52,11 @@ SCENARIO("Test AVL Tree") {
 			}
 		}
 		WHEN("Nodes are inserted in random order") {
-			AVLTree.insert(4 , 0);
-			AVLTree.insert(2 , 0);
+			AVLTree.insert(4, 0);
+			AVLTree.insert(2, 0);
 			AVLTree.insert(90, 0);
-			AVLTree.insert(3 , 0);
-			AVLTree.insert(0 , 0);
+			AVLTree.insert(3, 0);
+			AVLTree.insert(0, 0);
 			AVLTree.insert(14, 0);
 			AVLTree.insert(45, 0);
 			THEN("Test size()") {

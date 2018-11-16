@@ -55,11 +55,11 @@ SCENARIO("Test Splay Tree") {
 			}
 		}
 		WHEN("Nodes are inserted in random order") {
-			SplayTree.insert(4 , 0);
-			SplayTree.insert(2 , 0);
+			SplayTree.insert(4, 0);
+			SplayTree.insert(2, 0);
 			SplayTree.insert(90, 0);
-			SplayTree.insert(3 , 0);
-			SplayTree.insert(0 , 0);
+			SplayTree.insert(3, 0);
+			SplayTree.insert(0, 0);
 			SplayTree.insert(14, 0);
 			SplayTree.insert(45, 0);
 			THEN("Test size") {

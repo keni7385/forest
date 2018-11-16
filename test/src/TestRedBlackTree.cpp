@@ -52,11 +52,11 @@ SCENARIO("Test Red Black Tree") {
 			}
 		}
 		WHEN("Nodes are inserted in random order") {
-			RedBlackTree.insert(4 , 0);
-			RedBlackTree.insert(2 , 0);
+			RedBlackTree.insert(4, 0);
+			RedBlackTree.insert(2, 0);
 			RedBlackTree.insert(90, 0);
-			RedBlackTree.insert(3 , 0);
-			RedBlackTree.insert(0 , 0);
+			RedBlackTree.insert(3, 0);
+			RedBlackTree.insert(0, 0);
 			RedBlackTree.insert(14, 0);
 			RedBlackTree.insert(45, 0);
 			THEN("Test size()") {

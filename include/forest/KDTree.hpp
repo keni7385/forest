@@ -53,7 +53,13 @@ namespace forest {
 		public:
 			Range() = default;
 			Range(const Point & ORIGIN, const Point & TRANSFORM) : origin(ORIGIN), transform(TRANSFORM) { }
+			Range(const Range &) = delete;
+			Range(Range &&) = delete;
 			~Range() = default;
+
+		public:
+			Range & operator=(const Range &) = delete;
+			Range & operator=(Range &&) = delete;
 
 		public:
 			void setOrigin(const Point & ORIGIN) {
@@ -115,7 +121,13 @@ namespace forest {
 				}
 				point = *(begin + std::distance(begin, end) / 2);
 			}
+			KDTreeNode(const KDTreeNode &) = delete;
+			KDTreeNode(KDTreeNode &&) = delete;
 			~KDTreeNode() = default;
+
+		public:
+			KDTreeNode & operator=(const KDTreeNode &) = delete;
+			KDTreeNode & operator=(KDTreeNode &&) = delete;
 		};
 
 	private:
@@ -258,9 +270,15 @@ namespace forest {
 		KDTree(const PointsIt begin, const PointsIt end) {
 			fill(begin, end);
 		}
+		KDTree(const KDTree &) = delete;
+		KDTree(KDTree &&) = delete;
 		~KDTree() {
 			clear();
 		}
+
+	public:
+		KDTree & operator=(const KDTree &) = delete;
+		KDTree & operator=(KDTree &&) = delete;
 
 	public:
 		KDTreeNode * minimum(const unsigned dimension) {

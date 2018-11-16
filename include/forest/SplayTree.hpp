@@ -27,7 +27,6 @@
 #include <algorithm>
 #include <functional>
 #include <initializer_list>
-#include <memory>
 #include <queue>
 #include <utility>
 
@@ -35,6 +34,8 @@ namespace forest {
 	template <typename Key, typename Value>
 	class SplayTree {
 	public:
+		using Pair = std::pair <Key, Value>;
+		using Pairs = std::initializer_list<Pair>;
 		using Handler = std::function <void(const Key &, const Value &)>;
 
 	private:
@@ -55,9 +56,11 @@ namespace forest {
 			SplayTreeNode(const Key & KEY, const Value & VALUE) : key(KEY), value(VALUE) { }
 			SplayTreeNode(const SplayTreeNode &) = delete;
 			SplayTreeNode(SplayTreeNode &&) = delete;
+			~SplayTreeNode() = default;
+
+		public:
 			SplayTreeNode & operator=(const SplayTreeNode &) = delete;
 			SplayTreeNode & operator=(SplayTreeNode &&) = delete;
-			~SplayTreeNode() = default;
 		};
 
 	private:
@@ -200,18 +203,20 @@ namespace forest {
 
 	public:
 		SplayTree() = default;
-		explicit SplayTree(std::initializer_list <std::pair <Key, Value> > list) {
-			for (auto element : list) {
-				insert(element.first, element.second);
+		explicit SplayTree(Pairs pairs) {
+			for (auto pair : pairs) {
+				insert(pair.first, pair.second);
 			}
 		}
 		SplayTree(const SplayTree &) = delete;
 		SplayTree(SplayTree &&) = delete;
-		SplayTree & operator=(const SplayTree &) = delete;
-		SplayTree & operator=(SplayTree &&) = delete;
 		~SplayTree() {
 			clear();
 		}
+
+	public:
+		SplayTree & operator=(const SplayTree &) = delete;
+		SplayTree & operator=(SplayTree &&) = delete;
 
 	public:
 		void pre_order_traversal(Handler handler) {
