@@ -33,6 +33,13 @@ SCENARIO("Test Quad Tree") {
 			THEN("Test search({ 0, 0 })") {
 				REQUIRE(QuadTree.search({ 0, 0 }) == false);
 			}
+			THEN("Test query({ { 0 , 0 }, { 1, 1 } })") {
+				forest::QuadTree<float, 2>::Points results;
+				QuadTree.query({ { 0 , 0 }, { 1, 1 } }, [&results](const forest::QuadTree<float, 2>::Point & point) {
+					results.push_back(point);
+				});
+				REQUIRE(results.empty() == true);
+			}
 		}
 		WHEN("Nodes are inserted in random order") {
 			QuadTree.insert({ 1, 2 });
@@ -104,7 +111,7 @@ SCENARIO("Test Quad Tree") {
 			}
 			THEN("Test query({ { 0 , 0 }, { 1, 1 } })") {
 				forest::QuadTree<float, 2>::Points results;
-				QuadTree.query({ { 0 , 0 }, { 3, 3 } }, [&results](auto point) {
+				QuadTree.query({ { 0 , 0 }, { 3, 3 } }, [&results](const forest::QuadTree<float, 2>::Point & point) {
 					results.push_back(point);
 				});
 				REQUIRE(results.size() == 4);
