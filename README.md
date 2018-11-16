@@ -30,7 +30,7 @@ $ sudo make install
 
 ```sh
 $ mkdir build
-$ cmake .. -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON -DBUILD_BENCHMARKS=ON
+$ cmake .. -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release
 $ make
 ```
 
