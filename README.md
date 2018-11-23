@@ -1,4 +1,4 @@
-![forest logo](forest.png)
+![forest logo](resource/logo/forest.png)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/8e5jutnq0a8b458f/branch/master?svg=true)](https://ci.appveyor.com/project/xorz57/forest/branch/master)
 [![Build Status](https://travis-ci.org/xorz57/forest.svg?branch=master)](https://travis-ci.org/xorz57/forest)
@@ -45,3 +45,20 @@ $ buck run example:SplayTree
 $ buck run example:KDTree
 $ buck run example:QuadTree
 ```
+
+## Benchmarks
+
+```
+Run on (2 X 2133 MHz CPU s)
+CPU Caches:
+  L1 Data 32K (x2)
+  L1 Instruction 32K (x2)
+  L2 Unified 3072K (x1)
+```
+
+![AVLTree Benchmark](resource/benchmark/AVLTree.png)
+![BinarySearchTree Benchmark](resource/benchmark/BinarySearchTree.png)
+![RedBlackTree Benchmark](resource/benchmark/RedBlackTree.png)
+![SplayTree Benchmark](resource/benchmark/SplayTree.png)
+![KDTree Benchmark](resource/benchmark/KDTree.png)
+![QuadTree Benchmark](resource/benchmark/QuadTree.png)

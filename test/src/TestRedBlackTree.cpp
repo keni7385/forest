@@ -45,6 +45,34 @@ SCENARIO("Test Red Black Tree") {
 			THEN("Test search(555)") {
 				REQUIRE(RedBlackTree.search(555) == nullptr);
 			}
+			THEN("Test pre_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.pre_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.empty() == true);
+			}
+			THEN("Test in_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.in_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.empty() == true);
+			}
+			THEN("Test post_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.post_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.empty() == true);
+			}
+			THEN("Test breadth_first_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.breadth_first_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.empty() == true);
+			}
 			THEN("Test clear()") {
 				RedBlackTree.clear();
 				REQUIRE(RedBlackTree.height() == 0);
@@ -83,6 +111,34 @@ SCENARIO("Test Red Black Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
+			THEN("Test pre_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.pre_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 7);
+			}
+			THEN("Test in_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.in_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 7);
+			}
+			THEN("Test post_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.post_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 7);
+			}
+			THEN("Test breadth_first_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.breadth_first_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 7);
+			}
 			THEN("Test clear()") {
 				RedBlackTree.clear();
 				REQUIRE(RedBlackTree.height() == 0);
@@ -117,6 +173,34 @@ SCENARIO("Test Red Black Tree") {
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
+			THEN("Test pre_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.pre_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test in_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.in_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test post_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.post_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test breadth_first_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.breadth_first_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
 			THEN("Test clear()") {
 				RedBlackTree.clear();
 				REQUIRE(RedBlackTree.height() == 0);
@@ -150,6 +234,34 @@ SCENARIO("Test Red Black Tree") {
 				auto result = RedBlackTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
+			}
+			THEN("Test pre_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.pre_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test in_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.in_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test post_order_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.post_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test breadth_first_traversal()") {
+				forest::RedBlackTree<int, int>::Keys results;
+				RedBlackTree.breadth_first_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
 			}
 			THEN("Test clear()") {
 				RedBlackTree.clear();
