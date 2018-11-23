@@ -30,25 +30,53 @@ SCENARIO("Test Splay Tree") {
 	GIVEN("A Splay Tree") {
 		forest::SplayTree<int, int> SplayTree;
 		WHEN("The Splay Tree is empty") {
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(SplayTree.size() == 0);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(SplayTree.height() == 0);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = SplayTree.maximum();
 				REQUIRE(max == nullptr);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = SplayTree.minimum();
 				REQUIRE(min == nullptr);
 			}
-			THEN("Test search for a node that does not exist") {
+			THEN("Test search(555))") {
 				auto result = SplayTree.search(555);
 				REQUIRE(result == nullptr);
 			}
-			THEN("Test clear") {
+			THEN("Test pre_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.pre_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.empty() == true);
+			}
+			THEN("Test in_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.in_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.empty() == true);
+			}
+			THEN("Test post_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.post_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.empty() == true);
+			}
+			THEN("Test breadth_first_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.breadth_first_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.empty() == true);
+			}
+			THEN("Test clear()") {
 				SplayTree.clear();
 				REQUIRE(SplayTree.height() == 0);
 				REQUIRE(SplayTree.size() == 0);
@@ -62,32 +90,60 @@ SCENARIO("Test Splay Tree") {
 			SplayTree.insert(0, 0);
 			SplayTree.insert(14, 0);
 			SplayTree.insert(45, 0);
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(SplayTree.size() == 7);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(SplayTree.height() == 5);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = SplayTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 90);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = SplayTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
+			THEN("Test search(1337)") {
 				auto result = SplayTree.search(1337);
 				REQUIRE(result == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = SplayTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test clear") {
+			THEN("Test pre_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.pre_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 7);
+			}
+			THEN("Test in_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.in_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 7);
+			}
+			THEN("Test post_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.post_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 7);
+			}
+			THEN("Test breadth_first_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.breadth_first_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 7);
+			}
+			THEN("Test clear()") {
 				SplayTree.clear();
 				REQUIRE(SplayTree.height() == 0);
 				REQUIRE(SplayTree.size() == 0);
@@ -97,32 +153,60 @@ SCENARIO("Test Splay Tree") {
 			for (int i = 0; i < 10; ++i) {
 				SplayTree.insert(i, 0);
 			}
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(SplayTree.size() == 10);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(SplayTree.height() == 10);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = SplayTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 9);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = SplayTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
+			THEN("Test search(1337)") {
 				auto result = SplayTree.search(1337);
 				REQUIRE(result == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = SplayTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test clear") {
+			THEN("Test pre_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.pre_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test in_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.in_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test post_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.post_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test breadth_first_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.breadth_first_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test clear()") {
 				SplayTree.clear();
 				REQUIRE(SplayTree.height() == 0);
 				REQUIRE(SplayTree.size() == 0);
@@ -132,32 +216,60 @@ SCENARIO("Test Splay Tree") {
 			for (int i = 9; i >= 0; --i) {
 				SplayTree.insert(i, 0);
 			}
-			THEN("Test size") {
+			THEN("Test size()") {
 				REQUIRE(SplayTree.size() == 10);
 			}
-			THEN("Test height") {
+			THEN("Test height()") {
 				REQUIRE(SplayTree.height() == 10);
 			}
-			THEN("Test maximum") {
+			THEN("Test maximum()") {
 				auto max = SplayTree.maximum();
 				REQUIRE(max != nullptr);
 				REQUIRE(max->key == 9);
 			}
-			THEN("Test minimum") {
+			THEN("Test minimum()") {
 				auto min = SplayTree.minimum();
 				REQUIRE(min != nullptr);
 				REQUIRE(min->key == 0);
 			}
-			THEN("Test search for a node that does not exist") {
+			THEN("Test search(1337)") {
 				auto result = SplayTree.search(1337);
 				REQUIRE(result == nullptr);
 			}
-			THEN("Test search for a node that does exist") {
+			THEN("Test search(3)") {
 				auto result = SplayTree.search(3);
 				REQUIRE(result != nullptr);
 				REQUIRE(result->key == 3);
 			}
-			THEN("Test clear") {
+			THEN("Test pre_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.pre_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test in_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.in_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test post_order_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.post_order_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test breadth_first_traversal()") {
+				forest::SplayTree<int, int>::Keys results;
+				SplayTree.breadth_first_traversal([&](const int & key, int & value) {
+					results.push_back(key);
+				});
+				REQUIRE(results.size() == 10);
+			}
+			THEN("Test clear()") {
 				SplayTree.clear();
 				REQUIRE(SplayTree.height() == 0);
 				REQUIRE(SplayTree.size() == 0);

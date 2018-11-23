@@ -38,19 +38,22 @@ int main() {
 	SplayTree.insert(45, "Heimdall");
 
 	std::cout << "pre_order_traversal()" << std::endl;
-	SplayTree.pre_order_traversal([](auto key, auto value) {
+	SplayTree.pre_order_traversal([](auto key, auto & value) {
+		value += ".";
 		std::cout << key << "->" << value << std::endl;
 	});
 	std::cout << std::endl;
 
 	std::cout << "in_order_traversal()" << std::endl;
-	SplayTree.in_order_traversal([](auto key, auto value) {
+	SplayTree.in_order_traversal([](auto key, auto & value) {
+		value += ".";
 		std::cout << key << "->" << value << std::endl;
 	});
 	std::cout << std::endl;
 
 	std::cout << "post_order_traversal()" << std::endl;
-	SplayTree.post_order_traversal([](auto key, auto value) {
+	SplayTree.post_order_traversal([](auto key, auto & value) {
+		value += ".";
 		std::cout << key << "->" << value << std::endl;
 	});
 	std::cout << std::endl;

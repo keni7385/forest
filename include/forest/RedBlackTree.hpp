@@ -34,9 +34,11 @@ namespace forest {
 	template <typename Key, typename Value>
 	class RedBlackTree {
 	public:
-		using Pair = std::pair <Key, Value>;
+		using Keys = std::vector<Key>;
+		using Values = std::vector<Value>;
+		using Pair = std::pair<Key, Value>;
 		using Pairs = std::initializer_list<Pair>;
-		using Handler = std::function <void(const Key &, const Value &)>;
+		using Handler = std::function<void(const Key &, Value &)>;
 
 	private:
 		enum Color {
@@ -74,26 +76,26 @@ namespace forest {
 		RedBlackTreeNode * tree_root{ nullptr };
 
 	private:
-		void pre_order_traversal(const RedBlackTreeNode * root, Handler handler) {
+		void pre_order_traversal(RedBlackTreeNode * root, Handler handler) {
 			if (!root) return;
 			handler(root->key, root->value);
 			pre_order_traversal(root->left, handler);
 			pre_order_traversal(root->right, handler);
 		}
-		void in_order_traversal(const RedBlackTreeNode * root, Handler handler) {
+		void in_order_traversal(RedBlackTreeNode * root, Handler handler) {
 			if (!root) return;
 			in_order_traversal(root->left, handler);
 			handler(root->key, root->value);
 			in_order_traversal(root->right, handler);
 		}
-		void post_order_traversal(const RedBlackTreeNode * root, Handler handler) {
+		void post_order_traversal(RedBlackTreeNode * root, Handler handler) {
 			if (!root) return;
 			post_order_traversal(root->left, handler);
 			post_order_traversal(root->right, handler);
 			handler(root->key, root->value);
 		}
-		void breadth_first_traversal(const RedBlackTreeNode * root, Handler handler) {
-			std::queue <const RedBlackTreeNode *> queue;
+		void breadth_first_traversal(RedBlackTreeNode * root, Handler handler) {
+			std::queue <RedBlackTreeNode *> queue;
 			if (!root) return;
 			queue.push(root);
 			while (!queue.empty()) {

@@ -35,9 +35,9 @@ namespace forest {
 		static_assert(Capacity > 0, "Invalid QuadTree Dimensions");
 
 	public:
-		using Point = std::array <Arithmetic, 2>;
-		using Points = std::vector <Point>;
-		using PointsIt = typename std::vector <Point>::iterator;
+		using Point = std::array<Arithmetic, 2>;
+		using Points = std::vector<Point>;
+		using PointsIt = typename std::vector<Point>::iterator;
 		using Handler = std::function<void(const Point &)>;
 
 	public:
@@ -101,7 +101,7 @@ namespace forest {
 		};
 
 	private:
-		Points children;
+		Points bucket;
 
 	private:
 		Range boundary;
@@ -158,16 +158,16 @@ namespace forest {
 		bool insert(const Point & point) {
 			if (!boundary.contains(point)) return false;
 			if (!divided) {
-				children.push_back(point);
-				if (children.size() > Capacity) {
+				bucket.push_back(point);
+				if (bucket.size() > Capacity) {
 					divide();
-					PointsIt it = children.begin();
-					while (it != children.end()) {
+					PointsIt it = bucket.begin();
+					while (it != bucket.end()) {
 						if (NW->boundary.contains(*it)) NW->insert(*it);
 						else if (NE->boundary.contains(*it)) NE->insert(*it);
 						else if (SW->boundary.contains(*it)) SW->insert(*it);
 						else if (SE->boundary.contains(*it)) SE->insert(*it);
-						it = children.erase(it);
+						it = bucket.erase(it);
 					}
 				}
 				return true;
@@ -177,12 +177,12 @@ namespace forest {
 		bool remove(const Point & point) {
 			if (!boundary.contains(point)) return false;
 			if (!divided) {
-				children.erase(std::remove(children.begin(), children.end(), point), children.end());
+				bucket.erase(std::remove(bucket.begin(), bucket.end(), point), bucket.end());
 				return true;
 			}
 			if (NW->remove(point) || NE->remove(point) || SW->remove(point) || SE->remove(point)) {
 				if (!NW->divided && !NE->divided && !SW->divided && !SE->divided) {
-					if (NW->children.empty() && NE->children.empty() && SW->children.empty() && SE->children.empty()) {
+					if (NW->bucket.empty() && NE->bucket.empty() && SW->bucket.empty() && SE->bucket.empty()) {
 						merge();
 					}
 				}
@@ -196,7 +196,7 @@ namespace forest {
 				return NW->search(point) || NE->search(point) || SW->search(point) || SE->search(point);
 			}
 			else {
-				return std::find(children.begin(), children.end(), point) != children.end();
+				return std::find(bucket.begin(), bucket.end(), point) != bucket.end();
 			}
 		}
 		void query(const Range & range, Handler handler) {
@@ -208,7 +208,7 @@ namespace forest {
 				SE->query(range, handler);
 			}
 			else {
-				for (auto child : children) {
+				for (auto child : bucket) {
 					if (range.contains(child)) {
 						handler(child);
 					}
@@ -224,7 +224,7 @@ namespace forest {
 				SW->clear();
 				SE->clear();
 			}
-			children.clear();
+			bucket.clear();
 			merge();
 		}
 	};

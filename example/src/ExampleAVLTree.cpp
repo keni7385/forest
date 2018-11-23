@@ -38,19 +38,22 @@ int main() {
 	AVLTree.insert(45, "Einar");
 
 	std::cout << "pre_order_traversal()" << std::endl;
-	AVLTree.pre_order_traversal([](auto key, auto value) {
+	AVLTree.pre_order_traversal([](auto key, auto & value) {
+		value += ".";
 		std::cout << key << "->" << value << std::endl;
 	});
 	std::cout << std::endl;
 
 	std::cout << "in_order_traversal()" << std::endl;
-	AVLTree.in_order_traversal([](auto key, auto value) {
+	AVLTree.in_order_traversal([](auto key, auto & value) {
+		value += ".";
 		std::cout << key << "->" << value << std::endl;
 	});
 	std::cout << std::endl;
 
 	std::cout << "post_order_traversal()" << std::endl;
-	AVLTree.post_order_traversal([](auto key, auto value) {
+	AVLTree.post_order_traversal([](auto key, auto & value) {
+		value += ".";
 		std::cout << key << "->" << value << std::endl;
 	});
 	std::cout << std::endl;

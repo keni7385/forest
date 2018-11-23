@@ -38,19 +38,22 @@ int main() {
 	RedBlackTree.insert(45, "Heimdall");
 
 	std::cout << "pre_order_traversal()" << std::endl;
-	RedBlackTree.pre_order_traversal([](auto key, auto value) {
+	RedBlackTree.pre_order_traversal([](auto key, auto & value) {
+		value += ".";
 		std::cout << key << "->" << value << std::endl;
 	});
 	std::cout << std::endl;
 
 	std::cout << "in_order_traversal()" << std::endl;
-	RedBlackTree.in_order_traversal([](auto key, auto value) {
+	RedBlackTree.in_order_traversal([](auto key, auto & value) {
+		value += ".";
 		std::cout << key << "->" << value << std::endl;
 	});
 	std::cout << std::endl;
 
 	std::cout << "post_order_traversal()" << std::endl;
-	RedBlackTree.post_order_traversal([](auto key, auto value) {
+	RedBlackTree.post_order_traversal([](auto key, auto & value) {
+		value += ".";
 		std::cout << key << "->" << value << std::endl;
 	});
 	std::cout << std::endl;
