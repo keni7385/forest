@@ -1,9 +1,8 @@
-![forest logo](resource/logo/forest.png)
+![forest](forest.png)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/8e5jutnq0a8b458f/branch/master?svg=true)](https://ci.appveyor.com/project/xorz57/forest/branch/master)
+[![Build Status](https://ci.appveyor.com/api/projects/status/8e5jutnq0a8b458f/branch/master?svg=true)](https://ci.appveyor.com/project/xorz57/forest/branch/master)
 [![Build Status](https://travis-ci.org/xorz57/forest.svg?branch=master)](https://travis-ci.org/xorz57/forest)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f2eb2dcf98794d03b5cf0d4c9910db39)](https://www.codacy.com/app/xorz57/forest?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=xorz57/forest&amp;utm_campaign=Badge_Grade)
-[![codecov](https://codecov.io/gh/xorz57/forest/branch/master/graph/badge.svg)](https://codecov.io/gh/xorz57/forest)
+[![CodeCov](https://codecov.io/gh/xorz57/forest/branch/master/graph/badge.svg)](https://codecov.io/gh/xorz57/forest)
 [![CodeFactor](https://www.codefactor.io/repository/github/xorz57/forest/badge/master)](https://www.codefactor.io/repository/github/xorz57/forest/overview/master)
 
 ## How to Install
@@ -30,14 +29,22 @@ $ sudo make install
 
 ```sh
 $ mkdir build
-$ cmake .. -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release
-$ make
+$ cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON -DBUILD_BENCHMARKS=ON
+$ make -j2
 ```
 
 #### Using [Buck](https://buckbuild.com/)
 
 ```sh
-$ buck run test
+$ buck run test:AVLTree
+$ buck run test:BinarySearchTree
+$ buck run test:RedBlackTree
+$ buck run test:SplayTree
+$ buck run test:KDTree
+$ buck run test:QuadTree
+```
+
+```sh
 $ buck run example:AVLTree
 $ buck run example:BinarySearchTree
 $ buck run example:RedBlackTree
@@ -45,20 +52,3 @@ $ buck run example:SplayTree
 $ buck run example:KDTree
 $ buck run example:QuadTree
 ```
-
-## Benchmarks
-
-```
-Run on (2 X 2133 MHz CPU s)
-CPU Caches:
-  L1 Data 32K (x2)
-  L1 Instruction 32K (x2)
-  L2 Unified 3072K (x1)
-```
-
-![AVLTree Benchmark](resource/benchmark/AVLTree.png)
-![BinarySearchTree Benchmark](resource/benchmark/BinarySearchTree.png)
-![RedBlackTree Benchmark](resource/benchmark/RedBlackTree.png)
-![SplayTree Benchmark](resource/benchmark/SplayTree.png)
-![KDTree Benchmark](resource/benchmark/KDTree.png)
-![QuadTree Benchmark](resource/benchmark/QuadTree.png)
