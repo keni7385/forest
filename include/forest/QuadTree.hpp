@@ -32,7 +32,7 @@
 namespace forest {
 	template <typename Arithmetic, int Capacity = 1>
 	class QuadTree {
-		static_assert(Capacity > 0, "Invalid QuadTree Dimensions");
+		static_assert(Capacity > 0, "Invalid QuadTree Capacity");
 
 	public:
 		using Point = std::array<Arithmetic, 2>;
