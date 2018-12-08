@@ -29,14 +29,22 @@ $ sudo make install
 
 ```sh
 $ mkdir build
-$ cmake .. -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON -DBUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release
-$ make
+$ cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON -DBUILD_EXAMPLES=ON -DBUILD_BENCHMARKS=ON
+$ make -j2
 ```
 
 #### Using [Buck](https://buckbuild.com/)
 
 ```sh
-$ buck run test
+$ buck run test:AVLTree
+$ buck run test:BinarySearchTree
+$ buck run test:RedBlackTree
+$ buck run test:SplayTree
+$ buck run test:KDTree
+$ buck run test:QuadTree
+```
+
+```sh
 $ buck run example:AVLTree
 $ buck run example:BinarySearchTree
 $ buck run example:RedBlackTree
