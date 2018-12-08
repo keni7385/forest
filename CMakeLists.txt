@@ -16,7 +16,7 @@ target_include_directories(forest INTERFACE ${CMAKE_SOURCE_DIR}/include)
 
 if (BUILD_TESTS)
   add_library(Catch2 INTERFACE)
-  target_include_directories(Catch2 INTERFACE ${CMAKE_SOURCE_DIR}/ext/catchorg/Catch2/single_include)
+  target_include_directories(Catch2 INTERFACE ${CMAKE_SOURCE_DIR}/vendor/catchorg/Catch2/single_include)
   enable_testing()
   add_subdirectory(test)
 endif()
@@ -27,7 +27,7 @@ endif()
 
 if (BUILD_BENCHMARKS)
   set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Suppressing Google Benchmark's Tests" FORCE)
-  add_subdirectory(ext/google/benchmark)
+  add_subdirectory(vendor/google/benchmark)
   add_subdirectory(benchmark)
 endif()
 

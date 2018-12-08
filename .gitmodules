@@ -1,6 +1,6 @@
-[submodule "ext/google/benchmark"]
-	path = ext/google/benchmark
+[submodule "vendor/google/benchmark"]
+	path = vendor/google/benchmark
 	url = https://github.com/google/benchmark
-[submodule "ext/catchorg/Catch2"]
-	path = ext/catchorg/Catch2
+[submodule "vendor/catchorg/Catch2"]
+	path = vendor/catchorg/Catch2
 	url = https://github.com/catchorg/Catch2.git
