@@ -241,6 +241,7 @@ namespace forest {
 		~RedBlackTree() {
 			clear();
 		}
+
 	public:
 		RedBlackTree & operator=(const RedBlackTree &) = delete;
 		RedBlackTree & operator=(RedBlackTree &&) = delete;
