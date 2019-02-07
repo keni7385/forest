@@ -158,6 +158,7 @@ namespace forest {
 		bool insert(const Point & point) {
 			if (!boundary.contains(point)) return false;
 			if (!divided) {
+				if (std::find(bucket.begin(), bucket.end(), point) != bucket.end()) return false;
 				bucket.push_back(point);
 				if (bucket.size() > Capacity) {
 					divide();
