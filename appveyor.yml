@@ -15,3 +15,23 @@ build_script:
     cd test
 
     ctest
+artifacts:
+- path: include/forest/AVLTree.hpp
+  name: AVLTree.hpp
+- path: include/forest/BinarySearchTree.hpp
+  name: BinarySearchTree.hpp
+- path: include/forest/KDTree.hpp
+  name: KDTree.hpp
+- path: include/forest/QuadTree.hpp
+  name: QuadTree.hpp
+- path: include/forest/RedBlackTree.hpp
+  name: RedBlackTree.hpp
+- path: include/forest/SplayTree.hpp
+  name: SplayTree.hpp
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: 322968168eb368bf3ed45a91c7d35a1c7b61f853
+  force_update: true
+  on:
+    APPVEYOR_REPO_TAG: true
