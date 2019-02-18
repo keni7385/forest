@@ -1,28 +1,15 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.10...3.13)
 
-project("benchmark")
+project("benchmark" LANGUAGES CXX)
 
-set(BenchmarkAVLTreeSource "src/BenchmarkAVLTree.cpp")
-set(BenchmarkBinarySearchTreeSource "src/BenchmarkBinarySearchTree.cpp")
-set(BenchmarkRedBlackTreeSource "src/BenchmarkRedBlackTree.cpp")
-set(BenchmarkSplayTreeSource "src/BenchmarkSplayTree.cpp")
-set(BenchmarkKDTreeSource "src/BenchmarkKDTree.cpp")
-set(BenchmarkQuadTreeSource "src/BenchmarkQuadTree.cpp")
+add_executable(Benchmark_AVLTree "src/Benchmark_AVLTree.cpp")
+target_link_libraries(Benchmark_AVLTree benchmark forest)
 
-add_executable(BenchmarkAVLTree ${BenchmarkAVLTreeSource})
-target_link_libraries(BenchmarkAVLTree benchmark forest)
+add_executable(Benchmark_BinarySearchTree "src/Benchmark_BinarySearchTree.cpp")
+target_link_libraries(Benchmark_BinarySearchTree benchmark forest)
 
-add_executable(BenchmarkBinarySearchTree ${BenchmarkBinarySearchTreeSource})
-target_link_libraries(BenchmarkBinarySearchTree benchmark forest)
+add_executable(Benchmark_KDTree "src/Benchmark_KDTree.cpp")
+target_link_libraries(Benchmark_KDTree benchmark forest)
 
-add_executable(BenchmarkRedBlackTree ${BenchmarkRedBlackTreeSource})
-target_link_libraries(BenchmarkRedBlackTree benchmark forest)
-
-add_executable(BenchmarkSplayTree ${BenchmarkSplayTreeSource})
-target_link_libraries(BenchmarkSplayTree benchmark forest)
-
-add_executable(BenchmarkKDTree ${BenchmarkKDTreeSource})
-target_link_libraries(BenchmarkKDTree benchmark forest)
-
-add_executable(BenchmarkQuadTree ${BenchmarkQuadTreeSource})
-target_link_libraries(BenchmarkQuadTree benchmark forest)
+add_executable(Benchmark_QuadTree "src/Benchmark_QuadTree.cpp")
+target_link_libraries(Benchmark_QuadTree benchmark forest)

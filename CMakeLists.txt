@@ -1,6 +1,6 @@
-﻿cmake_minimum_required (VERSION 3.0.0)
+﻿cmake_minimum_required(VERSION 3.10...3.13)
 
-project ("forest")
+project("forest" LANGUAGES CXX VERSION 10.1.3)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -14,21 +14,23 @@ endif()
 add_library(forest INTERFACE)
 target_include_directories(forest INTERFACE ${CMAKE_SOURCE_DIR}/include)
 
-if (BUILD_TESTS)
+if(BUILD_TESTS)
   add_library(Catch2 INTERFACE)
   target_include_directories(Catch2 INTERFACE ${CMAKE_SOURCE_DIR}/vendor/catchorg/Catch2/single_include)
   enable_testing()
   add_subdirectory(test)
 endif()
 
-if (BUILD_EXAMPLES)
+if(BUILD_EXAMPLES)
   add_subdirectory(example)
 endif()
 
-if (BUILD_BENCHMARKS)
+if(BUILD_BENCHMARKS)
   set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Suppressing Google Benchmark's Tests" FORCE)
   add_subdirectory(vendor/google/benchmark)
   add_subdirectory(benchmark)
 endif()
 
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
+        DESTINATION include
+        FILES_MATCHING PATTERN "*.hpp")
