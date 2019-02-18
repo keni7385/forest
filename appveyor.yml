@@ -9,8 +9,6 @@ build_script:
 - sh: cd build
 - sh: cmake .. -DCMAKE_BUILD_TYPE=Release
 - sh: make -j2
-- sh: cd test
-- sh: ctest
 - sh: cpack -G DEB
 - sh: cpack -G RPM
 artifacts:
