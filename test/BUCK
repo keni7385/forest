@@ -21,28 +21,6 @@ cxx_binary(
 )
 
 cxx_binary(
-  name = 'RedBlackTree',
-  srcs = [
-    'src/TestRedBlackTree.cpp',
-  ],
-  deps = [
-    '//:forest',
-    '//vendor:catch',
-  ],
-)
-
-cxx_binary(
-  name = 'SplayTree',
-  srcs = [
-    'src/TestSplayTree.cpp',
-  ],
-  deps = [
-    '//:forest',
-    '//vendor:catch',
-  ],
-)
-
-cxx_binary(
   name = 'KDTree',
   srcs = [
     'src/TestKDTree.cpp',
