@@ -12,14 +12,6 @@ build_script:
 - sh: cpack -G DEB
 - sh: cpack -G RPM
 artifacts:
-- path: include/forest/AVLTree.hpp
-  name: AVLTree.hpp
-- path: include/forest/BinarySearchTree.hpp
-  name: BinarySearchTree.hpp
-- path: include/forest/KDTree.hpp
-  name: KDTree.hpp
-- path: include/forest/QuadTree.hpp
-  name: QuadTree.hpp
 - path: build/*.deb
 - path: build/*.rpm
 deploy:

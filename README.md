@@ -21,9 +21,7 @@ $ cmake ..
 $ sudo make install
 ```
 
-#### Or simply [download](https://github.com/xorz57/forest/releases/latest) the header files
-
-## How to Build
+## How to Build Tests, Examples and Benchmarks
 
 #### Using [CMake](https://cmake.org/)
 
