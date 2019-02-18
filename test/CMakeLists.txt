@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.10...3.13)
 project(forest_test LANGUAGES CXX)
 
 if (CMAKE_COMPILER_IS_GNUCC)
-  option(ENABLE_COVERAGE OFF)
   if (ENABLE_COVERAGE)
     add_compile_options(--coverage -O0)
   endif()
