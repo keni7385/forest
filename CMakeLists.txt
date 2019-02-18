@@ -35,6 +35,7 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
         DESTINATION include
         FILES_MATCHING PATTERN "*.hpp")
 
+set(CPACK_PACKAGE_NAME "forest")
 set(CPACK_PACKAGE_VENDOR "George Fotopoulos")
 set(CPACK_PACKAGE_CONTACT "xorz57@protonmail.com")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Template Library of Tree Data Structures")
