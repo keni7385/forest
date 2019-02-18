@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10...3.13)
 
-project("example" LANGUAGES CXX)
+project(forest_example LANGUAGES CXX)
 
 add_executable(Example_AVLTree "src/Example_AVLTree.cpp")
 target_link_libraries(Example_AVLTree forest)
