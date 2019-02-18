@@ -38,8 +38,6 @@ $ make -j2
 ```sh
 $ buck run test:AVLTree
 $ buck run test:BinarySearchTree
-$ buck run test:RedBlackTree
-$ buck run test:SplayTree
 $ buck run test:KDTree
 $ buck run test:QuadTree
 ```
@@ -47,8 +45,6 @@ $ buck run test:QuadTree
 ```sh
 $ buck run example:AVLTree
 $ buck run example:BinarySearchTree
-$ buck run example:RedBlackTree
-$ buck run example:SplayTree
 $ buck run example:KDTree
 $ buck run example:QuadTree
 ```

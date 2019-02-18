@@ -2,19 +2,17 @@ version: '{build}'
 image: Ubuntu
 install:
 - sh: git submodule update --init --recursive
+- sh: sudo apt-get update
+- sh: sudo apt-get install -y rpm
 build_script:
-- sh: >-
-    mkdir build
-
-    cd build
-
-    cmake .. -DBUILD_TESTS=ON
-
-    make
-
-    cd test
-
-    ctest
+- sh: mkdir build
+- sh: cd build
+- sh: cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON
+- sh: make
+- sh: cd test
+- sh: ctest
+- sh: cpack -G DEB
+- sh: cpack -G RPM
 artifacts:
 - path: include/forest/AVLTree.hpp
   name: AVLTree.hpp
@@ -24,10 +22,8 @@ artifacts:
   name: KDTree.hpp
 - path: include/forest/QuadTree.hpp
   name: QuadTree.hpp
-- path: include/forest/RedBlackTree.hpp
-  name: RedBlackTree.hpp
-- path: include/forest/SplayTree.hpp
-  name: SplayTree.hpp
+- path: build/*.deb
+- path: build/*.rpm
 deploy:
 - provider: GitHub
   auth_token:
