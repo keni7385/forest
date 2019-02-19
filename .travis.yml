@@ -1,12 +1,10 @@
 language: cpp
-dist: trusty
+dist: xenial
 os:
   - linux
 script:
   - mkdir build
   - cd build
-  - cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON -DENABLE_COVERAGE=ON
+  - cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON
   - make -j2
-  - cd test
   - ctest
-  - bash <(curl -s https://codecov.io/bash)
