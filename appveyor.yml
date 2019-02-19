@@ -7,8 +7,9 @@ install:
 build_script:
 - sh: mkdir build
 - sh: cd build
-- sh: cmake .. -DCMAKE_BUILD_TYPE=Release
+- sh: cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON
 - sh: make -j2
+- sh: ctest
 - sh: cpack -G DEB
 - sh: cpack -G RPM
 artifacts:

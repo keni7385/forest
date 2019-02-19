@@ -8,4 +8,3 @@ script:
   - cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON
   - make -j2
   - ctest
-  - bash <(curl -s https://codecov.io/bash)
