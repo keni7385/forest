@@ -8,5 +8,4 @@ script:
   - cmake .. -DBUILD_TESTS=ON -DENABLE_COVERAGE=ON
   - make -j2
   - ctest
-  - cd test
   - bash <(curl -s https://codecov.io/bash)
